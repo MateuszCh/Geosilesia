@@ -1,0 +1,130 @@
+.tabs   {
+  .structures:nth-child(n+4) {
+    display: none;
+  }
+  &>ul {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    background-color: $color3;
+    flex-direction: column;
+    @include landscapePhone {
+      flex-direction: row;
+      width: 100%;
+    }
+    @include mq-not-mobile  {
+      flex-direction: row;
+    }
+    li  {
+      flex-grow: 1;
+      padding: .3125rem;
+      color: white;
+      border: .125rem solid $color3;
+      font-family: $text-font;
+      text-align: center;
+      font-size: .9rem;
+      transition: all .3s ease-in-out;
+      cursor: pointer;
+      @include mq-not-mobile  {
+        font-size: 1rem;
+        border: none;
+      }
+      &:hover,
+      &.selectedTab{
+        background-color: white;
+        color: $header-color;
+      }
+    }
+  }
+  .structures {
+    background-color: white;
+    padding: .625rem .3125rem;
+    a   {
+      display: inline-block;
+      color: inherit;
+      &:hover {
+        color: red;
+      }
+    }
+    .przekroj  {
+      @include laptops  {
+        figure  {
+          width: 75%;
+        }
+      }
+      @include laptopsForPrzekroj{
+        margin-top: 1.25rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        figure  {
+          width: 65%;
+          margin: 0;
+        }
+        ol  {
+          width: 33%;
+        }
+      }
+    }
+    ol {
+      list-style-position: inside;
+      font-family: $text-font;
+      color: $text-color;
+      line-height: 1.25rem;
+      font-size: .7rem;
+      @include mq-not-mobile  {
+        font-size: .8rem;
+      }
+    }
+    h3  {
+      font-size: 1.5rem;
+      font-family: $headers-font;
+      text-align: center;
+      color: darken($header-color, 10%);
+    }
+    figure  {
+      width: 100%;
+      margin: .625rem 0;
+      &.sto {
+        @include mq-not-mobile  {
+          width: 100%;
+        }
+      }
+      &.sixty {
+        @include laptops  {
+          width: 60%;
+        }
+      }
+      @include mq-not-mobile  {
+        margin: 0 auto;
+        width: 75%;
+      }
+      @include laptops  {
+        width: 50%;
+      }
+      img {
+        width: 100%;
+      }
+      figcaption  {
+        font-size: .7rem;
+        font-family: $text-font;
+        color: $text-color;
+        text-align: center;
+        padding: 1rem;
+        span  {
+          display: block;
+        }
+        @include mq-not-mobile  {
+          font-size: .9rem;
+        }
+      }
+    }
+  }
+}
+.footnotes  {
+  font-size: 1.5rem;
+  font-family: $headers-font;
+  text-align: center;
+  color: darken($header-color, 10%);
+}
+

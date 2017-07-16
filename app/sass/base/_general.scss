@@ -1,0 +1,56 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+ul  {
+  list-style: none;
+}
+body  {
+  @include mq-not-mobile  {
+    background-color: #eee;
+  }
+}
+p,
+dd  {
+  font-family: $text-font;
+  color: $text-color;
+  line-height: 1.5rem;
+  font-size: .9rem;
+  margin: 0.625rem 0;
+  @include mq-not-mobile  {
+    font-size: 1rem;
+    padding: 0 0.625rem;
+  }
+}
+
+h2  {
+  margin: 0 auto;
+  width: 100%;
+  font-family: $headers-font;
+  text-align: center;
+  font-size: 2rem;
+  color: darken($header-color, 10%);
+  padding-bottom: .625rem;
+  @include mq-not-mobile  {
+    font-size: 3rem;
+  }
+}
+dt  {
+  font-family: $text-font;
+  font-size: 1.3rem;
+  color: darken($text-color, 10%);
+}
+
+main {
+  width: 95%;
+  margin: 0 auto;
+  padding-top: 5rem;
+  @include mq-not-mobile  {
+    width: 70%;
+    padding-top: 8.125rem;
+  }
+  @include laptops  {
+    width: 60%;
+  }
+}

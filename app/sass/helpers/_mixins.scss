@@ -1,0 +1,20 @@
+@mixin landscapePhone {
+  @media (min-width: 480px) and (orientation: landscape) {
+    @content;
+  }
+}
+@mixin mq-not-mobile  {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+@mixin laptops  {
+  @media only screen and (min-width : 1200px) {
+    @content;
+  }
+}
+@mixin laptopsForPrzekroj  {
+  @media only screen and (min-width : 1500px) {
+    @content;
+  }
+}

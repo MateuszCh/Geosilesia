@@ -1,0 +1,137 @@
+main  {
+  .fullScreenMode {
+    position: fixed;
+    background-color: #222;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button  {
+      position: absolute;
+      right: .625rem;
+      top: .625rem;
+      background-color: transparent;
+      border: none;
+      height: 1.5rem;
+      width: 1.5rem;
+      z-index: 10;
+      img   {
+        width: 100%;
+      }
+      &:hover {
+        color: lighten($header-color, 20%);
+      }
+    }
+    .up   {
+      transform: scale(1);
+    }
+    figure  {
+      overflow: auto;
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      transform: scale(0);
+      transition: all .2s ease-in-out;
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      .prevnext  {
+        position: absolute;
+        background-color: transparent;
+        width: 25%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        bottom: 0;
+        opacity: 0;
+        transition: opacity .2s ease-in-out;
+        @include laptops  {
+          display: flex;
+          opacity: 0;
+          background-color: rgba(#fff, .2);
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+      .prev {
+        left: 0;
+        transform: rotate(180deg);
+      }
+      .next {
+        right: 0;
+      }
+      &>img {
+        max-width: 100%;
+        max-height: 100%;
+        height: auto;
+      }
+      figcaption  {
+        padding: 0 1.25rem;
+        @include landscapePhone {
+          display: none;
+        }
+        @include mq-not-mobile  {
+          display: block;
+        }
+        @include laptops  {
+          padding: 0 3.125rem;
+        }
+        h3,
+        p,
+        a   {
+          text-align: center;
+          color: #ddd;
+          font-family: $text-font;
+          font-size: 0.9rem;
+          line-height: 1rem;
+        }
+        h3  {
+          margin-top: .625rem;
+          @include laptops  {
+            font-size: 1.125rem;
+          }
+        }
+      }
+    }
+    .loadingPhoto {
+      background: #ffffff;
+      animation: float 1s infinite ease;
+      width: 1em;
+      height: 4em;
+      color: #ffffff;
+      margin: 5rem auto;
+      position: absolute;
+      top: calc(50% - 7rem);
+      left: calc(50% - .5em);
+      font-size: .625rem;
+      transform: translateZ(0);
+      animation-delay: -0.16s;
+      z-index: 10;
+      &:before,
+      &:after {
+        background: #ffffff;
+        animation: float 1s infinite ease;
+        width: 1em;
+        height: 4em;
+        position: absolute;
+        top: 0;
+        content: '';
+      }
+      &:before  {
+        left: -1.5em;
+        animation-delay: -0.32s;
+      }
+      &:after {
+        left: 1.5em;
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.rzezbaTable  {
+  width: 100%;
+  margin: 0 auto;
+  border: 2px solid black;
+  font-family: $text-font;
+  color: $text-color;
+  border-collapse: collapse;
+  @include laptops  {
+    width: 50%;
+  }
+  th  {
+    border: 1px solid black;
+    text-align: center;
+    padding: .2rem;
+    font-weight: normal;
+  }
+  td  {
+    text-align: center;
+    padding: .125rem;
+    width: 25%;
+    &.rightColumn  {
+      border-left: 1px solid black;
+    }
+  }
+}

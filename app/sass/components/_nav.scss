@@ -1,0 +1,99 @@
+.mainNav li.active   {
+  background-color: lighten($header-color, 20%);
+  ul li   {
+    background-color: $header-color;
+    @include mq-not-mobile  {
+      background-color: lighten($header-color, 10%);
+    }
+  }
+  ul li.active  {
+    background-color: lighten($header-color, 20%);
+    &:hover   {
+      background-color: white;
+      color: darken($header-color, 10%)
+    }
+  }
+}
+.mainNav  {
+  display: none;
+  @include mq-not-mobile  {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: .7rem;
+    position: relative;
+  }
+  @include laptops  {
+    padding-bottom: 0;
+  }
+  a,
+  span  {
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    font-family: $text-font;
+    color: inherit;
+  }
+  .mainListItems  {
+    transition: all .4s ease-in-out;
+    @include mq-not-mobile  {
+      background-color: lighten($header-color, 10%);
+      flex-grow: 1;
+      text-align: center;
+      &:hover {
+        background-color: white;
+        color: darken($header-color, 10%)
+      }
+    }
+    &>a,
+    span {
+      padding: .2rem 0;
+      padding-left: .5rem;
+      font-size: 1.2rem;
+      @include mq-not-mobile  {
+        padding: .5rem 1.5rem;
+      }
+      @include laptops  {
+        padding: 2.625rem 1.75rem;
+      }
+    }
+  }
+  .parentGeoSlaskNav  {
+    &:hover ul  {
+      @include laptops  {
+        display: block;
+      }
+    }
+  }
+  .geoslaskNav  {
+    display: none;
+    @include mq-not-mobile  {
+      position: absolute;
+      color: white;
+      width: 100%;
+      left: 0;
+    }
+    a  {
+      padding-left: 1rem;
+      font-size: .9rem;
+      @include mq-not-mobile  {
+        padding-left: 0;
+        width: 100%;
+        font-size: 1rem;
+      }
+    }
+    li  {
+      transition: all .2s ease-in-out;
+      padding: 0.1875rem 0;
+      @include mq-not-mobile  {
+        background-color: lighten($header-color, 10%);
+        padding: .3125rem 0;
+        width: 100%;
+        &:hover   {
+          background-color: white;
+          color: darken($header-color, 10%);
+        }
+      }
+    }
+  }
+}
+

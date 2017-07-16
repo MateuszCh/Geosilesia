@@ -1,0 +1,84 @@
+.photos {
+  @include landscapePhone {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  @include mq-not-mobile  {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  a  {
+    display: block;
+    position: relative;
+    margin: 1.25rem .625rem;
+    overflow: hidden;
+    padding: .3125rem;
+    box-shadow: 0 0 3px 3px darken(white, 20%);
+    background-color: darken(white, 5%);
+    transform: scale(0);
+    transition: all .5s cubic-bezier(.17,.67,.83,.67);
+    &.figuryUp  {
+      transform: scale(1);
+    }
+    @include landscapePhone {
+      width: 40%;
+    }
+    @include mq-not-mobile  {
+      margin: .625rem;
+      width: 28%;
+      background-color: darken(white, 5%);
+      box-shadow: 0 0 4px 4px darken(white, 20%);
+    }
+    @include laptops  {
+      width: 21%;
+      &:hover figcaption  {
+        opacity: .9;
+      }
+      &:hover img   {
+        transform: scale(1.4);
+      }
+    }
+    &.hidden  {
+      display: none;
+    }
+    figure  {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+        transition: all .2s ease-in-out;
+      }
+      figcaption  {
+        padding: .625rem .3125rem;
+        display: flex;
+        position: absolute;
+        color: white;
+        background-color: rgba(lighten($header-color, 10%),.9);
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-family: $headers-font;
+        font-size: 1rem;
+        align-items: center;
+        justify-content: center;
+        transition: all .2s ease-in-out;
+        opacity: 1;
+        @include mq-not-mobile  {
+          font-size: .9rem;
+          min-height: 3.5rem;
+        }
+        @include laptops  {
+          background-color: lighten($header-color, 10%);
+          opacity: 0;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
