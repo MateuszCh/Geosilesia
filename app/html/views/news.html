@@ -1,12 +1,12 @@
 <main>
     <section class="news">
         <h2>Wydarzenia</h2>
-        <article ng-repeat="new in vm.news" ng-class="{'border' : $first}" ng-attr-id="{{'news-' + $index}}">
-            <div class="head" ng-click="vm.action($event)">
+        <article ng-repeat="new in vm.news" ng-init="vm.active = 0" ng-class="{'border' : vm.active === $index}">
+            <div class="head" ng-click="vm.active === $index ? vm.active = ' ' : vm.active = $index">
                 <h3 ng-bind="new.header"></h3>
                 <p class="dateAndPlace" ng-bind="new.dateAndPlace"></p>
             </div>
-            <div class="body" ng-class="{'dol' : $first}">
+            <div class="body" ng-class="{'dol' : vm.active === $index}">
                 <p ng-repeat="para in new.paragraphs" ng-bind="para">
                 </p>
                 <p ng-if="new.hyperlink" ng-repeat="link in new.hyperlink" class="links">

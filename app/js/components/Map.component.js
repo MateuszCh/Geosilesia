@@ -1,7 +1,6 @@
 /**
- * Created by Mateusz Chybiorz on 2017-07-09.
+ * Created by Mateusz Chybiorz on 2017-07-17.
  */
-
 (function(){
     angular.module('geosilesia').component('map', {
         template: '<div id="map" class="map"></div>',

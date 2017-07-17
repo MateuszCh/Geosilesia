@@ -118,9 +118,8 @@
 })();
 
 /**
- * Created by Mateusz Chybiorz on 2017-07-09.
+ * Created by Mateusz Chybiorz on 2017-07-17.
  */
-
 (function(){
     angular.module('geosilesia').component('map', {
         template: '<div id="map" class="map"></div>',
@@ -227,25 +226,43 @@
                 console.log(vm.news);
             });
         }
-
-        vm.action = function (event) {
-            var target = angular.element(event.currentTarget);
-            var parent = angular.element(event.currentTarget.parentNode);
-            parent.hasClass("border") ? thesame = false : thesame = true;
-
-            angular.element(document.querySelectorAll("article")).removeClass('border');
-            angular.element(document.querySelectorAll(".body")).removeClass("dol");
-
-            if (thesame) {
-                parent.addClass('border');
-                target.next().addClass('dol');
-            }
-        }
-
-
     }
-
 })();
+/**
+ * Created by Mateusz Chybiorz on 2017-07-16.
+ */
+
+(function(){
+    angular.module('geosilesia').config(['$locationProvider', '$routeProvider',
+        function ($locationProvider, $routeProvider) {
+            $locationProvider.hashPrefix('');
+
+            $routeProvider.
+            when('/',{
+                template: '<homepage></homepage>'
+            }).
+            when('/about', {
+                template: '<about></about>'
+            }).
+            when('/english', {
+                template: '<english></english>'
+            }).
+            when('/dictionary', {
+                template: '<dictionary></dictionary>'
+            }).
+            when('/news', {
+                template: '<events></events>'
+            }).
+            when('/gallery', {
+                templateUrl: 'html/views/gallery.html'
+            }).
+            otherwise('/');
+            $locationProvider.html5Mode(true);
+
+        }
+    ]);
+})();
+
 /**
  * Created by Mateusz Chybiorz on 2017-07-09.
  */
@@ -456,39 +473,4 @@
             }
         ],{name: 'Custom'})
     );
-})();
-
-/**
- * Created by Mateusz Chybiorz on 2017-07-16.
- */
-
-(function(){
-    angular.module('geosilesia').config(['$locationProvider', '$routeProvider',
-        function ($locationProvider, $routeProvider) {
-            $locationProvider.hashPrefix('');
-
-            $routeProvider.
-            when('/',{
-                template: '<homepage></homepage>'
-            }).
-            when('/about', {
-                template: '<about></about>'
-            }).
-            when('/english', {
-                template: '<english></english>'
-            }).
-            when('/dictionary', {
-                template: '<dictionary></dictionary>'
-            }).
-            when('/news', {
-                template: '<events></events>'
-            }).
-            when('/gallery', {
-                templateUrl: 'html/views/gallery.html'
-            }).
-            otherwise('/');
-            $locationProvider.html5Mode(true);
-
-        }
-    ]);
 })();
