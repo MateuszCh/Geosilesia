@@ -28,7 +28,7 @@ gulp.task('styles', function(){
 // Scripts Task
 //Uglifies
 gulp.task('scripts', function(){
-    gulp.src(['app/js/app.js','app/js/components/*.js', 'app/js/constants/*.js', 'app/js/config/*.js'])
+    gulp.src(['app/js/**/*.js'])
         .on('error', errorLog)
         .pipe(concat('main.js'))
         .pipe(gulp.dest('app/minjs'))
@@ -60,7 +60,7 @@ gulp.task('browser-sync', function(){
 
 // Watch Task
 gulp.task('watch', function(){
-    gulp.watch(['app/js/app.js','app/js/components/*.js', 'app/js/constants/*.js', 'app/js/config/*.js'], ['scripts']);
+    gulp.watch(['app/js/**/*.js'], ['scripts']);
     gulp.watch('app/**/*.html', ['html']);
     gulp.watch('app/sass/**/*.scss', ['styles']);
 });

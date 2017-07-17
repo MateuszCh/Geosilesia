@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="geosilesia">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <base href="/">
@@ -11,7 +11,7 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmB631kh-m9oK9PL_i4OEmvkRqjcdeWzg" ></script>
         <script src="minjs/main.js"></script>
     </head>
-    <body>
+    <body ng-app="geosilesia" ng-controller="MainController">
         <header></header>
         <div ng-view=""></div>
         <button class="buttonUp" id="buttonUp">↑</button>

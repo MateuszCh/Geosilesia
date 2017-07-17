@@ -5,6 +5,9 @@
 (function(){
     var geosilesia = angular.module('geosilesia', ['ngRoute']);
 
+    angular.module('geosilesia').controller('MainController', ['$scope', function($scope){
+
+    }]);
 })();
 
 
