@@ -14,223 +14,6 @@
 /**
  * Created by Mateusz Chybiorz on 2017-07-16.
  */
-(function(){
-    angular.module('geosilesia').component('about', {
-        templateUrl: 'html/views/about.html',
-        bindings: {
-            custom: '<'
-        },
-        controllerAs: 'vm',
-        controller: AboutController
-    });
-
-    AboutController.$inject = [];
-
-    function AboutController(){
-        var vm = this;
-    }
-})();
-
-/**
- * Created by Mateusz Chybiorz on 2017-07-16.
- */
-(function(){
-    angular.module('geosilesia').component('dictionary', {
-        templateUrl: 'html/views/dictionary.html',
-        bindings: {
-            custom: '<'
-        },
-        controllerAs: 'vm',
-        controller: DictionaryController
-    });
-
-    DictionaryController.$inject = [];
-
-    function DictionaryController(){
-        var vm = this;
-    }
-})();
-
-/**
- * Created by Mateusz Chybiorz on 2017-07-16.
- */
-(function(){
-    angular.module('geosilesia').component('english', {
-        templateUrl: 'html/views/english.html',
-        bindings: {
-            custom: '<'
-        },
-        controllerAs: 'vm',
-        controller: EnglishController
-    });
-
-    EnglishController.$inject = [];
-
-    function EnglishController(){
-        var vm = this;
-    }
-})();
-
-/**
- * Created by Mateusz Chybiorz on 2017-07-16.
- */
-(function(){
-    angular.module('geosilesia').component('header', {
-        templateUrl: 'html/header.html',
-        bindings: {
-            custom: '<'
-        },
-        controllerAs: 'vm',
-        controller: HeaderController
-    });
-    HeaderController.$inject = ['$scope'];
-    function HeaderController(){
-        var vm = this;
-    }
-})();
-
-/**
- * Created by Mateusz Chybiorz on 2017-07-16.
- */
-(function(){
-    angular.module('geosilesia').component('homepage', {
-        templateUrl: 'html/views/homepage.html',
-        bindings: {
-            custom: '<'
-        },
-        controllerAs: 'vm',
-        controller: HomepageController
-    });
-
-    HomepageController.$inject = ['$http'];
-
-    function HomepageController($http){
-        var vm = this;
-        vm.markers = [];
-        vm.$onInit = onInit;
-        function onInit(){
-            $http.get("json/markers.json").then(function (response) {
-                vm.markers = response.data.obiekty;
-                console.log(vm.markers);
-            })
-        }
-    }
-})();
-
-/**
- * Created by Mateusz Chybiorz on 2017-07-17.
- */
-(function(){
-    angular.module('geosilesia').component('map', {
-        template: '<div id="map" class="map"></div>',
-        bindings: {
-            markers: '<'
-        },
-        controllerAs: 'vm',
-        controller: MapController
-    });
-
-    MapController.$inject = ['mapStyle', 'iconsForMarkers'];
-    function MapController(mapStyle, iconsForMarkers){
-
-        var vm = this;
-        vm.$onChanges = onChanges;
-
-        function onChanges(changes){
-            console.log(changes);
-            if(vm.markers){
-                obiekty = vm.markers;
-                console.log("oninit");
-                console.log(obiekty);
-                console.log(vm.markers);
-                var map, marker, i, infowindow;
-
-                var styledMapType = mapStyle;
-
-                var icons  = iconsForMarkers;
-
-                var mapOptions =    {
-                    center: {
-                        lat: 50.277978,
-                        lng: 19.020544
-                    },
-                    zoom: 10,
-                    scrollwheel: false,
-                    draggable: true,
-                    mapTypeId: "terrain",
-                    minZoom: 8,
-                    fullscreenControl: true,
-                    zoomControl: true,
-                    zoomControlOptions: {
-                        position: google.maps.ControlPosition.RIGHT_TOP
-                    },
-                    streetViewControl: true,
-                    streetViewControlOptions: {
-                        position: google.maps.ControlPosition.RIGHT_TOP
-                    },
-                    mapTypeControl: true,
-                    mapTypeControlOptions: {
-                        mapTypeIds: ["roadmap", "satellite", "hybrid", "terrain", "styled_map"],
-                        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
-                    },
-                    scaleControl: true
-                };
-
-                map = new google.maps.Map(document.getElementById("map"), mapOptions);
-                map.mapTypes.set("styled_map", styledMapType);
-                infowindow = new google.maps.InfoWindow();
-
-                for (i = 0; i < obiekty.length; i++) {
-
-
-                    var pozycja = eval("(" + obiekty[i].position + ")");
-
-                    marker = new google.maps.Marker({
-                        position: pozycja,
-                        map: map,
-                        title: obiekty[i].title,
-                        icon: icons[obiekty[i].category].icon
-                    });
-                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                        return function() {
-                            infowindow.setContent("<div class='markerDeskription'><p>" + obiekty[i].title + "</p><p>" + obiekty[i].place + "</p><a href=" + obiekty[i].hyperlink + " target='_blank'>Więcej</a></div>");
-                            infowindow.open(map, marker);
-                        }
-                    })(marker, i));
-                }
-            }
-
-        }
-    }
-})();
-(function(){
-    angular.module('geosilesia').component('events', {
-            templateUrl: 'html/views/news.html',
-            bindings: {
-                custom: '<'
-            },
-            controllerAs: 'vm',
-            controller: NewsController
-        });
-
-    NewsController.$inject = ['$http'];
-
-    function NewsController($http) {
-        var vm = this;
-        vm.news = [];
-        vm.$onInit = onInit;
-
-        function onInit() {
-            $http.get("json/events.json").then(function (response) {
-                vm.news = response.data.news;
-                console.log(vm.news);
-            });
-        }
-    }
-})();
-/**
- * Created by Mateusz Chybiorz on 2017-07-16.
- */
 
 (function(){
     angular.module('geosilesia').config(['$locationProvider', '$routeProvider',
@@ -241,20 +24,35 @@
             when('/',{
                 template: '<homepage></homepage>'
             }).
-            when('/about', {
+            when('/o-nas', {
                 template: '<about></about>'
             }).
             when('/english', {
                 template: '<english></english>'
             }).
-            when('/dictionary', {
+            when('/slownik', {
                 template: '<dictionary></dictionary>'
             }).
-            when('/news', {
+            when('/wydarzenia', {
                 template: '<events></events>'
             }).
-            when('/gallery', {
+            when('/galeria', {
                 templateUrl: 'html/views/gallery.html'
+            }).
+            when('/polozenie', {
+                templateUrl: 'html/views/geoslask/polozenie.html'
+            }).
+            when('/rzezba', {
+                templateUrl: 'html/views/geoslask/rzezba.html'
+            }).
+            when('/budowa', {
+                templateUrl: 'html/views/geoslask/budowa.html'
+            }).
+            when('/geostanowiska', {
+                templateUrl: 'html/views/geoslask/geostanowiska.html'
+            }).
+            when('/atrakcje', {
+                templateUrl: 'html/views/geoslask/atrakcje.html'
             }).
             otherwise('/');
             $locationProvider.html5Mode(true);
@@ -473,4 +271,237 @@
             }
         ],{name: 'Custom'})
     );
+})();
+
+/**
+ * Created by Mateusz Chybiorz on 2017-07-16.
+ */
+(function(){
+    angular.module('geosilesia').component('about', {
+        templateUrl: 'html/views/about.html',
+        bindings: {
+            custom: '<'
+        },
+        controllerAs: 'vm',
+        controller: AboutController
+    });
+
+    AboutController.$inject = [];
+
+    function AboutController(){
+        var vm = this;
+    }
+})();
+
+/**
+ * Created by Mateusz Chybiorz on 2017-07-16.
+ */
+(function(){
+    angular.module('geosilesia').component('dictionary', {
+        templateUrl: 'html/views/dictionary.html',
+        bindings: {
+            custom: '<'
+        },
+        controllerAs: 'vm',
+        controller: DictionaryController
+    });
+
+    DictionaryController.$inject = [];
+
+    function DictionaryController(){
+        var vm = this;
+    }
+})();
+
+/**
+ * Created by Mateusz Chybiorz on 2017-07-16.
+ */
+(function(){
+    angular.module('geosilesia').component('english', {
+        templateUrl: 'html/views/english.html',
+        bindings: {
+            custom: '<'
+        },
+        controllerAs: 'vm',
+        controller: EnglishController
+    });
+
+    EnglishController.$inject = [];
+
+    function EnglishController(){
+        var vm = this;
+    }
+})();
+
+/**
+ * Created by Mateusz Chybiorz on 2017-07-16.
+ */
+(function(){
+    angular.module('geosilesia').component('header', {
+        templateUrl: 'html/header.html',
+        bindings: {
+            custom: '<'
+        },
+        controllerAs: 'vm',
+        controller: HeaderController
+    });
+    HeaderController.$inject = ['$scope'];
+    function HeaderController(){
+
+        var vm = this;
+        vm.nav = [
+            {title: 'O serwisie', link: '/o-nas'},
+            {title: 'Geośląsk', submenu : [
+                {title: 'Położenie', link : '/polozenie'},
+                {title: 'Rzeźba terenu', link: '/rzezba'},
+                {title: 'Budowa geologiczna', link: '/budowa'},
+                {title: 'Geostanowiska', link: '/geostanowiska'},
+                {title: 'Atakcje geoturystyczne', link: '/atrakcje'}
+            ]},
+            {title: 'Wydarzenia', link: '/wydarzenia'},
+            {title: 'Słownik', link: '/slownik'},
+            {title: 'Galeria', link: '/galeria'},
+            {title: 'English', link: '/english'}
+        ];
+    }
+})();
+
+/**
+ * Created by Mateusz Chybiorz on 2017-07-16.
+ */
+(function(){
+    angular.module('geosilesia').component('homepage', {
+        templateUrl: 'html/views/homepage.html',
+        bindings: {
+            custom: '<'
+        },
+        controllerAs: 'vm',
+        controller: HomepageController
+    });
+
+    HomepageController.$inject = ['$http'];
+
+    function HomepageController($http){
+        var vm = this;
+        vm.markers = [];
+        vm.$onInit = onInit;
+        function onInit(){
+            $http.get("json/markers.json").then(function (response) {
+                vm.markers = response.data.obiekty;
+                console.log(vm.markers);
+            })
+        }
+    }
+})();
+
+/**
+ * Created by Mateusz Chybiorz on 2017-07-17.
+ */
+(function(){
+    angular.module('geosilesia').component('map', {
+        template: '<div id="map" class="map"></div>',
+        bindings: {
+            markers: '<'
+        },
+        controllerAs: 'vm',
+        controller: MapController
+    });
+
+    MapController.$inject = ['mapStyle', 'iconsForMarkers'];
+    function MapController(mapStyle, iconsForMarkers){
+
+        var vm = this;
+        vm.$onChanges = onChanges;
+
+        function onChanges(changes){
+            console.log(changes);
+            if(vm.markers){
+                obiekty = vm.markers;
+                console.log("oninit");
+                console.log(obiekty);
+                console.log(vm.markers);
+                var map, marker, i, infowindow;
+
+                var styledMapType = mapStyle;
+
+                var icons  = iconsForMarkers;
+
+                var mapOptions =    {
+                    center: {
+                        lat: 50.277978,
+                        lng: 19.020544
+                    },
+                    zoom: 10,
+                    scrollwheel: false,
+                    draggable: true,
+                    mapTypeId: "terrain",
+                    minZoom: 8,
+                    fullscreenControl: true,
+                    zoomControl: true,
+                    zoomControlOptions: {
+                        position: google.maps.ControlPosition.RIGHT_TOP
+                    },
+                    streetViewControl: true,
+                    streetViewControlOptions: {
+                        position: google.maps.ControlPosition.RIGHT_TOP
+                    },
+                    mapTypeControl: true,
+                    mapTypeControlOptions: {
+                        mapTypeIds: ["roadmap", "satellite", "hybrid", "terrain", "styled_map"],
+                        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                    },
+                    scaleControl: true
+                };
+
+                map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                map.mapTypes.set("styled_map", styledMapType);
+                infowindow = new google.maps.InfoWindow();
+
+                for (i = 0; i < obiekty.length; i++) {
+
+
+                    var pozycja = eval("(" + obiekty[i].position + ")");
+
+                    marker = new google.maps.Marker({
+                        position: pozycja,
+                        map: map,
+                        title: obiekty[i].title,
+                        icon: icons[obiekty[i].category].icon
+                    });
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                            infowindow.setContent("<div class='markerDeskription'><p>" + obiekty[i].title + "</p><p>" + obiekty[i].place + "</p><a href=" + obiekty[i].hyperlink + " target='_blank'>Więcej</a></div>");
+                            infowindow.open(map, marker);
+                        }
+                    })(marker, i));
+                }
+            }
+
+        }
+    }
+})();
+(function(){
+    angular.module('geosilesia').component('events', {
+            templateUrl: 'html/views/news.html',
+            bindings: {
+                custom: '<'
+            },
+            controllerAs: 'vm',
+            controller: NewsController
+        });
+
+    NewsController.$inject = ['$http'];
+
+    function NewsController($http) {
+        var vm = this;
+        vm.news = [];
+        vm.$onInit = onInit;
+
+        function onInit() {
+            $http.get("json/events.json").then(function (response) {
+                vm.news = response.data.news;
+                console.log(vm.news);
+            });
+        }
+    }
 })();

@@ -11,20 +11,35 @@
             when('/',{
                 template: '<homepage></homepage>'
             }).
-            when('/about', {
+            when('/o-nas', {
                 template: '<about></about>'
             }).
             when('/english', {
                 template: '<english></english>'
             }).
-            when('/dictionary', {
+            when('/slownik', {
                 template: '<dictionary></dictionary>'
             }).
-            when('/news', {
+            when('/wydarzenia', {
                 template: '<events></events>'
             }).
-            when('/gallery', {
+            when('/galeria', {
                 templateUrl: 'html/views/gallery.html'
+            }).
+            when('/polozenie', {
+                templateUrl: 'html/views/geoslask/polozenie.html'
+            }).
+            when('/rzezba', {
+                templateUrl: 'html/views/geoslask/rzezba.html'
+            }).
+            when('/budowa', {
+                templateUrl: 'html/views/geoslask/budowa.html'
+            }).
+            when('/geostanowiska', {
+                templateUrl: 'html/views/geoslask/geostanowiska.html'
+            }).
+            when('/atrakcje', {
+                templateUrl: 'html/views/geoslask/atrakcje.html'
             }).
             otherwise('/');
             $locationProvider.html5Mode(true);

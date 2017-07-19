@@ -5,21 +5,15 @@
     <h1 id="logo"><a href="/">GeoSilesia</a></h1>
     <nav>
         <ul class="mainNav" id="mainNav">
-            <li class="mainListItems"><a href="/about">O serwisie</a></li>
-            <li class="parentGeoSlaskNav mainListItems">
-                <span id="secondNav" class="secondNav">GeoŚląsk</span>
-                <ul class="geoslaskNav" id="geoSlaskNav">
-                    <li><a href="/polozenie">Położenie</a></li>
-                    <li><a href="/rzezba">Rzeźba terenu</a></li>
-                    <li><a href="/budowa">Budowa geologiczna</a></li>
-                    <li><a href="/geostanowiska">Geostanowiska</a></li>
-                    <li><a href="/atrakcje">Atrakcje geoturystyczne</a></li>
+            <li class="mainListItems" ng-repeat="item in ::vm.nav" ng-class="{'parentGeoSlaskNav' : item.submenu}">
+                <a ng-if="item.link" ng-href="{{item.link}}" ng-bind="item.title"></a>
+                <span class="secondNav" id="secondNav" ng-bind="item.title" ng-if="item.submenu"></span>
+                <ul ng-if="item.submenu" class="geoslaskNav" id="geoSlaskNav">
+                    <li ng-repeat="sub in ::item.submenu">
+                        <a ng-href="{{sub.link}}" ng-bind="sub.title"></a>
+                    </li>
                 </ul>
             </li>
-            <li class="mainListItems"><a href="/news">Wydarzenia</a></li>
-            <li class="mainListItems"><a href="/dictionary">Słownik</a></li>
-            <li class="mainListItems"><a href="/gallery">Galeria</a></li>
-            <li class="mainListItems"><a href="/english">English</a></li>
         </ul>
     </nav>
 </div>
