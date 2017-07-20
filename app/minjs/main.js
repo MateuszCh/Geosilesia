@@ -5,15 +5,43 @@
 (function(){
     var geosilesia = angular.module('geosilesia', ['ngRoute', 'ngAnimate']);
 
-    angular.module('geosilesia').controller('MainController', ['$scope', '$window', function($scope, $window){
-        angular.element($window).on("scroll", function() {
+    angular.module('geosilesia').controller('MainController', ['$scope', '$window', '$rootScope', function($scope, $window, $rootScope){
+        setSize();
+        $window.addEventListener('scroll', showButtonUp);
+        $window.addEventListener('resize', setSize);
+
+        function showButtonUp(){
             if (this.pageYOffset >= 100) {
                 $scope.showButtonUp = true;
             } else {
                 $scope.showButtonUp = false;
             }
             $scope.$apply();
-        });
+        }
+
+        function resetSizes(){
+            $rootScope.isS = false;
+            $rootScope.isM = false;
+            $rootScope.isL = false;
+            $rootScope.isX = false;
+        }
+
+        function checkMatchMedia(width){
+            return this.matchMedia('(max-width: ' + width + 'px)').matches;
+        }
+
+        function setSize(){
+            resetSizes();
+            if(checkMatchMedia('767')){
+                $rootScope.isS = true;
+            } else if (checkMatchMedia('1200')){
+                $rootScope.isM = true;
+            } else if (checkMatchMedia('1500')){
+                $rootScope.isL = true;
+            } else {
+                $rootScope.isX = true;
+            }
+        }
     }]);
 })();
 
@@ -90,10 +118,11 @@
         controllerAs: 'vm',
         controller: HeaderController
     });
-    HeaderController.$inject = ['$scope'];
-    function HeaderController(){
+    HeaderController.$inject = ['$window'];
+    function HeaderController($window){
 
         var vm = this;
+        vm.$onInit = onInit;
         vm.nav = [
             {title: 'O serwisie', link: '/o-nas'},
             {title: 'Geośląsk', submenu : [
@@ -109,11 +138,48 @@
             {title: 'English', link: '/english'}
         ];
 
+        function onInit(){
+            $window.addEventListener('resize', resetHeader);
+            if($window.innerWidth > 768){
+                vm.hamOpen = true;
+            }
+        }
 
+        vm.hamOpen = false;
+        vm.openHam = openHam;
 
-
+        function openHam() {
+            return vm.hamOpen ? vm.hamOpen = false : vm.hamOpen = true;
+        }
+        var previousSize;
+        function resetHeader(){
+            vm.hamOpen = false;
+            var currentSize = $window.innerWidth;
+            if((previousSize <= 768 && currentSize > 768) || (previousSize <= 1200 && currentSize > 1200)){
+                vm.openHam = true;
+            }
+        }
     }
 })();
+
+
+// $(window).on("resize", function () {
+//     sizeOfHeader = $("header").height();
+//     var currentSize = window.innerWidth;
+//     if((previousSize <= 768 && currentSize > 768) || (previousSize <= 1200 && currentSize > 1200)){
+//         if($(mainNav).css("display")){
+//             $(geoSlaskNav).slideUp(0);
+//             $(mainNav).attr("style", " ");
+//         }
+//         if($(geoSlaskNav).css("display")){
+//             $(geoSlaskNav).attr("style", " ");
+//         }
+//         if($(menuHam).hasClass("expanded")){
+//             $(menuHam).removeClass("expanded");
+//         }
+//     }
+//     previousSize = currentSize;
+// });
 /**
  * Created by Mateusz Chybiorz on 2017-07-16.
  */
@@ -272,56 +338,6 @@
         }
     }
 })();
-/**
- * Created by Mateusz Chybiorz on 2017-07-16.
- */
-
-(function(){
-    angular.module('geosilesia').config(['$locationProvider', '$routeProvider',
-        function ($locationProvider, $routeProvider) {
-            $locationProvider.hashPrefix('');
-
-            $routeProvider.
-            when('/',{
-                template: '<homepage></homepage>'
-            }).
-            when('/o-nas', {
-                template: '<about></about>'
-            }).
-            when('/english', {
-                template: '<english></english>'
-            }).
-            when('/slownik', {
-                template: '<dictionary></dictionary>'
-            }).
-            when('/wydarzenia', {
-                template: '<events></events>'
-            }).
-            when('/galeria', {
-                templateUrl: 'html/views/gallery.html'
-            }).
-            when('/polozenie', {
-                templateUrl: 'html/views/geoslask/polozenie.html'
-            }).
-            when('/rzezba', {
-                templateUrl: 'html/views/geoslask/rzezba.html'
-            }).
-            when('/budowa', {
-                templateUrl: 'html/views/geoslask/budowa.html'
-            }).
-            when('/geostanowiska', {
-                templateUrl: 'html/views/geoslask/geostanowiska.html'
-            }).
-            when('/atrakcje', {
-                templateUrl: 'html/views/geoslask/atrakcje.html'
-            }).
-            otherwise('/');
-            $locationProvider.html5Mode(true);
-
-        }
-    ]);
-})();
-
 /**
  * Created by Mateusz Chybiorz on 2017-07-09.
  */
@@ -532,4 +548,54 @@
             }
         ],{name: 'Custom'})
     );
+})();
+
+/**
+ * Created by Mateusz Chybiorz on 2017-07-16.
+ */
+
+(function(){
+    angular.module('geosilesia').config(['$locationProvider', '$routeProvider',
+        function ($locationProvider, $routeProvider) {
+            $locationProvider.hashPrefix('');
+
+            $routeProvider.
+            when('/',{
+                template: '<homepage></homepage>'
+            }).
+            when('/o-nas', {
+                template: '<about></about>'
+            }).
+            when('/english', {
+                template: '<english></english>'
+            }).
+            when('/slownik', {
+                template: '<dictionary></dictionary>'
+            }).
+            when('/wydarzenia', {
+                template: '<events></events>'
+            }).
+            when('/galeria', {
+                templateUrl: 'html/views/gallery.html'
+            }).
+            when('/polozenie', {
+                templateUrl: 'html/views/geoslask/polozenie.html'
+            }).
+            when('/rzezba', {
+                templateUrl: 'html/views/geoslask/rzezba.html'
+            }).
+            when('/budowa', {
+                templateUrl: 'html/views/geoslask/budowa.html'
+            }).
+            when('/geostanowiska', {
+                templateUrl: 'html/views/geoslask/geostanowiska.html'
+            }).
+            when('/atrakcje', {
+                templateUrl: 'html/views/geoslask/atrakcje.html'
+            }).
+            otherwise('/');
+            $locationProvider.html5Mode(true);
+
+        }
+    ]);
 })();

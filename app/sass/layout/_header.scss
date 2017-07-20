@@ -6,6 +6,11 @@
   color: white;
   box-shadow: 0 3px 5px 1px darken($header-color, 20%);
   z-index: 10;
+  transition: all 1s ease;
+  &.slide {
+    transition: all 0.5s ease;
+    top: -150px;
+  }
   @include laptops  {
     display: flex;
     align-items: center;

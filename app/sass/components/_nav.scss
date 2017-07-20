@@ -14,9 +14,17 @@
     }
   }
 }
+
 .mainNav  {
-  display: none;
+  overflow: hidden;
+  transition: all 1s ease;
+  max-height: 500px;
+  &.slide {
+    max-height: 0;
+    transition: all 1s ease;
+  }
   @include mq-not-mobile  {
+    overflow: visible;
     display: flex;
     justify-content: space-around;
     padding-bottom: .7rem;

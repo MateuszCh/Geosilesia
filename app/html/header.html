@@ -1,16 +1,16 @@
-<div class="mainHeader" id="mainHeader" ng-show="!$root.hideHeader">
-    <div id="menu">
+<div class="mainHeader" id="mainHeader" ng-class="{'slide' : $root.hideHeader}">
+    <div id="menu" ng-click="vm.openHam()" ng-class="{'expanded' : vm.hamOpen}">
         <span class="menu"></span>
     </div>
     <h1 id="logo"><a href="/">GeoSilesia</a></h1>
     <nav>
-        <ul class="mainNav" id="mainNav">
+        <ul class="mainNav" id="mainNav" ng-class="{'slide' : !vm.hamOpen && $root.isS}">
             <li class="mainListItems" ng-repeat="item in ::vm.nav" ng-class="{'parentGeoSlaskNav' : item.submenu}">
-                <a ng-if="item.link" ng-href="{{item.link}}" ng-bind="item.title"></a>
+                <a ng-if="item.link" ng-href="{{item.link}}" ng-bind="item.title" ng-click="$root.isS ? vm.openHam() : angular.noop()"></a>
                 <span class="secondNav" id="secondNav" ng-bind="item.title" ng-if="item.submenu"></span>
                 <ul ng-if="item.submenu" class="geoslaskNav" id="geoSlaskNav">
                     <li ng-repeat="sub in ::item.submenu">
-                        <a ng-href="{{sub.link}}" ng-bind="sub.title"></a>
+                        <a ng-href="{{sub.link}}" ng-bind="sub.title" ng-click="$root.isS ? vm.openHam() : angular.noop()"></a>
                     </li>
                 </ul>
             </li>
