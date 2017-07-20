@@ -18,7 +18,7 @@
         vm.markers = [];
         vm.$onInit = onInit;
         vm.$onDestroy = onDestroy;
-        var sizeOfHeader = document.getElementById("mainHeader").offsetHeight;
+        var mainHeader = document.getElementById("mainHeader");
 
         function onDestroy(){
             $rootScope.hideHeader = false;
@@ -36,13 +36,16 @@
         }
 
         function hideHeader(){
-            var heighInner = $window.innerHeight;
-            var scrollTopWindow = $window.scrollY;
-            var diff = scrollTopWindow + sizeOfHeader;
-            if(heighInner < diff){
-                $rootScope.hideHeader = true;
-            } else {
-                $rootScope.hideHeader = false;
+            if(mainHeader){
+                var sizeOfHeader = mainHeader.offsetHeight;
+                var heighInner = $window.innerHeight;
+                var scrollTopWindow = $window.scrollY;
+                var diff = scrollTopWindow + sizeOfHeader;
+                if(heighInner < diff){
+                    $rootScope.hideHeader = true;
+                } else {
+                    $rootScope.hideHeader = false;
+                }
             }
         }
     }

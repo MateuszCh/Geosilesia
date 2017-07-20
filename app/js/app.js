@@ -6,9 +6,18 @@
     var geosilesia = angular.module('geosilesia', ['ngRoute', 'ngAnimate']);
 
     angular.module('geosilesia').controller('MainController', ['$scope', '$window', '$rootScope', function($scope, $window, $rootScope){
-        setSize();
+
+
+
+        $scope.init = function(){
+            setSize();
+        };
+        $scope.init();
         $window.addEventListener('scroll', showButtonUp);
-        $window.addEventListener('resize', setSize);
+        $window.addEventListener('resize', function () {
+            setSize(true);
+        });
+
 
         function showButtonUp(){
             if (this.pageYOffset >= 100) {
@@ -19,6 +28,10 @@
             $scope.$apply();
         }
 
+        $rootScope.$on("$routeChangeSuccess", function(){
+            $window.scrollTo(0,0);
+        });
+
         function resetSizes(){
             $rootScope.isS = false;
             $rootScope.isM = false;
@@ -26,20 +39,21 @@
             $rootScope.isX = false;
         }
 
-        function checkMatchMedia(width){
-            return this.matchMedia('(max-width: ' + width + 'px)').matches;
-        }
 
-        function setSize(){
+        function setSize(apply){
             resetSizes();
-            if(checkMatchMedia('767')){
+            var width = $window.innerWidth;
+            if(width < 767){
                 $rootScope.isS = true;
-            } else if (checkMatchMedia('1200')){
+            } else if (width < 1200){
                 $rootScope.isM = true;
-            } else if (checkMatchMedia('1500')){
+            } else if (width < 1500){
                 $rootScope.isL = true;
             } else {
                 $rootScope.isX = true;
+            }
+            if(apply){
+                $scope.$apply();
             }
         }
     }]);

@@ -18,12 +18,13 @@
 .mainNav  {
   overflow: hidden;
   transition: all 1s ease;
-  max-height: 500px;
+  max-height: 0;
   &.slide {
-    max-height: 0;
+    max-height: 500px;
     transition: all 1s ease;
   }
   @include mq-not-mobile  {
+    max-height: 500px;
     overflow: visible;
     display: flex;
     justify-content: space-around;
@@ -67,7 +68,7 @@
   }
   .parentGeoSlaskNav  {
     &:hover ul  {
-      @include laptops  {
+      @include mq-not-mobile  {
         display: block;
       }
     }
