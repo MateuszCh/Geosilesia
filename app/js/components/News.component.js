@@ -18,7 +18,6 @@
         function onInit() {
             $http.get("json/events.json").then(function (response) {
                 vm.news = response.data.news;
-                console.log(vm.news);
             });
         }
     }

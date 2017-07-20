@@ -18,12 +18,8 @@
         vm.$onChanges = onChanges;
 
         function onChanges(changes){
-            console.log(changes);
             if(vm.markers){
                 obiekty = vm.markers;
-                console.log("oninit");
-                console.log(obiekty);
-                console.log(vm.markers);
                 var map, marker, i, infowindow;
 
                 var styledMapType = mapStyle;

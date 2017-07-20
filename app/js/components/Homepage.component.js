@@ -11,17 +11,41 @@
         controller: HomepageController
     });
 
-    HomepageController.$inject = ['$http'];
+    HomepageController.$inject = ['$http', '$window', '$rootScope'];
 
-    function HomepageController($http){
+    function HomepageController($http, $window, $rootScope){
         var vm = this;
         vm.markers = [];
         vm.$onInit = onInit;
+        vm.$onDestroy = onDestroy;
+        var sizeOfHeader = document.getElementById("mainHeader").offsetHeight;
+
+        function onDestroy(){
+            $rootScope.hideHeader = false;
+            $window.removeEventListener('scroll', hideHeader);
+        }
+
         function onInit(){
             $http.get("json/markers.json").then(function (response) {
                 vm.markers = response.data.obiekty;
-                console.log(vm.markers);
-            })
+            });
+
+            if(document.getElementById('map')){
+                $window.addEventListener('scroll', hideHeader);
+            }
+        }
+
+        function hideHeader(){
+            var heighInner = $window.innerHeight;
+            var scrollTopWindow = $window.scrollY;
+            var diff = scrollTopWindow + sizeOfHeader;
+            if(heighInner < diff){
+                $rootScope.hideHeader = true;
+            } else {
+                $rootScope.hideHeader = false;
+            }
         }
     }
 })();
+
+
