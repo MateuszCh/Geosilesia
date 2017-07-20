@@ -8,12 +8,13 @@
         <link rel="stylesheet" href="css/main.css">
         <script src="minjs/angular.min.js"></script>
         <script src="minjs/angular-route.min.js"></script>
+        <script src="minjs/angular-animate.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmB631kh-m9oK9PL_i4OEmvkRqjcdeWzg" ></script>
         <script src="minjs/main.js"></script>
     </head>
     <body ng-app="geosilesia" ng-controller="MainController">
         <header></header>
-        <div ng-view=""></div>
+        <div ng-view="" class="fade"></div>
         <button class="buttonUp" ng-show="showButtonUp">↑</button>
     </body>
 </html>
