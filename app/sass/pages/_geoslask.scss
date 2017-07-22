@@ -1,6 +1,7 @@
 .tabs   {
-  .structures:nth-child(n+4) {
-    display: none;
+  &>div {
+    padding: .625rem .3125rem;
+    background-color: white;
   }
   &>ul {
     display: flex;
@@ -37,8 +38,13 @@
     }
   }
   .structures {
-    background-color: white;
-    padding: .625rem .3125rem;
+    max-height: 0;
+    transition: max-height .5s ease;
+    overflow: hidden;
+    &.slide {
+      max-height: 2000px;
+      transition: max-height .5s ease;
+    }
     a   {
       display: inline-block;
       color: inherit;
