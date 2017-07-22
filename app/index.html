@@ -9,12 +9,13 @@
         <script src="minjs/angular.min.js"></script>
         <script src="minjs/angular-route.min.js"></script>
         <script src="minjs/angular-animate.min.js"></script>
+        <script src="minjs/angular-scroll.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmB631kh-m9oK9PL_i4OEmvkRqjcdeWzg" ></script>
         <script src="minjs/main.js"></script>
     </head>
     <body ng-app="geosilesia" ng-controller="MainController">
         <header></header>
-        <div ng-view="" class="fade"></div>
-        <button class="buttonUp" ng-show="showButtonUp">↑</button>
+        <div ng-view="" class="fade" id="page"></div>
+        <button class="buttonUp" ng-show="showButtonUp" du-smooth-scroll="page">↑</button>
     </body>
 </html>

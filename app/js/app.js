@@ -3,7 +3,7 @@
  */
 
 (function(){
-    var geosilesia = angular.module('geosilesia', ['ngRoute', 'ngAnimate']);
+    var geosilesia = angular.module('geosilesia', ['ngRoute', 'ngAnimate', 'duScroll']);
 
     angular.module('geosilesia').controller('MainController', ['$scope', '$window', '$rootScope', function($scope, $window, $rootScope){
 

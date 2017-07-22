@@ -20,6 +20,8 @@
         vm.$onDestroy = onDestroy;
         var mainHeader = document.getElementById("mainHeader");
 
+        vm.scrollTo
+
         function onDestroy(){
             $rootScope.hideHeader = false;
             $window.removeEventListener('scroll', hideHeader);
