@@ -39,6 +39,10 @@
             $window.addEventListener('resize', resetHeader);
             $rootScope.$on("$routeChangeSuccess", function(){
                 vm.currentPath = $location.path();
+                if(vm.currentPath === '/'){
+                    vm.activeGeo = false;
+                    vm.hamOpen = false;
+                }
             });
         }
 

@@ -2,15 +2,15 @@
     <div id="menu" ng-click="vm.openHam()" ng-class="{'expanded' : vm.hamOpen}">
         <span class="menu"></span>
     </div>
-    <h1 id="logo"><a href="/">GeoSilesia</a></h1>
+    <h1 id="logo"><a href="/" ng-click="vm.hamOpen = false">GeoSilesia</a></h1>
     <nav>
         <ul class="mainNav" id="mainNav" ng-class="{'slide' : vm.hamOpen}">
-            <li class="mainListItems" ng-repeat="item in ::vm.nav" ng-class="{'parentGeoSlaskNav' : item.submenu, 'active' : ((vm.currentPath == item.link) && item.link) || (!item.link && vm.activeGeo)}" >
+            <li class="mainListItems" ng-repeat="item in ::vm.nav" ng-mouseenter="vm.hoverNavItem = $index" ng-mouseleave="vm.hoverNavItem = false" ng-class="{'parentGeoSlaskNav' : item.submenu, 'active' : ((vm.currentPath == item.link) && item.link) || (!item.link && vm.activeGeo)}" >
                 <a ng-if="item.link" ng-href="{{item.link}}" ng-bind="item.title" ng-click="$root.isS ? vm.openHam() : angular.noop(); vm.checkGeo(item)"></a>
                 <span class="secondNav" id="secondNav" ng-bind="item.title" ng-if="item.submenu"></span>
-                <ul ng-if="item.submenu" class="geoslaskNav" id="geoSlaskNav">
+                <ul ng-if="item.submenu" class="geoslaskNav" id="geoSlaskNav" ng-class="{'slide' : vm.hoverNavItem == $index}">
                     <li ng-repeat="sub in ::item.submenu" ng-class="{'active' : vm.currentPath == sub.link}">
-                        <a ng-href="{{sub.link}}" ng-bind="sub.subtitle" ng-click="$root.isS ? vm.openHam() : angular.noop(); vm.checkGeo(sub)"></a>
+                        <a ng-href="{{sub.link}}" ng-bind="sub.subtitle" ng-click="$root.isS ? vm.openHam() : angular.noop(); vm.checkGeo(sub); vm.hoverNavItem = false"></a>
                     </li>
                 </ul>
             </li>

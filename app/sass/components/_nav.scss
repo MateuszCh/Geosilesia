@@ -66,16 +66,17 @@
       }
     }
   }
-  .parentGeoSlaskNav  {
-    &:hover ul  {
-      max-height: 500px;
-      transition: all 0.5s ease;
-    }
-  }
+
   .geoslaskNav  {
     max-height:0;
     overflow: hidden;
     transition: all 0.5s ease;
+
+
+    &.slide {
+      max-height: 500px;
+      transition: all 0.5s ease;
+    }
     @include mq-not-mobile  {
       position: absolute;
       color: white;
