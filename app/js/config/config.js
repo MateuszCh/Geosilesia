@@ -24,7 +24,7 @@
                 template: '<events></events>'
             }).
             when('/galeria', {
-                templateUrl: 'html/views/gallery.html'
+                template: '<gallery></gallery>'
             }).
             when('/polozenie', {
                 templateUrl: 'html/views/geoslask/polozenie.html'

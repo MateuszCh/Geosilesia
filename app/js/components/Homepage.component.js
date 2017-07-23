@@ -39,11 +39,12 @@
 
         function hideHeader(){
             if(mainHeader){
+                console.log("start");
                 var sizeOfHeader = mainHeader.offsetHeight;
-                var heighInner = $window.innerHeight;
+                var heightInner = $window.innerHeight;
                 var scrollTopWindow = $window.scrollY;
                 var diff = scrollTopWindow + sizeOfHeader;
-                if(heighInner < diff){
+                if(heightInner < diff){
                     $rootScope.hideHeader = true;
                 } else {
                     $rootScope.hideHeader = false;
