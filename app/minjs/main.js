@@ -133,17 +133,41 @@
         controller: GalleryController
     });
 
-    GalleryController.$inject = ['$http'];
+    GalleryController.$inject = ['$http', '$timeout'];
 
-    function GalleryController($http){
+    function GalleryController($http, $timeout){
         var vm = this;
         vm.galleries = [];
         vm.$onInit = onInit;
+        vm.selectedCategory = 'all';
+        vm.changeCategory = changeCategory;
+        var timer;
+
+        vm.categories = [
+                {category: 'wyzyna', categoryText : 'krainy geograficzne'},
+                {category: 'mineralySkaly', categoryText : 'minerały i skały'},
+                {category : 'dziedzictwo', categoryText : 'dziedzictwo poprzemysłowe'},
+                {category : 'sciezki', categoryText : 'ścieżki tematyczne'},
+                {category : 'wydarzenia', categoryText : 'wydarzenia'},
+                {category : 'all', categoryText: 'wszystkie'}
+            ];
 
         function onInit() {
             $http.get("json/gallery.json").then(function (response) {
                 vm.galleries = response.data.gallery;
             });
+        }
+
+        function changeCategory(category){
+
+            if(vm.selectedCategory !== category){
+                $timeout.cancel(timer);
+                vm.selectedCategory = undefined;
+                timer = $timeout(function () {
+                    vm.selectedCategory = category;
+                }, 300);
+
+            }
         }
     }
 })();
@@ -195,17 +219,12 @@
             });
         }
 
-
-
-
         function openHam() {
             return vm.hamOpen ? vm.hamOpen = false : vm.hamOpen = true;
         }
 
         function checkGeo(link) {
-            console.log(link);
             vm.activeGeo = link.subtitle;
-            console.log(vm.activeGeo);
         }
 
         function resetHeader(){
@@ -378,6 +397,56 @@
         }
     }
 })();
+/**
+ * Created by Mateusz Chybiorz on 2017-07-16.
+ */
+
+(function(){
+    angular.module('geosilesia').config(['$locationProvider', '$routeProvider',
+        function ($locationProvider, $routeProvider) {
+            $locationProvider.hashPrefix('');
+
+            $routeProvider.
+            when('/',{
+                template: '<homepage></homepage>'
+            }).
+            when('/o-nas', {
+                template: '<about></about>'
+            }).
+            when('/english', {
+                template: '<english></english>'
+            }).
+            when('/slownik', {
+                template: '<dictionary></dictionary>'
+            }).
+            when('/wydarzenia', {
+                template: '<events></events>'
+            }).
+            when('/galeria', {
+                template: '<gallery></gallery>'
+            }).
+            when('/polozenie', {
+                templateUrl: 'html/views/geoslask/polozenie.html'
+            }).
+            when('/rzezba', {
+                templateUrl: 'html/views/geoslask/rzezba.html'
+            }).
+            when('/budowa', {
+                templateUrl: 'html/views/geoslask/budowa.html'
+            }).
+            when('/geostanowiska', {
+                templateUrl: 'html/views/geoslask/geostanowiska.html'
+            }).
+            when('/atrakcje', {
+                templateUrl: 'html/views/geoslask/atrakcje.html'
+            }).
+            otherwise('/');
+            $locationProvider.html5Mode(true);
+
+        }
+    ]);
+})();
+
 /**
  * Created by Mateusz Chybiorz on 2017-07-09.
  */
@@ -591,56 +660,6 @@
 })();
 
 /**
- * Created by Mateusz Chybiorz on 2017-07-16.
- */
-
-(function(){
-    angular.module('geosilesia').config(['$locationProvider', '$routeProvider',
-        function ($locationProvider, $routeProvider) {
-            $locationProvider.hashPrefix('');
-
-            $routeProvider.
-            when('/',{
-                template: '<homepage></homepage>'
-            }).
-            when('/o-nas', {
-                template: '<about></about>'
-            }).
-            when('/english', {
-                template: '<english></english>'
-            }).
-            when('/slownik', {
-                template: '<dictionary></dictionary>'
-            }).
-            when('/wydarzenia', {
-                template: '<events></events>'
-            }).
-            when('/galeria', {
-                template: '<gallery></gallery>'
-            }).
-            when('/polozenie', {
-                templateUrl: 'html/views/geoslask/polozenie.html'
-            }).
-            when('/rzezba', {
-                templateUrl: 'html/views/geoslask/rzezba.html'
-            }).
-            when('/budowa', {
-                templateUrl: 'html/views/geoslask/budowa.html'
-            }).
-            when('/geostanowiska', {
-                templateUrl: 'html/views/geoslask/geostanowiska.html'
-            }).
-            when('/atrakcje', {
-                templateUrl: 'html/views/geoslask/atrakcje.html'
-            }).
-            otherwise('/');
-            $locationProvider.html5Mode(true);
-
-        }
-    ]);
-})();
-
-/**
  * Created by Mateusz Chybiorz on 2017-07-22.
  */
 /**
@@ -657,3 +676,21 @@
     }]);
 })();
 
+
+/**
+ * Created by Mateusz Chybiorz on 2017-07-23.
+ */
+(function(){
+    angular.module('geosilesia').directive('imageLoaded', function() {
+        return {
+            restrict: 'A',
+            link: link
+        };
+        function link(scope, element){
+            var img = element.find('img');
+            img.bind('load', function () {
+                element.addClass('figuryUp');
+            })
+        }
+    });
+})();

@@ -46,17 +46,12 @@
             });
         }
 
-
-
-
         function openHam() {
             return vm.hamOpen ? vm.hamOpen = false : vm.hamOpen = true;
         }
 
         function checkGeo(link) {
-            console.log(link);
             vm.activeGeo = link.subtitle;
-            console.log(vm.activeGeo);
         }
 
         function resetHeader(){

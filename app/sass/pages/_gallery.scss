@@ -18,7 +18,10 @@
     box-shadow: 0 0 3px 3px darken(white, 20%);
     background-color: darken(white, 5%);
     transform: scale(0);
-    transition: all .5s cubic-bezier(.17,.67,.83,.67);
+    transition: transform .3s cubic-bezier(.17,.67,.83,.67);
+    &.ng-hide {
+      transform: scale(0) !important;
+    }
     &.figuryUp  {
       transform: scale(1);
     }

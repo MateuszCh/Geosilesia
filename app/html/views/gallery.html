@@ -1,14 +1,9 @@
 <main class="photos">
     <h2>Galeria</h2>
     <ul class="listOfCategories" id="listOfCategories">
-        <li class="categories" data-category="wyzyna">krainy geograficzne</li>
-        <li class="categories" data-category="mineralySkaly">minerały i skały</li>
-        <li class="categories" data-category="dziedzictwo">dziedzictwo poprzemysłowe</li>
-        <li class="categories" data-category="sciezki">scieżki tematyczne</li>
-        <li class="categories" data-category="wydarzenia">wydarzenia</li>
-        <li class="categories markedCategory" data-category="all">wszystkie</li>
+        <li class="categories" ng-repeat="category in vm.categories track by $index" ng-bind="category.categoryText" ng-class="{'markedCategory' : vm.selectedCategory == category.category}" ng-click="vm.changeCategory(category.category)"></li>
     </ul>
-    <a class="figuryUp" ng-href="{{gallery.hyperlink}}" ng-attr-data-category="{{gallery.category}}" ng-repeat="gallery in vm.galleries"><figure>
+    <a class="gallery" ng-href="{{gallery.hyperlink}}" image-loaded ng-attr-data-category="{{gallery.category}}" ng-repeat="gallery in vm.galleries" ng-show="vm.selectedCategory == 'all' || vm.selectedCategory == gallery.category"><figure>
         <img  ng-src="{{gallery.image}}" ng-attr-alt="{{gallery.title}}">
         <figcaption ng-bind="gallery.title"></figcaption>
     </figure></a>
