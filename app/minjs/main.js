@@ -121,21 +121,21 @@
 })();
 
 /**
- * Created by Mateusz Chybiorz on 2017-07-23.
+ * Created by Mateusz Chybiorz on 2017-07-26.
  */
 (function(){
-    angular.module('geosilesia').component('gallery', {
-        templateUrl: 'html/views/gallery.html',
+    angular.module('geosilesia').component('galleries', {
+        templateUrl: 'html/views/galleries.html',
         bindings: {
             custom: '<'
         },
         controllerAs: 'vm',
-        controller: GalleryController
+        controller: GalleriesController
     });
 
-    GalleryController.$inject = ['$http', '$timeout'];
+    GalleriesController.$inject = ['$http', '$timeout'];
 
-    function GalleryController($http, $timeout){
+    function GalleriesController($http, $timeout){
         var vm = this;
         vm.galleries = [];
         vm.$onInit = onInit;
@@ -144,13 +144,13 @@
         var timer;
 
         vm.categories = [
-                {category: 'wyzyna', categoryText : 'krainy geograficzne'},
-                {category: 'mineralySkaly', categoryText : 'minerały i skały'},
-                {category : 'dziedzictwo', categoryText : 'dziedzictwo poprzemysłowe'},
-                {category : 'sciezki', categoryText : 'ścieżki tematyczne'},
-                {category : 'wydarzenia', categoryText : 'wydarzenia'},
-                {category : 'all', categoryText: 'wszystkie'}
-            ];
+            {category: 'wyzyna', categoryText : 'krainy geograficzne'},
+            {category: 'mineralySkaly', categoryText : 'minerały i skały'},
+            {category : 'dziedzictwo', categoryText : 'dziedzictwo poprzemysłowe'},
+            {category : 'sciezki', categoryText : 'ścieżki tematyczne'},
+            {category : 'wydarzenia', categoryText : 'wydarzenia'},
+            {category : 'all', categoryText: 'wszystkie'}
+        ];
 
         function onInit() {
             $http.get("json/gallery.json").then(function (response) {
@@ -168,6 +168,33 @@
                 }, 300);
 
             }
+        }
+    }
+})();
+/**
+ * Created by Mateusz Chybiorz on 2017-07-23.
+ */
+(function(){
+    angular.module('geosilesia').component('gallery', {
+        templateUrl: 'html/views/gallery.html',
+        bindings: {
+            custom: '<'
+        },
+        controllerAs: 'vm',
+        controller: GalleryController
+    });
+
+    GalleryController.$inject = ['$http', '$routeParams'];
+
+    function GalleryController($http, $routeParams){
+        var vm = this;
+        console.log($routeParams.galleryId);
+        vm.$onInit = onInit;
+
+        function onInit() {
+            $http.get("json/galleries/" + $routeParams.galleryId + ".json").then(function (gallery) {
+                vm.gallery = gallery.data;
+            });
         }
     }
 })();
@@ -423,6 +450,9 @@
                 template: '<events></events>'
             }).
             when('/galeria', {
+                template: '<galleries></galleries>'
+            }).
+            when('/galeria/:galleryId', {
                 template: '<gallery></gallery>'
             }).
             when('/polozenie', {

@@ -1,10 +1,12 @@
-<main class="photos">
-    <h2>Galeria</h2>
-    <ul class="listOfCategories" id="listOfCategories">
-        <li class="categories" ng-repeat="category in vm.categories track by $index" ng-bind="category.categoryText" ng-class="{'markedCategory' : vm.selectedCategory == category.category}" ng-click="vm.changeCategory(category.category)"></li>
-    </ul>
-    <a class="gallery" ng-href="{{gallery.hyperlink}}" image-loaded ng-attr-data-category="{{gallery.category}}" ng-repeat="gallery in vm.galleries" ng-show="vm.selectedCategory == 'all' || vm.selectedCategory == gallery.category"><figure>
-        <img  ng-src="{{gallery.image}}" ng-attr-alt="{{gallery.title}}">
-        <figcaption ng-bind="gallery.title"></figcaption>
-    </figure></a>
+<main>
+    <section class="galleries">
+        <h2 ng-bind="vm.gallery.title"></h2>
+        <p ng-bind="vm.gallery.description"></p>
+        <figure ng-repeat="image in vm.gallery.images" image-loaded="">
+            <img ng-src="{{image.src}}">
+            <figcaption>
+                <p ng-bind="image.copy" class="opis"></p>
+            </figcaption>
+        </figure>
+    </section>
 </main>

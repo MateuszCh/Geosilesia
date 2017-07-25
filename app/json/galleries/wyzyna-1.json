@@ -1,0 +1,22 @@
+{
+  "title": "Wyżyna Częstochowska część 1",
+  "description": "Makroregion Wyżyna Krakowsko-Częstochowska (341.3) jest częścią podprowincji Wyżyna Śląsko-Krakowska, która należy do prowincji Wyżyny Polskie. Wyżyna Krakowsko-Częstochowska dzieli się na następujące makroregiony: Wyżynę Częstochowską, Wyżynę Olkuską, Rów Krzeszowicki i Grzbiet Tenczyński. Do województwa śląskiego należy prawie cała Wyżyna Częstochowska (341.31) i niewielki fragment Rowu Krzeszowickiego (341.33). Charakterystycznym elementem krajobrazu Wyżyny Częstochowskiej są liczne skaliste wzgórza (ostańce) zbudowane z górnojurajskich wapieni skalistych. Ze względu na krasowy charakter podłoża jest tu dużo form (jaskinie, leje) krasowych i mało rzek. Liczne suche obniżenia między wzgórzami prowadzą wody jedynie okresowo, po ulewnych deszczach i w czasie roztopów – są to tzw. doliny wodące. W Kromołowie i Bzowie, u podnóża kuesty, występują obfite źródła krasowe, z których biorą początek rzeki Warta i Czarna Przemsza. Ze źródeł krasowych w Złotym Potoku bierze początek Wiercica, w Siamoszycach – Krztynia, a w Zdowie - Białka Zdowska. Wschodnią część Wyżyny Częstochowskiej, jak i sąsiadujący z nią od tej strony kredowy Próg Lelowski rozcina dolina Pilicy.",
+  "images": [
+    {
+      "src" : "/images/galeria/w1/10_1.jpg",
+    "thumb" : "/images/galeria/w1/10_1_mid.jpg",
+    "copy" : "Smoleń, wzgórze zamkowe",
+    "author" : "Fot. Ryszard Chybiorz / 08.2009",
+    "description" : "Więcej",
+    "link" : "http://www.it-jura.pl/pl/zamki.php?go=smolen"
+    },
+    {
+      "src" : "/images/galeria/w1/10_2.jpg",
+      "thumb" : "/images/galeria/w1/10_2_mid.jpg",
+      "copy" : "Kusięta, Jaskinia w Zielonej Górze",
+      "author" : "Fot. T. Dulias",
+      "description" : "Więcej",
+      "link" : "http://www.sktj.pl/epimenides/jura/jwzg_p.html"
+    }
+  ]
+}

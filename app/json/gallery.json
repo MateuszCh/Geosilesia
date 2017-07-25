@@ -4,115 +4,134 @@
       "image" : "images/galeria/wyzyna_czestochowska_1.jpg",
       "title" : "Wyżyna Częstochowska cz. 1",
       "hyperlink" : "galleries/wyzyna1.html",
-      "category" : "wyzyna"
+      "category" : "wyzyna",
+      "id" : "wyzyna-1"
     },
     {
       "image" : "images/galeria/wyzyna_czestochowska_2.jpg",
       "title" : "Wyżyna Częstochowska cz. 2",
       "hyperlink" : "galleries/wyzyna2.html",
-      "category" : "wyzyna"
+      "category" : "wyzyna",
+      "id" : "wyzyna-2"
     },
     {
       "image" : "images/galeria/kolekcja.jpg",
       "title" : "Minerały województwa Śląskiego",
       "hyperlink" : "galleries/kolekcja.html",
-      "category" : "mineralySkaly"
+      "category" : "mineralySkaly",
+      "id" : "kolekcja"
     },
     {
       "image" : "images/galeria/cieszynity.jpg",
       "title" : "Cieszynity, pikryty i syenity",
       "hyperlink" : "galleries/cieszynity.html",
-      "category" : "mineralySkaly"
+      "category" : "mineralySkaly",
+      "id" : "cieszynity"
     },
     {
       "image" : "images/galeria/magurskiej.jpg",
       "title" : "Skały płaszczowiny magurskiej",
       "hyperlink" : "galleries/magurskiej.html",
-      "category" : "mineralySkaly"
+      "category" : "mineralySkaly",
+      "id" : "magurskiej"
     },
     {
       "image" : "images/galeria/gliwice.jpg",
       "title" : "Kamień w architekturze - Gliwice",
       "hyperlink" : "galleries/kamienGliwice.html",
-      "category" : "mineralySkaly"
+      "category" : "mineralySkaly",
+      "id" : "gliwice"
     },
     {
       "image" : "images/galeria/kamien_tuitam.jpg",
       "title" : "Kamień w architekturze - TUiTAM",
       "hyperlink" : "galleries/kamienTuITam.html",
-      "category" : "mineralySkaly"
+      "category" : "mineralySkaly",
+      "id" : "kamieni-tu-i-tam"
     },
     {
       "image" : "images/galeria/glazyNarzutowe.jpg",
       "title" : "Głazy narzutow",
       "hyperlink" : "galleries/glazyNarzutowe.html",
-      "category" : "mineralySkaly"
+      "category" : "mineralySkaly",
+      "id" : "glazy-narzutowe"
     },
     {
       "image" : "images/galeria/siemianowice.jpg",
       "title" : "Park Tradycji w Siemianowicach",
       "hyperlink" : "galleries/siemianowice.html",
-      "category" : "dziedzictwo"
+      "category" : "dziedzictwo",
+      "id" : "siemianowice"
     },
     {
       "image" : "images/galeria/dg.jpg",
       "title" : "Kopalnia Ćwiczebna w Dąbrowie Górniczej",
       "hyperlink" : "galleries/kopaniaDG.html",
-      "category" : "dziedzictwo"
+      "category" : "dziedzictwo",
+      "id" : "dabrowa-gornicza"
     },
     {
       "image" : "images/galeria/luiza_zabrze.jpg",
       "title" : "Skansen Górniczy Królowa Luiza w Zabrzu",
       "hyperlink" : "galleries/luizaZabrze.html",
-      "category" : "dziedzictwo"
+      "category" : "dziedzictwo",
+      "id" : "luiza-zabrze"
     },
     {
       "image" : "images/galeria/ignacy_rybnik.jpg",
       "title" : "Zabytkowa KWK „Ignacy” w Rybniku",
       "hyperlink" : "galleries/kwkIgnacy.html",
-      "category" : "dziedzictwo"
+      "category" : "dziedzictwo",
+      "id" : "ignacy-rybnik"
     },
     {
       "image" : "images/galeria/tuitam.jpg",
       "title" : "Dziedzictwo poprzemysłowe - TUiTAM",
       "hyperlink" : "galleries/dziedzictwoPoprzemysloweTuITam.html",
-      "category" : "dziedzictwo"
+      "category" : "dziedzictwo",
+      "id" : "tu-i-tam"
     },
     {
       "image" : "images/galeria/lipowka.jpg",
       "title" : "Rudniki - Kamieniołom Lipówka",
       "hyperlink" : "galleries/rudnikiLipowka.html",
-      "category" : "sciezki"
+      "category" : "sciezki",
+      "id" : "lipowka"
     },
     {
       "image" : "images/galeria/hutki.jpg",
       "title" : "Hutki-Kanki - Po rezerwacie Góra Chełm",
       "hyperlink" : "galleries/hutkiKanki.htm",
-      "category" : "sciezki"
+      "category" : "sciezki",
+      "id" : "hutki"
     },
     {
       "image" : "images/galeria/smolen.jpg",
       "title" : "Smoleń - Po Dolinie Wodącej",
       "hyperlink" : "galleries/smolen.html",
-      "category" : "sciezki"
+      "category" : "sciezki",
+      "id" : "smolen"
     },
     {
       "image" : "images/galeria/10pytan.jpg",
       "title" : "10 pytań o Ziemię",
       "hyperlink" : "galleries/10pytan.html",
-      "category" : "wydarzenia"
+      "category" : "wydarzenia",
+      "id" : "10-pytan"
     },
     {
       "image" : "images/galeria/jaskinia.jpg",
       "title" : "Trasa turystyczna w Jaskini Głębokiej",
       "hyperlink" : "galleries/jaskiniaGleboka.html",
-      "category" : "wydarzenia"
+      "category" : "wydarzenia",
+      "id" : "jaskinia"
     },
     {
       "image" : "images/galeria/dino.jpg",
       "title" : "Operacja Tyranozaur",
       "hyperlink" : "galleries/operacjaDino.html",
-      "category" : "wydarzenia"
+      "category" : "wydarzenia",
+      "id" : "dinozaur"
     }
   ]
 }

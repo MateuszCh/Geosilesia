@@ -24,6 +24,9 @@
                 template: '<events></events>'
             }).
             when('/galeria', {
+                template: '<galleries></galleries>'
+            }).
+            when('/galeria/:galleryId', {
                 template: '<gallery></gallery>'
             }).
             when('/polozenie', {
