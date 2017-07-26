@@ -1,0 +1,314 @@
+{
+  "title": "Minerały województwa Śląskiego",
+  "description": ["Minerał to pierwiastek, związek lub jednorodna mieszanina pierwiastków lub związków chemicznych o stałym stanie skupienia, utworzona w wyniku procesów geologicznych lub kosmologicznych. Inaczej: jednorodne ciało stał, utworzone w procesach geologicznych lub kosmologicznych. Nirktórzy ograniczają pojęcie minerału do fazy krystalicznej."],
+  "images": [
+    {
+      "src" : "/images/galeria/kolekcja/5_1.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_1_mid.jpg",
+      "copy" : "HEMIMORFIT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Hemimorfit (bezbarwny) - kopalnia Orzeł Biały w Bytomiu (wielkość kryształów do 0,3 cm)."
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_2.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_2_mid.jpg",
+      "copy" : "JORDANIT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Jordanit - kopalnia Orzeł Biały w Bytomiu (wielkość 1 cm)."
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_3.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_3_mid.jpg",
+      "copy" : "MARKASYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Markasyt (jasnożółty z odcieniem zielonkawym) - KWK Miechowice w Bytomiu (wielkość kryształów do 0,8 cm)."
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_4.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_4_mid.jpg",
+      "copy" : "PIRYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Piryt (mosiężnożółty, mosiężny, złoty) - KWK Miechowice w Bytomiu (wielkość kryształów do 3 cm)."
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_5.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_5_mid.jpg",
+      "copy" : "AUGIT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Augit (czarny) - nieczynny łom Cieszyn-Rudów (wielkość kryształów do 0,7 cm)."
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_6.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_6_mid.jpg",
+      "copy" : "KAERSUTYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Kaersutyt (czarny) - nieczynny łom Cieszyn-Rudów (wielkość kryształów do 5 cm)."
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_7.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_7_mid.jpg",
+      "copy" : "ARAGONIT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Aragonit (brunatny) - cegielnia Częstochowa-Gnaszyn (wielkość kryształów do 0,5 cm)."
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_8.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_8_mid.jpg",
+      "copy" : "BARYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Baryt (biały) - cegielnia Częstochowa-Gnaszyn (wielkość kryształów do 1 cm)."
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_9.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_9_mid.jpg",
+      "copy" : "SFLALERYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Sfaleryt (srebny) - cegielnia Częstochowa-Gnaszyn (wielkość kryształów do 1 cm)."
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_10.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_10_mid.jpg",
+      "copy" : "KONKRECJA SYDERYTU",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Konkrecja syderytu ilastego z kalcytem w środku  - cegielnia Częstochowa-Gnaszyn (średnica 17 cm)."
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_11.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_11_mid.jpg",
+      "copy" : "KALCYT NA SYDERYCIE",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Kalcyt (żółty) na syderycie - cegielnia Częstochowa-Gnaszyn (wielkość kryształów do 0,5 cm)"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_12.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_12_mid.jpg",
+      "copy" : "SMITSONIT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Smitsonit - Dąbrowa Górnicza-Strzemieszyce (szerokość 6 cm)."
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_13.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_13_mid.jpg",
+      "copy" : "ANATAZ",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Anataz - Knurów, KWK Szczygłowice (wielkość 0,1 cm)."
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_32.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_32_mid.jpg",
+      "copy" : "ANHYDRYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Anhydryt - Knurów, KWK Szczygłowice"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_17.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_17_mid.jpg",
+      "copy" : "APATYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Apatyt - Knurów, KWK Szczygłowice"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_18.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_18_mid.jpg",
+      "copy" : "BARYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Baryt - Knurów, KWK Szczygłowice"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_19.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_19_mid.jpg",
+      "copy" : "CHALKOPIRYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Chalkopiryt (mosiężnożółty) - Knurów, KWK Szczygłowice"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_20.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_20_mid.jpg",
+      "copy" : "DOLOMIT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Dolomit - Knurów, KWK Szczygłowice"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_21.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_21_mid.jpg",
+      "copy" : "GALENA",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Galena - Knurów, KWK Szczygłowice"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_22.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_22_mid.jpg",
+      "copy" : "KALCYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Kalcyt - Knurów, KWK Szczygłowice"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_23.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_23_mid.jpg",
+      "copy" : "KAOLINIT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Kaolinit - Knurów, KWK Szczygłowice"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_24.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_24_mid.jpg",
+      "copy" : "MARKASYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Markasyt - Knurów, KWK Szczygłowice"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_25.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_25_mid.jpg",
+      "copy" : "MILERYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Mileryt - Knurów, KWK Szczygłowice"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_26.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_26_mid.jpg",
+      "copy" : "PIRYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Piryt - Knurów, KWK Szczygłowice"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_14.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_14_mid.jpg",
+      "copy" : "SYDERYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Syderyt - Knurów, KWK Szczygłowice"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_27.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_27_mid.jpg",
+      "copy" : "SFALERYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Sfaleryt - Knurów, KWK Szczygłowice"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_28.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_28_mid.jpg",
+      "copy" : "SIEGENIT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Siegenit - Knurów, KWK Szczygłowice"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_29.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_29_mid.jpg",
+      "copy" : "KWARC",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Kwarc - Łazy, nieczynny kamieniołom 'Wysoka'"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_30.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_30_mid.jpg",
+      "copy" : "ANALCYM",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Analcym - Międzyrzecze Bielskie, nieczynny łom"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_31.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_31_mid.jpg",
+      "copy" : "DATOLIT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Datolit - Międzyrzecze Bielskie, nieczynny łom"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_33.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_33_mid.jpg",
+      "copy" : "ANKERYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Ankeryt - Sosnowiec, KWK Kazimierz-Juliusz, hałda"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_34.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_34_mid.jpg",
+      "copy" : "BARYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Baryt - Sosnowiec, KWK Kazimierz-Juliusz, hałda"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_35.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_35_mid.jpg",
+      "copy" : "BARYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Baryt - Sosnowiec, KWK Kazimierz-Juliusz, hałda"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_36.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_36_mid.jpg",
+      "copy" : "GALENA",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Galena - Sosnowiec, KWK Porąbka-Klimontów, hałda"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_37.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_37_mid.jpg",
+      "copy" : "MARKASYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Markasyt - Sosnowiec, KWK Kazimierz-Juliusz, hałda"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_38.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_38_mid.jpg",
+      "copy" : "PIRYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Piryt - Sosnowiec, KWK Kazimierz-Juliusz, hałda"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_39.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_39_mid.jpg",
+      "copy" : "PIRYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Piryt - Sosnowiec, KWK Kazimierz-Juliusz, hałda"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_40.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_40_mid.jpg",
+      "copy" : "PIRYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Piryt - Sosnowiec, KWK Kazimierz-Juliusz, hałda"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_41.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_41_mid.jpg",
+      "copy" : "PIRYT - MARKASYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Piryt i markasyt - Sosnowiec, KWK Kazimierz-Juliusz, hałda"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_42.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_42_mid.jpg",
+      "copy" : "SFALERYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Sfaleryt (srebny) - Sosnowiec, KWK Kazimierz-Juliusz, hałda"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_43.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_43_mid.jpg",
+      "copy" : "SYDERYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Syderyt - Sosnowiec, KWK Kazimierz-Juliusz, hałda"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_44.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_44_mid.jpg",
+      "copy" : "SYDERYT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Syderyt - Sosnowiec, KWK Kazimierz-Juliusz, hałda"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_15.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_15_mid.jpg",
+      "copy" : "ARAGONIT OŁOWIONOŚNY (TARNOWICYT)",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Aragonit ołowionośny (tarnowicyt) - Tarnowskie Góry"
+    },
+    {
+      "src" : "/images/galeria/kolekcja/5_16.jpg",
+      "thumb" : "/images/galeria/kolekcja/5_16_mid.jpg",
+      "copy" : "PIROMORFIT",
+      "author" : "Foto i kolekcja: Eligiusz Szełęg",
+      "description" : "Piromorfit - Tarnowskie Góry"
+    }
+  ]
+}

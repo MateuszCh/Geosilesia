@@ -1,7 +1,7 @@
 <main>
     <section class="galleries">
         <h2 ng-bind="vm.gallery.title"></h2>
-        <p ng-bind="vm.gallery.description"></p>
+        <p ng-bind="desc" ng-repeat="desc in vm.gallery.description"></p>
         <figure ng-repeat="image in vm.gallery.images" image-loaded="">
             <img ng-src="{{image.src}}">
             <figcaption>
