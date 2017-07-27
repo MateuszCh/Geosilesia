@@ -4,7 +4,7 @@
         <p ng-bind="desc" ng-repeat="desc in vm.gallery.description"></p>
         <figure ng-repeat="image in vm.gallery.images" image-loaded="">
             <img ng-src="{{image.src}}">
-            <figcaption>
+            <figcaption ng-if="image.copy">
                 <p ng-bind="image.copy" class="opis"></p>
             </figcaption>
         </figure>
