@@ -3,7 +3,7 @@
  */
 
 (function(){
-    var geosilesia = angular.module('geosilesia', ['ngRoute', 'ngAnimate', 'duScroll']);
+    var geosilesia = angular.module('geosilesia', ['ngRoute', 'ngAnimate', 'duScroll', 'ngTouch']);
 
     angular.module('geosilesia').controller('MainController', ['$scope', '$window', '$rootScope', function($scope, $window, $rootScope){
 
@@ -188,8 +188,8 @@
 
     function GalleryController($http, $routeParams){
         var vm = this;
-        console.log($routeParams.galleryId);
         vm.$onInit = onInit;
+        vm.showFullMode = false;
 
         function onInit() {
             $http.get("json/galleries/" + $routeParams.galleryId + ".json").then(function (gallery) {
@@ -301,7 +301,6 @@
 
         function hideHeader(){
             if(mainHeader){
-                console.log("start");
                 var sizeOfHeader = mainHeader.offsetHeight;
                 var heightInner = $window.innerHeight;
                 var scrollTopWindow = $window.scrollY;
@@ -318,6 +317,57 @@
 
 
 
+(function(){
+    angular.module('geosilesia').component('fullscreenImage', {
+        templateUrl: 'html/views/fullscreen-image.html',
+        bindings: {
+            custom: '<',
+            images: '<',
+            activeSlide: '<'
+        },
+        controllerAs: 'vm',
+        controller: fullscreenImage
+    });
+
+    fullscreenImage.$inject = [];
+
+    function fullscreenImage() {
+        var vm = this;
+        vm.$onInit = onInit;
+        vm.$onChanges = onChanges;
+
+        vm.next = function(){
+            if((vm.currentImage + 1) === vm.numberOfImages){
+                vm.currentImage = 0;
+            } else {
+                vm.currentImage++;
+            }
+        };
+
+        vm.prev = function(){
+            if(vm.currentImage === 0){
+                vm.currentImage = (vm.numberOfImages - 1);
+            } else {
+                vm.currentImage--;
+            }
+        };
+
+        function onInit() {
+
+        }
+
+        function onChanges(changes){
+            if(changes.images && changes.images.currentValue){
+                vm.numberOfImages = changes.images.currentValue.length;
+            }
+            if(changes.activeSlide){
+                vm.currentImage = changes.activeSlide.currentValue;
+            } else {
+                vm.currentImage = 0;
+            }
+        }
+    }
+})();
 /**
  * Created by Mateusz Chybiorz on 2017-07-17.
  */

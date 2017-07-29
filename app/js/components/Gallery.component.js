@@ -15,8 +15,8 @@
 
     function GalleryController($http, $routeParams){
         var vm = this;
-        console.log($routeParams.galleryId);
         vm.$onInit = onInit;
+        vm.showFullMode = false;
 
         function onInit() {
             $http.get("json/galleries/" + $routeParams.galleryId + ".json").then(function (gallery) {

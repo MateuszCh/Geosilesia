@@ -39,7 +39,6 @@
 
         function hideHeader(){
             if(mainHeader){
-                console.log("start");
                 var sizeOfHeader = mainHeader.offsetHeight;
                 var heightInner = $window.innerHeight;
                 var scrollTopWindow = $window.scrollY;
