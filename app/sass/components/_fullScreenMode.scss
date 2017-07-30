@@ -1,137 +1,162 @@
-main  {
-  .fullScreenMode {
-    position: fixed;
-    background-color: #222;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+.fullScreenMode {
+  position: fixed;
+  top: 15%;
+  background-color: white;
+  bottom: 15%;
+  right: 20%;
+  left: 20%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  box-shadow: grey 0 0 15px 5px;
+  &__close  {
+    position: absolute;
+    right: .625rem;
+    top: .625rem;
+    background-color: transparent;
+    border: none;
+    height: 1.5rem;
+    width: 1.5rem;
     z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    button  {
-      position: absolute;
-      right: .625rem;
-      top: .625rem;
-      background-color: transparent;
-      border: none;
-      height: 1.5rem;
+    box-sizing: border-box;
+    line-height: 1.5rem;
+    display: inline-block;
+    cursor: pointer;
+    &:before,
+    &:after {
       width: 1.5rem;
-      z-index: 10;
-      img   {
-        width: 100%;
-      }
-      &:hover {
-        color: lighten($header-color, 20%);
+      height: .3rem;
+      transform: rotate(-45deg);
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -.15rem;
+      margin-left: -.75rem;
+      display: block;
+      background-color: $header-color;
+      transition: all 0.2s ease-out;
+    }
+    &:after {
+      transform: rotate(45deg);
+    }
+    &:hover {
+      &:before,
+      &:after {
+        transform: rotate(0deg);
+        background-color: $color3;
       }
     }
-    .up   {
-      transform: scale(1);
-    }
-    figure  {
-      overflow: auto;
+  }
+
+  &__figure  {
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    position: relative;
+    justify-content: center;
+
+    &__container {
+      width: 70%;
+      max-height: 100%;
       height: 100%;
-      width: 100%;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      transform: scale(0);
-      //transition: all .2s ease-in-out;
       position: relative;
+      display: flex;
       justify-content: center;
       align-items: center;
-      .prevnext  {
-        position: absolute;
-        background-color: transparent;
-        width: 25%;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        top: 0;
-        bottom: 0;
-        opacity: 0;
-        transition: opacity .2s ease-in-out;
-        @include laptops  {
-          display: flex;
-          opacity: 0;
-          background-color: rgba(#fff, .2);
-          &:hover {
-            opacity: 1;
-          }
-        }
-      }
-      .prev {
-        left: 0;
-        transform: rotate(180deg);
-      }
-      .next {
-        right: 0;
-      }
-      &>img {
+      &__img {
+        display: block;
         max-width: 100%;
         max-height: 100%;
         height: auto;
       }
-      figcaption  {
-        padding: 0 1.25rem;
-        @include landscapePhone {
-          display: none;
-        }
-        @include mq-not-mobile  {
-          display: block;
-        }
-        @include laptops  {
-          padding: 0 3.125rem;
-        }
-        h3,
-        p,
-        a   {
-          text-align: center;
-          color: #ddd;
-          font-family: $text-font;
-          font-size: 0.9rem;
-          line-height: 1rem;
-        }
-        h3  {
-          margin-top: .625rem;
-          @include laptops  {
-            font-size: 1.125rem;
-          }
-        }
-      }
     }
-    .loadingPhoto {
-      background: #ffffff;
-      animation: float 1s infinite ease;
-      width: 1em;
-      height: 4em;
-      color: #ffffff;
-      margin: 5rem auto;
-      position: absolute;
-      top: calc(50% - 7rem);
-      left: calc(50% - .5em);
-      font-size: .625rem;
-      transform: translateZ(0);
-      animation-delay: -0.16s;
-      z-index: 10;
-      &:before,
-      &:after {
-        background: #ffffff;
-        animation: float 1s infinite ease;
-        width: 1em;
-        height: 4em;
-        position: absolute;
-        top: 0;
-        content: '';
+
+
+    &__figcaption  {
+      padding: 0 .5rem;
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      @include landscapePhone {
+        display: none;
       }
-      &:before  {
-        left: -1.5em;
-        animation-delay: -0.32s;
+      @include mq-not-mobile  {
+        display: flex;
       }
-      &:after {
-        left: 1.5em;
+      @include laptops  {
+      }
+      h3,
+      p,
+      a   {
+        text-align: center;
+        color: $text-color;
+        font-family: $text-font;
+        font-size: 0.9rem;
+        line-height: 1rem;
+      }
+      h3  {
+        margin-top: .625rem;
+        @include laptops  {
+          font-size: 1.125rem;
+        }
       }
     }
   }
 }
+
+
+
+.blur {
+  filter: blur(5px);
+  transition: filter 0.2s ease-in-out;
+}
+
+.closedScroll {
+  overflow: hidden;
+  max-height: 100vh;
+}
+
+
+.prevnext {
+  position: absolute;
+  top: 50%;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border-top: .4rem solid $header-color;
+  border-right: .4rem solid $header-color;
+  box-shadow: 0 0 0 lightgray;
+  transition: all 200ms ease;
+  cursor: pointer;
+
+  &.prev {
+    left: 1rem;
+    transform: translate3d(0,-50%,0) rotate(-135deg);
+  }
+
+  &.next {
+    right: 1rem;
+    transform: translate3d(0,-50%,0) rotate(45deg);
+  }
+
+  &:hover {
+    border-top: .4rem solid $header-color;
+    border-right: .4rem solid $header-color;
+    box-shadow: .2rem -.2rem 0 lighten($header-color, 50%);
+
+    &.prev {
+      left: .8rem;
+    }
+
+    &.next {
+      right: .8rem;
+    }
+  }
+}
+

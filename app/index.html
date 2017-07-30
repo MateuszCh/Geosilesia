@@ -14,7 +14,7 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmB631kh-m9oK9PL_i4OEmvkRqjcdeWzg" ></script>
         <script src="minjs/main.js"></script>
     </head>
-    <body ng-app="geosilesia" ng-controller="MainController">
+    <body ng-app="geosilesia" ng-controller="MainController" ng-class="{'closedScroll' : $root.blur}">
         <header></header>
         <div ng-view="" class="fade" id="page"></div>
         <button class="buttonUp" ng-show="showButtonUp" du-smooth-scroll="page">↑</button>

@@ -184,12 +184,19 @@
         controller: GalleryController
     });
 
-    GalleryController.$inject = ['$http', '$routeParams'];
+    GalleryController.$inject = ['$http', '$routeParams', '$rootScope'];
 
-    function GalleryController($http, $routeParams){
+    function GalleryController($http, $routeParams, $rootScope){
         var vm = this;
         vm.$onInit = onInit;
         vm.showFullMode = false;
+        vm.openFullMode = openFullMode;
+
+        function openFullMode(img) {
+            vm.showFullMode = true;
+            vm.openWith = img;
+            $rootScope.blur = true;
+        }
 
         function onInit() {
             $http.get("json/galleries/" + $routeParams.galleryId + ".json").then(function (gallery) {
@@ -323,18 +330,25 @@
         bindings: {
             custom: '<',
             images: '<',
-            activeSlide: '<'
+            activeSlide: '<',
+            show : '='
         },
         controllerAs: 'vm',
         controller: fullscreenImage
     });
 
-    fullscreenImage.$inject = [];
+    fullscreenImage.$inject = ['$rootScope'];
 
-    function fullscreenImage() {
+    function fullscreenImage($rootScope) {
         var vm = this;
         vm.$onInit = onInit;
         vm.$onChanges = onChanges;
+        vm.closeFullScreenMode = closeFullScreenMode;
+
+        function closeFullScreenMode(){
+            $rootScope.blur = false;
+            vm.show = false;
+        }
 
         vm.next = function(){
             if((vm.currentImage + 1) === vm.numberOfImages){

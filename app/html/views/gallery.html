@@ -1,13 +1,14 @@
-<main>
+<main ng-class="{'blur' : $root.blur}">
     <section class="galleries">
         <h2 ng-bind="vm.gallery.title"></h2>
         <p ng-bind="desc" ng-repeat="desc in vm.gallery.description"></p>
-        <figure ng-click="vm.showFullMode = true; vm.openWith = $index" ng-repeat="image in vm.gallery.images" image-loaded="">
+        <figure ng-click="vm.openFullMode($index)" ng-repeat="image in vm.gallery.images" image-loaded="">
             <img ng-src="{{image.src}}">
             <figcaption ng-if="image.copy">
                 <p ng-bind="image.copy" class="opis"></p>
             </figcaption>
         </figure>
     </section>
-    <fullscreen-image ng-show="vm.showFullMode" images="vm.gallery.images" active-slide="vm.openWith"></fullscreen-image>
+    <div class="overlay" ng-if="vm.showFullMode"></div>
 </main>
+<fullscreen-image ng-show="vm.showFullMode" images="vm.gallery.images" active-slide="vm.openWith" show="vm.showFullMode"></fullscreen-image>

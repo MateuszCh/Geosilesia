@@ -11,12 +11,19 @@
         controller: GalleryController
     });
 
-    GalleryController.$inject = ['$http', '$routeParams'];
+    GalleryController.$inject = ['$http', '$routeParams', '$rootScope'];
 
-    function GalleryController($http, $routeParams){
+    function GalleryController($http, $routeParams, $rootScope){
         var vm = this;
         vm.$onInit = onInit;
         vm.showFullMode = false;
+        vm.openFullMode = openFullMode;
+
+        function openFullMode(img) {
+            vm.showFullMode = true;
+            vm.openWith = img;
+            $rootScope.blur = true;
+        }
 
         function onInit() {
             $http.get("json/galleries/" + $routeParams.galleryId + ".json").then(function (gallery) {
