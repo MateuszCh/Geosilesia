@@ -1,4 +1,4 @@
-<main ng-class="{'blur' : $root.blur}">
+<main ng-class="{'blur' : $root.blur && ($root.isL || $root.isX)}">
     <section class="galleries">
         <h2 ng-bind="vm.gallery.title"></h2>
         <p ng-bind="desc" ng-repeat="desc in vm.gallery.description"></p>
@@ -11,4 +11,4 @@
     </section>
     <div class="overlay" ng-if="vm.showFullMode"></div>
 </main>
-<fullscreen-image ng-show="vm.showFullMode" images="vm.gallery.images" active-slide="vm.openWith" show="vm.showFullMode"></fullscreen-image>
+<fullscreen-image class="fullScreenImage" ng-show="vm.showFullMode" images="vm.gallery.images" active-slide="vm.openWith" show="vm.showFullMode"></fullscreen-image>

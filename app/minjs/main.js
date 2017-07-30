@@ -30,6 +30,7 @@
 
         $rootScope.$on("$routeChangeSuccess", function(){
             $window.scrollTo(0,0);
+            $rootScope.blur = false;
         });
 
         function resetSizes(){
@@ -489,77 +490,6 @@
     }
 })();
 /**
- * Created by Mateusz Chybiorz on 2017-07-16.
- */
-
-(function(){
-    angular.module('geosilesia').config(['$locationProvider', '$routeProvider',
-        function ($locationProvider, $routeProvider) {
-            $locationProvider.hashPrefix('');
-
-            $routeProvider.
-            when('/',{
-                template: '<homepage></homepage>'
-            }).
-            when('/o-nas', {
-                template: '<about></about>'
-            }).
-            when('/english', {
-                template: '<english></english>'
-            }).
-            when('/slownik', {
-                template: '<dictionary></dictionary>'
-            }).
-            when('/wydarzenia', {
-                template: '<events></events>'
-            }).
-            when('/galeria', {
-                template: '<galleries></galleries>'
-            }).
-            when('/galeria/:galleryId', {
-                template: '<gallery></gallery>'
-            }).
-            when('/polozenie', {
-                templateUrl: 'html/views/geoslask/polozenie.html'
-            }).
-            when('/rzezba', {
-                templateUrl: 'html/views/geoslask/rzezba.html'
-            }).
-            when('/budowa', {
-                templateUrl: 'html/views/geoslask/budowa.html'
-            }).
-            when('/geostanowiska', {
-                templateUrl: 'html/views/geoslask/geostanowiska.html'
-            }).
-            when('/atrakcje', {
-                templateUrl: 'html/views/geoslask/atrakcje.html'
-            }).
-            otherwise('/');
-            $locationProvider.html5Mode(true);
-
-        }
-    ]);
-})();
-
-/**
- * Created by Mateusz Chybiorz on 2017-07-22.
- */
-/**
- * Created by Mateusz Chybiorz on 2017-03-24.
- */
-
-(function(){
-    angular.module('geosilesia').controller('StructuresController', ['$scope', function($scope){
-        $scope.activeTab = 1;
-        $scope.checkTab = function(tab){
-            $scope.activeTab = tab;
-            console.log($scope.activeTab);
-        }
-    }]);
-})();
-
-
-/**
  * Created by Mateusz Chybiorz on 2017-07-09.
  */
 (function(){
@@ -770,6 +700,77 @@
         ],{name: 'Custom'})
     );
 })();
+
+/**
+ * Created by Mateusz Chybiorz on 2017-07-16.
+ */
+
+(function(){
+    angular.module('geosilesia').config(['$locationProvider', '$routeProvider',
+        function ($locationProvider, $routeProvider) {
+            $locationProvider.hashPrefix('');
+
+            $routeProvider.
+            when('/',{
+                template: '<homepage></homepage>'
+            }).
+            when('/o-nas', {
+                template: '<about></about>'
+            }).
+            when('/english', {
+                template: '<english></english>'
+            }).
+            when('/slownik', {
+                template: '<dictionary></dictionary>'
+            }).
+            when('/wydarzenia', {
+                template: '<events></events>'
+            }).
+            when('/galeria', {
+                template: '<galleries></galleries>'
+            }).
+            when('/galeria/:galleryId', {
+                template: '<gallery></gallery>'
+            }).
+            when('/polozenie', {
+                templateUrl: 'html/views/geoslask/polozenie.html'
+            }).
+            when('/rzezba', {
+                templateUrl: 'html/views/geoslask/rzezba.html'
+            }).
+            when('/budowa', {
+                templateUrl: 'html/views/geoslask/budowa.html'
+            }).
+            when('/geostanowiska', {
+                templateUrl: 'html/views/geoslask/geostanowiska.html'
+            }).
+            when('/atrakcje', {
+                templateUrl: 'html/views/geoslask/atrakcje.html'
+            }).
+            otherwise('/');
+            $locationProvider.html5Mode(true);
+
+        }
+    ]);
+})();
+
+/**
+ * Created by Mateusz Chybiorz on 2017-07-22.
+ */
+/**
+ * Created by Mateusz Chybiorz on 2017-03-24.
+ */
+
+(function(){
+    angular.module('geosilesia').controller('StructuresController', ['$scope', function($scope){
+        $scope.activeTab = 1;
+        $scope.checkTab = function(tab){
+            $scope.activeTab = tab;
+            console.log($scope.activeTab);
+        }
+    }]);
+})();
+
 
 /**
  * Created by Mateusz Chybiorz on 2017-07-23.

@@ -30,6 +30,7 @@
 
         $rootScope.$on("$routeChangeSuccess", function(){
             $window.scrollTo(0,0);
+            $rootScope.blur = false;
         });
 
         function resetSizes(){
