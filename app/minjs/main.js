@@ -354,16 +354,35 @@
         vm.next = function(){
             if((vm.currentImage + 1) === vm.numberOfImages){
                 vm.currentImage = 0;
+                vm.nextImage = 1;
+                vm.prevImage = vm.numberOfImages - 1;
             } else {
                 vm.currentImage++;
+                if((vm.currentImage + 1) === vm.numberOfImages){
+                    vm.nextImage = 0;
+                    vm.prevImage = vm.numberOfImages - 2;
+                } else {
+                    vm.nextImage = vm.currentImage + 1;
+                    vm.prevImage = vm.currentImage - 1;
+                }
             }
         };
 
         vm.prev = function(){
             if(vm.currentImage === 0){
                 vm.currentImage = (vm.numberOfImages - 1);
+                vm.nextImage = 0;
+                vm.prevImage = vm.currentImage - 1;
             } else {
                 vm.currentImage--;
+                if(vm.currentImage === 0){
+                    vm.nextImage = 1;
+                    vm.prevImage = (vm.numberOfImages - 1);
+                } else {
+                    vm.nextImage = vm.currentImage + 1;
+                    vm.prevImage = vm.currentImage - 1;
+                }
+
             }
         };
 
@@ -377,6 +396,8 @@
             }
             if(changes.activeSlide){
                 vm.currentImage = changes.activeSlide.currentValue;
+                vm.nextImage = vm.currentImage + 1;
+                vm.prevImage = vm.currentImage - 1;
             } else {
                 vm.currentImage = 0;
             }
@@ -489,6 +510,59 @@
         }
     }
 })();
+/**
+ * Created by Mateusz Chybiorz on 2017-07-16.
+ */
+
+(function(){
+    angular.module('geosilesia').config(['$locationProvider', '$routeProvider',
+        function ($locationProvider, $routeProvider) {
+            $locationProvider.hashPrefix('');
+
+            $routeProvider.
+            when('/',{
+                template: '<homepage></homepage>'
+            }).
+            when('/o-nas', {
+                template: '<about></about>'
+            }).
+            when('/english', {
+                template: '<english></english>'
+            }).
+            when('/slownik', {
+                template: '<dictionary></dictionary>'
+            }).
+            when('/wydarzenia', {
+                template: '<events></events>'
+            }).
+            when('/galeria', {
+                template: '<galleries></galleries>'
+            }).
+            when('/galeria/:galleryId', {
+                template: '<gallery></gallery>'
+            }).
+            when('/polozenie', {
+                templateUrl: 'html/views/geoslask/polozenie.html'
+            }).
+            when('/rzezba', {
+                templateUrl: 'html/views/geoslask/rzezba.html'
+            }).
+            when('/budowa', {
+                templateUrl: 'html/views/geoslask/budowa.html'
+            }).
+            when('/geostanowiska', {
+                templateUrl: 'html/views/geoslask/geostanowiska.html'
+            }).
+            when('/atrakcje', {
+                templateUrl: 'html/views/geoslask/atrakcje.html'
+            }).
+            otherwise('/');
+            $locationProvider.html5Mode(true);
+
+        }
+    ]);
+})();
+
 /**
  * Created by Mateusz Chybiorz on 2017-07-09.
  */
@@ -699,59 +773,6 @@
             }
         ],{name: 'Custom'})
     );
-})();
-
-/**
- * Created by Mateusz Chybiorz on 2017-07-16.
- */
-
-(function(){
-    angular.module('geosilesia').config(['$locationProvider', '$routeProvider',
-        function ($locationProvider, $routeProvider) {
-            $locationProvider.hashPrefix('');
-
-            $routeProvider.
-            when('/',{
-                template: '<homepage></homepage>'
-            }).
-            when('/o-nas', {
-                template: '<about></about>'
-            }).
-            when('/english', {
-                template: '<english></english>'
-            }).
-            when('/slownik', {
-                template: '<dictionary></dictionary>'
-            }).
-            when('/wydarzenia', {
-                template: '<events></events>'
-            }).
-            when('/galeria', {
-                template: '<galleries></galleries>'
-            }).
-            when('/galeria/:galleryId', {
-                template: '<gallery></gallery>'
-            }).
-            when('/polozenie', {
-                templateUrl: 'html/views/geoslask/polozenie.html'
-            }).
-            when('/rzezba', {
-                templateUrl: 'html/views/geoslask/rzezba.html'
-            }).
-            when('/budowa', {
-                templateUrl: 'html/views/geoslask/budowa.html'
-            }).
-            when('/geostanowiska', {
-                templateUrl: 'html/views/geoslask/geostanowiska.html'
-            }).
-            when('/atrakcje', {
-                templateUrl: 'html/views/geoslask/atrakcje.html'
-            }).
-            otherwise('/');
-            $locationProvider.html5Mode(true);
-
-        }
-    ]);
 })();
 
 /**

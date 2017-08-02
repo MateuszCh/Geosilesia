@@ -1,7 +1,7 @@
 .fullScreenImage {
   opacity: 1;
   transition: opacity 0.5s ease;
-  z-index: 200;
+  z-index: 20;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -27,6 +27,7 @@
   }
 
   .fullScreenMode {
+    overflow: hidden;
     position: fixed;
     top: 0;
     background-color: white;
@@ -41,7 +42,6 @@
     @include mq-not-mobile {
     }
     @include laptops {
-      padding: 3rem;
       top: 10%;
       bottom: 10%;
       left: 15%;
@@ -55,6 +55,7 @@
       right: 20%;
     }
     &__close  {
+      z-index: 101;
       position: absolute;
       right: 1.875rem;
       top: 1.875rem;
@@ -91,17 +92,35 @@
     }
 
     &__figure  {
+      transform: translate(100%);
       overflow: auto;
       height: 100%;
       width: 100%;
       margin: 0;
       display: flex;
-      position: relative;
+      position: absolute;
       justify-content: center;
       flex-direction: column;
+      transition: transform .5s ease;
+      background-color: white;
 
       @include laptops {
         flex-direction: row;
+        padding: 3rem;
+      }
+
+      &.is-active {
+        transform: translate(0%);
+        transition: transform .5s ease;
+        z-index: 100;
+      }
+      &.is-next {
+        transform: translate(100%);
+        z-index: 50;
+      }
+      &.is-prev {
+        transform: translate(-100%);
+        z-index: 50;
       }
 
       &__container {
@@ -203,6 +222,7 @@
   box-shadow: 0 0 0 lightgray;
   transition: all 200ms ease;
   cursor: pointer;
+  z-index: 101;
   @include laptops  {
     display: block;
   }
