@@ -1,6 +1,6 @@
 <div class="imageOverlay" ng-click="vm.closeFullScreenMode()"></div>
 <div class="fullScreenMode">
-    <div class="fullScreenMode__figure" ng-swipe-right="vm.next()" ng-swipe-left="vm.prev()" ng-repeat="img in ::vm.images track by $index" ng-class="{'is-active' : vm.currentImage == $index, 'is-prev' : vm.prevImage == $index, 'is-next' : vm.nextImage == $index}">
+    <div class="fullScreenMode__figure" ng-swipe-right="vm.next()" ng-swipe-left="vm.prev()" ng-repeat="img in ::vm.images track by $index" ng-class="{'is-active' : vm.currentImage == $index, 'is-prev' : vm.prevImage == $index, 'is-next' : vm.nextImage == $index, 'backward' : vm.back, 'no-move' : vm.noMove}">
         <div class="fullScreenMode__figure__container">
             <img class="fullScreenMode__figure__container__img" ng-src="{{img.src}}"ng-swipe-right="vm.next()" ng-swipe-left="vm.prev()">
         </div>

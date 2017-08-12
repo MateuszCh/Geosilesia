@@ -101,8 +101,14 @@
       position: absolute;
       justify-content: center;
       flex-direction: column;
-      transition: transform .5s ease;
       background-color: white;
+
+      &.backward {
+        transform: translate(-100%);
+      }
+      &.no-move {
+        transition: none !important;
+      }
 
       @include laptops {
         flex-direction: row;
@@ -112,15 +118,14 @@
       &.is-active {
         transform: translate(0%);
         transition: transform .5s ease;
-        z-index: 100;
       }
       &.is-next {
         transform: translate(100%);
-        z-index: 50;
+        transition: transform .5s ease;
       }
       &.is-prev {
         transform: translate(-100%);
-        z-index: 50;
+        transition: transform .5s ease;
       }
 
       &__container {
