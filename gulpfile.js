@@ -4,6 +4,7 @@
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
     imagemin = require('gulp-imagemin'),
+    uglify = require('gulp-uglify'),
     prefix = require('gulp-autoprefixer'),
     browserSync = require('browser-sync'),
     reload = browserSync.reload,
@@ -30,7 +31,18 @@ gulp.task('styles', function(){
 gulp.task('scripts', function(){
     gulp.src(['app/js/**/*.js'])
         .on('error', errorLog)
-        .pipe(concat('main.js'))
+        .pipe(uglify())
+        .pipe(concat('app.js'))
+        .pipe(gulp.dest('app/minjs'))
+        .pipe(reload({stream: true}));
+});
+
+// Libraries Task
+//Uglifies
+gulp.task('libs', function(){
+    gulp.src(['app/libraries/angular.min.js', 'app/libraries/angular-route.min.js', 'app/libraries/angular-animate.min.js', 'app/libraries/angular-scroll.min.js', 'app/libraries/angular-touch.min.js'])
+        .on('error', errorLog)
+        .pipe(concat('libs.js'))
         .pipe(gulp.dest('app/minjs'))
         .pipe(reload({stream: true}));
 });
@@ -61,8 +73,9 @@ gulp.task('browser-sync', function(){
 // Watch Task
 gulp.task('watch', function(){
     gulp.watch(['app/js/**/*.js'], ['scripts']);
+    gulp.watch(['app/libraries/**/*.min.js'], ['libs']);
     gulp.watch('app/**/*.html', ['html']);
     gulp.watch('app/sass/**/*.scss', ['styles']);
 });
 
-gulp.task('default', ['scripts', 'styles', 'html', 'browser-sync', 'watch']);
+gulp.task('default', ['scripts', 'libs', 'styles', 'html', 'browser-sync', 'watch']);
