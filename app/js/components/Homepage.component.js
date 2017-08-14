@@ -11,9 +11,9 @@
         controller: HomepageController
     });
 
-    HomepageController.$inject = ['$http', '$window', '$rootScope'];
+    HomepageController.$inject = ['$http', '$window', '$rootScope', '$timeout'];
 
-    function HomepageController($http, $window, $rootScope){
+    function HomepageController($http, $window, $rootScope, $timeout){
         var vm = this;
         vm.markers = [];
         vm.$onInit = onInit;
@@ -36,6 +36,11 @@
                 vm.markers = response.data.obiekty;
             });
             setBannerHeight();
+            $window.addEventListener('resize', function(){
+                $timeout(function () {
+                    setBannerHeight();
+                }, 1);
+            });
 
             if(document.getElementById('map')){
                 $window.addEventListener('scroll', hideHeader);
