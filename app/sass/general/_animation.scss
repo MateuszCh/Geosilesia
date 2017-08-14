@@ -21,7 +21,7 @@
 }
 .fade.ng-enter,
 .fade.ng-leave {
-  transition: all 0.5s ease;
+  transition: opacity 0.5s ease;
 }
 .fade.ng-enter {
   opacity: 0;

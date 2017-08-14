@@ -7,7 +7,7 @@ ul  {
   list-style: none;
 }
 body  {
-  @include mq-not-mobile  {
+  @include tablet  {
     background-color: #eee;
   }
 }
@@ -18,7 +18,7 @@ dd  {
   line-height: 1.5rem;
   font-size: .9rem;
   margin: 0.625rem 0;
-  @include mq-not-mobile  {
+  @include tablet  {
     font-size: 1rem;
     padding: 0 0.625rem;
   }
@@ -32,7 +32,7 @@ h2  {
   font-size: 2rem;
   color: darken($header-color, 10%);
   padding-bottom: .625rem;
-  @include mq-not-mobile  {
+  @include tablet  {
     font-size: 3rem;
   }
 }
@@ -46,11 +46,15 @@ main {
   width: 95%;
   margin: 0 auto;
   padding-top: 5rem;
-  @include mq-not-mobile  {
+  @include tablet  {
     width: 70%;
     padding-top: 8.125rem;
   }
-  @include laptops  {
+  @include laptop  {
     width: 60%;
   }
+}
+
+a   {
+  color: inherit;
 }

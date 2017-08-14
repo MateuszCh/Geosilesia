@@ -10,7 +10,7 @@
         function link(scope, element){
             var img = element.find('img');
             img.bind('load', function () {
-                element.addClass('figuryUp');
+                element.addClass('figury-up');
             })
         }
     });

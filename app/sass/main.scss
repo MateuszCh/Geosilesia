@@ -1,19 +1,25 @@
-@import "base/fonts";
-@import 'helpers/variables';
-@import "helpers/mixins";
-@import "helpers/animation";
-@import "base/general";
-@import 'layout/header';
-@import 'components/nav';
+// general
+@import "general/fonts";
+@import 'general/variables';
+@import "general/mixins";
+@import "general/animation";
+@import "general/general";
+@import "general/lists";
+
+// pages
 @import "pages/mainPage";
-@import "components/buttonUp";
 @import "pages/gallery";
 @import "pages/geoslask";
 @import "pages/about";
 @import "pages/news";
-@import "pages/galleries";
+@import "pages/mainGallery";
+@import "pages/atrakcje";
+
+// components
+@import 'components/header';
+@import 'components/nav';
+@import "components/buttonUp";
 @import "components/fullScreenMode";
-@import "components/lists";
 @import "components/rzezbaTable";
 @import "components/infoDiv";
 

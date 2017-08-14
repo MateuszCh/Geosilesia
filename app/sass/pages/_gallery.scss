@@ -1,86 +1,83 @@
-.photos {
-  @include landscapePhone {
+.gallery {
+  padding-bottom: .625rem;
+  width: 100%;
+  @include landscape {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
-  @include mq-not-mobile  {
+  @include tablet  {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
-  a  {
-    display: block;
+  .figury-up  {
+    transform: scale(1);
+  }
+  &__description {
+    width: 100%;
+  }
+  &__figure  {
+    cursor: pointer;
     position: relative;
     margin: 1.25rem .625rem;
     overflow: hidden;
     padding: .3125rem;
     box-shadow: 0 0 3px 3px darken(white, 20%);
     background-color: darken(white, 5%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transform: scale(0);
-    transition: transform .3s cubic-bezier(.17,.67,.83,.67);
-    &.ng-hide {
-      transform: scale(0) !important;
-    }
-    &.figuryUp  {
-      transform: scale(1);
-    }
-    @include landscapePhone {
+    transition: all .5s cubic-bezier(.17,.67,.83,.67);
+    @include landscape {
       width: 40%;
     }
-    @include mq-not-mobile  {
+    @include tablet  {
       margin: .625rem;
       width: 28%;
       background-color: darken(white, 5%);
       box-shadow: 0 0 4px 4px darken(white, 20%);
     }
-    @include laptops  {
-      width: 21%;
-      &:hover figcaption  {
+    @include laptop  {
+      width: 22%;
+      &:hover .gallery__figure__text  {
         opacity: .9;
       }
-      &:hover img   {
+      &:hover .gallery__figure__image   {
         transform: scale(1.4);
       }
     }
-    &.hidden  {
-      display: none;
-    }
-    figure  {
-      margin: 0;
-      padding: 0;
+    &__image {
       width: 100%;
-      height: 100%;
-      img {
-        width: 100%;
-        height: 100%;
-        transition: all .2s ease-in-out;
+      transition: all .2s ease-in-out;
+    }
+    &__text  {
+      position: absolute;
+      color: white;
+      background-color: rgba(lighten($header-color, 10%), .9);
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: $headers-font;
+      transition: all .3s ease-in-out;
+      margin: 0;
+      padding: .625rem .3125rem;
+      font-size: 1rem;
+      line-height: normal;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include tablet  {
+        font-size: .8rem;
+        min-height: 3.5rem;
       }
-      figcaption  {
-        padding: .625rem .3125rem;
-        display: flex;
-        position: absolute;
-        color: white;
-        background-color: rgba(lighten($header-color, 10%),.9);
-        bottom: 0;
-        left: 0;
-        right: 0;
-        text-align: center;
-        font-family: $headers-font;
+      @include laptop  {
         font-size: 1rem;
-        align-items: center;
-        justify-content: center;
-        transition: all .2s ease-in-out;
-        opacity: 1;
-        @include mq-not-mobile  {
-          font-size: .9rem;
-          min-height: 3.5rem;
-        }
-        @include laptops  {
-          background-color: lighten($header-color, 10%);
-          opacity: 0;
-          font-size: 1rem;
-        }
+      }
+      @include laptop  {
+        opacity: 0;
       }
     }
   }

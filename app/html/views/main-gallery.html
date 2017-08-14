@@ -1,0 +1,24 @@
+<main class="photos">
+    <h2>Galeria</h2>
+    <ul class="photos__categories">
+        <li class="photos__categories__category"
+            ng-repeat="category in vm.categories track by $index"
+            ng-bind="category.categoryText"
+            ng-class="{'markedCategory' : vm.selectedCategory == category.category}"
+            ng-click="vm.changeCategory(category.category)"></li>
+    </ul>
+    <a class="photos__link"
+       ng-href="galeria/{{gallery.id}}"
+       image-loaded
+       ng-attr-data-category="{{gallery.category}}"
+       ng-repeat="gallery in vm.galleries"
+       ng-show="vm.selectedCategory == 'all' || vm.selectedCategory == gallery.category">
+        <figure class="photos__link__figure">
+            <img class="photos__link__figure__image"
+                 ng-src="{{gallery.image}}"
+                 ng-attr-alt="{{gallery.title}}">
+            <figcaption class="photos__link__figure__text"
+                        ng-bind="gallery.title"></figcaption>
+        </figure>
+    </a>
+</main>

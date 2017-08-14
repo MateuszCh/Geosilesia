@@ -1,19 +1,35 @@
-<section class="bannerPhoto" ng-style="{'height' : $root.isS ? vm.bannerHeight : '100vh'}">
-    <h2 id="scrollToMap" du-smooth-scroll="map">Atrakcje geoturystyczne
+<section class="bannerPhoto"
+         ng-style="{'height' : $root.isS ? vm.bannerHeight : '100vh'}">
+    <h2 id="scrollToMap"
+        du-smooth-scroll="map">Atrakcje geoturystyczne
         <span>
             <p>patrz także GeoŚląsk</p>
         </span>
     </h2>
     <div class="infoDiv">
-        <div class="infoImg" id="img1" ng-mouseenter="isVisibleOne = true" ng-mouseleave="isVisibleOne = false"><img src="images/marker.png"></div>
-        <div class="infoText" id="infoText1" ng-class="{'show' : isVisibleOne}">
+        <div class="infoImg"
+             id="img1"
+             ng-mouseenter="isVisibleOne = true"
+             ng-mouseleave="isVisibleOne = false">
+            <img src="images/marker.png">
+        </div>
+        <div class="infoText"
+             id="infoText1"
+             ng-class="{'show' : isVisibleOne}">
             <p>Muzeum Śląskie <span>na terenie dawnej KWK Katowice</span></p>
             <p>Silesian Museum <span>(former Katowice Coal Mine)</span></p>
         </div>
     </div>
     <div class="infoDiv2">
-        <div class="infoImg" id="img2" ng-mouseenter="isVisibleTwo = true" ng-mouseleave="isVisibleTwo = false"><img src="images/marker_info.png"></div>
-        <div class="infoText" id="infoText2" ng-class="{'show' : isVisibleTwo}">
+        <div class="infoImg"
+             id="img2"
+             ng-mouseenter="isVisibleTwo = true"
+             ng-mouseleave="isVisibleTwo = false">
+            <img src="images/marker_info.png">
+        </div>
+        <div class="infoText"
+             id="infoText2"
+             ng-class="{'show' : isVisibleTwo}">
             <p>Atrakcje geoturystyczne patrz także GeoŚląsk</p>
             <p>Geotourist attractions see also English</p>
         </div>

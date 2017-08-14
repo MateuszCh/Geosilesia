@@ -2,7 +2,7 @@
   background-color: lighten($header-color, 20%);
   ul li   {
     background-color: $header-color;
-    @include mq-not-mobile  {
+    @include tablet  {
       background-color: lighten($header-color, 10%);
     }
   }
@@ -23,7 +23,7 @@
     max-height: 500px;
     transition: all .5s ease;
   }
-  @include mq-not-mobile  {
+  @include tablet  {
     max-height: 500px;
     overflow: visible;
     display: flex;
@@ -31,7 +31,7 @@
     padding-bottom: .7rem;
     position: relative;
   }
-  @include laptops  {
+  @include laptop  {
     padding-bottom: 0;
   }
   a,
@@ -44,7 +44,7 @@
   }
   .mainListItems  {
     transition: all .4s ease-in-out;
-    @include mq-not-mobile  {
+    @include tablet  {
       background-color: lighten($header-color, 10%);
       flex-grow: 1;
       text-align: center;
@@ -58,10 +58,10 @@
       padding: .2rem 0;
       padding-left: .5rem;
       font-size: 1.2rem;
-      @include mq-not-mobile  {
+      @include tablet  {
         padding: .5rem 1.5rem;
       }
-      @include laptops  {
+      @include laptop  {
         padding: 2.625rem 1.75rem;
       }
     }
@@ -77,7 +77,7 @@
       max-height: 500px;
       transition: all 0.5s ease;
     }
-    @include mq-not-mobile  {
+    @include tablet  {
       position: absolute;
       color: white;
       width: 100%;
@@ -86,7 +86,7 @@
     a  {
       padding-left: 1rem;
       font-size: .9rem;
-      @include mq-not-mobile  {
+      @include tablet  {
         padding-left: 0;
         width: 100%;
         font-size: 1rem;
@@ -95,7 +95,7 @@
     li  {
       transition: all .2s ease-in-out;
       padding: 0.1875rem 0;
-      @include mq-not-mobile  {
+      @include tablet  {
         background-color: lighten($header-color, 10%);
         padding: .3125rem 0;
         width: 100%;

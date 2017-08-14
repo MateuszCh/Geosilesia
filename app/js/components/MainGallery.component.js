@@ -1,19 +1,16 @@
-/**
- * Created by Mateusz Chybiorz on 2017-07-26.
- */
 (function(){
-    angular.module('geosilesia').component('galleries', {
-        templateUrl: 'html/views/galleries.html',
+    angular.module('geosilesia').component('mainGallery', {
+        templateUrl: 'html/views/main-gallery.html',
         bindings: {
             custom: '<'
         },
         controllerAs: 'vm',
-        controller: GalleriesController
+        controller: MainGalleryController
     });
 
-    GalleriesController.$inject = ['$http', '$timeout'];
+    MainGalleryController.$inject = ['$http', '$timeout'];
 
-    function GalleriesController($http, $timeout){
+    function MainGalleryController($http, $timeout){
         var vm = this;
         vm.galleries = [];
         vm.$onInit = onInit;

@@ -9,11 +9,11 @@
     margin: 0 auto;
     background-color: $color3;
     flex-direction: column;
-    @include landscapePhone {
+    @include landscape {
       flex-direction: row;
       width: 100%;
     }
-    @include mq-not-mobile  {
+    @include tablet  {
       flex-direction: row;
     }
     li  {
@@ -26,7 +26,7 @@
       font-size: .9rem;
       transition: all .3s ease-in-out;
       cursor: pointer;
-      @include mq-not-mobile  {
+      @include tablet  {
         font-size: 1rem;
         border: none;
       }
@@ -53,12 +53,12 @@
       }
     }
     .przekroj  {
-      @include laptops  {
+      @include laptop  {
         figure  {
           width: 75%;
         }
       }
-      @include laptopsForPrzekroj{
+      @include full{
         margin-top: 1.25rem;
         display: flex;
         justify-content: space-between;
@@ -78,7 +78,7 @@
       color: $text-color;
       line-height: 1.25rem;
       font-size: .7rem;
-      @include mq-not-mobile  {
+      @include tablet  {
         font-size: .8rem;
       }
     }
@@ -92,20 +92,20 @@
       width: 100%;
       margin: .625rem 0;
       &.sto {
-        @include mq-not-mobile  {
+        @include tablet  {
           width: 100%;
         }
       }
       &.sixty {
-        @include laptops  {
+        @include laptop  {
           width: 60%;
         }
       }
-      @include mq-not-mobile  {
+      @include tablet  {
         margin: 0 auto;
         width: 75%;
       }
-      @include laptops  {
+      @include laptop  {
         width: 50%;
       }
       img {
@@ -120,13 +120,14 @@
         span  {
           display: block;
         }
-        @include mq-not-mobile  {
+        @include tablet  {
           font-size: .9rem;
         }
       }
     }
   }
 }
+
 .footnotes  {
   font-size: 1.5rem;
   font-family: $headers-font;

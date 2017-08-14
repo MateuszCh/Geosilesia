@@ -5,7 +5,7 @@
   align-items: center;
   right: 0;
   top: 15%;
-  @include mq-not-mobile  {
+  @include tablet  {
     display: flex;
     height: 80px;
     top: 150px;
@@ -18,7 +18,7 @@
     order: 2;
     padding: 1rem;
     background-color: $header-color;
-    @include mq-not-mobile  {
+    @include tablet  {
       display: flex;
       width: 60px;
       height: 60px;
@@ -37,7 +37,7 @@
     position: relative;
     padding: 0.3rem;
     margin-right: .3rem;
-    @include mq-not-mobile  {
+    @include tablet  {
       margin-right: 0;
       padding: 0;
       background-color: $color3;
@@ -67,11 +67,11 @@
       font-size: .8rem;
       span  {
         display: none;
-        @include mq-not-mobile  {
+        @include tablet  {
           display: inline-block;
         }
       }
-      @include mq-not-mobile  {
+      @include tablet  {
         font-size: .9rem;
         margin: 0;
       }
@@ -86,7 +86,7 @@
   align-items: center;
   right: 0;
   top: 41%;
-  @include mq-not-mobile  {
+  @include tablet  {
     display: flex;
     height: 80px;
     top: 250px;
@@ -99,7 +99,7 @@
     order: 2;
     padding: 1rem;
     background-color: $header-color;
-    @include mq-not-mobile  {
+    @include tablet  {
       display: flex;
       width: 60px;
       height: 60px;
@@ -118,7 +118,7 @@
     position: relative;
     padding: 0.3rem;
     margin-right: .3rem;
-    @include mq-not-mobile  {
+    @include tablet  {
       margin-right: 0;
       padding: 0;
       background-color: $color3;
@@ -148,11 +148,11 @@
       font-size: .8rem;
       span  {
         display: none;
-        @include mq-not-mobile  {
+        @include tablet  {
           display: inline-block;
         }
       }
-      @include mq-not-mobile  {
+      @include tablet  {
         font-size: .9rem;
         margin: 0;
       }

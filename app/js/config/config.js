@@ -24,7 +24,7 @@
                 template: '<events></events>'
             }).
             when('/galeria', {
-                template: '<galleries></galleries>'
+                template: '<main-gallery></main-gallery>'
             }).
             when('/galeria/:galleryId', {
                 template: '<gallery></gallery>'
