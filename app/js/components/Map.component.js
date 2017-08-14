@@ -3,7 +3,7 @@
  */
 (function(){
     angular.module('geosilesia').component('map', {
-        template: '<div id="map" class="map"></div>',
+        template: '<div id="map" class="map-section__map"></div>',
         bindings: {
             markers: '<'
         },
@@ -70,7 +70,7 @@
                     });
                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
                         return function() {
-                            infowindow.setContent("<div class='markerDeskription'><p>" + obiekty[i].title + "</p><p>" + obiekty[i].place + "</p><a href=" + obiekty[i].hyperlink + " target='_blank'>Więcej</a></div>");
+                            infowindow.setContent("<div class='marker-description'><p class='marker-description__text'>" + obiekty[i].title + "</p><p class='marker-description__text'>" + obiekty[i].place + "</p><a href=" + obiekty[i].hyperlink + " target='_blank'>Więcej</a></div>");
                             infowindow.open(map, marker);
                         }
                     })(marker, i));

@@ -1,4 +1,5 @@
-.bannerPhoto  {
+.homepage-banner  {
+  overflow: hidden;
   height: 100vh;
   background-image: url("../images/geosilesia.jpg");
   background-size: cover;
@@ -11,7 +12,7 @@
   @include tablet  {
     background-position: center;
   }
-  h2  {
+  &__heading  {
     cursor: pointer;
     font-family: $headers-font;
     color: white;
@@ -24,13 +25,11 @@
       padding: 1.25rem 1.25rem .625rem 1.25rem;
     }
 
-    span  {
-      p   {
-        font-family: inherit;
-        color: inherit;
-        margin: 0;
-        padding: 0;
-      }
+    &__mobile   {
+      font-family: inherit;
+      color: inherit;
+      margin: 0;
+      padding: 0;
       @include tablet  {
         display: none;
       }
@@ -56,29 +55,26 @@
   }
 }
 
-.mapSection  {
+.map-section  {
   height: 100vh;
   text-align: center;
-  .map   {
+  &__map   {
     height: 100%;
     width: 100%;
     @include laptop  {
       height: 100%;
       width: 100%;
     }
-    .markerDeskription  {
+    .marker-description  {
       font-size: .8rem;
       width: 12.5rem;
-      p   {
+      &__text   {
         font-size: .8rem;
         margin: 0;
         padding: 0;
         &:first-of-type {
           font-size: 1rem;
         }
-      }
-      a   {
-        color: inherit;
       }
     }
   }

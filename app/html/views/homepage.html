@@ -1,40 +1,28 @@
-<section class="bannerPhoto"
+<section class="homepage-banner"
          ng-style="{'height' : $root.isS ? vm.bannerHeight : '100vh'}">
-    <h2 id="scrollToMap"
+    <h2 class="homepage-banner__heading"
         du-smooth-scroll="map">Atrakcje geoturystyczne
-        <span>
-            <p>patrz także GeoŚląsk</p>
-        </span>
+            <p class="homepage-banner__heading__mobile">patrz także GeoŚląsk</p>
     </h2>
-    <div class="infoDiv">
-        <div class="infoImg"
-             id="img1"
-             ng-mouseenter="isVisibleOne = true"
-             ng-mouseleave="isVisibleOne = false">
-            <img src="images/marker.png">
+    <div class="info info--top">
+        <div class="info__figure">
+            <img class="info__figure__image" src="images/pin.png">
         </div>
-        <div class="infoText"
-             id="infoText1"
-             ng-class="{'show' : isVisibleOne}">
-            <p>Muzeum Śląskie <span>na terenie dawnej KWK Katowice</span></p>
-            <p>Silesian Museum <span>(former Katowice Coal Mine)</span></p>
+        <div class="info__text">
+            <p class="info__text__paragraph">Muzeum Śląskie na terenie dawnej KWK Katowice</p>
+            <p class="info__text__paragraph">Silesian Museum (former Katowice Coal Mine)</p>
         </div>
     </div>
-    <div class="infoDiv2">
-        <div class="infoImg"
-             id="img2"
-             ng-mouseenter="isVisibleTwo = true"
-             ng-mouseleave="isVisibleTwo = false">
-            <img src="images/marker_info.png">
+    <div class="info info--bottom">
+        <div class="info__figure">
+            <img class="info__figure__image" src="images/info.png">
         </div>
-        <div class="infoText"
-             id="infoText2"
-             ng-class="{'show' : isVisibleTwo}">
-            <p>Atrakcje geoturystyczne patrz także GeoŚląsk</p>
-            <p>Geotourist attractions see also English</p>
+        <div class="info__text">
+            <p class="info__text__paragraph">Atrakcje geoturystyczne patrz także GeoŚląsk</p>
+            <p class="info__text__paragraph">Geotourist attractions see also English</p>
         </div>
     </div>
 </section>
-<div class="mapSection">
+<div class="map-section">
     <map markers="vm.markers"></map>
 </div>
