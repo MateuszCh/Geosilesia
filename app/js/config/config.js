@@ -12,13 +12,13 @@
                 template: '<homepage></homepage>'
             }).
             when('/o-nas', {
-                template: '<about></about>'
+                templateUrl: 'html/views/about.html'
             }).
             when('/english', {
-                template: '<english></english>'
+                templateUrl: 'html/views/english.html'
             }).
             when('/slownik', {
-                template: '<dictionary></dictionary>'
+                templateUrl: 'html/views/dictionary.html'
             }).
             when('/wydarzenia', {
                 template: '<events></events>'
