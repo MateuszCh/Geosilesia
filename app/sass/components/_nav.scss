@@ -1,25 +1,8 @@
-.mainNav li.active   {
-  background-color: lighten($header-color, 20%);
-  ul li   {
-    background-color: $header-color;
-    @include tablet  {
-      background-color: lighten($header-color, 10%);
-    }
-  }
-  ul li.active  {
-    background-color: lighten($header-color, 20%);
-    &:hover   {
-      background-color: white;
-      color: darken($header-color, 10%)
-    }
-  }
-}
-
-.mainNav  {
+.nav  {
   overflow: hidden;
   transition: all .2s ease;
   max-height: 0;
-  &.slide {
+  &--active {
     max-height: 500px;
     transition: all .5s ease;
   }
@@ -34,15 +17,7 @@
   @include laptop  {
     padding-bottom: 0;
   }
-  a,
-  span  {
-    cursor: pointer;
-    display: block;
-    text-decoration: none;
-    font-family: $text-font;
-    color: inherit;
-  }
-  .mainListItems  {
+  &__item  {
     transition: all .4s ease-in-out;
     @include tablet  {
       background-color: lighten($header-color, 10%);
@@ -53,11 +28,31 @@
         color: darken($header-color, 10%)
       }
     }
-    &>a,
-    span {
+    &--active {
+      background-color: lighten($header-color, 20%);
+      .subnav__item {
+        background-color: $header-color;
+        @include tablet  {
+          background-color: lighten($header-color, 10%);
+        }
+        &--active {
+          background-color: lighten($header-color, 20%);
+          &:hover   {
+            background-color: white;
+            color: darken($header-color, 10%)
+          }
+        }
+      }
+    }
+    &__link {
       padding: .2rem 0;
       padding-left: .5rem;
       font-size: 1.2rem;
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+      font-family: $text-font;
+      color: inherit;
       @include tablet  {
         padding: .5rem 1.5rem;
       }
@@ -66,33 +61,21 @@
       }
     }
   }
-
-  .geoslaskNav  {
+  .subnav  {
     max-height:0;
     overflow: hidden;
     transition: all 0.5s ease;
-
-
-    &.slide {
-      max-height: 500px;
-      transition: all 0.5s ease;
-    }
     @include tablet  {
       position: absolute;
       color: white;
       width: 100%;
       left: 0;
     }
-    a  {
-      padding-left: 1rem;
-      font-size: .9rem;
-      @include tablet  {
-        padding-left: 0;
-        width: 100%;
-        font-size: 1rem;
-      }
+    &--active {
+      max-height: 500px;
+      transition: all 0.5s ease;
     }
-    li  {
+    &__item  {
       transition: all .2s ease-in-out;
       padding: 0.1875rem 0;
       @include tablet  {
@@ -102,6 +85,20 @@
         &:hover   {
           background-color: white;
           color: darken($header-color, 10%);
+        }
+      }
+      &__link  {
+        padding-left: 1rem;
+        font-size: .9rem;
+        cursor: pointer;
+        display: block;
+        text-decoration: none;
+        font-family: $text-font;
+        color: inherit;
+        @include tablet  {
+          padding-left: 0;
+          width: 100%;
+          font-size: 1rem;
         }
       }
     }

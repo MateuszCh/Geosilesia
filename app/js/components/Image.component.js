@@ -1,6 +1,6 @@
 (function(){
     angular.module('geosilesia').component('fullscreenImage', {
-        templateUrl: 'html/views/fullscreen-image.html',
+        templateUrl: 'html/components/fullscreen-image.html',
         bindings: {
             custom: '<',
             images: '<',

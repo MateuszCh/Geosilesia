@@ -15,7 +15,7 @@
         vm.markers = [];
         vm.$onInit = onInit;
         vm.$onDestroy = onDestroy;
-        var mainHeader = document.getElementById("mainHeader");
+        var mainHeader = document.getElementById("header");
         var heightInner;
 
         function onDestroy(){

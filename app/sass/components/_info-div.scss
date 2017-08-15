@@ -22,7 +22,7 @@
     margin-left: 3rem;
     align-items: center;
     justify-content: center;
-    z-index: 10;
+    z-index: 4;
     order: 2;
     padding: 1rem;
     height: 60px;
@@ -35,7 +35,7 @@
     }
   }
   &__text {
-    z-index: 5;
+    z-index: 3;
     position: absolute;
     background-color: $color3;
     display: flex;

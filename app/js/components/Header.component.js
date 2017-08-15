@@ -1,6 +1,6 @@
 (function(){
     angular.module('geosilesia').component('header', {
-        templateUrl: 'html/header.html',
+        templateUrl: 'html/layout/header.html',
         bindings: {
             custom: '<'
         },

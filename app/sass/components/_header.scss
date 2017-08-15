@@ -1,4 +1,4 @@
-.mainHeader  {
+.header  {
   position: fixed;
   width: 100vw;
   top: 0;
@@ -7,46 +7,48 @@
   box-shadow: 0 3px 5px 1px darken($header-color, 20%);
   z-index: 5;
   transition: top 1s ease;
-  &.slide {
-    transition: top 0.5s ease;
-    top: -150px;
-  }
   @include laptop  {
     display: flex;
     align-items: center;
     justify-content: space-around;
   }
-  h1  {
+  &--hidden {
+    transition: top 0.5s ease;
+    top: -150px;
+  }
+
+  &__logo {
     text-align: center;
     font-family: $headers-font;
-    font-size: 3rem;
     margin: .5rem;
-    @include laptop  {
-      font-size: 5rem;
-    }
-    a   {
-      color:white;
-      text-decoration: none;
+    text-decoration: none;
+    display: block;
+    &__heading {
+      font-size: 3rem;
+      @include laptop {
+        font-size: 5rem;
+      }
     }
   }
-  &>div {
+
+  .hamburger {
     cursor: pointer;
     position: absolute;
     top:1.875rem;
     right: 1.25rem;
     width: 1.5625rem;
     height: 1.125rem;
-    &.expanded .menu  {
+    &--expanded .hamburger__menu  {
       background-color: transparent;
     }
-    &.expanded .menu:after  {
+    &--expanded .hamburger__menu:after  {
       transform: rotate(45deg);
     }
-    &.expanded .menu:before  {
+    &--expanded .hamburger__menu:before  {
       transform: rotate(-45deg);
       top: 7px;
     }
-    .menu {
+    &__menu {
       height: 0.125rem;
       width: 1.5625rem;
       background-color: white;
