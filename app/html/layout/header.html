@@ -2,7 +2,10 @@
      id="header"
      ng-class="{'header--hidden' : $root.hideHeader, 'blur' : $root.blur}">
     <div class="hamburger" ng-click="vm.openHam()"
-         ng-class="{'hamburger--expanded' : vm.hamOpen}">
+         ng-class="{'hamburger--open' : vm.hamOpen}">
+        <span class="hamburger__menu"></span>
+        <span class="hamburger__menu"></span>
+        <span class="hamburger__menu"></span>
         <span class="hamburger__menu"></span>
     </div>
     <a class="header__logo"

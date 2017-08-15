@@ -1,15 +1,21 @@
 .fullscreen-mode {
-  opacity: 1;
-  transition: opacity 0.5s ease;
   z-index: 20;
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-
+  opacity: 1;
   &.ng-hide {
     opacity: 0;
+  }
+
+  &.ng-hide-remove {
+    transition: opacity .5s ease;
+  }
+
+  &.ng-hide-add {
+    transition: opacity .5s ease;
   }
 
   .image-overlay {
@@ -54,10 +60,10 @@
     &__close  {
       z-index: 101;
       position: absolute;
-      right: 1.875rem;
-      top: 1.875rem;
-      height: 1.125rem;
-      width: 1.5625rem;
+      right: 1rem;
+      top: 1rem;
+      height: 1.5rem;
+      width: 1.5rem;
       cursor: pointer;
       &:before,
       &:after {
@@ -65,8 +71,8 @@
         height: .3rem;
         content: '';
         position: absolute;
-        top: 50%;
-        left: 50%;
+        top: calc(50% - (0.3rem / 2));
+        left: 0;
         display: block;
         background-color: $header-color;
         transition: all 0.2s ease-in-out;

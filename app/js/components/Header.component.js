@@ -7,15 +7,15 @@
         controllerAs: 'vm',
         controller: HeaderController
     });
-    HeaderController.$inject = ['$window', '$rootScope', '$location'];
-    function HeaderController($window, $rootScope, $location){
+    HeaderController.$inject = ['$window', '$location', '$scope'];
+    function HeaderController($window, $location, $scope){
 
         var vm = this;
         vm.$onInit = onInit;
-        vm.hamOpen = false;
         vm.openHam = openHam;
-        vm.activeGeo = false;
         vm.checkGeo = checkGeo;
+        vm.hamOpen = false;
+        vm.activeGeo = false;
 
         vm.nav = [
             {title: 'O serwisie', link: '/o-nas'},
@@ -34,13 +34,27 @@
 
         function onInit(){
             $window.addEventListener('resize', resetHeader);
-            $rootScope.$on("$routeChangeSuccess", function(){
-                vm.currentPath = $location.path();
-                if(vm.currentPath === '/'){
-                    vm.activeGeo = false;
-                    vm.hamOpen = false;
+            $scope.$on("$routeChangeSuccess", setCurrentPath);
+        }
+
+        function setCurrentPath() {
+            vm.currentPath = $location.path();
+            if(vm.currentPath === '/'){
+                vm.activeGeo = false;
+                vm.hamOpen = false;
+            }
+            var counter = 0, i, position;
+            for(i = 0; i < vm.currentPath.length; i++){
+                if(vm.currentPath[i] === '/'){
+                    counter++;
+                    if(counter === 2){
+                        position = i;
+                    }
                 }
-            });
+            }
+            if(counter === 2){
+                vm.currentPath = vm.currentPath.substr(0, position);
+            }
         }
 
         function openHam() {

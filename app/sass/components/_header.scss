@@ -32,46 +32,53 @@
   }
 
   .hamburger {
+    width: 26px;
+    height: 16px;
+    transform: rotate(0deg);
+    transition: .5s ease-in-out;
     cursor: pointer;
     position: absolute;
-    top:1.875rem;
+    top: 1.875rem;
     right: 1.25rem;
-    width: 1.5625rem;
-    height: 1.125rem;
-    &--expanded .hamburger__menu  {
-      background-color: transparent;
+    &--open .hamburger__menu:nth-child(1) {
+      top: 7px;
+      width: 0;
+      left: 50%;
     }
-    &--expanded .hamburger__menu:after  {
+    &--open .hamburger__menu:nth-child(2) {
       transform: rotate(45deg);
     }
-    &--expanded .hamburger__menu:before  {
+    &--open .hamburger__menu:nth-child(3) {
       transform: rotate(-45deg);
+    }
+    &--open .hamburger__menu:nth-child(4) {
       top: 7px;
+      width: 0;
+      left: 50%;
     }
     &__menu {
-      height: 0.125rem;
-      width: 1.5625rem;
-      background-color: white;
       display: block;
-      transition: all .2s ease-in-out;
-      @include tablet  {
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background: white;
+      border-radius: 2px;
+      opacity: 1;
+      left: 0;
+      transform: rotate(0deg);
+      transition: .25s ease-in-out;
+      @include tablet {
         display: none;
       }
-      &:after {
-        top: 0.4375rem;
+      &:nth-child(1){
+        top: 0;
       }
-      &:before {
-        top: 0.875rem;
+      &:nth-child(2),
+      &:nth-child(3){
+        top: 7px;
       }
-      &:after,
-      &:before  {
-        height: 0.125rem;
-        width: 1.5625rem;
-        background-color: white;
-        position: absolute;
-        display: block;
-        content: "";
-        transition: all .2s ease-in-out;
+      &:nth-child(4){
+        top: 14px;
       }
     }
   }
