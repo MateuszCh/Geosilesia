@@ -1,20 +1,29 @@
 <main ng-controller="StructuresController">
-    <section class="tabs">
+    <section class="geosilesia">
         <h2>Budowa geologiczna</h2>
-        <ul>
-            <li class="structure-1" ng-click="checkTab(1)" ng-class="{'selectedTab' : activeTab == 1}">Powierzchniowe utwory geologiczne</li>
-            <li class="structure-2" ng-click="checkTab(2)" ng-class="{'selectedTab' : activeTab == 2}">Wgłębna budowa geologiczna</li>
-            <li class="structure-3" ng-click="checkTab(3)" ng-class="{'selectedTab' : activeTab == 3}">Kopaliny</li>
+        <ul class="geosilesia__tabs">
+            <li class="geosilesia__tabs__item"
+                ng-click="checkTab(1)"
+                ng-class="{'geosilesia__tabs__item--selected' : activeTab == 1}">Powierzchniowe utwory geologiczne</li>
+            <li class="geosilesia__tabs__item"
+                ng-click="checkTab(2)"
+                ng-class="{'geosilesia__tabs__item--selected' : activeTab == 2}">Wgłębna budowa geologiczna</li>
+            <li class="geosilesia__tabs__item"
+                ng-click="checkTab(3)"
+                ng-class="{'geosilesia__tabs__item--selected' : activeTab == 3}">Kopaliny</li>
         </ul>
-        <div>
-            <section id="structure-1" class="structures" ng-class="{'slide' : activeTab == 1}">
-                <h3>Powierzchniowe utwory geologiczne</h3>
+        <div class="geosilesia__field">
+            <section class="geosilesia__field__structure"
+                     ng-class="{'geosilesia__field__structure--active' : activeTab == 1}">
+                <h3 class="geosilesia__field__structure__heading">Powierzchniowe utwory geologiczne</h3>
                 <p>Na powierzchni województwa śląskiego występują utwory geologiczne zaliczane do 9 okresów (systemów) geologicznych. Są to skały górnopaleozoiczne (dewon, karbon i perm), mezozoiczne (trias, jura i kreda) i kenozoiczne (paleogen, neogen i czwartorzęd). W regionie południowym, w Karpatach Zachodnich, na powierzchni terenu występują tylko skały mezozoiczne (jura i kreda) i kenozoiczne (paleogen, neogen i czwartorzęd).</p>
-                <figure>
-                    <img src="images/budowa/wsl_mapa_geologiczna-powierzchniowa.gif" alt="Mapa - powierzchniowe utwory">
+                <figure class="geosilesia__field__structure__figure">
+                    <img class="geosilesia__field__structure__figure__image"
+                         src="images/budowa/wsl_mapa_geologiczna-powierzchniowa.gif"
+                         alt="Mapa - powierzchniowe utwory">
                 </figure>
                 <p>Z różnowiekowymi skałami regionu związane są skamieniałości, dostarczające wiedzy o wyglądzie fauny i flory oraz o ich środowisku życia i klimacie w minionych epokach geologicznych. Najlepiej poznanymi skamieniałościami województwa śląskiego, występującymi w stanowiskach powierzchniowych są (Chybiorz i in. 2015):</p>
-                <ul class="disc-list">
+                <ul class="default-list">
                     <li>środkowodewońskie organizmy rafotwórcze (koralowce, stromatoporoidy) pojawiające się w wapieniach okolic Siewierza;</li>
                     <li>górnokarbońska fauna morska (mięczaki, trylobity, liliowce, koralowce) występujące w piaskowcach z Gołonoga w Dąbrowie Górniczej; </li>
                     <li>górnokarbońska fauna lądowa i słodkowodna (pajęczaki, owady, wije, mieczogony i małże) oraz szczątki roślin lądowych spotykane na hałdach powęglowych lub w wyrobiskach kopalnianych (przede wszystkim widłaki Lepidodendron i Sigillaria, skrzypy Calamites, paprocie zarodnikowe i nasienne oraz kordaity);</li>
@@ -28,25 +37,33 @@
                 <p>Skamieniałości, skały i minerały można oglądać nie tylko w naturalnych i sztucznych odsłonięciach geologicznych, ale także w sztuce i architekturze oraz przestrzeni muzealnej (patrz Strona główna – Atrakcje geoturystyczne).</p>
                 <p>Szczegółowa informacja o budowie geologicznej województwa, wodach podziemnych, kopalinach i środowisku przedstawiona jest na seryjnych mapach geologicznych w skali 1:50 000. Skany map geologicznych, hydrogeologicznych i środowiskowych wraz z objaśnieniami tekstowymi dostępne są bezpłatnie w Portalu Centralnej Bazy Danych Geologicznych (CBDG). Dane geologiczne dostępne są również w aplikacji mobilnej GeoLOG, a także w formie usług WMS i WFS oraz plików SHP na Portalu CBDG.</p>
             </section>
-            <div id="structure-2" class="structures" ng-class="{'slide' : activeTab == 2}">
-                <section id="structure-2-1">
-                    <h3>Wgłębna budowa geologiczna na powierzchni podkenozoicznej</h3>
+            <div class="geosilesia__field__structure"
+                 ng-class="{'geosilesia__field__structure--active' : activeTab == 2}">
+                <section>
+                    <h3 class="geosilesia__field__structure__heading">Wgłębna budowa geologiczna na powierzchni podkenozoicznej</h3>
                     <p>Jeszcze większe zróżnicowanie geologiczne województwa śląskiego występuje pod pokrywą kenozoiczną, czyli bez utworów: czwartorzędu, neogenu i paleogenu, gdzie pod Karpatami udokumentowano wierceniami skały kambru dolnego i prekambru.</p>
                     <p>Na powierzchni podkenozoicznej występuje 7 głównych jednostek tektonicznych (Karnkowski 2008), a południowa granica monokliny śląsko-krakowskiej i zapadliska górnośląskiego chowa się pod mioceńskie utwory zapadliska przedkarpackiego i pod Karpaty (Oszczypko 2006; Oszczypko i in. 2008).</p>
-                    <figure class="sixty">
-                        <img src="images/budowa/wsl-geologia-podkenozoiczna_geosilesia.gif" alt="Mapa geologiczna bez utworów kenozoiku">
-                        <figcaption><a href="pdf/wsl-geologia-podkenozoiczna_geosilesia.pdf">Pobierz wielowarstwowy PDF</a></figcaption>
+                    <figure class="geosilesia__field__structure__figure">
+                        <img class="geosilesia__field__structure__figure__image"
+                             src="images/budowa/wsl-geologia-podkenozoiczna_geosilesia.gif"
+                             alt="Mapa geologiczna bez utworów kenozoiku">
+                        <figcaption class="geosilesia__field__structure__figure__text">
+                            <a class="geosilesia__field__structure__link"
+                               href="pdf/wsl-geologia-podkenozoiczna_geosilesia.pdf">Pobierz wielowarstwowy PDF</a>
+                        </figcaption>
                     </figure>
                 </section>
-                <section id="structure-2-2">
-                    <h3>Wgłębna budowa geologiczna na powierzchni podpermskiej</h3>
+                <section>
+                    <h3 class="geosilesia__field__structure__heading">Wgłębna budowa geologiczna na powierzchni podpermskiej</h3>
                     <p>Na powierzchni podpermskiej, czyli bez osadów kenozoicznych i mezozoiczno-permskich, oprócz wspomnianych wyżej utworów prekambru (górnoproterozoicznych), kambru dolnego, dewonu i karbonu, występują również osady ordowiku i syluru oraz skały magmowe związane ze strefą dyslokacyjną Kraków–Lubliniec. Najstarsze udokumentowane skały w regionie Goczałkowic, reprezentujące edikarski flisz (górnoproterozoiczne), mają około 550–570 mln lat. Występujące na powierzchni terenu w Dziewkach k/Siewierza wapienie środkowo dewońskie ok. 390 mln lat, a powszechnie znane górnokarbońskie utwory węglonośne zapadliska górnośląskiego ok. 300–323 mln lat. Występująca aktywność magmowa miała charakter trzyetapowy: w dewonie (ems), w karbonie (wizen) oraz w permie (Nawrocki i in. 2010).</p>
                     <p>Propozycja szczegółowej tektonicznej regionalizacji jednostek wgłębnych pięter strukturalnych (podpermskiego i poddewońskiego) przedstawiona jest w pracach Buły i in. (2002, 2008) i publikacji Żelaźniewicza i in. (2011).</p>
-                    <div class="przekroj">
-                        <figure>
-                            <img src="images/budowa/wsl_przekroj-geologiczny_geosilesia.gif" alt="Przekrój geologiczny przez blok górnośląski oraz Górnośląskie Zagłębie Węglowe">
+                    <div class="geosilesia__field__structure__segment">
+                        <figure class="geosilesia__field__structure__figure">
+                            <img class="geosilesia__field__structure__figure__image"
+                                 src="images/budowa/wsl_przekroj-geologiczny_geosilesia.gif"
+                                 alt="Przekrój geologiczny przez blok górnośląski oraz Górnośląskie Zagłębie Węglowe">
                         </figure>
-                        <ol>
+                        <ol class="geosilesia__field__structure__list">
                             <li>płaszczowiny karpackie</li>
                             <li>utwory pokrywy permsko-mezozoiczno-kenozoicznej</li>
                             <li>waryscyjskie granitoidy</li>
@@ -67,8 +84,9 @@
                     </div>
                 </section>
             </div>
-            <section id="structure-3" class="structures" ng-class="{'slide' : activeTab == 3}">
-                <h3>Kopaliny</h3>
+            <section class="geosilesia__field__structure"
+                     ng-class="{'geosilesia__field__structure--active' : activeTab == 3}">
+                <h3 class="geosilesia__field__structure__heading">Kopaliny</h3>
                 <p>W różnowiekowych skałach udokumentowanych na terenie województwa śląskiego, obok skamieniałości, struktur sedymentacyjnych i tektonicznych, występują liczne kopaliny i towarzyszące im minerały (patrz Gabzdyl & Hanak 2005; Gabzdyl & Gorol 2008; Różkowski 2008; Chybiorz & Tyc 2012).</p>
                 <p>Najważniejszą kopaliną regionu są górnokarbońskie złoża węgla kamiennego i metanu eksploatowane na terenie Górnośląskiego Zagłębia Węglowego (GZW), ale pamiętać należy też o innych, równie ważnych w historii województwa bogactwach mineralnych. Należą do nich złoża rud cynku i ołowiu w skałach triasowych, które eksploatowane były w okolicy Tarnowskich Gór, Bytomia, Piekar Śląskich, Będzina, Dąbrowy Górniczej, Strzemieszyc i Sławkowa, pierwotnie eksploatowane jako złoża srebra; środkowojurajskie złoża syderytów ilastych w okolicy Częstochowy, eksploatowane do lat 80. ubiegłego wieku; czy dotychczas nieeksploatowane złoże rud molibdenowo-wolframowo-miedziowych w strefie kontaktu bloku małopolskiego z blokiem górnośląskim (patrz Wgłębna budowa geologiczna, ukryte pod powierzchnią ziemi w obszarze Zawiercia i Myszkowa. Wśród złóż pospolitych, ważnych dla gospodarki regionu, znajdują się różnowiekowe złoża surowców skalnych zwięzłych (dolomity, wapienie i margle, piaskowce), okruchowych (piaski i żwiry, piaski formierskie, piaski kwarcowe, piaski podsadzkowe i żwirki filtracyjne) i ilastych (do produkcji cementu i ceramiki budowlanej), eksploatowane w wielu obszarach województwa. Nie należy także zapominać o mioceńskich złożach gazu ziemnego eksploatowanych w okolicach Skoczowa, udokumentowanym w formacji mioceńskiej złożu soli kamiennej w okolicy Rybnika-Żor-Orzesza czy czwartorzędowych torfach wydobywanych w powiecie cieszyńskim, pszczyńskim i raciborskim. W przeszłości eksploatowano rudy darniowe, rudy limonitu i syderytu poza regionem częstochowskim, wydobywano węgiel brunatny w okolicy Siewierza, Poręby, Zawiercia i Łaz, a także karbońskie bentonity i glinki ogniotrwałe na obszarze GZW oraz mioceńskie złoże siarki rodzimej Pszów– Kokoszyce koło Wodzisławia Śląskiego i gipsów w Czernicy koło Rydułtów. Z jaskiń Wyżyny Częstochowskiej (patrz galerie Wyżyna Częstochowska część 1 i 2) pozyskiwano szpat, czyli krystaliczny kalcyt używany niegdyś w hutnictwie szkła. Bardzo prawdopodobne, że w utworach karbonu występuje również gaz łupkowy (Chybiorz i in. 2015).</p>
                 <p>Z bogactwami mineralnymi regionu związane są nagromadzenia różnych minerałów (patrz galeria Minerały województwa śląskiego). Najbardziej znanymi są okazy galeny, sfalerytu, jordanitu, hemimorfitu, cerusytu, ołowionośnego aragonitu zwanego tarnowicytem (jego nazwa pochodzi od niemieckiej nazwy Tarnowskich Gór – miejsca ich pierwszego znalezienia i opisania w literaturze), piromorfitu pochodzące z nieczynnych już kopalń z okolic Tarnowskich Gór i Bytomia. Równie znane są okazy konkrecji syderytowych wypełnionych kryształami kalcytu, barytu, aragonitu, sfalerytu pochodzące z okolic Częstochowy. Cennym materiałem kolekcjonerskim są okazy kwarcu), millerytu i pirytu z karbońskich syderytów ilastych towarzyszących pokładom węgla. Na szczególną uwagę zasługują też minerały związane ze słynnymi w świecie skałami magmowymi występującymi w okolicy Cieszyna, zwanymi cieszynitami oraz skałami przez nie przeobrażonymi (patrz galeria Cieszynity, pikryty i syenity), w tym np. analcym, kaersutyt, pektolit, datolit (Chybiorz i in. 2015).</p>
@@ -78,8 +96,8 @@
 
     </section>
     <section class="literature">
-        <h2>Wybrana literatura</h2>
-        <ul class="listOfSources">
+        <h2 class="literature__heading">Wybrana literatura</h2>
+        <ul class="literature__sources">
             <li>BUŁA Z., HABRYN R. & KUREK S. 2002. Atlas geologiczny paleozoiku bez permu w strefie kontaktu bloków górnośląskiego i małopolskiego w skali 1:200 000. Państwowy Instytut Geologiczny, Warszawa.</li>
             <li>BUŁA Z., ŻABA J. & HABRYN R. 2008. Regionalizacja tektoniczna Polski—Polska południowa (blok górnośląski i blok małopolski). Przegląd Geologiczny, 56(10): 912–920.</li>
             <li>BUŁA Z. 2011. Regionalne badania geologiczne Górnego Śląska. Przyroda Górnego Śląska, 64: 7-8, 14.</li>

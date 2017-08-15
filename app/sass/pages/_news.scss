@@ -1,55 +1,59 @@
-.news {
-  article   {
-    padding: .625rem;
-    background-color: #ddd;
-    margin: .625rem;
-    transition: all .5s ease-in-out;
-    font-family: $text-font;
-    color: #666;
-    &.border  {
-      background-color: $color3;
+.news   {
+  padding: .625rem;
+  background-color: #ddd;
+  margin: .625rem;
+  transition: all .5s ease-in-out;
+  font-family: $text-font;
+  color: #666;
+
+  &--active  {
+    background-color: $color3;
+    color: white;
+    .news__head__title,
+    .news__head__date,
+    .news__body__text,
+    .news__body__links  {
       color: white;
-      h3,
-      p   {
-        color: white;
-      }
     }
-    p   {
-      transition: all .5s ease-in-out;
-    }
-    a   {
-      color: inherit;
-      padding: 0 .625rem;
-    }
-    h3  {
+  }
+  &__head {
+    cursor: pointer;
+    &__title  {
       color: darken($text-color, 10%);
       font-size: 1.2rem;
       transition: all .5s ease-in-out;
     }
-    .head {
-      cursor: pointer;
-      p  {
-        font-size: 1rem;
-        line-height: normal;
-        margin: 0;
-        padding: 0;
-      }
+    &__date  {
+      font-size: 1rem;
+      line-height: normal;
+      margin: 0;
+      padding: 0;
+      transition: all .5s ease-in-out;
     }
-    .body {
-      max-height: 0;
-      transition: all 1s ease;
-      overflow: hidden;
-      padding: 0 .625rem;
+  }
 
-    }
+  &__body {
+    max-height: 0;
+    transition: all 1s ease;
+    overflow: hidden;
+    padding: 0 .625rem;
 
-    .dol {
-      max-height: 500px !important;
+    &--active {
+      max-height: 1500px !important;
       padding: .625rem;
     }
-    .links {
+    &__text {
+      transition: all .5s ease-in-out;
+    }
+    &__links {
       margin-bottom: 0;
       margin-top: 0;
+      transition: all .5s ease-in-out;
+      &__item   {
+        color: inherit;
+        padding: 0 .625rem;
+      }
     }
   }
 }
+

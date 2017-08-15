@@ -1,6 +1,3 @@
-/**
- * Created by Mateusz Chybiorz on 2017-07-09.
- */
 (function(){
     angular.module('geosilesia').value('iconsForMarkers', {
         wybraneGeostanowiska:    {

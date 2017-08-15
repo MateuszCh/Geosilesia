@@ -1,9 +1,5 @@
-.tabs   {
-  &>div {
-    padding: .625rem .3125rem;
-    background-color: white;
-  }
-  &>ul {
+.geosilesia {
+  &__tabs {
     display: flex;
     width: 100%;
     margin: 0 auto;
@@ -16,7 +12,7 @@
     @include tablet  {
       flex-direction: row;
     }
-    li  {
+    &__item  {
       flex-grow: 1;
       padding: .3125rem;
       color: white;
@@ -31,107 +27,165 @@
         border: none;
       }
       &:hover,
-      &.selectedTab{
+      &--selected{
         background-color: white;
         color: $header-color;
       }
     }
   }
-  .structures {
-    max-height: 0;
-    transition: max-height .5s ease;
-    overflow: hidden;
-    &.slide {
-      max-height: 2000px;
+  &__field {
+    padding: .625rem .3125rem;
+    background-color: white;
+    &__structure {
+      max-height: 0;
       transition: max-height .5s ease;
-    }
-    a   {
-      display: inline-block;
-      color: inherit;
-      &:hover {
-        color: red;
+      overflow: hidden;
+      &--active {
+        max-height: 5000px;
+        transition: max-height .5s ease;
       }
-    }
-    .przekroj  {
-      @include laptop  {
-        figure  {
+      &__link   {
+        display: inline-block;
+        color: inherit;
+        &:hover {
+          color: red;
+        }
+      }
+      &__segment  {
+        @include laptop  {
+          .geosilesia__field__structure__figure  {
+            width: 75%;
+          }
+        }
+        @include full{
+          margin-top: 1.25rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .geosilesia__field__structure__figure  {
+            width: 65%;
+            margin: 0;
+          }
+          .geosilesia__field__structure__list  {
+            width: 33%;
+          }
+        }
+      }
+      &__list {
+        list-style-position: inside;
+        font-family: $text-font;
+        color: $text-color;
+        line-height: 1.25rem;
+        font-size: .7rem;
+        @include tablet  {
+          font-size: .8rem;
+        }
+      }
+      &__heading  {
+        font-size: 1.5rem;
+        font-family: $headers-font;
+        text-align: center;
+        color: darken($header-color, 10%);
+      }
+      &__figure  {
+        width: 100%;
+        margin: .625rem 0;
+        @include tablet  {
+          margin: 0 auto;
           width: 75%;
         }
-      }
-      @include full{
-        margin-top: 1.25rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        figure  {
-          width: 65%;
-          margin: 0;
-        }
-        ol  {
-          width: 33%;
-        }
-      }
-    }
-    ol {
-      list-style-position: inside;
-      font-family: $text-font;
-      color: $text-color;
-      line-height: 1.25rem;
-      font-size: .7rem;
-      @include tablet  {
-        font-size: .8rem;
-      }
-    }
-    h3  {
-      font-size: 1.5rem;
-      font-family: $headers-font;
-      text-align: center;
-      color: darken($header-color, 10%);
-    }
-    figure  {
-      width: 100%;
-      margin: .625rem 0;
-      &.sto {
-        @include tablet  {
-          width: 100%;
-        }
-      }
-      &.sixty {
         @include laptop  {
           width: 60%;
         }
-      }
-      @include tablet  {
-        margin: 0 auto;
-        width: 75%;
-      }
-      @include laptop  {
-        width: 50%;
-      }
-      img {
-        width: 100%;
-      }
-      figcaption  {
-        font-size: .7rem;
-        font-family: $text-font;
-        color: $text-color;
-        text-align: center;
-        padding: 1rem;
-        span  {
-          display: block;
+        &__image {
+          width: 100%;
         }
-        @include tablet  {
-          font-size: .9rem;
+        &__text  {
+          font-size: .7rem;
+          font-family: $text-font;
+          color: $text-color;
+          text-align: center;
+          padding: 1rem;
+          span  {
+            display: block;
+          }
+          @include tablet  {
+            font-size: .9rem;
+          }
         }
       }
     }
   }
 }
 
-.footnotes  {
-  font-size: 1.5rem;
-  font-family: $headers-font;
-  text-align: center;
-  color: darken($header-color, 10%);
+.footnotes {
+  margin-bottom: 1.5rem;
+  padding: 0;
+  &__heading {
+    font-size: 1.5rem;
+    font-family: $headers-font;
+    text-align: center;
+    color: darken($header-color, 10%);
+  }
+  li  {
+    margin: .625rem 0;
+    font-family: $text-font;
+    color: $text-color;
+    font-size: .9rem;
+    word-wrap: break-word;
+    @include laptop  {
+      font-size: 1rem;
+    }
+    a   {
+      color: inherit;
+      &:hover {
+        color: $color3;
+      }
+    }
+  }
+  @include tablet  {
+    padding: 0 0.625rem;
+  }
 }
 
+.literature {
+  &__heading {
+    padding: .625rem 0;
+  }
+  &__sources  {
+    margin-bottom: 3.125rem;
+    padding: 0 .3125rem;
+    li  {
+      margin: .625rem 0;
+      font-family: $text-font;
+      color: $text-color;
+      font-size: .9rem;
+      word-wrap: break-word;
+      @include laptop  {
+        font-size: 1rem;
+      }
+      a   {
+        color: inherit;
+        &:hover {
+          color: $color3;
+        }
+      }
+    }
+  }
+}
+
+.geosites  {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  list-style-type: none;
+  &__link  {
+    max-width: 9.375rem;
+    margin: .625rem;
+  }
+  &__image {
+    width: 100%;
+  }
+}

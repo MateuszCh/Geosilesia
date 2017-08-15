@@ -1,7 +1,3 @@
-/**
- * Created by Mateusz Chybiorz on 2017-07-16.
- */
-
 (function(){
     angular.module('geosilesia').config(['$locationProvider', '$routeProvider',
         function ($locationProvider, $routeProvider) {
@@ -30,19 +26,19 @@
                 template: '<gallery></gallery>'
             }).
             when('/polozenie', {
-                templateUrl: 'html/views/geoslask/polozenie.html'
+                templateUrl: 'html/views/geoslask/location.html'
             }).
             when('/rzezba', {
-                templateUrl: 'html/views/geoslask/rzezba.html'
+                templateUrl: 'html/views/geoslask/terrain.html'
             }).
             when('/budowa', {
-                templateUrl: 'html/views/geoslask/budowa.html'
+                templateUrl: 'html/views/geoslask/structure.html'
             }).
             when('/geostanowiska', {
-                templateUrl: 'html/views/geoslask/geostanowiska.html'
+                templateUrl: 'html/views/geoslask/geosites.html'
             }).
             when('/atrakcje', {
-                templateUrl: 'html/views/geoslask/atrakcje.html'
+                templateUrl: 'html/views/geoslask/attractions.html'
             }).
             otherwise('/');
             $locationProvider.html5Mode(true);

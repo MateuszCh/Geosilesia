@@ -1,6 +1,3 @@
-/**
- * Created by Mateusz Chybiorz on 2017-07-16.
- */
 (function(){
     angular.module('geosilesia').component('homepage', {
         templateUrl: 'html/views/homepage.html',

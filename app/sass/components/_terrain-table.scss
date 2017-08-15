@@ -1,4 +1,4 @@
-.rzezbaTable  {
+.terrain-table  {
   width: 100%;
   margin: 0 auto;
   border: 2px solid black;
@@ -8,17 +8,17 @@
   @include laptop  {
     width: 50%;
   }
-  th  {
+  &__header  {
     border: 1px solid black;
     text-align: center;
     padding: .2rem;
     font-weight: normal;
   }
-  td  {
+  &__data  {
     text-align: center;
     padding: .125rem;
     width: 25%;
-    &.rightColumn  {
+    &--right  {
       border-left: 1px solid black;
     }
   }
