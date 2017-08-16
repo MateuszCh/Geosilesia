@@ -7,8 +7,8 @@
         controllerAs: 'vm',
         controller: HeaderController
     });
-    HeaderController.$inject = ['$window', '$location', '$scope'];
-    function HeaderController($window, $location, $scope){
+    HeaderController.$inject = ['$window', '$location', '$scope', '$timeout'];
+    function HeaderController($window, $location, $scope, $timeout){
 
         var vm = this;
         vm.$onInit = onInit;
@@ -16,6 +16,7 @@
         vm.checkGeo = checkGeo;
         vm.hamOpen = false;
         vm.activeGeo = false;
+        var previousScroll = 0;
 
         vm.nav = [
             {title: 'O serwisie', link: '/o-nas'},
@@ -35,6 +36,7 @@
         function onInit(){
             $window.addEventListener('resize', resetHeader);
             $scope.$on("$routeChangeSuccess", setCurrentPath);
+            $window.addEventListener('scroll', hideHeader);
         }
 
         function setCurrentPath() {
@@ -67,6 +69,19 @@
 
         function resetHeader(){
             vm.hamOpen = false;
+            vm.noTransition = true;
+            $timeout(function(){
+                vm.noTransition = false;
+            }, 500);
+        }
+        function hideHeader(){
+            var currentScroll = $window.scrollY;
+            if(previousScroll < currentScroll){
+                vm.hideHeader = true;
+            } else {
+                vm.hideHeader = false;
+            }
+            previousScroll = currentScroll;
         }
     }
 })();

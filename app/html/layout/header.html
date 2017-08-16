@@ -1,6 +1,6 @@
 <div class="header"
      id="header"
-     ng-class="{'header--hidden' : $root.hideHeader, 'blur' : $root.blur}">
+     ng-class="{'header--hidden' : vm.hideHeader, 'blur' : $root.blur}">
     <div class="hamburger" ng-click="vm.openHam()"
          ng-class="{'hamburger--open' : vm.hamOpen}">
         <span class="hamburger__menu"></span>
@@ -15,7 +15,7 @@
     </a>
     <nav>
         <ul class="nav"
-            ng-class="{'nav--active' : vm.hamOpen}">
+            ng-class="{'nav--active' : vm.hamOpen, 'nav--no-transition' : vm.noTransition}">
             <li class="nav__item"
                 ng-repeat="item in ::vm.nav"
                 ng-mouseenter="vm.hoverNavItem = $index"

@@ -7,6 +7,7 @@
   box-shadow: 0 3px 5px 1px darken($header-color, 20%);
   z-index: 5;
   transition: top 1s ease;
+  text-align: center;
   @include laptop  {
     display: flex;
     align-items: center;
@@ -22,7 +23,10 @@
     font-family: $headers-font;
     margin: .5rem;
     text-decoration: none;
-    display: block;
+    display: inline-block;
+    @include laptop {
+      display: block;
+    }
     &__heading {
       font-size: 3rem;
       @include laptop {

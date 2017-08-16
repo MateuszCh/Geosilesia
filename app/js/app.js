@@ -40,11 +40,11 @@
         function setSize(apply){
             resetSizes();
             var width = $window.innerWidth;
-            if(width < 767){
+            if(width < 568){
                 $rootScope.isS = true;
-            } else if (width < 1200){
+            } else if (width < 850){
                 $rootScope.isM = true;
-            } else if (width < 1500){
+            } else if (width < 1400){
                 $rootScope.isL = true;
             } else {
                 $rootScope.isX = true;

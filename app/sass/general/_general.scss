@@ -51,10 +51,13 @@ main {
   margin: 0 auto;
   padding-top: 5rem;
   @include tablet  {
-    width: 70%;
+    width: 90%;
     padding-top: 8.125rem;
   }
   @include laptop  {
+    width: 80%;
+  }
+  @include full {
     width: 60%;
   }
 }

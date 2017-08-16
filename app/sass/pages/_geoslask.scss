@@ -18,10 +18,13 @@
       color: white;
       border: .125rem solid $color3;
       font-family: $text-font;
-      text-align: center;
       font-size: .9rem;
       transition: all .3s ease-in-out;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       @include tablet  {
         font-size: 1rem;
         border: none;
