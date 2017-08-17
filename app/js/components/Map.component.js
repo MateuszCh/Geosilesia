@@ -51,21 +51,19 @@
         }
 
         function onChanges(changes){
-            var previous = changes.markers.previousValue.length;
             if(changes.markers.currentValue && map){
-                if(markers){
-                    markers.forEach(function (marker) {
-                        marker.setMap(null);
-                    })
-                }
-                if(previous){
+                if(markers.length){
+                    deleteMarkers();
                     search = true;
                 }
                 setMarkers(changes.markers.currentValue);
-                if(previous){
-                    setBounds();
-                }
             }
+        }
+
+        function deleteMarkers(){
+            markers.forEach(function(marker){
+                marker.setMap(null);
+            })
         }
 
         function initMap() {
@@ -101,8 +99,10 @@
                     })(marker));
                     markers.push(marker);
                 }, (vm.randomAnimation && search) ? Math.floor(Math.random() * 1000) : 0)
-
             });
+            if(search){
+                setBounds();
+            }
         }
 
         function setBounds(){
