@@ -2,8 +2,7 @@
     angular.module('geosilesia').component('map', {
         bindings: {
             places: '<',
-            options: '<',
-            markers: '='
+            options: '<'
         },
         controllerAs: 'vm',
         controller: MapController
@@ -17,6 +16,8 @@
         vm.$onChanges = onChanges;
         var map, marker;
         var infowindow = new google.maps.InfoWindow();
+        var currentMarker;
+        vm.markers = [];
 
         var mapOptions = {
             center: {
@@ -50,7 +51,6 @@
         }
 
         function onChanges(changes){
-            console.log(changes);
             if(changes.places.currentValue && map){
                 if(vm.markers.length){
                     deleteMarkers();
@@ -97,8 +97,12 @@
                                 "</div>");
                             infowindow.open(map, marker);
                             toggleBounce(marker);
+                            currentMarker = marker;
                         }
                     })(marker));
+                    google.maps.event.addListener(infowindow, 'closeclick', function(){
+                        toggleBounce(currentMarker);
+                    });
                     vm.markers.push(marker);
             });
         }

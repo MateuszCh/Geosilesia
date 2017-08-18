@@ -14,61 +14,65 @@
         vm.search = search;
         vm.pickCategory = pickCategory;
         vm.location = "";
-        var places;
+        vm.category = "";
         var geocoder = new google.maps.Geocoder();
-        vm.test = [];
 
         function onInit(){
             $http.get("json/markers.json").then(function (response) {
-                places = response.data.obiekty;
-                vm.markers = places.slice();
+                vm.places = response.data.obiekty;
+                vm.markers = vm.places.slice();
             });
         }
 
         function search(input){
             vm.location = "";
-            getCoordinates(input, nearestPlaces);
+            vm.category = "";
+            getCoordinates(input).then(function(coordinates){
+                sortByDistance(coordinates);
+                nearestPlaces(10);
+            }, function(status){
+                vm.geocodeErrorMessage = status;
+            });
         }
 
-        function getCoordinates(input, callback){
+        function getCoordinates(input){
+            var q = $q.defer();
             geocoder.geocode({'address': input}, function(results, status){
                 if(status === "OK"){
-                    var lat = results[0].geometry.location.lat();
-                    var lng = results[0].geometry.location.lng();
-                    callback(lat, lng);
+                    var coordinates = {lat: results[0].geometry.location.lat(),
+                                       lng: results[0].geometry.location.lng()};
+                    q.resolve(coordinates);
                 } else {
-                    console.log(status);
+                    q.reject(status);
                 }
+            });
+            return q.promise;
+        }
+
+        function sortByDistance(coors) {
+            vm.places.forEach(function (place) {
+                place.distance = getDistance(coors.lat, coors.lng, place.position.lat, place.position.lng);
+            });
+            vm.places.sort(function (a, b) {
+                return a.distance - b.distance;
             })
         }
 
-        function nearestPlaces(lat, lng){
-            // vm.markers = [];
-            // var place = {position: {lat: lat, lng: lng}, title: "akacjowa", place: "akacjowa", category: "trasyPodziemne"};
-            // vm.markers.push(place);
-            // $scope.$apply();
-            places.forEach(function (place) {
-                // console.log(getDistance(lat, lng, place.position.lat, place.position.lng));
-                place.distance = getDistance(lat, lng, place.position.lat, place.position.lng);
-            });
-            console.log(places);
-            places.sort(function(a, b){
-                return a.distance - b.distance;
-            })
-            console.log(places);
-            vm.markers = places.slice(0, 10);
-            $scope.$apply();
-
-
+        function nearestPlaces(qty){
+            vm.markers = vm.places.slice(0, qty);
         }
 
         function pickCategory(input){
-            vm.markers = [];
-            places.slice().forEach(function(place){
-                if(place.category === input){
-                    vm.markers.push(place);
-                }
-            })
+            if(input === 'all'){
+                vm.markers = vm.places.slice();
+            } else {
+                vm.markers = [];
+                vm.places.slice().forEach(function(place){
+                    if(place.category === input){
+                        vm.markers.push(place);
+                    }
+                })
+            }
         }
 
 

@@ -5,13 +5,13 @@
 
             <div ng-repeat="category in ::vm.categories track by $index">
                 <label ng-bind="category.name"></label>
-                <input type="radio" ng-model="vm.location" value="{{category.category}}" ng-change="vm.pickCategory(vm.location)">
+                <input type="radio" ng-model="vm.category" value="{{category.category}}" ng-change="vm.pickCategory(vm.category)">
             </div>
+            <label>Wszystkie</label>
+            <input type="radio" ng-model="vm.category" value="all" ng-change="vm.pickCategory(vm.category)">
         </form>
-        <div id="dwa">test</div>
     </div>
     <map class="search__container"
-         places="vm.markers"
-         markers="vm.test"></map>
+         places="vm.markers"></map>
 </div>
 
