@@ -55,28 +55,8 @@
   }
 }
 
-.map-section  {
+.homepage-map  {
   height: 100vh;
-  text-align: center;
-  position: relative;
-  &__map   {
-    height: 100%;
-    width: 100%;
-    @include laptop  {
-      height: 100%;
-      width: 100%;
-    }
-    .marker-description  {
-      font-size: .8rem;
-      width: 12.5rem;
-      &__text   {
-        font-size: .8rem;
-        margin: 0;
-        padding: 0;
-        &:first-of-type {
-          font-size: 1rem;
-        }
-      }
-    }
-  }
+  width: 100%;
+  display: block;
 }

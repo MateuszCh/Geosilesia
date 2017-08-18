@@ -1,24 +1,22 @@
 (function(){
     angular.module('geosilesia').component('map', {
         bindings: {
-            markers: '<',
+            places: '<',
             options: '<',
-            animation: '<',
-            randomAnimation: '<'
+            markers: '='
         },
         controllerAs: 'vm',
         controller: MapController
     });
 
-    MapController.$inject = ['mapStyle', 'iconsForMarkers', '$element', '$timeout'];
-    function MapController(mapStyle, iconsForMarkers, $element, $timeout){
+    MapController.$inject = ['mapStyle', 'iconsForMarkers', '$element'];
+    function MapController(mapStyle, iconsForMarkers, $element){
 
         var vm = this;
         vm.$onInit = onInit;
         vm.$onChanges = onChanges;
-        var map, marker, search;
+        var map, marker;
         var infowindow = new google.maps.InfoWindow();
-        var markers = [];
 
         var mapOptions = {
             center: {
@@ -47,44 +45,47 @@
         };
 
         function onInit() {
+            deleteMarkers();
             initMap();
         }
 
         function onChanges(changes){
-            if(changes.markers.currentValue && map){
-                if(markers.length){
+            console.log(changes);
+            if(changes.places.currentValue && map){
+                if(vm.markers.length){
                     deleteMarkers();
-                    search = true;
                 }
-                setMarkers(changes.markers.currentValue);
+                setMarkers();
+                setBounds();
             }
         }
 
         function deleteMarkers(){
-            markers.forEach(function(marker){
+            vm.markers.forEach(function(marker){
                 marker.setMap(null);
-            })
+            });
+            vm.markers = [];
         }
 
         function initMap() {
             var mapContainer = document.createElement('div');
-            mapContainer.classList.add('map-section__map');
+            mapContainer.classList.add('search__container__map');
             $element.append(mapContainer);
             map = new google.maps.Map(mapContainer, vm.options || mapOptions);
             map.mapTypes.set('styled_map', mapStyle);
 
         }
 
-        function setMarkers(places){
-            places.forEach(function (place) {
-                $timeout(function(){
-                    var position = eval("(" + place.position + ")");
-
+        function setMarkers(){
+            vm.places.forEach(function (place) {
+                    var latitude = Number(place.position.lat);
+                    var longitude = Number(place.position.lng);
+                    var position = {lat: latitude, lng: longitude};
                     marker = new google.maps.Marker({
                         position: position,
                         map: map,
                         title: place.title,
-                        animation: vm.animation && search ? google.maps.Animation.DROP : null,
+                        animation: google.maps.Animation.DROP,
                         icon: iconsForMarkers[place.category].icon
                     });
                     google.maps.event.addListener(marker, 'click', (function(marker){
@@ -95,22 +96,30 @@
                                 "<a href=" + place.hyperlink + " target='_blank'>Więcej</a>" +
                                 "</div>");
                             infowindow.open(map, marker);
+                            toggleBounce(marker);
                         }
                     })(marker));
-                    markers.push(marker);
-                }, (vm.randomAnimation && search) ? Math.floor(Math.random() * 1000) : 0)
+                    vm.markers.push(marker);
             });
-            if(search){
-                setBounds();
-            }
         }
 
         function setBounds(){
             var bounds = new google.maps.LatLngBounds();
-            markers.forEach(function (marker) {
-               bounds.extend(marker.getPosition());
+            vm.markers.forEach(function (marker) {
+                bounds.extend(marker.getPosition());
             });
             map.fitBounds(bounds);
+            if(vm.markers.length === 1){
+                map.setZoom(16);
+            }
+        }
+
+        function toggleBounce(mar) {
+            var active = mar.getAnimation() !== null;
+            vm.markers.forEach(function (marker) {
+                marker.setAnimation(null);
+            });
+            active ? mar.setAnimation(null) : mar.setAnimation(google.maps.Animation.BOUNCE);
         }
     }
 })();

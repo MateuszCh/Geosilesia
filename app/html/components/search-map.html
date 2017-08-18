@@ -1,0 +1,17 @@
+<div class="search">
+    <div class="search__form">
+        <form ng-submit="vm.search(vm.location)">
+            <input ng-model="vm.location" type="text">
+
+            <div ng-repeat="category in ::vm.categories track by $index">
+                <label ng-bind="category.name"></label>
+                <input type="radio" ng-model="vm.location" value="{{category.category}}" ng-change="vm.pickCategory(vm.location)">
+            </div>
+        </form>
+        <div id="dwa">test</div>
+    </div>
+    <map class="search__container"
+         places="vm.markers"
+         markers="vm.test"></map>
+</div>
+

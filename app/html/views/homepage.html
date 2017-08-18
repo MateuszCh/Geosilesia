@@ -6,7 +6,8 @@
     </h2>
     <div class="info info--top">
         <div class="info__figure">
-            <img class="info__figure__image" src="images/pin.png">
+            <img class="info__figure__image"
+                 src="images/pin.png">
         </div>
         <div class="info__text">
             <p class="info__text__paragraph">Muzeum Śląskie na terenie dawnej KWK Katowice</p>
@@ -15,7 +16,8 @@
     </div>
     <div class="info info--bottom">
         <div class="info__figure">
-            <img class="info__figure__image" src="images/info.png">
+            <img class="info__figure__image"
+                 src="images/info.png">
         </div>
         <div class="info__text">
             <p class="info__text__paragraph">Atrakcje geoturystyczne patrz także GeoŚląsk</p>
@@ -23,11 +25,6 @@
         </div>
     </div>
 </section>
-<div class="map-section" id="map">
-    <map markers="vm.markers" animation="true" random-animation="true"></map>
-    <div style="position: absolute; width: 50px; height: 50px; left: calc(50% - 25px); top: 50px;">
-        <form ng-submit="vm.search(vm.location)">
-            <input ng-model="vm.location" type="text">
-        </form>
-    </div>
-</div>
+<search-map id="map"
+            class="homepage-map"
+            places="vm.markers"></search-map>
