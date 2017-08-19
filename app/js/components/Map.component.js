@@ -2,14 +2,15 @@
     angular.module('geosilesia').component('map', {
         bindings: {
             places: '<',
-            options: '<'
+            options: '<',
+            centerMap: '<'
         },
         controllerAs: 'vm',
         controller: MapController
     });
 
-    MapController.$inject = ['mapStyle', 'iconsForMarkers', '$element'];
-    function MapController(mapStyle, iconsForMarkers, $element){
+    MapController.$inject = ['mapStyle', 'iconsForMarkers', '$element', '$timeout', '$window'];
+    function MapController(mapStyle, iconsForMarkers, $element, $timeout, $window){
 
         var vm = this;
         vm.$onInit = onInit;
@@ -17,6 +18,7 @@
         var map, marker;
         var infowindow = new google.maps.InfoWindow();
         var currentMarker;
+        var currentCenter;
         vm.markers = [];
 
         var mapOptions = {
@@ -48,15 +50,26 @@
         function onInit() {
             deleteMarkers();
             initMap();
+            $window.addEventListener('resize', function(){
+                map.setCenter(currentCenter);
+                currentCenter = map.getCenter();
+            })
         }
 
         function onChanges(changes){
-            if(changes.places.currentValue && map){
+            if(changes.places && changes.places.currentValue && map){
                 if(vm.markers.length){
                     deleteMarkers();
                 }
                 setMarkers();
                 setBounds();
+            }
+            if(changes.centerMap && map){
+                $timeout(function(){
+                    google.maps.event.trigger(map, "resize");
+                    map.setCenter(currentCenter);
+                    currentCenter = map.getCenter();
+                }, 1010);
             }
         }
 
@@ -73,7 +86,7 @@
             $element.append(mapContainer);
             map = new google.maps.Map(mapContainer, vm.options || mapOptions);
             map.mapTypes.set('styled_map', mapStyle);
-
+            currentCenter = map.getCenter();
         }
 
         function setMarkers(){
@@ -116,6 +129,7 @@
             if(vm.markers.length === 1){
                 map.setZoom(16);
             }
+            currentCenter = map.getCenter();
         }
 
         function toggleBounce(mar) {

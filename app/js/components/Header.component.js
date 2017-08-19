@@ -7,8 +7,8 @@
         controllerAs: 'vm',
         controller: HeaderController
     });
-    HeaderController.$inject = ['$window', '$location', '$scope', '$timeout'];
-    function HeaderController($window, $location, $scope, $timeout){
+    HeaderController.$inject = ['$window', '$location', '$scope', '$timeout', '$element'];
+    function HeaderController($window, $location, $scope, $timeout, $element){
 
         var vm = this;
         vm.$onInit = onInit;
@@ -37,6 +37,7 @@
             $window.addEventListener('resize', resetHeader);
             $scope.$on("$routeChangeSuccess", setCurrentPath);
             $window.addEventListener('scroll', hideHeader);
+            hideHeader();
         }
 
         function setCurrentPath() {
@@ -76,7 +77,8 @@
         }
         function hideHeader(){
             var currentScroll = $window.scrollY;
-            if(previousScroll < currentScroll){
+            var heightOfHeader = document.getElementById('header').offsetHeight;
+            if(previousScroll < currentScroll || (document.getElementById('map') && (currentScroll > $window.innerHeight - heightOfHeader))){
                 vm.hideHeader = true;
             } else {
                 vm.hideHeader = false;

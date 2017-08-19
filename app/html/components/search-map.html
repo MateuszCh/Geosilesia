@@ -1,5 +1,5 @@
 <div class="search">
-    <div class="search__form">
+    <div class="search__form" ng-class="{'search__form__active' : vm.showSearch}">
         <form ng-submit="vm.search(vm.location)">
             <input ng-model="vm.location" type="text">
 
@@ -12,6 +12,11 @@
         </form>
     </div>
     <map class="search__container"
-         places="vm.markers"></map>
+         ng-class="{'search__container__smaller' : vm.showSearch}"
+         places="vm.markers" center-map="vm.showSearch"></map>
+
+    <div style="position: absolute; top:50%;" ng-click="vm.toggleSearchPanel()">
+        <button>text</button>
+    </div>
 </div>
 

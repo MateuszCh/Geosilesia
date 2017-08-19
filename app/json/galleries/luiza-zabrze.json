@@ -1,0 +1,62 @@
+{
+  "title": "Skansen Górniczy Królowa Luiza w Zabrzu",
+  "description" : ["Skansen Górniczy 'Królowa Luiza' udostępnia do zwiedzania kompleks powierzchniowy i podziemny kopalni. Część powierzchniowa  skansenu mieści się w Zabrzu przy ul. Wolności 410, a część  podziemna przy ul. Sienkiewicza 43 (wjazd od ul. Mochnackiego). W skład części powierzchniowej wchodzą obiekty wpisane na listę zabytków województwa śląskiego: nadszybie szybu wraz z wieżą wyciągową „Carnall” (Zabrze II), maszynownia szybu „Carnall” (Zabrze II), maszynownia szybu „Zabrze I”, budynek kompresorów, budynek łaźni, budynek skraplarni powietrza, budynek magazynu, budynek cechowni. Część podziemna (sztolnia) znajduje się na głębokości 35 m. Są to chodniki i wyrobiska z XIX i XX wieku o długości 1560 m, prezentujące rożne sposoby i rożne urządzenia do urabiania węgla oraz 500-metrowa kolejka górnicza. Przed sztolnią znajduje się ścieżka edukacyjna z 8 górniczymi kamieniami granicznymi i zabytkowymi maszynami górniczymi. Kompleks jest punktem Szlaku Zabytków Techniki Województwa Śląskiego."],
+  "images": [
+    {
+      "src" : "/images/galeria/luizaZabrze/39_1.jpg",
+      "thumb" : "/images/galeria/luizaZabrze/39_1_mid.jpg",
+      "copy" : "Lokalizacja części naziemnej skansenu",
+      "author" : "Fot. R. Chybiorz / 07.2010",
+      "description" : "Skansen Górniczy Królowa Luiza - część powierzchniowa"
+    },
+    {
+      "src" : "/images/galeria/luizaZabrze/39_2.jpg",
+      "thumb" : "/images/galeria/luizaZabrze/39_2_mid.jpg",
+      "copy" : "Nadszybie wraz z wieżą wyciągową oraz maszynownia szybu „Carnall” (Zabrze II).",
+      "author" : "Fot. R. Chybiorz / 07.2010",
+      "description" : "Skansen Górniczy Królowa Luiza - część powierzchniowa"
+    },
+    {
+      "src" : "/images/galeria/luizaZabrze/39_3.jpg",
+      "thumb" : "/images/galeria/luizaZabrze/39_3_mid.jpg",
+      "copy" : "Wejście do części podziemnej skansenu (ul. Sienkiewicza 43).",
+      "author" : "Fot. R. Chybiorz / 07.2010",
+      "description" : "Skansen Górniczy Królowa Luiza - sztolnia"
+    },
+    {
+      "src" : "/images/galeria/luizaZabrze/39_4.jpg",
+      "thumb" : "/images/galeria/luizaZabrze/39_4_mid.jpg",
+      "copy" : "Plan ścieżki edukacyjnej Kamienie Milowe Górnictwa",
+      "author" : "Fot. R. Chybiorz / 07.2010",
+      "description" : "Skansen Górniczy Królowa Luiza - rejon sztolni"
+    },
+    {
+      "src" : "/images/galeria/luizaZabrze/39_5.jpg",
+      "thumb" : "/images/galeria/luizaZabrze/39_5_mid.jpg",
+      "copy" : "Wentylator Guibald wyprodukowany w 1907 roku. Pracował w KWK Paryż w Dąbrowie Górniczej.",
+      "author" : "Fot. R. Chybiorz / 07.2010",
+      "description" : "Skansen Górniczy Królowa Luiza - rejon sztolni"
+    },
+    {
+      "src" : "/images/galeria/luizaZabrze/39_6.jpg",
+      "thumb" : "/images/galeria/luizaZabrze/39_6_mid.jpg",
+      "copy" : "Kamień graniczny pola górniczego kopalni rudy cynku",
+      "author" : "Fot. R. Chybiorz / 07.2010",
+      "description" : "Skansen Górniczy Królowa Luiza - rejon sztolni"
+    },
+    {
+      "src" : "/images/galeria/luizaZabrze/39_7.jpg",
+      "thumb" : "/images/galeria/luizaZabrze/39_7_mid.jpg",
+      "copy" : "Budynek dawnej akumulatorni.",
+      "author" : "Fot. R. Chybiorz / 07.2010",
+      "description" : "Skansen Górniczy Królowa Luiza - część powierzchniowa"
+    },
+    {
+      "src" : "/images/galeria/luizaZabrze/39_8.jpg",
+      "thumb" : "/images/galeria/luizaZabrze/39_8_mid.jpg",
+      "copy" : "Maszynownia szybu 'Carnall' (Zabrze II) z czynną parową maszyną wyciągową z 1915 roku.",
+      "author" : "Fot. R. Chybiorz / 07.2010",
+      "description" : "Skansen Górniczy Królowa Luiza - część powierzchniowa"
+    }
+  ]
+}

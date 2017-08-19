@@ -2,17 +2,32 @@
   height: 100%;
   width: 100%;
   display: flex;
+  justify-content: flex-end;
   &__form {
+    transition: transform 1s ease;
     display: none;
     @include tablet {
       display: block;
-      width: 30%;
+      //width: 30%;
+      position: absolute;
+      left:0;
+      top:0;
+      bottom:0;
+      right: 70%;
+      transform: translate3d(-100%,0,0);
+    }
+    &__active {
+      transform: translate3d(0,0,0);
     }
   }
   &__container {
+    transition: width 1s ease;
     width: 100%;
     height: 100%;
     @include tablet {
+      width: 100%;
+    }
+    &__smaller {
       width: 70%;
     }
     &__map   {

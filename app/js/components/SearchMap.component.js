@@ -15,13 +15,19 @@
         vm.pickCategory = pickCategory;
         vm.location = "";
         vm.category = "";
+        vm.toggleSearchPanel = toggleSearchPanel;
         var geocoder = new google.maps.Geocoder();
+        vm.showSearch = false;
 
         function onInit(){
             $http.get("json/markers.json").then(function (response) {
                 vm.places = response.data.obiekty;
                 vm.markers = vm.places.slice();
             });
+        }
+
+        function toggleSearchPanel(){
+            vm.showSearch ? vm.showSearch = false : vm.showSearch = true;
         }
 
         function search(input){

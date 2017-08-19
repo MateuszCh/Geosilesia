@@ -1,0 +1,62 @@
+{
+  "title": "Zabytkowa KWK „Ignacy” w Rybniku",
+  "description" : ["Zabytkowa KWK „Ignacy - Hoym” znajduje się w miejscowości Rybnik-Niewiadom, przy ul. Mościckiego 3. Kopalnia udostępnia do zwiedzania kompleks powierzchniowy kopalni: budynek nadszybia z wieżą wyciągową szybu „Głowacki”, budynek maszyny wyciągowej szybu „Głowacki” (z parową maszyną wyciągową z 1900 r.), budynek nadszybia z wieżą wyciągową szybu „Kościuszko”, budynek maszyny wyciągowej szybu „Kościuszko” (z parową maszyną wyciągową z 1920 r.), elektrownia - obecnie sprężarkownia (ze sprężarką tłokową z 1923 r.). Dla ruchu turystycznego udostępniona została także wieża ciśnień, zaadoptowana na punkt widokowy. Obiekt jest 22 punktem Szlaku Zabytków Techniki Województwa Śląskiego."],
+  "images": [
+    {
+      "src" : "/images/galeria/kwkIgnacy/41_2.jpg",
+      "thumb" : "/images/galeria/kwkIgnacy/41_2_mid.jpg",
+      "copy" : "Górna część wieży ciśnień o wysokości 46 m - punkt widokowy.",
+      "author" : "Fot. R. Chybiorz / 08.2010",
+      "description" : "Zabytkowa KWK Ignacy"
+    },
+    {
+      "src" : "/images/galeria/kwkIgnacy/41_9.jpg",
+      "thumb" : "/images/galeria/kwkIgnacy/41_9_mid.jpg",
+      "copy" : "Budynek elektrowni - obecnie sprężarkownia ze sprężarką tłokową z 1923 r.",
+      "author" : "Fot. R. Chybiorz / 08.2010",
+      "description" : "Zabytkowa KWK Ignacy"
+    },
+    {
+      "src" : "/images/galeria/kwkIgnacy/41_5.jpg",
+      "thumb" : "/images/galeria/kwkIgnacy/41_5_mid.jpg",
+      "copy" : "Tablica pamiątkowa 200 lat pracy kopalni 'Ignacy-Hoym'",
+      "author" : "Fot. R. Chybiorz / 08.2010",
+      "description" : "Zabytkowa KWK Ignacy"
+    },
+    {
+      "src" : "/images/galeria/kwkIgnacy/41_3.jpg",
+      "thumb" : "/images/galeria/kwkIgnacy/41_3_mid.jpg",
+      "copy" : "Wieża ciśnień została zaadaptowana na punkt widokowy w ramach dofinansowania z Uni Europejskiej na cele turystyczno-rekreacyjne.",
+      "author" : "Fot. R. Chybiorz / 08.2010",
+      "description" : "Zabytkowa KWK Ignacy"
+    },
+    {
+      "src" : "/images/galeria/kwkIgnacy/41_4.jpg",
+      "thumb" : "/images/galeria/kwkIgnacy/41_4_mid.jpg",
+      "copy" : "Wieża wyciągowa szybu „Kościuszko”.",
+      "author" : "Fot. R. Chybiorz / 08.2010",
+      "description" : "Zabytkowa KWK Ignacy"
+    },
+    {
+      "src" : "/images/galeria/kwkIgnacy/41_7.jpg",
+      "thumb" : "/images/galeria/kwkIgnacy/41_7_mid.jpg",
+      "copy" : "Widok z wieży na budynki Zabytkowej Kopalni 'Ignacy'",
+      "author" : "Fot. R. Chybiorz / 08.2010",
+      "description" : "Zabytkowa KWK Ignacy"
+    },
+    {
+      "src" : "/images/galeria/kwkIgnacy/41_8.jpg",
+      "thumb" : "/images/galeria/kwkIgnacy/41_8_mid.jpg",
+      "copy" : "Widok z wieży na 'Szarlotę' - jedna z najwyższych stożkowych hałd pogórniczych w Europie. Na pierwszym planie ul. Skargi w Rybiku.",
+      "author" : "Fot. R. Chybiorz / 08.2010",
+      "description" : "Zabytkowa KWK Ignacy"
+    },
+    {
+      "src" : "/images/galeria/kwkIgnacy/41_1.jpg",
+      "thumb" : "/images/galeria/kwkIgnacy/41_1_mid.jpg",
+      "copy" : "Wieża wyciągowa szybu „Głowacki”.",
+      "author" : "Fot. R. Chybiorz / 08.2010",
+      "description" : "Zabytkowa KWK Ignacy"
+    }
+  ]
+}
