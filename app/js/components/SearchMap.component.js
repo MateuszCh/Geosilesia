@@ -5,19 +5,19 @@
         controller: SearchMapController
     });
 
-    SearchMapController.$inject = ['iconsForMarkers', '$http', '$scope', '$q'];
+    SearchMapController.$inject = ['iconsForMarkers', '$http', '$q'];
 
-    function SearchMapController(iconsForMarkers, $http, $scope, $q){
+    function SearchMapController(iconsForMarkers, $http, $q){
         var vm = this;
         vm.$onInit = onInit;
-        vm.categories = iconsForMarkers;
         vm.search = search;
         vm.pickCategory = pickCategory;
-        vm.location = "";
-        vm.category = "";
         vm.toggleSearchPanel = toggleSearchPanel;
-        var geocoder = new google.maps.Geocoder();
+        vm.categories = iconsForMarkers;
         vm.showSearch = false;
+        vm.searchInput = "";
+        vm.category = "";
+        var geocoder = new google.maps.Geocoder();
 
         function onInit(){
             $http.get("json/markers.json").then(function (response) {
@@ -31,11 +31,14 @@
         }
 
         function search(input){
-            vm.location = "";
+            vm.searchInput = "";
             vm.category = "";
-            getCoordinates(input).then(function(coordinates){
-                sortByDistance(coordinates);
+            getCoordinates(input).then(function(result){
+                vm.location = getLocationDetails(result);
+                console.log(vm.location);
+                sortByDistance(vm.location.position.lat, vm.location.position.lng);
                 nearestPlaces(10);
+                vm.markers.push(vm.location);
             }, function(status){
                 vm.geocodeErrorMessage = status;
             });
@@ -45,9 +48,7 @@
             var q = $q.defer();
             geocoder.geocode({'address': input}, function(results, status){
                 if(status === "OK"){
-                    var coordinates = {lat: results[0].geometry.location.lat(),
-                                       lng: results[0].geometry.location.lng()};
-                    q.resolve(coordinates);
+                    q.resolve(results[0]);
                 } else {
                     q.reject(status);
                 }
@@ -55,13 +56,38 @@
             return q.promise;
         }
 
-        function sortByDistance(coors) {
+        function getLocationDetails(address){
+            return {
+                position: {
+                    lat : address.geometry.location.lat(),
+                    lng : address.geometry.location.lng()
+                },
+                address : address.formatted_address,
+                type: 'home'
+            };
+        }
+
+        function sortByDistance(lat, lng) {
             vm.places.forEach(function (place) {
-                place.distance = getDistance(coors.lat, coors.lng, place.position.lat, place.position.lng);
+                place.distance = getDistance(lat, lng, place.position.lat, place.position.lng);
             });
             vm.places.sort(function (a, b) {
                 return a.distance - b.distance;
             })
+        }
+
+        function getDistance(lat1, lng1, lat2, lng2){
+            var R = 6371;
+            var dLat = deg2rad(lat2-lat1);
+            var dLng = deg2rad(lng2-lng1);
+            var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLng/2) * Math.sin(dLng/2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            var d = R * c;
+            return d;
+        }
+
+        function deg2rad(deg){
+            return deg * (Math.PI/180);
         }
 
         function nearestPlaces(qty){
@@ -79,21 +105,6 @@
                     }
                 })
             }
-        }
-
-
-        function getDistance(lat1, lng1, lat2, lng2){
-            var R = 6371;
-            var dLat = deg2rad(lat2-lat1);
-            var dLng = deg2rad(lng2-lng1);
-            var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLng/2) * Math.sin(dLng/2);
-            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-            var d = R * c;
-            return d;
-        }
-
-        function deg2rad(deg){
-            return deg * (Math.PI/180);
         }
     }
 })();

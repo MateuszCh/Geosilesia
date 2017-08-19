@@ -1,7 +1,7 @@
 <div class="search">
     <div class="search__form" ng-class="{'search__form__active' : vm.showSearch}">
-        <form ng-submit="vm.search(vm.location)">
-            <input ng-model="vm.location" type="text">
+        <form ng-submit="vm.search(vm.searchInput)">
+            <input ng-model="vm.searchInput" type="text">
 
             <div ng-repeat="category in ::vm.categories track by $index">
                 <label ng-bind="category.name"></label>
@@ -11,7 +11,8 @@
             <input type="radio" ng-model="vm.category" value="all" ng-change="vm.pickCategory(vm.category)">
         </form>
     </div>
-    <map class="search__container"
+    <map id="map"
+         class="search__container"
          ng-class="{'search__container__smaller' : vm.showSearch}"
          places="vm.markers" center-map="vm.showSearch"></map>
 
