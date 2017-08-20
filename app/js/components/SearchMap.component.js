@@ -5,9 +5,9 @@
         controller: SearchMapController
     });
 
-    SearchMapController.$inject = ['iconsForMarkers', '$http', '$q'];
+    SearchMapController.$inject = ['iconsForMarkers', '$http', '$q', '$rootScope', '$document', '$element'];
 
-    function SearchMapController(iconsForMarkers, $http, $q){
+    function SearchMapController(iconsForMarkers, $http, $q, $rootScope, $document, $element){
         var vm = this;
         vm.$onInit = onInit;
         vm.search = search;
@@ -34,8 +34,10 @@
             vm.searchInput = "";
             vm.category = "";
             getCoordinates(input).then(function(result){
+                if($rootScope.isS){
+                    $document.scrollToElementAnimated($element);
+                }
                 vm.location = getLocationDetails(result);
-                console.log(vm.location);
                 sortByDistance(vm.location.position.lat, vm.location.position.lng);
                 nearestPlaces(10);
                 vm.markers.push(vm.location);
@@ -95,6 +97,8 @@
         }
 
         function pickCategory(input){
+            vm.location = null;
+            vm.searchInput = "";
             if(input === 'all'){
                 vm.markers = vm.places.slice();
             } else {
@@ -104,6 +108,9 @@
                         vm.markers.push(place);
                     }
                 })
+            }
+            if($rootScope.isS){
+                $document.scrollToElementAnimated($element);
             }
         }
     }

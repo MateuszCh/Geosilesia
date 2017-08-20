@@ -10,8 +10,8 @@
         template: '<div class="search__container__map"></div>'
     });
 
-    MapController.$inject = ['mapStyle', 'iconsForMarkers', '$timeout', '$window', '$element', '$interval'];
-    function MapController(mapStyle, iconsForMarkers, $timeout, $window, $element, $interval){
+    MapController.$inject = ['mapStyle', 'iconsForMarkers', '$timeout', '$window', '$element', '$interval', '$rootScope'];
+    function MapController(mapStyle, iconsForMarkers, $timeout, $window, $element, $interval, $rootScope){
 
         var vm = this;
         vm.$onInit = onInit;
@@ -38,8 +38,9 @@
             },
             mapTypeControl: true,
             mapTypeControlOptions: {
-                position: google.maps.ControlPosition.LEFT_BOTTOM,
-                mapTypeIds: ["roadmap", "satellite", "hybrid", "terrain", "styled_map"]
+                position: google.maps.ControlPosition.LEFT_TOP,
+                mapTypeIds: ["roadmap", "satellite", "hybrid", "terrain", "styled_map"],
+                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
             },
             scaleControl: true
         };
@@ -103,8 +104,8 @@
                     position: position,
                     map: map,
                     title: place.title || "",
-                    animation: google.maps.Animation.DROP,
-                    icon: place.category ? iconsForMarkers[place.category].icon : ""
+                    animation: $rootScope.isS ? "" : google.maps.Animation.DROP,
+                    icon: place.type ? ""  : iconsForMarkers[place.category].icon
                 });
                 google.maps.event.addListener(marker, 'click', (function(marker){
                     return function() {
@@ -144,11 +145,10 @@
         }
 
         function toggleBounce(marker) {
-            var active = marker.getAnimation() !== null;
             markers.forEach(function (marker) {
                 marker.setAnimation(null);
             });
-            active ? marker.setAnimation(null) : marker.setAnimation(google.maps.Animation.BOUNCE);
+            $rootScope.isS ? marker.setAnimation(null) : marker.setAnimation(google.maps.Animation.BOUNCE);
         }
 
         function centerMap(){

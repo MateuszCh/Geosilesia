@@ -37,7 +37,6 @@
             $window.addEventListener('resize', resetHeader);
             $scope.$on("$routeChangeSuccess", setCurrentPath);
             $window.addEventListener('scroll', hideHeader);
-            hideHeader();
         }
 
         function setCurrentPath() {
@@ -78,9 +77,10 @@
         function hideHeader(){
             var currentScroll = $window.scrollY;
             var heightOfHeader = document.getElementById('header').offsetHeight;
-            if(previousScroll < currentScroll || (document.getElementById('map') && (currentScroll > $window.innerHeight - heightOfHeader))){
+            if(previousScroll < currentScroll){
                 vm.hideHeader = true;
-            } else {
+                $element.children().addClass('header--hidden');
+            } else if(previousScroll > currentScroll && (!document.getElementById('search') || currentScroll < $window.innerHeight - heightOfHeader)) {
                 vm.hideHeader = false;
             }
             previousScroll = currentScroll;

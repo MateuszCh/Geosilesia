@@ -22,7 +22,7 @@
         </div>
     </div>
     <map class="search__container"
-         ng-class="{'search__container__smaller' : vm.showSearch}"
+         ng-class="{'search__container__smaller' : vm.showSearch && !$root.isS}"
          places="vm.markers" center-map="vm.showSearch"></map>
 </div>
 

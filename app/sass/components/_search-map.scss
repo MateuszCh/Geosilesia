@@ -10,11 +10,11 @@
   }
   &__form {
     padding: 1rem;
-    transition: transform 1s ease;
     position: relative;
     z-index: 5;
     @include tablet {
       border-right-color: $header-color;
+      transition: transform 1s ease;
       border-right-style: solid;
       border-right-width: .25rem;
       z-index: 4;
@@ -34,14 +34,14 @@
       left: 0;
       border: none;
       cursor: pointer;
-      background-color: $color3;
+      background-color: $header-color;
       line-height: 0;
       color: white;
-      top: -100vh;
+      top: calc(-50vh - 1.5rem);
       @include tablet {
         display: block;
         right: -3rem;
-        top: 0;
+        top: calc(50% - 1.5rem);
         left: 100%;
 
       }
