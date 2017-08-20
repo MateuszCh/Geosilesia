@@ -1,23 +1,28 @@
-<div class="search">
-    <div class="search__form" ng-class="{'search__form__active' : vm.showSearch}">
+<div id="search"
+     class="search">
+    <div id="search-form"
+         class="search__form"
+         ng-class="{'search__form__active' : vm.showSearch}">
+        <h2>Atrakcje Geoturystyczne Województwa Śląskiego</h2>
         <form ng-submit="vm.search(vm.searchInput)">
             <input ng-model="vm.searchInput" type="text">
 
             <div ng-repeat="category in ::vm.categories track by $index">
-                <label ng-bind="category.name"></label>
-                <input type="radio" ng-model="vm.category" value="{{category.category}}" ng-change="vm.pickCategory(vm.category)">
+                <label ng-bind="::category.name"></label>
+                <input type="radio" ng-model="::vm.category" value="{{::category.category}}" ng-change="vm.pickCategory(vm.category)">
             </div>
             <label>Wszystkie</label>
-            <input type="radio" ng-model="vm.category" value="all" ng-change="vm.pickCategory(vm.category)">
+            <input type="radio" ng-model="::vm.category" value="all" ng-change="vm.pickCategory(vm.category)">
         </form>
+        <div class="search__form__activate" ng-click="vm.toggleSearchPanel()" ng-if="!$root.isS">
+            <img class="search__form_activate__image" src="images/search-icon.png">
+        </div>
+        <div class="search__form__activate" du-smooth-scroll="search-form" ng-if="$root.isS">
+            <img class="search__form_activate__image" src="images/search-icon.png">
+        </div>
     </div>
-    <map id="map"
-         class="search__container"
+    <map class="search__container"
          ng-class="{'search__container__smaller' : vm.showSearch}"
          places="vm.markers" center-map="vm.showSearch"></map>
-
-    <div style="position: absolute; top:50%;" ng-click="vm.toggleSearchPanel()">
-        <button>text</button>
-    </div>
 </div>
 

@@ -1,7 +1,7 @@
 <section class="homepage-banner"
          ng-style="{'height' : $root.isS ? vm.bannerHeight : '100vh'}">
     <h2 class="homepage-banner__heading"
-        du-smooth-scroll="map">Atrakcje geoturystyczne
+        du-smooth-scroll="search">Atrakcje geoturystyczne
             <p class="homepage-banner__heading__mobile">patrz także GeoŚląsk</p>
     </h2>
     <div class="info info--top">
@@ -25,5 +25,4 @@
         </div>
     </div>
 </section>
-<search-map class="homepage-map"
-            places="vm.markers"></search-map>
+<search-map class="homepage-map"></search-map>

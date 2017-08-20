@@ -1,7 +1,8 @@
 <div class="header"
      id="header"
      ng-class="{'header--hidden' : vm.hideHeader, 'blur' : $root.blur}">
-    <div class="hamburger" ng-click="vm.openHam()"
+    <div class="hamburger"
+         ng-click="vm.openHam()"
          ng-class="{'hamburger--open' : vm.hamOpen}">
         <span class="hamburger__menu"></span>
         <span class="hamburger__menu"></span>
@@ -22,22 +23,22 @@
                 ng-mouseleave="vm.hoverNavItem = false"
                 ng-class="{'nav__item--active' : ((vm.currentPath == item.link) && item.link) || (!item.link && vm.activeGeo)}" >
                 <a class="nav__item__link"
-                   ng-if="item.link"
-                   ng-href="{{item.link}}"
-                   ng-bind="item.title"
+                   ng-if="::item.link"
+                   ng-href="{{::item.link}}"
+                   ng-bind="::item.title"
                    ng-click="$root.isS ? vm.openHam() : angular.noop(); vm.checkGeo(item)"></a>
                 <span class="nav__item__link"
-                      ng-bind="item.title"
-                      ng-if="item.submenu"></span>
-                <ul ng-if="item.submenu"
+                      ng-bind="::item.title"
+                      ng-if="::item.submenu"></span>
+                <ul ng-if="::item.submenu"
                     class="subnav"
                     ng-class="{'subnav--active' : vm.hoverNavItem == $index}">
                     <li class="subnav__item"
                         ng-repeat="sub in ::item.submenu"
                         ng-class="{'subnav__item--active' : vm.currentPath == sub.link}">
                         <a class="subnav__item__link"
-                           ng-href="{{sub.link}}"
-                           ng-bind="sub.subtitle"
+                           ng-href="{{::sub.link}}"
+                           ng-bind="::sub.subtitle"
                            ng-click="$root.isS ? vm.openHam() : angular.noop(); vm.checkGeo(sub); vm.hoverNavItem = false"></a>
                     </li>
                 </ul>

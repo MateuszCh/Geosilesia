@@ -26,7 +26,7 @@
             zoom: 9,
             scrollwheel: false,
             draggable: true,
-            mapTypeId: "terrain",
+            mapTypeId: "styled_map",
             fullscreenControl: true,
             zoomControl: true,
             zoomControlOptions: {
@@ -38,8 +38,8 @@
             },
             mapTypeControl: true,
             mapTypeControlOptions: {
-                mapTypeIds: ["roadmap", "satellite", "hybrid", "terrain", "styled_map"],
-                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                position: google.maps.ControlPosition.LEFT_BOTTOM,
+                mapTypeIds: ["roadmap", "satellite", "hybrid", "terrain", "styled_map"]
             },
             scaleControl: true
         };

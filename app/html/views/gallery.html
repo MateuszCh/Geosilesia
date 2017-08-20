@@ -1,17 +1,17 @@
 <main ng-class="{'blur' : $root.blur && ($root.isL || $root.isX)}">
     <section class="gallery">
-        <h2 ng-bind="vm.gallery.title"></h2>
+        <h2 ng-bind="::vm.gallery.title"></h2>
         <p class="gallery__description"
-           ng-bind="desc"
-           ng-repeat="desc in vm.gallery.description"></p>
+           ng-bind="::desc"
+           ng-repeat="desc in ::vm.gallery.description"></p>
         <figure class="gallery__figure"
                 ng-click="vm.openFullMode($index)"
-                ng-repeat="image in vm.gallery.images" image-loaded="">
+                ng-repeat="image in ::vm.gallery.images" image-loaded="">
             <img class="gallery__figure__image"
-                 ng-src="{{image.src}}">
+                 ng-src="{{::image.src}}">
             <figcaption class="gallery__figure__text"
-                        ng-if="image.copy"
-                        ng-bind="image.copy">
+                        ng-if="::image.copy"
+                        ng-bind="::image.copy">
             </figcaption>
         </figure>
     </section>
@@ -20,6 +20,6 @@
 </main>
 <fullscreen-image class="fullscreen-mode"
                   ng-show="vm.showFullMode"
-                  images="vm.gallery.images"
+                  images="::vm.gallery.images"
                   active-slide="vm.openWith"
                   show="vm.showFullMode"></fullscreen-image>
