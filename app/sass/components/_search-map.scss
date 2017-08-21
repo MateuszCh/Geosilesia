@@ -1,18 +1,24 @@
 .search {
-  background-color: white;
+  background-color: #f5f5f5;
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-end;
-  @include tablet {
+  @include laptop {
     flex-direction: row;
   }
   &__form {
-    padding: 1rem;
+    padding: 0 1rem;
     position: relative;
     z-index: 5;
-    @include tablet {
+    border-top-color: $header-color;
+    border-top-width: .25rem;
+    border-top-style: solid;
+    display: flex;
+    flex-direction: column;
+    @include laptop {
+      border-top: none;
       border-right-color: $header-color;
       transition: transform 1s ease;
       border-right-style: solid;
@@ -25,8 +31,52 @@
       right: 70%;
       transform: translate3d(-100%,0,0);
     }
-    &__active {
+    &--active {
       transform: translate3d(0,0,0);
+    }
+    &__search {
+      padding: .5rem 0;
+      display: flex;
+      &__input {
+        border: none;
+        flex-grow: 1;
+        background-color: white;
+        padding-left: 1rem;
+        line-height: 100%;
+        font-size: .9rem;
+        &:focus {
+          outline: none;
+          border: 2px solid $header-color;
+        }
+      }
+      &__button {
+        cursor: pointer;
+        box-shadow: none;
+        border: none;
+        background: url('../images/search-icon.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        border: 0;
+        display: block;
+        height: 40px;
+        width: 40px;
+        background-color: $header-color;
+      }
+    }
+    &__category {
+
+    }
+    &__heading {
+      font-family: $headers-font;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 1.25rem;
+      @include tablet {
+        font-size: 2rem;
+      }
+      @include full {
+        font-size: 2.5rem;
+      }
     }
     &__activate {
       position: absolute;
@@ -37,8 +87,8 @@
       background-color: $header-color;
       line-height: 0;
       color: white;
-      top: calc(-50vh - 1.5rem);
-      @include tablet {
+      top: calc(-50vh - 1.375rem);
+      @include laptop {
         display: block;
         right: -3rem;
         top: calc(50% - 1.5rem);
@@ -46,10 +96,20 @@
 
       }
       &__image {
-        padding: .25rem;
         display: block;
-        height: 2rem;
-        width: 2rem;
+        height: 1.75rem;
+        width:  1.75rem;
+        @include laptop {
+          height: 2rem;
+          width: 2rem;
+        }
+      }
+    }
+    &__results {
+      overflow: auto;
+      flex-grow: 1;
+      .result {
+
       }
     }
   }
@@ -57,20 +117,16 @@
     transition: width 1s ease;
     width: 100%;
     height: 100vh;
-    @include tablet {
+    @include laptop {
       height: 100%;
       width: 100%;
     }
-    &__smaller {
+    &--smaller {
       width: 70%;
     }
     &__map   {
       height: 100%;
       width: 100%;
-      @include laptop  {
-        height: 100%;
-        width: 100%;
-      }
       .marker-description  {
         text-align: center;
         font-size: .8rem;

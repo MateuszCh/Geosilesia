@@ -27,7 +27,12 @@
         }
 
         function toggleSearchPanel(){
-            vm.showSearch ? vm.showSearch = false : vm.showSearch = true;
+            if($rootScope.isL || $rootScope.isX) {
+                vm.showSearch ? vm.showSearch = false : vm.showSearch = true;
+            } else {
+                $document.scrollToElementAnimated(document.getElementById('search-form'));
+            }
+
         }
 
         function search(input){
@@ -44,6 +49,7 @@
             }, function(status){
                 vm.geocodeErrorMessage = status;
             });
+
         }
 
         function getCoordinates(input){
@@ -109,7 +115,7 @@
                     }
                 })
             }
-            if($rootScope.isS){
+            if($rootScope.isS || $rootScope.isM){
                 $document.scrollToElementAnimated($element);
             }
         }

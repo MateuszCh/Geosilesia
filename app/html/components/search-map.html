@@ -2,27 +2,52 @@
      class="search">
     <div id="search-form"
          class="search__form"
-         ng-class="{'search__form__active' : vm.showSearch}">
-        <h2>Atrakcje Geoturystyczne Województwa Śląskiego</h2>
+         ng-class="{'search__form--active' : vm.showSearch}">
+        <h3 class="search__form__heading">Atrakcje Geoturystyczne Województwa Śląskiego</h3>
         <form ng-submit="vm.search(vm.searchInput)">
-            <input ng-model="vm.searchInput" type="text">
-
-            <div ng-repeat="category in ::vm.categories track by $index">
-                <label ng-bind="::category.name"></label>
-                <input type="radio" ng-model="::vm.category" value="{{::category.category}}" ng-change="vm.pickCategory(vm.category)">
+            <div class="search__form__search">
+                <input class="search__form__search__input"
+                       ng-model="vm.searchInput"
+                       type="text" placeholder="Wpisz szukaną lokalizację">
+                <input class="search__form__search__button"
+                       type="submit"
+                value="">
             </div>
-            <label>Wszystkie</label>
-            <input type="radio" ng-model="::vm.category" value="all" ng-change="vm.pickCategory(vm.category)">
+            <div class="search__form__category">
+                <div ng-repeat="category in ::vm.categories track by $index">
+                    <input type="radio"
+                           ng-attr-id="{{category.category}}"
+                           ng-model="::vm.category"
+                           value="{{::category.category}}"
+                           ng-change="vm.pickCategory(vm.category)">
+                    <label for="{{category.category}}"
+                           ng-bind="::category.name"></label>
+                </div>
+                <div>
+                    <input type="radio"
+                           ng-model="::vm.category"
+                           value="all"
+                           id="all"
+                           ng-change="vm.pickCategory(vm.category)">
+                    <label for="all">Wszystkie</label>
+                </div>
+            </div>
         </form>
-        <div class="search__form__activate" ng-click="vm.toggleSearchPanel()" ng-if="!$root.isS">
-            <img class="search__form_activate__image" src="images/search-icon.png">
+        <div class="search__form__results">
+            <div class="result"
+                 ng-repeat="result in vm.markers track by $index" ng-if="!result.type">
+                <h4 ng-bind="result.title"></h4>
+            </div>
         </div>
-        <div class="search__form__activate" du-smooth-scroll="search-form" ng-if="$root.isS">
-            <img class="search__form_activate__image" src="images/search-icon.png">
+        <div class="search__form__activate"
+             ng-click="vm.toggleSearchPanel()">
+            <img class="search__form__activate__image"
+                 src="images/search-icon.png">
         </div>
     </div>
     <map class="search__container"
-         ng-class="{'search__container__smaller' : vm.showSearch && !$root.isS}"
-         places="vm.markers" center-map="vm.showSearch"></map>
+         ng-class="{'search__container--smaller' : vm.showSearch && ($root.isL || $root.isX)}"
+         places="vm.markers"
+         center-map="vm.showSearch"></map>
 </div>
 
