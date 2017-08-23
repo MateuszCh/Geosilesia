@@ -42,21 +42,24 @@
                 </div>
             </div>
         </form>
-        <div>
-            <span ng-click="vm.increaseSearchQty()" ng-if="vm.showMore">MORE</span>
-        </div>
         <div class="search__form__results">
-            <div class="result"
-                 ng-repeat="result in vm.markers track by $index"
-                 ng-if="!result.type">
-                <h4 class="result__heading"
-                    ng-bind="result.title"></h4>
-                <p class="result__place"
-                   ng-bind="result.place"></p>
-                <p class="result__coordinates">Współrzędne: <span ng-bind="result.position.lat"></span>, <span ng-bind="result.position.lng"></span></p>
-                <a class="result__directions"
-                   ng-href="{{'https://www.google.com/maps/dir/Current+Location/' + result.position.lat + ',' + result.position.lng}}"
-                   target="_blank">Dojazd</a>
+            <h3 class="search__form__results__heading">Obiekty</h3>
+            <div class="search__form__results__container">
+                <div class="result"
+                     ng-repeat="result in vm.markers track by $index"
+                     ng-if="!result.type">
+                    <h4 class="result__heading"
+                        ng-bind="result.title"></h4>
+                    <div class="result__container">
+                        <div class="result__container__location">
+                            <p class="result__container__location__coordinates">Współrzędne: <span ng-bind="result.position.lat"></span>, <span ng-bind="result.position.lng"></span></p>
+                            <p class="result__container__location__distance" ng-if="result.distance && vm.location">Odległość: <span ng-bind="result.distance | number : 2"></span> km</p>
+                        </div>
+                        <a class="result__container__directions"
+                           ng-href="{{'https://www.google.com/maps/dir/Current+Location/' + result.position.lat + ',' + result.position.lng}}"
+                           target="_blank">Dojazd</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="search__form__activate"

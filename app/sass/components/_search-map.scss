@@ -9,7 +9,7 @@
     flex-direction: row;
   }
   &__form {
-    padding: 0 1rem;
+    padding: 0 .5rem;
     position: relative;
     z-index: 5;
     border-top-color: $header-color;
@@ -39,7 +39,7 @@
       display: flex;
       &__input {
         flex-grow: 1;
-        border: 2px solid $header-color;
+        border: 2px solid $color3;
         border-right: none;
         padding-left: 1rem;
         line-height: 100%;
@@ -47,7 +47,7 @@
         transition: background-color .5s ease;
         &:focus {
           outline: none;
-          background-color: $header-color;
+          background-color: $color3;
           color: white;
         }
       }
@@ -63,7 +63,7 @@
         display: block;
         height: 30px;
         width: 30px;
-        background-color: $header-color;
+        background-color: $color3;
         @include laptop {
           height: 40px;
           width: 40px;
@@ -75,7 +75,7 @@
       &__heading {
         font-family: $headers-font;
         text-align: center;
-        padding: .5rem 0;
+        padding: .2rem 0;
         font-size: 1rem;
         @include tablet {
           font-size: 1.3rem;
@@ -86,7 +86,7 @@
       }
       &__container {
         position: relative;
-        margin: 10px 0;
+        margin: .3rem 0;
         display: flex;
       }
       &__radio {
@@ -108,6 +108,12 @@
       &__label {
         position: relative;
         cursor: pointer;
+        width: 100%;
+        transition: background-color .2s ease;
+        &:hover {
+          background-color: white;
+          transition: background-color .2s ease;
+        }
         &__text {
           padding-left: 30px;
           font-family: $headers-font;
@@ -126,9 +132,10 @@
           width: 16px;
           height: 16px;
           border-radius: 50%;
-          transition: all .2s ease-in-out;
-          background: $header-color;
-
+          background: $color3;
+          @include laptop {
+            transition: all .2s ease-in-out;
+          }
 
           &:before,
           &:after {
@@ -142,11 +149,12 @@
             width: 8px;
             height: 8px;
             background: white;
-            box-shadow: rgba(0,0,0,0.117647) 0 0 .8vw 0, rgba(0,0,0, 0.239216) 0 .8vw .8vw 0;
-            transition: all .2s;
             transform: scale(0);
             top: calc(50% - 4px);
             left: calc(50% - 4px);
+            @include laptop {
+              transition: all .2s;
+            }
           }
           &:after {
             top:0;
@@ -155,7 +163,6 @@
             height: 16px;
             background: rgba(255,255,255, .5);
             transform: scale(0);
-
           }
         }
       }
@@ -202,23 +209,71 @@
     }
     &__results {
       @include laptop {
-        overflow: auto;
         flex-grow: 1;
+        display: flex;
+        flex-direction: column;
       }
-      .result {
-        &__heading {
-
+      &__heading {
+        font-family: $headers-font;
+        text-align: center;
+        padding-top: .2rem;
+        font-size: 1rem;
+        @include tablet {
+          font-size: 1.3rem;
         }
-        &__place {
-
-        }
-        &__coordinate {
-
-        }
-        &__directions {
-
+        @include full {
+          font-size: 1.5rem;
         }
       }
+      &__container {
+        padding-top: .4rem;
+        @include laptop {
+          overflow: auto;
+        }
+        .result {
+          margin-bottom: 10px;
+          padding: .2rem;
+          background-color: white;
+          box-shadow: 0 8px 6px -6px $header-color;
+          &__heading {
+            text-align: center;
+            font-family: $headers-font;
+            font-size: 1.1rem;
+            font-weight: 600;
+          }
+          &__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            &__location {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              &__distance {
+                padding: 0;
+                font-size: .95rem;
+                color: #000;
+                margin-top: 0;
+              }
+              &__coordinates {
+                padding: 0;
+                font-size: .95rem;
+                color: #000;
+
+              }
+            }
+            &__directions {
+              text-decoration: none;
+              text-align: right;
+              display: block;
+              font-family: $text-font;
+              font-size: .95rem;
+              color: $color3;
+            }
+          }
+        }
+      }
+
     }
   }
   &__container {

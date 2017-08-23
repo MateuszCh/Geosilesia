@@ -72,8 +72,8 @@
         function getLocationDetails(address){
             return {
                 position: {
-                    lat : address.geometry.location.lat(),
-                    lng : address.geometry.location.lng()
+                    lat : parseFloat(address.geometry.location.lat().toFixed(8)),
+                    lng : parseFloat(address.geometry.location.lng().toFixed(8))
                 },
                 address : address.formatted_address,
                 type: 'home'
