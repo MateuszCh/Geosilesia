@@ -13,10 +13,13 @@
         vm.search = search;
         vm.pickCategory = pickCategory;
         vm.toggleSearchPanel = toggleSearchPanel;
+        vm.increaseSearchQty = increaseSearchQty;
         vm.categories = iconsForMarkers;
         vm.showSearch = false;
+        vm.showMore = false;
         vm.searchInput = "";
         vm.category = "";
+        var searchQty = 10;
         var geocoder = new google.maps.Geocoder();
 
         function onInit(){
@@ -36,6 +39,7 @@
         }
 
         function search(input){
+            searchQty = 10;
             vm.searchInput = "";
             vm.category = "";
             getCoordinates(input).then(function(result){
@@ -44,8 +48,9 @@
                 }
                 vm.location = getLocationDetails(result);
                 sortByDistance(vm.location.position.lat, vm.location.position.lng);
-                nearestPlaces(10);
+                nearestPlaces();
                 vm.markers.push(vm.location);
+                vm.showMore = true;
             }, function(status){
                 vm.geocodeErrorMessage = status;
             });
@@ -90,19 +95,28 @@
             var dLng = deg2rad(lng2-lng1);
             var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLng/2) * Math.sin(dLng/2);
             var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-            var d = R * c;
-            return d;
+            return R * c;
         }
 
         function deg2rad(deg){
             return deg * (Math.PI/180);
         }
 
-        function nearestPlaces(qty){
-            vm.markers = vm.places.slice(0, qty);
+        function nearestPlaces(){
+            vm.markers = vm.places.slice(0, searchQty);
+        }
+
+        function increaseSearchQty(){
+            searchQty = searchQty + 10;
+            nearestPlaces();
+            if(searchQty > vm.places.length){
+                vm.showMore = false;
+            }
         }
 
         function pickCategory(input){
+            vm.showMore = false;
+            searchQty = 10;
             vm.location = null;
             vm.searchInput = "";
             if(input === 'all'){

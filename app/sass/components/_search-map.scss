@@ -38,15 +38,17 @@
       padding: .5rem 0;
       display: flex;
       &__input {
-        border: none;
         flex-grow: 1;
-        background-color: white;
+        border: 2px solid $header-color;
+        border-right: none;
         padding-left: 1rem;
         line-height: 100%;
         font-size: .9rem;
+        transition: background-color .5s ease;
         &:focus {
           outline: none;
-          border: 2px solid $header-color;
+          background-color: $header-color;
+          color: white;
         }
       }
       &__button {
@@ -56,21 +58,114 @@
         background: url('../images/search-icon.png');
         background-repeat: no-repeat;
         background-position: center;
+        background-size: 80% 80%;
         border: 0;
         display: block;
-        height: 40px;
-        width: 40px;
+        height: 30px;
+        width: 30px;
         background-color: $header-color;
+        @include laptop {
+          height: 40px;
+          width: 40px;
+
+        }
       }
     }
     &__category {
+      &__heading {
+        font-family: $headers-font;
+        text-align: center;
+        padding: .5rem 0;
+        font-size: 1rem;
+        @include tablet {
+          font-size: 1.3rem;
+        }
+        @include full {
+          font-size: 1.5rem;
+        }
+      }
+      &__container {
+        position: relative;
+        margin: 10px 0;
+        display: flex;
+      }
+      &__radio {
+        display: none;
+        &:focus {
+          outline: none;
+        }
+        &:checked + label .search__form__category__label__icon:after {
+          background: transparent;
+          transition: all .5s;
+          transform: scale(1);
+        }
+        &:checked + label .search__form__category__label__icon:before {
+          transform: scale(1);
+          transition: all .4s;
+        }
+      }
+
+      &__label {
+        position: relative;
+        cursor: pointer;
+        &__text {
+          padding-left: 30px;
+          font-family: $headers-font;
+          font-weight: 600;
+          font-size: .8rem;
+          @include laptop {
+            font-size: .9rem;
+          }
+          @include full {
+            font-size: 1rem;
+          }
+        }
+        &__icon {
+          position: absolute  ;
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          transition: all .2s ease-in-out;
+          background: $header-color;
+
+
+          &:before,
+          &:after {
+            position: absolute;
+            bottom:0;
+            right:0;
+            content: "";
+            border-radius: 50%;
+          }
+          &:before {
+            width: 8px;
+            height: 8px;
+            background: white;
+            box-shadow: rgba(0,0,0,0.117647) 0 0 .8vw 0, rgba(0,0,0, 0.239216) 0 .8vw .8vw 0;
+            transition: all .2s;
+            transform: scale(0);
+            top: calc(50% - 4px);
+            left: calc(50% - 4px);
+          }
+          &:after {
+            top:0;
+            left: 0;
+            width: 16px;
+            height: 16px;
+            background: rgba(255,255,255, .5);
+            transform: scale(0);
+
+          }
+        }
+      }
 
     }
     &__heading {
       font-family: $headers-font;
       text-align: center;
       padding: 1rem 0;
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       @include tablet {
         font-size: 2rem;
       }
@@ -106,10 +201,23 @@
       }
     }
     &__results {
-      overflow: auto;
-      flex-grow: 1;
+      @include laptop {
+        overflow: auto;
+        flex-grow: 1;
+      }
       .result {
+        &__heading {
 
+        }
+        &__place {
+
+        }
+        &__coordinate {
+
+        }
+        &__directions {
+
+        }
       }
     }
   }
