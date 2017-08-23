@@ -3,7 +3,8 @@
         bindings: {
             places: '<',
             options: '<',
-            centerMap: '<'
+            centerMap: '<',
+            currentResult: '<'
         },
         controllerAs: 'vm',
         controller: MapController,
@@ -16,7 +17,7 @@
         var vm = this;
         vm.$onInit = onInit;
         vm.$onChanges = onChanges;
-        var map, currentMarker, currentCenter, centering, stopping, markers = [];
+        var map, currentCenter, centering, stopping, markers = [];
 
         var mapOptions = {
             center: {
@@ -61,7 +62,7 @@
 
         function onChanges(changes){
             if(changes.places && changes.places.currentValue && map){
-                updateMarkers(changes.places.previousValue);
+                updateMarkers();
             }
             if(changes.centerMap && map){
                 if(centering && centering.$$state.value !== 'canceled'){
@@ -75,16 +76,18 @@
                     $interval.cancel(centering);
                 }, 1001);
             }
+            if(changes.currentResult && changes.currentResult.currentValue !== undefined){
+                var resultMarker = markers[changes.currentResult.currentValue];
+                google.maps.event.trigger(resultMarker, "click");
+            }
         }
 
-        function updateMarkers(search){
+        function updateMarkers(){
             if(markers.length){
                 deleteMarkers();
             }
             setMarkers();
-            if(search){
-                setBounds();
-            }
+            setBounds();
         }
 
         function deleteMarkers(){
@@ -123,13 +126,8 @@
                                 "</div>");
                         }
                         infowindow.open(map, marker);
-                        toggleBounce(marker);
-                        currentMarker = marker;
                     }
                 })(marker));
-                google.maps.event.addListener(infowindow, 'closeclick', function(){
-                    toggleBounce(currentMarker);
-                });
                 markers.push(marker);
             });
         }
@@ -144,13 +142,6 @@
                 map.setZoom(16);
             }
             currentCenter = map.getCenter();
-        }
-
-        function toggleBounce(marker) {
-            markers.forEach(function (marker) {
-                marker.setAnimation(null);
-            });
-            $rootScope.isS ? marker.setAnimation(null) : marker.setAnimation(google.maps.Animation.BOUNCE);
         }
 
         function centerMap(){

@@ -26,6 +26,7 @@
                         <span class="search__form__category__label__icon"></span>
                         <span class="search__form__category__label__text"
                               ng-bind="category.name"></span>
+                        <img class="search__form__category__label__image" ng-attr-alt="{{category.name}}" style="height:27px; width: 24px;" ng-src="{{category.icon}}">
                     </label>
                 </div>
                 <div class="search__form__category__container">
@@ -43,11 +44,11 @@
             </div>
         </form>
         <div class="search__form__results">
-            <h3 class="search__form__results__heading">Obiekty</h3>
+            <h3 class="search__form__results__heading">Obiekty:</h3>
             <div class="search__form__results__container">
                 <div class="result"
                      ng-repeat="result in vm.markers track by $index"
-                     ng-if="!result.type">
+                     ng-if="!result.type" ng-click="vm.setCurrentResult($index)">
                     <h4 class="result__heading"
                         ng-bind="result.title"></h4>
                     <div class="result__container">
@@ -57,7 +58,7 @@
                         </div>
                         <a class="result__container__directions"
                            ng-href="{{'https://www.google.com/maps/dir/Current+Location/' + result.position.lat + ',' + result.position.lng}}"
-                           target="_blank">Dojazd</a>
+                           target="_blank" ng-click="$event.stopPropagation()">Dojazd</a>
                     </div>
                 </div>
             </div>
@@ -71,6 +72,7 @@
     <map class="search__container"
          ng-class="{'search__container--smaller' : vm.showSearch && ($root.isL || $root.isX)}"
          places="vm.markers"
-         center-map="vm.showSearch"></map>
+         center-map="vm.showSearch"
+         current-result="vm.currentResult"></map>
 </div>
 

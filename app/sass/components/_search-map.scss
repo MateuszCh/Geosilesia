@@ -1,5 +1,5 @@
 .search {
-  background-color: #f5f5f5;
+  background-color: #ebebeb;
   height: 100%;
   width: 100%;
   display: flex;
@@ -109,12 +109,17 @@
         position: relative;
         cursor: pointer;
         width: 100%;
-        transition: background-color .2s ease;
-        &:hover {
-          background-color: white;
-          transition: background-color .2s ease;
+        transition: background-color .6s ease;
+        display: flex;
+        align-items: center;
+        @include laptop {
+          &:hover {
+            background-color: white;
+            transition: background-color .2s ease;
+          }
         }
         &__text {
+          flex-grow: 1;
           padding-left: 30px;
           font-family: $headers-font;
           font-weight: 600;
@@ -125,6 +130,11 @@
           @include full {
             font-size: 1rem;
           }
+        }
+        &__image {
+          width: 21.5px;
+          height: 25px;
+          margin-right: .5rem;
         }
         &__icon {
           position: absolute  ;
@@ -166,7 +176,6 @@
           }
         }
       }
-
     }
     &__heading {
       font-family: $headers-font;
@@ -216,7 +225,7 @@
       &__heading {
         font-family: $headers-font;
         text-align: center;
-        padding-top: .2rem;
+        padding: .2rem 0;
         font-size: 1rem;
         @include tablet {
           font-size: 1.3rem;
@@ -226,7 +235,6 @@
         }
       }
       &__container {
-        padding-top: .4rem;
         @include laptop {
           overflow: auto;
         }
@@ -243,8 +251,12 @@
           }
           &__container {
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
             align-items: baseline;
+            @include tablet {
+              flex-direction: row;
+            }
             &__location {
               display: flex;
               flex-direction: column;

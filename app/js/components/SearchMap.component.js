@@ -5,20 +5,22 @@
         controller: SearchMapController
     });
 
-    SearchMapController.$inject = ['iconsForMarkers', '$http', '$q', '$rootScope', '$document', '$element'];
+    SearchMapController.$inject = ['iconsForMarkers', '$http', '$q', '$rootScope', '$document', '$element', '$timeout'];
 
-    function SearchMapController(iconsForMarkers, $http, $q, $rootScope, $document, $element){
+    function SearchMapController(iconsForMarkers, $http, $q, $rootScope, $document, $element, $timeout){
         var vm = this;
         vm.$onInit = onInit;
         vm.search = search;
         vm.pickCategory = pickCategory;
         vm.toggleSearchPanel = toggleSearchPanel;
         vm.increaseSearchQty = increaseSearchQty;
+        vm.setCurrentResult = setCurrentResult;
         vm.categories = iconsForMarkers;
         vm.showSearch = false;
         vm.showMore = false;
         vm.searchInput = "";
         vm.category = "";
+        vm.currentResult = undefined;
         var searchQty = 10;
         var geocoder = new google.maps.Geocoder();
 
@@ -43,7 +45,7 @@
             vm.searchInput = "";
             vm.category = "";
             getCoordinates(input).then(function(result){
-                if($rootScope.isS){
+                if($rootScope.isS || $rootScope.isM){
                     $document.scrollToElementAnimated($element);
                 }
                 vm.location = getLocationDetails(result);
@@ -51,6 +53,7 @@
                 nearestPlaces();
                 vm.markers.push(vm.location);
                 vm.showMore = true;
+                vm.currentResult = undefined;
             }, function(status){
                 vm.geocodeErrorMessage = status;
             });
@@ -119,6 +122,7 @@
             searchQty = 10;
             vm.location = null;
             vm.searchInput = "";
+            vm.currentResult = undefined;
             if(input === 'all'){
                 vm.markers = vm.places.slice();
             } else {
@@ -129,6 +133,18 @@
                     }
                 })
             }
+            if($rootScope.isS || $rootScope.isM){
+                $document.scrollToElementAnimated($element);
+            }
+        }
+
+        function setCurrentResult(index){
+            if(vm.currentResult === index){
+                vm.currentResult = undefined;
+            }
+            $timeout(function(){
+                vm.currentResult = index;
+            },0);
             if($rootScope.isS || $rootScope.isM){
                 $document.scrollToElementAnimated($element);
             }
