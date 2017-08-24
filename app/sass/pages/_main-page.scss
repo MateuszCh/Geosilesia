@@ -17,22 +17,17 @@
     font-family: $headers-font;
     color: white;
     font-weight: 800;
-    padding: 1.25rem 3.125rem .625rem 3.125rem;
+    padding: 1.5rem 3.125rem .625rem 3.125rem;
     background-color: $color3;
     position: relative;
+    font-size: 1.3rem;
     @include tablet  {
       width: auto;
-      padding: 1.25rem 1.25rem .625rem 1.25rem;
+      padding: 2rem 1.25rem .625rem 1.25rem;
+      font-size: 1.5rem;
     }
-
-    &__mobile   {
-      font-family: inherit;
-      color: inherit;
-      margin: 0;
-      padding: 0;
-      @include tablet  {
-        display: none;
-      }
+    @include laptop {
+      font-size: 2rem;
     }
 
     &:before  {

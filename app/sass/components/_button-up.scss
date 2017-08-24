@@ -9,4 +9,12 @@
   cursor: pointer;
   background-color: $header-color;
   z-index: 100;
+  @include laptop {
+    width: 3rem;
+    height: 3rem;
+  }
+  &__image {
+    height: 60%;
+    width: 16.5%;
+  }
 }

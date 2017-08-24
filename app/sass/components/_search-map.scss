@@ -39,7 +39,7 @@
       display: flex;
       &__input {
         flex-grow: 1;
-        border: 2px solid $color3;
+        border: 2px solid $header-color;
         border-right: none;
         padding-left: 1rem;
         line-height: 100%;
@@ -47,7 +47,7 @@
         transition: background-color .5s ease;
         &:focus {
           outline: none;
-          background-color: $color3;
+          background-color: $header-color;
           color: white;
         }
       }
@@ -63,7 +63,7 @@
         display: block;
         height: 30px;
         width: 30px;
-        background-color: $color3;
+        background-color: $header-color;
         @include laptop {
           height: 40px;
           width: 40px;
@@ -73,15 +73,12 @@
     }
     &__category {
       &__heading {
-        font-family: $headers-font;
+        font-family: $text-font;
         text-align: center;
         padding: .2rem 0;
-        font-size: 1rem;
+        font-size: .9rem;
         @include tablet {
           font-size: 1.3rem;
-        }
-        @include full {
-          font-size: 1.5rem;
         }
       }
       &__container {
@@ -121,14 +118,10 @@
         &__text {
           flex-grow: 1;
           padding-left: 30px;
-          font-family: $headers-font;
-          font-weight: 600;
+          font-family: $text-font;
           font-size: .8rem;
           @include laptop {
             font-size: .9rem;
-          }
-          @include full {
-            font-size: 1rem;
           }
         }
         &__image {
@@ -142,7 +135,7 @@
           width: 16px;
           height: 16px;
           border-radius: 50%;
-          background: $color3;
+          background: $header-color;
           @include laptop {
             transition: all .2s ease-in-out;
           }
@@ -178,15 +171,12 @@
       }
     }
     &__heading {
-      font-family: $headers-font;
+      font-family: $text-font;
       text-align: center;
-      padding: 1rem 0;
-      font-size: 1.5rem;
+      padding: .5rem 0;
+      font-size: .9rem;
       @include tablet {
-        font-size: 2rem;
-      }
-      @include full {
-        font-size: 2.5rem;
+        font-size: 1.3rem;
       }
     }
     &__activate {
@@ -223,15 +213,12 @@
         flex-direction: column;
       }
       &__heading {
-        font-family: $headers-font;
+        font-family: $text-font;
         text-align: center;
         padding: .2rem 0;
-        font-size: 1rem;
+        font-size: .9rem;
         @include tablet {
           font-size: 1.3rem;
-        }
-        @include full {
-          font-size: 1.5rem;
         }
       }
       &__container {
@@ -240,14 +227,17 @@
         }
         .result {
           margin-bottom: 10px;
+          cursor: pointer;
           padding: .2rem;
           background-color: white;
           box-shadow: 0 8px 6px -6px $header-color;
           &__heading {
             text-align: center;
-            font-family: $headers-font;
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-family: $text-font;
+            font-size: .9rem;
+            @include tablet {
+              font-size: 1rem;
+            }
           }
           &__container {
             display: flex;
@@ -257,30 +247,52 @@
             @include tablet {
               flex-direction: row;
             }
-            &__location {
+            &__left {
               display: flex;
               flex-direction: column;
               justify-content: space-between;
-              &__distance {
+              &__coordinates {
+                padding: 0;
+                font-size: .95rem;
+                color: #000;
+              }
+              &__address {
                 padding: 0;
                 font-size: .95rem;
                 color: #000;
                 margin-top: 0;
               }
-              &__coordinates {
+            }
+            &__right {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              @include laptop {
+                min-width: 150px;
+              }
+              &__directions {
+                display: block;
+                font-family: $text-font;
+                font-size: .95rem;
+                color: $header-color;
+                margin-bottom: .625rem;
+                @include laptop {
+                  text-decoration: none;
+                  text-align: right;
+                }
+                &:hover {
+                  color: $color3;
+                }
+              }
+              &__distance {
                 padding: 0;
                 font-size: .95rem;
                 color: #000;
-
+                margin-top: 0;
+                @include laptop {
+                  text-align: right;
+                }
               }
-            }
-            &__directions {
-              text-decoration: none;
-              text-align: right;
-              display: block;
-              font-family: $text-font;
-              font-size: .95rem;
-              color: $color3;
             }
           }
         }

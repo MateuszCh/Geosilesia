@@ -120,7 +120,6 @@
                         } else {
                             infowindow.setContent("<div class='marker-description'>" +
                                 "<p class='marker-description__text'>" + place.title + "</p>" +
-                                "<p class='marker-description__text'>" + place.place + "</p>" +
                                 "<p class='marker-description__text'>" + place.position.lat + ", " + place.position.lng + "</p>" +
                                 "<a href=" + place.hyperlink + " target='_blank'>Więcej</a>" +
                                 "</div>");

@@ -14,7 +14,7 @@
                 value="">
             </div>
             <div class="search__form__category">
-                <h3 class="search__form__category__heading">Kategorie:</h3>
+                <h3 class="search__form__category__heading">Kategorie</h3>
                 <div class="search__form__category__container" ng-repeat="category in ::vm.categories track by $index">
                     <input class="search__form__category__radio"
                            type="radio"
@@ -44,7 +44,7 @@
             </div>
         </form>
         <div class="search__form__results">
-            <h3 class="search__form__results__heading">Obiekty:</h3>
+            <h3 class="search__form__results__heading">Obiekty/Produkty</h3>
             <div class="search__form__results__container">
                 <div class="result"
                      ng-repeat="result in vm.markers track by $index"
@@ -52,13 +52,20 @@
                     <h4 class="result__heading"
                         ng-bind="result.title"></h4>
                     <div class="result__container">
-                        <div class="result__container__location">
-                            <p class="result__container__location__coordinates">Współrzędne: <span ng-bind="result.position.lat"></span>, <span ng-bind="result.position.lng"></span></p>
-                            <p class="result__container__location__distance" ng-if="result.distance && vm.location">Odległość: <span ng-bind="result.distance | number : 2"></span> km</p>
+                        <div class="result__container__left">
+                            <p class="result__container__left__coordinates">Współrzędne: <span ng-bind="result.position.lat"></span>, <span ng-bind="result.position.lng"></span></p>
+                            <p class="result__container__left__address"
+                               ng-bind="result.place"
+                               ng-if="result.place"></p>
                         </div>
-                        <a class="result__container__directions"
-                           ng-href="{{'https://www.google.com/maps/dir/Current+Location/' + result.position.lat + ',' + result.position.lng}}"
-                           target="_blank" ng-click="$event.stopPropagation()">Dojazd</a>
+                        <div class="result__container__right">
+                            <a class="result__container__right__directions"
+                               ng-href="{{'https://www.google.com/maps/dir/Current+Location/' + result.position.lat + ',' + result.position.lng}}"
+                               target="_blank"
+                               ng-click="$event.stopPropagation()">Dojazd</a>
+                            <p class="result__container__right__distance"
+                               ng-if="result.distance && vm.location">Odległość: <span ng-bind="result.distance | number : 2"></span> km</p>
+                        </div>
                     </div>
                 </div>
             </div>
