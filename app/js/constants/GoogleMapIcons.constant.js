@@ -21,7 +21,7 @@
             category: 'imprezyTematyczne'
         },
         muzeaGeologiczneIDinoparki:    {
-            name: "Muzea geologiczne, ośrodki edukacyjne i dinoparki",
+            name: "Muzea, ośrodki edukacyjne i dinoparki",
             icon: "images/markers/museum_science.png",
             category: 'muzeaGeologiczneIDinoparki'
         },

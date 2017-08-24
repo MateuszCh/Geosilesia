@@ -14,12 +14,13 @@
   }
   &__heading  {
     cursor: pointer;
-    font-family: $headers-font;
+    font-family: $text-font;
     color: white;
     font-weight: 800;
     padding: 1.5rem 3.125rem .625rem 3.125rem;
     background-color: $color3;
     position: relative;
+    font-weight: normal;
     font-size: 1.3rem;
     @include tablet  {
       width: auto;

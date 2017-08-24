@@ -28,6 +28,9 @@
             $http.get("json/markers.json").then(function (response) {
                 vm.places = response.data.obiekty;
                 vm.markers = vm.places.slice();
+                vm.markers.sort(function (a, b) {
+                    return b.position.lat - a.position.lat;
+                });
             });
         }
 
@@ -133,6 +136,9 @@
                     }
                 })
             }
+            vm.markers.sort(function (a, b) {
+                return b.position.lat - a.position.lat;
+            });
             if($rootScope.isS || $rootScope.isM){
                 $document.scrollToElementAnimated($element);
             }
