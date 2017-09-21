@@ -23,7 +23,7 @@
     },
     {
       "position" : {"lat" : "50.877535", "lng" : "19.233106"},
-      "title" : "Ścieżka dydaktyczna w kamieniołomie Lipówka, Geostanowisko",
+      "title" : "Ścieżka dydaktyczna Kamieniołom Lipówka w Rudnikach, Geostanowisko",
       "place" : "Rudniki, ul .Dworcowa",
       "hyperlink" : "http://www.cemex.pl/kamieniolom-lipowka.aspx",
       "category" : "sciezkiTematyczne"
@@ -51,7 +51,7 @@
     },
     {
       "position" : {"lat" : "50.757984", "lng" : "19.268618"},
-      "title" : "Ścieżka geoturystyczna w Górach Towarnych, Geostanowiska",
+      "title" : "Ścieżka geoturystyczna Góry Towarne w Olsztynie, Geostanowiska",
       "place" : "Gmina Olsztyn",
       "hyperlink" : "http://jura.slaskie.travel/Trasy/Pokaz/8108/sciezka-geologiczna-w-krainie-bialych-skal/1247",
       "category" : "sciezkiTematyczne"
@@ -65,10 +65,17 @@
     },
     {
     "position" : {"lat" : "50.227293", "lng" : "19.274351"},
-    "title" : "Ośrodek Edukacji Ekologiczno-Geologicznej GEOsfera w Jaworznie",
-    "place" : "Jaworzno, Św. Wojciecha 100",
+    "title" : "Ośrodek Edukacji Ekologiczno-Geologicznej GEOsfera w Jaworznie, Geostanowisko",
+    "place" : "Jaworzno, ul. Św. Wojciecha 100",
     "hyperlink" : "https://www.facebook.com/geosfera/?ref=page_internal",
-    "category" : "geostanowiskaInne"
+    "category" : "muzeaGeologiczneIDinoparki"
+    },
+    {
+      "position" : {"lat" : "49.748861", "lng" : "18.790024"},
+      "title" : "Parku Ruchomych Dinozaurów i Ogromnych Owadów w Ustroniu",
+      "place" : "Ustroń, ul. Katowicka 201",
+      "hyperlink" : "http://www.parkdinozaurow-ustron.pl/park-dinozaurow-ustron",
+      "category" : "muzeaGeologiczneIDinoparki"
     },
     {
       "position" : {"lat" : "50.319327", "lng" : "19.184904"},
@@ -113,22 +120,22 @@
       "category" : "trasyPodziemne"
     },
     {
-      "position" : {"lat" : "50,289639", "lng" : "18,791556"},
+      "position" : {"lat" : "50.289639", "lng" : "18.791556"},
       "title" : "Kopalnia Guido w Zabrzu",
       "place" : "Zabrze, 3 Maja 93",
       "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=1634",
       "category" : "geostanowiskaMiedzynarodowe"
     },
     {
-      "position" : {"lat" : "50,425089", "lng" : "18,850956"},
+      "position" : {"lat" : "50.425089", "lng" : "18.850956"},
       "title" : "Zabytkowa Kopalnia Srebra w Tarnowskich Górach",
       "place" : "Tarnowskie Góry, ul. Szczęść Boże 81",
       "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=7020",
       "category" : "geostanowiskaMiedzynarodowe"
     },
     {
-      "position" : {"lat" : "50,296528", "lng" : "18,807111"},
-      "title" : "Skansen Królowa Luiza w Zabrzu ",
+      "position" : {"lat" : "50.296528", "lng" : "18.807111"},
+      "title" : "Skansen Królowa Luiza w Zabrzu",
       "place" : "Zabrze, ul. Wolności 410",
       "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=1850",
       "category" : "geostanowiskaMiedzynarodowe"
@@ -156,15 +163,15 @@
     },
     {
       "position" : {"lat" : "50.402597", "lng" : "18.859255"},
-      "title" : "Dolomity środkowotriasowe w nieczynnym kamieniołomie Blachówka w Bytomiu, Stanowisko dokumentacyjne",
+      "title" : "Kamieniołom dolomitów środkowotriasowych   Blachówka w Bytomiu (nieczynny), Stanowisko dokumentacyjne",
       "place" : "Bytom - Sucha Góra, ul. Blachówka 94",
       "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=10446",
       "category" : "geostanowiskaInne"
     },
     {
       "position" : {"lat" : "49.464108", "lng" : "19.152271"},
-      "title" : "Geopark Glinka - Ujsoły",
-      "place" : "Ujsoły, Glinka 4 ",
+      "title" : "Geo-park Glinka w dawnym kamieniołomie piaskowców magurskich",
+      "place" : "Ujsoły, Glinka 4",
       "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=7350",
       "category" : "geostanowiskaInne"
     },
@@ -199,7 +206,7 @@
     {
       "position" : {"lat" : "50.191491", "lng" : "18.445949"},
       "title" : "Ośrodek edukacyjny ZPKWŚ w Rudach",
-      "place" : "Rudy, ul. Raciborska 10 ",
+      "place" : "Rudy, ul. Raciborska 10",
       "hyperlink" : "http://www.zpk.com.pl/index.php/osrodek-rudy",
       "category" : "muzeaGeologiczneIDinoparki"
     },
@@ -219,15 +226,15 @@
     },
     {
       "position" : {"lat" : "50.318136", "lng" : "19.008677"},
-      "title" : "Park Tradycji w Siemianowicach",
-      "place" : "Siemianowice, ul. Orzeszkowej 12",
+      "title" : "Park Tradycji na terenie dawnej KWK Michał w Siemianowicach Śląskich",
+      "place" : "Siemianowice Śląskie, ul. Orzeszkowej 12",
       "hyperlink" : "http://www.siemianowice.pl/kultura/katalog/obiekty-kultury/sck-park-tradycji.101/",
       "category" : "obiektyPoprzemyslowe"
     },
     {
       "position" : {"lat" : "50.349076", "lng" : "18.925711"},
       "title" : "Muzeum Górnośląskie w Bytomiu",
-      "place" : "Bytom, pl. Jana III Sobieskiego 2 ",
+      "place" : "Bytom, pl. Jana III Sobieskiego 2",
       "hyperlink" : "http://muzeum.bytom.pl/",
       "category" : "muzeaGeologiczneIDinoparki"
     },
@@ -254,7 +261,7 @@
     },
     {
       "position" : {"lat" : "50.315801", "lng" : "19.029369"},
-      "title" : "Park dinozaurów w Siemianowicach",
+      "title" : "Park dinozaurów w Siemianowicach Śląskich",
       "place" : "Siemianowice Śl., ul. Spacerowa",
       "hyperlink" : "https://www.google.pl/search?q=dinozaury+siemianowice+slaskie&oq=dinozaury+siem&aqs=chrome.1.69i57j0.9730j0j4&sourceid=chrome&ie=UTF-8#q=park+dinozaur%C3%B3w+siemianowice,+siemianowice+%C5%9Bl%C4%85skie",
       "category" : "muzeaGeologiczneIDinoparki"
@@ -359,9 +366,16 @@
     },
     {
       "position" : {"lat" : "50.365148", "lng" : "19.206483"},
-      "title" : "Zbiornik wodne Pogoria (Pojezierze Dąbrowskie)",
+      "title" : "Wyrobiska po eksploatacji piasków czwartorzędowych, obecnie sztuczne zbiorniki wodne Pogoria w Dąbrowie Górniczej",
       "place" : "Dąbrowa Górnicza",
       "hyperlink" : "https://pl.wikipedia.org/wiki/Zbiorniki_Pogoria",
+      "category" : "obiektyPoprzemyslowe"
+    },
+    {
+      "position" : {"lat" : "50.379564", "lng" : "18.556553"},
+      "title" : "Wyrobiska po eksploatacji piasków czwartorzędowych, obecnie sztuczne zbiorniki wodne Dzierżno k. Gliwic",
+      "place" : "Pyskowice, Gliwice",
+      "hyperlink" : "https://pl.wikipedia.org/wiki/Kategoria:Sztuczne_zbiorniki_wodne_w_wojew%C3%B3dztwie_%C5%9Bl%C4%85skim",
       "category" : "obiektyPoprzemyslowe"
     },
     {
@@ -394,7 +408,7 @@
     },
     {
     "position" : {"lat" : "49.619821", "lng" : "18.986288"},
-    "title" : "Kaskady Rodła u źródeł Wisły",
+    "title" : "Kaskady Rodła w rezerwacie przyrody Wisła",
     "place" : "Wisła, Biała Wisełka",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=1409",
     "category" : "geostanowiskaInne"
@@ -415,7 +429,7 @@
     },
     {
     "position" : {"lat" : "50.269259", "lng" : "19.144324"},
-    "title" : "Konkurs geologiczny PIG-PIB ",
+    "title" : "Ogólnopolski Konkurs Geologiczny PIG-PIB",
     "place" : "Sosnowiec, ul. Królowej Jadwigi 1",
     "hyperlink" : "https://www.pgi.gov.pl/sosnowiec/oddzial-gornoslaski.html",
     "category" : "imprezyTematyczne"
@@ -452,7 +466,7 @@
       "position" : {"lat" : "50.823974", "lng" : "19.116605"},
       "title" : "Giełda Minerałów, Skał, Skamieniałości i Wyrobów Jubilerskich w Częstochowie",
       "place" : "Częstochowa, Al. Armii Krajowej 23",
-      "hyperlink" : "www.geoexpo.pl",
+      "hyperlink" : "http://www.ackis.pcz.pl/kontakt",
       "category" : "imprezyTematyczne"
     },
     {
@@ -484,7 +498,7 @@
     "category" : "geostanowiskaMiedzynarodowe"
     },
     {
-    "position" : {"lat" : "49.648888 ", "lng" : "18.992777"},
+    "position" : {"lat" : "49.648888", "lng" : "18.992777"},
     "title" : "Jaskinia Miecharska w masywie Malinowa, Stanowisko dokumentacyjne",
     "place" : "Gmina Wisła",
     "hyperlink" : "://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=637",
@@ -562,7 +576,7 @@
     },
     {
     "position" : {"lat" : "49.837137", "lng" : "18.919720"},
-    "title" : "Sill pikrytowy ze skarnem pektolitowym w Miedzyrzeczu Górnym",
+    "title" : "Sill pikrytowy ze skarnem pektolitowym w Międzyrzeczu Górnym",
     "place" : "Międzyrzecze Górne, gm. Jasienica",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9668",
     "category" : "geostanowiskaMiedzynarodowe"
@@ -624,7 +638,7 @@
     "category" : "muzeaGeologiczneIDinoparki"
     },
     {
-    "position" : {"lat" : "50.062383 ", "lng" : "18.467683"},
+    "position" : {"lat" : "50.062383", "lng" : "18.467683"},
     "title" : "Wirtualna Izba Pamięci Zlikwidowanych Kopalń ROW",
     "place" : "Rybnik, ul. Mościckiego 3",
     "hyperlink" : "https://fkzrow.pl/",
@@ -646,14 +660,14 @@
     },
     {
     "position" : {"lat" : "50.464347", "lng" : "19.551377"},
-    "title" : "Góra Birów w Podzamczu",
+    "title" : "Skały wapienne na Górze Birów w Podzamczu",
     "place" : "Gmina Ogrodzieniec",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=43",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : " 51.054975", "lng" : " 18.805859"},
-    "title" : "Jaskinia Szachownica w rezerwacie przyrody nieożywionej k/Lipia",
+    "title" : "Jaskinie i wychodnie skał górnojurajskich w rezerwacie przyrody nieożywionej Szachownica k. Lipia",
     "place" : "Gmina Lipie",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=1818",
     "category" : "geostanowiskaInne"
@@ -674,15 +688,15 @@
     },
     {
     "position" : {"lat" : "50.499239", "lng" : "19.234253"},
-    "title" : "Kamieniołom dolomitu Nowa Wioska ",
-    "place" : "Gmina Siewierz",
+    "title" : "Kamieniołom dolomitów triasu i dewonu Nowa Wioska w Siewierzu",
+    "place" : "Siewierz, ul. Przemysłowa 2",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9631",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "50.495366", "lng" : "19.219151"},
-    "title" : "Kamieniołom dolomitu Siewierz ",
-    "place" : "Gmina Siewierz",
+    "title" : "Kamieniołom dolomitów triasu i dewonu Siewierz",
+    "place" : "Siewierz, ul. Bacholińska 11",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9630",
     "category" : "geostanowiskaInne"
     },
@@ -702,14 +716,14 @@
     },
     {
     "position" : {"lat" : "49.809709", "lng" : "19.234700"},
-    "title" : "Kamieniołom warstw godulskich w Wielkiej Puszczy",
+    "title" : "Kamieniołom warstw godulskich w Wielkiej Puszczy (nieczynny)",
     "place" : "Gmina Porąbka",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=1668",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "49.724869", "lng" : "18.741636"},
-    "title" : "Kamieniołomy fliszu karpackiego i wapieni cieszyńskich na Górze Jasieniowej w Goleszowie, Stanowisko dokumentacyjne",
+    "title" : "Kamieniołomy warstw cieszyńskich na Górze Jasieniowej w Goleszowie (nieczynne), Stanowisko dokumentacyjne",
     "place" : "Gmina Goleszów",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9634",
     "category" : "geostanowiskaInne"
@@ -730,7 +744,7 @@
     },
     {
     "position" : {"lat" : "49.777778", "lng" : "18.614167"},
-    "title" : "Sill cieszynitu i diabazu w rezerwacie Kopce w Cieszynie – Boguszowicach",
+    "title" : "Sill cieszynitu i diabazu na terenie rezerwatu przyrody Kopce w Cieszynie – Boguszowicach",
     "place" : "Cieszyn - Boguszowice",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9679",
     "category" : "geostanowiskaInne"
@@ -793,21 +807,21 @@
     },
     {
     "position" : {"lat" : "50.660786", "lng" : "19.420603"},
-    "title" : "Wzgórze ostańcowe Na Bukowym w Trzebniowie",
+    "title" : "Skałki wapienne Na Bukowym w Trzebniowie",
     "place" : "Gmina Niegowa",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9589",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "49.767736", "lng" : "19.371275"},
-    "title" : "Zbójeckie Okno, Skałka na Zakocierzy",
+    "title" : "Skałka piaskowcowa Zbójeckie Okno w Zakocierzy",
     "place" : "Gmina Ślemień",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=1386",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "50.412421", "lng" : "18.875813"},
-    "title" : "Ślady eksploatacji żeleźniaka brunatnego i galmanów na Górze Cipiorg w Tarnowskich Górach i Bytomiu, Geostanowisko",
+    "title" : "Ślady eksploatacji utworów środkowotriasowych na Górze Cipiorg w Tarnowskich Górach i Bytomiu, Geostanowisko",
     "place" : "Tarnowskie Góry - Bytom",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9635",
     "category" : "obiektyPoprzemyslowe"
@@ -856,7 +870,7 @@
     },
     {
     "position" : {"lat" : "49.601277", "lng" : "18.918685"},
-    "title" : "Wychodnia skalna Dorkowa Skała na Szarculi",
+    "title" : "Wychodnia skalna Dorkowa Skała na Szarculi w Wiśle",
     "place" : "Gmina Wisła",
     "hyperlink" : "https://pl.wikipedia.org/wiki/Dorkowa_Ska%C5%82a",
     "category" : "geostanowiskaProjektowane"
@@ -873,6 +887,13 @@
       "title" : "Mirowski Przełom Warty",
       "place" : "Mirów, blisko ul. Zawodziańskiej",
       "hyperlink" : "http://www.czestochowa.pl/data/other/cz.i.mirowski_przelom_warty.pdf",
+      "category" : "geostanowiskaProjektowane"
+    },
+    {
+      "position" : {"lat" : "49.836374", "lng" : "19.191011"},
+      "title" : "Osuwisko w Bujakowie – największe pod względem powierzchni w polskich Karpatach",
+      "place" : "Gminy Porąbka i Kozy",
+      "hyperlink" : "http://geoportal.pgi.gov.pl/portal/page/portal/SOPO/",
       "category" : "geostanowiskaProjektowane"
     },
     {
@@ -911,28 +932,28 @@
     },
     {
     "position" : {"lat" : "49.579690", "lng" : "19.345068"},
-    "title" : "Wodospad na potoku Glinne",
+    "title" : "Wodospad na potoku Glinne w Korbielowie",
     "place" : "Gmina Jeleśnia",
     "hyperlink" : "http://korbielow.net/rzeka-potok-korbielow/",
     "category" : "geostanowiskaProjektowane"
     },
     {
     "position" : {"lat" : "49.706217", "lng" : "18.825988"},
-    "title" : "Piaskowce godulskie w nieczynnym kamieniołomie Skalica w Ustroniu, Stanowisko dokumentacyjne",
+    "title" : "Kamieniołom piaskowców godulskich Skalica w Ustroniu (nieczynny), Stanowisko dokumentacyjne",
     "place" : "Ustroń, ul. Nadrzeczna",
     "hyperlink" : "http://www.ustron.bip.info.pl/dokument.php?iddok=11944&str=119",
     "category" : "geostanowiskaProjektowane"
     },
     {
     "position" : {"lat" : "50.314102", "lng" : "19.293742"},
-    "title" : "Kamieniołomy wapieni środkowotriasowych na Sroczej Górze w Dąbrowie Górniczej, Stanowisko dokumentacyjne",
+    "title" : "Kamieniołomy wapieni środkowotriasowych na Sroczej Górze w Dąbrowie Górniczej (nieczynne), Stanowisko dokumentacyjne",
     "place" : "Dąbrowa Górnicza, ul. Strzemieszycka",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9221",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "49.644030", "lng" : "19.056580"},
-    "title" : "Osuwisko na Muronce w rezerwacie Kuźnie k/Twardorzeczki",
+    "title" : "Osuwisko na Muronce w rezerwacie przyrody Kuźnie k. Twardorzeczki",
     "place" : "Gmina Lipowa",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=1712",
     "category" : "geostanowiskaInne"
@@ -952,7 +973,7 @@
       "category" : "geostanowiskaInne"
     },
     {
-      "position" : {"lat" : "50,761417 ", "lng" : "19,477611"},
+      "position" : {"lat" : "50,761417", "lng" : "19,477611"},
       "title" : "Kamieniołom utworów górnojurajskich i górnokredowych w Juliance (nieczynny)",
       "place" : "Gmina Przyrów",
       "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9377",
@@ -964,13 +985,6 @@
       "place" : "Gmina Mstów",
       "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=1621",
       "category" : "geostanowiskaInne"
-    },
-    {
-    "position" : {"lat" : "50.148449", "lng" : "18.879757"},
-    "title" : "Piaskowce górnokarbońskie w nieczynnym kamieniołomie w Łaziskach, Stanowisko dokumentacyjne",
-    "place" : "Łaziska Średnie",
-    "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9212",
-    "category" : "geostanowiskaProjektowane"
     },
     {
     "position" : {"lat" : "50.701694", "lng" : "19.355250"},
@@ -1009,61 +1023,61 @@
     },
     {
     "position" : {"lat" : "50.141030", "lng" : "18.855557"},
-    "title" : "Hałda stożkowa Skalny przy  KWK „Bolesław Śmiały”",
+    "title" : "Hałda Skalny przy KWK w Łaziskach",
     "place" : "Łaziska Górne",
     "hyperlink" : "https://pl.wikipedia.org/wiki/Ha%C5%82da_Skalny",
     "category" : "obiektyPoprzemyslowe"
     },
     {
     "position" : {"lat" : "50.518028", "lng" : "19.428889"},
-    "title" : "Hałda po eksploatacji rudy żelaza w Rudnikach, Geostanowisko",
+    "title" : "Hałda po eksploatacji środkowojurajskich rud żelaza w Rudnikach, Geostanowisko",
     "place" : "Gmina Włodowice",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=1790",
     "category" : "obiektyPoprzemyslowe"
     },
     {
     "position" : {"lat" : "50.769394", "lng" : "19.065094"},
-    "title" : "Hałda po eksploatacji rudy żelaza w Dźbowie, Geostanowisko",
+    "title" : "Hałda po eksploatacji środkowojurajskich rud żelaza w Dźbowie, Geostanowisko",
     "place" : "Częstochowa",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9499",
     "category" : "obiektyPoprzemyslowe"
     },
     {
     "position" : {"lat" : "50.733486", "lng" : "19.154336"},
-    "title" : "Hałda po eksploatacji rudy żelaza w Nowej Wsi, Geostanowisko",
+    "title" : "Hałda po eksploatacji środkowojurajskich rud żelaza w Nowej Wsi, Geostanowisko",
     "place" : "Gmina Poczesna",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9502",
     "category" : "obiektyPoprzemyslowe"
     },
     {
     "position" : {"lat" : "50.858833", "lng" : "18.870639"},
-    "title" : "Hałda po eksploatacji rudy żelaza w Golcach, Geostanowisko",
+    "title" : "Hałda po eksploatacji środkowojurajskich rud żelaza w Golcach, Geostanowisko",
     "place" : "Gmina Wręczyca Wielka",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9576",
     "category" : "obiektyPoprzemyslowe"
     },{
     "position" : {"lat" : "50.699047", "lng" : "18.896678"},
-    "title" : "Hałdy i wyrobiska po eksploatacji syderytów w Zumpach, Geostanowisko",
+    "title" : "Hałdy i wyrobiska po eksploatacji dolnojurajskich rud żelaza w Zumpach, Geostanowisko",
     "place" : "Gmina Boronów",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9427",
     "category" : "obiektyPoprzemyslowe"
     },
     {
     "position" : {"lat" : "50.256958", "lng" : "18.547761"},
-    "title" : "Hałdy po eksploatacji syderytów w Sośnicowicach, Geostanowiska",
+    "title" : "Hałdy po eksploatacji neogeńskich rud żelaza w Sośnicowicach -Smolnicy, Geostanowisko",
     "place" : "Gmina Sośnicowice",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9573",
     "category" : "obiektyPoprzemyslowe"
     },
     {
     "position" : {"lat" : "50.798056", "lng" : "18.649722"},
-    "title" : "Pozostałości po eksploatacji rud żelaza - Zborowskie i Panoszów, Geostanowisko",
+    "title" : "Pozostałości po eksploatacji dolnojurajskich rud żelaza Zborowskie i Panoszów, Geostanowisko",
     "place" : "Gmina Ciasna",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=648",
     "category" : "obiektyPoprzemyslowe"
     },
     {
-    "position" : {"lat" : "50.062383 ", "lng" : "18.467683"},
+    "position" : {"lat" : "50.062383", "lng" : "18.467683"},
     "title" : "Zabytkowa KWK Ignacy w Rybniku, Geostanowisko",
     "place" : "Rybnik, ul. Mościckiego 3",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9831",
@@ -1071,21 +1085,21 @@
     },
     {
     "position" : {"lat" : "50.064214", "lng" : "18.442596"},
-    "title" : "Hałda Szarlota w Rydułtowach, Geostanowisko",
+    "title" : "Hałda Szarlota przy KWK w Rydułtowach, Geostanowisko",
     "place" : "Rydułtowy",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9330",
     "category" : "obiektyPoprzemyslowe"
     },
     {
     "position" : {"lat" : "50.569673", "lng" : "19.645400"},
-    "title" : "Żelazna Dolina w Pradłach, Geostanowisko",
+    "title" : "Szlak Żelazna Dolina w Pradłach, Geostanowisko",
     "place" : "Gmina Kroczyce",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9390",
     "category" : "sciezkiTematyczne"
     },
     {
     "position" : {"lat" : "50.475417", "lng" : "19.334453"},
-    "title" : "Wyrobiska po eksploatacji węgla brunatnego w Porębie, Geostanowisko",
+    "title" : "Wyrobiska po eksploatacji dolnojurajskiego węgla brunatnego w Porębie, Geostanowisko",
     "place" : "Gmina Poręba",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9487",
     "category" : "obiektyPoprzemyslowe"
@@ -1106,7 +1120,7 @@
     },
     {
     "position" : {"lat" : "50.510722", "lng" : "18.988558"},
-    "title" : "Zatopiona Kopalnia Bibiela – Pasieki, Geostanowisko",
+    "title" : "Zatopiona Kopalnia rud Zn-Pb Bibiela – Pasieki, Geostanowisko",
     "place" : "Miasteczko Śląskie - Pasieki",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9863",
     "category" : "obiektyPoprzemyslowe"
@@ -1204,7 +1218,7 @@
     },
     {
     "position" : {"lat" : "50.101953", "lng" : "18.792800"},
-    "title" : "Piaskownia w Gardawicach",
+    "title" : "Wyrobisko piasków czwartorzędowych w Gardawicach",
     "place" : "Gmina Orzesze",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9488",
     "category" : "geostanowiskaInne"
@@ -1246,7 +1260,7 @@
     },
     {
     "position" : {"lat" : "50.276342", "lng" : "18.473647"},
-    "title" : "Wyrobisko iłów poznańskich w Sierakowicach",
+    "title" : "Wyrobisko iłów neogeńskich w Sierakowicach",
     "place" : "Gmina Sośnicowice",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9383",
     "category" : "geostanowiskaInne"
@@ -1260,14 +1274,14 @@
     },
     {
     "position" : {"lat" : "50.451472", "lng" : "19.553333"},
-    "title" : "Ostańce wapienne na Górze Janowskiego(Zamkowej)",
+    "title" : "Ostańce wapienne na Górze Janowskiego (Zamkowej) w Podzamczu",
     "place" : "Podzamcze k/Ogrodzieńca",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=1794",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "49.758550", "lng" : "19.410017"},
-    "title" : "Jaskinia Komonieckiego i wodospad Dusica",
+    "title" : "Jaskinia Komonieckiego i wodospad Dusica k. wsi Las",
     "place" : "Gmina Ślemień",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=1337",
     "category" : "geostanowiskaInne"
@@ -1323,14 +1337,14 @@
     },
     {
     "position" : {"lat" : "50.561206", "lng" : "19.140175"},
-    "title" : "Łomy wapieni woźnickich w Krusinie",
+    "title" : "Łomy wapieni górnotriasowych w Krusinie",
     "place" : "Gmina Koziegłowy",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9713",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "50.600975", "lng" : "19.113169"},
-    "title" : "Żwiry połomskie w Gniazdowie 1",
+    "title" : "Wyrobisko żwirów dolnojurajskich w Gniazdowie 1",
     "place" : "Gmina Koziegłowy",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9578",
     "category" : "geostanowiskaInne"
@@ -1358,7 +1372,7 @@
     },
     {
     "position" : {"lat" : "50.767222", "lng" : "19.270778"},
-    "title" : "Ostańce skalne w rezerwacie Góry Towarne k/Olsztyna",
+    "title" : "Ostańce wapienne w rezerwacie przyrody Góry Towarne k. Olsztyna",
     "place" : "Gmina Olsztyn",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=108",
     "category" : "geostanowiskaInne"
@@ -1393,7 +1407,7 @@
     },
     {
     "position" : {"lat" : "49.630083", "lng" : "18.855639"},
-    "title" : "Krzakoska Skała w Beskidzie Śląskim",
+    "title" : "Krzakoska Skała w Wiśle",
     "place" : "Gmina Wisła",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=6550",
     "category" : "geostanowiskaInne"
@@ -1407,28 +1421,28 @@
     },
     {
     "position" : {"lat" : "50.602217", "lng" : "19.127817"},
-    "title" : "Żwiry połomskie w Gniazdowie 2",
+    "title" : "Wyrobisko żwirów dolnojurajskich w Gniazdowie 2",
     "place" : "Gmina Koziegłowy",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9577",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "50.559128", "lng" : "19.164806"},
-    "title" : "Żwiry połomskie w Markowicach",
+    "title" : "Wyrobisko żwirów dolnojurajskich w Markowicach",
     "place" : "Gmina Koziegłowy",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9716",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "50.566786", "lng" : "19.163497"},
-    "title" : "Żwiry połomskie w Rzeniszowie",
+    "title" : "Wyrobisko żwirów dolnojurajskich w Rzeniszowie",
     "place" : "Gmina Koziegłowy",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9216",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "50.315000", "lng" : "18.868167"},
-    "title" : "Dawny kamieniołom Sztajnbruch w Rudzie Śląskiej",
+    "title" : "Dawny kamieniołom piaskowców górnokarbońskich Sztajnbruch w Rudzie Śląskiej",
     "place" : "Ruda Śląska, ul. Wincentego",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=7352",
     "category" : "geostanowiskaInne"
@@ -1442,28 +1456,35 @@
     },
     {
     "position" : {"lat" : "50.411972", "lng" : "19.277611"},
-    "title" : "Pozostałości dawnej eksploatacji rud Pb-Ag-Zn na Trzebiesławskiej Górze, Geostanowisko",
+    "title" : "Pozostałości po eksploatacji środkowotriasowych rud Pb-Ag-Zn na Trzebiesławskiej Górze, Geostanowisko",
     "place" : "Dąbrowa Górnicza - Ujejsce",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=10172",
     "category" : "obiektyPoprzemyslowe"
     },
     {
     "position" : {"lat" : "50.206184", "lng" : "18.386197"},
-    "title" : "Dolina rzeki Rudy",
+    "title" : "Dolina rzeki Rudy w Kuźni Raciborskiej",
     "place" : "Gmina Kuźnia Raciborska",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9391",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "50.689750", "lng" : "19.403889"},
-    "title" : "Brama Twardowskiego - ostaniec skalny",
+    "title" : "Ostaniec wapienny Brama Twardowskiego k. Złotego Potoku",
     "place" : "Gmina Janów",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9171",
     "category" : "geostanowiskaInne"
     },
     {
+      "position" : {"lat" : "50.148449", "lng" : "18.879757"},
+      "title" : "Kamieniołom piaskowców górnokarbońskich w Łaziskach (nieczynny), Stanowisko dokumentacyjne",
+      "place" : "Łaziska Średnie",
+      "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9212",
+      "category" : "geostanowiskaInne"
+    },
+    {
     "position" : {"lat" : "50.635289", "lng" : "19.427222"},
-    "title" : "Wzgórze ostańcowe Czarny Kamień w Moczydle ",
+    "title" : "Wzgórze ostańcowe Czarny Kamień w Moczydle",
     "place" : "Gmina Niegowa",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9827",
     "category" : "geostanowiskaInne"
@@ -1498,42 +1519,42 @@
     },
     {
     "position" : {"lat" : "50.215836", "lng" : "18.496614"},
-    "title" : "Hałdy po kopalniach rudy żelaza w Stanicy-Górniki, Geostanowisko",
+    "title" : "Hałdy po eksploatacji neogeńskich rud żelaza w Stanicy-Górniki, Geostanowisko",
     "place" : "Gmina Pilchowice",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9491",
     "category" : "obiektyPoprzemyslowe"
     },
     {
     "position" : {"lat" : "50.572833", "lng" : "19.530167"},
-    "title" : "Ostańce skalne w rezerwacie przyrody nieożywionej Góra Zborów w Podlesicach",
+    "title" : "Ostańce wapienne w rezerwacie przyrody nieożywionej Góra Zborów w Podlesicach",
     "place" : "Gmina Kroczyce",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=178",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "50.421672", "lng" : "19.621708"},
-    "title" : "Ostańce skalne Ruskie Góry w Ryczowie",
+    "title" : "Ostańce wapienne Ruskie Góry w Ryczowie",
     "place" : "Gmina Ogrodzieniec",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9714",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "50.524139", "lng" : "19.522750"},
-    "title" : "Skała Okiennik Wielki w Piasecznie",
+    "title" : "Skała wapienna Okiennik Wielki w Piasecznie",
     "place" : "Gmina Kroczyce",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=1618",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "49.663722", "lng" : "19.066278"},
-    "title" : "Dolina Zimnika i Leśnianki w Beskidzie Śląskim",
+    "title" : "Wychodnie skalne w dolinie potoku Zimnik k. Lipowej",
     "place" : "Gmina Lipowa",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=9366",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "49.595056", "lng" : "18.832083"},
-    "title" : "Ostańce piaskowcowe pomiędzy Stożkiem Wielkim a Kiczorami",
+    "title" : "Skałki piaskowcowe pomiędzy Stożkiem Wielkim a Kiczorami w Wiśle",
     "place" : "Gmina Wisła",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=7372",
     "category" : "geostanowiskaInne"
@@ -1554,21 +1575,21 @@
     },
     {
     "position" : {"lat" : "50.729389", "lng" : "19.291917"},
-    "title" : "Jaskinia Komarowa w rezerwacie Sokole Góry k/Olsztyna",
+    "title" : "Jaskinia Komarowa w rezerwacie przyrody Sokole Góry k. Olsztyna",
     "place" : "Gmina Olsztyn",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=10084",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "49.548500", "lng" : "18.975222"},
-    "title" : "Kamieniołom piaskowców krośnieńskich Koczy Zamek  w Istebnej",
+    "title" : "Kamieniołom piaskowców krośnieńskich Koczy Zamek w Istebnej (nieczynny)",
     "place" : "Gmina Istebna",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=909",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "50.550583", "lng" : "19.520667"},
-    "title" : "Zamek Bakowiec-Morsko",
+    "title" : "Skały wapienne w rejonie Zamku Bąkowiec w Morsku",
     "place" : "Gmina Zawiercie",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=4190",
     "category" : "geostanowiskaInne"
@@ -1582,42 +1603,42 @@
     },
     {
     "position" : {"lat" : "49.570874", "lng" : "19.054906"},
-    "title" : "Kamieniołom warstw krośnieńskich w Kamesznicy",
+    "title" : "Kamieniołom warstw krośnieńskich w Kamesznicy (nieczynny)",
     "place" : "Gmina Milówka",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=957",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "49.576333", "lng" : "19.010083"},
-    "title" : "Wychodnie skalne w potoku Janoszka",
+    "title" : "Wychodnie skalne w potoku Janoszka k. Kamesznicy",
     "place" : "Gmina Milówka",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=955",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "49.627511", "lng" : "18.907381"},
-    "title" : "Zlepieńce malinowskie w Wiśle-Nowej Osadzie",
+    "title" : "Wychodnia zlepieńców malinowskich w Wiśle-Nowej Osadzie",
     "place" : "Wisła, ul. Czarne",
     "hyperlink" : "http://geostanowiska.pgi.gov.pl/gsapp_v2/ObjectDetails.aspx?id=911",
     "category" : "geostanowiskaInne"
     },
     {
     "position" : {"lat" : "49.666535", "lng" : "19.075537"},
-    "title" : "Ścieżka przyrodnicza W Dolinie Zimnika, Geostanowisko",
+    "title" : "Ścieżka przyrodnicza Dolina Zimnika w Lipowej, Geostanowisko",
     "place" : "Lipowa, Potok Zimnik",
     "hyperlink" : "https://lipowaiokolice.blogspot.com/2013/04/sciezka-edukacyjna-dolina-zimnika.html",
     "category" : "sciezkiTematyczne"
     },
     {
     "position" : {"lat" : "50.438005", "lng" : "19.669163"},
-    "title" : "Ścieżka przyrodnicza Dolina Wodąca, Geostanowiska",
+    "title" : "Ścieżka przyrodnicza Dolina Wodąca w Smoleniu, Geostanowiska",
     "place" : "Smoleń, Gmina Pilica",
     "hyperlink" : "http://katowice.rdos.gov.pl/sciezki-przyrodnicze-na-obszarach-naturowych",
     "category" : "sciezkiTematyczne"
     },
     {
     "position" : {"lat" : "50.772921", "lng" : "19.240594"},
-    "title" : "Ścieżka edukacyjno-leśna Zielona Góra, Geostanowisko",
+    "title" : "Ścieżka edukacyjna Zielona Góra w Kusiętach, Geostanowisko",
     "place" : "Kusięta, Gmina Olsztyn",
     "hyperlink" : "http://katowice.rdos.gov.pl/sciezki-przyrodnicze-na-obszarach-naturowych",
     "category" : "sciezkiTematyczne"
@@ -1645,21 +1666,21 @@
     },
     {
     "position" : {"lat" : "50.702943", "lng" : "19.431732"},
-    "title" : "Ścieżka dydaktyczna po rezerwacie Parkowe k/Złotego Potoku, Geostanowiska ",
+    "title" : "Ścieżka dydaktyczna po rezerwacie przyrody Parkowe k. Złotego Potoku, Geostanowiska",
     "place" : "przy drodze Złoty Potok – Żarki",
     "hyperlink" : "http://katowice.rdos.gov.pl/sciezki-przyrodnicze-na-obszarach-naturowych",
     "category" : "sciezkiTematyczne"
     },
     {
     "position" : {"lat" : "50.730878", "lng" : "19.264925"},
-    "title" : "Ścieżka dydaktyczna po rezerwacie Sokole Góry, Geostanowiska",
+    "title" : "Ścieżka dydaktyczna po rezerwacie przyrody Sokole Góry w Olsztynie, Geostanowiska",
     "place" : "Olsztyn",
     "hyperlink" : "http://katowice.rdos.gov.pl/sciezki-przyrodnicze-na-obszarach-naturowych",
     "category" : "sciezkiTematyczne"
     },
     {
     "position" : {"lat" : "50.750442", "lng" : "19.272888"},
-    "title" : "Ścieżka dydaktyczna po rezerwacie Sokole Góry, Geostanowiska",
+    "title" : "Ścieżka dydaktyczna po rezerwacie przyrody Sokole Góry w Olsztynie, Geostanowiska",
     "place" : "Olsztyn",
     "hyperlink" : "http://katowice.rdos.gov.pl/sciezki-przyrodnicze-na-obszarach-naturowych",
     "category" : "sciezkiTematyczne"

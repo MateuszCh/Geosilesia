@@ -41,7 +41,7 @@
             category: 'trasyPodziemne'
         },
         uzdrowiskaIObiektyUzdrowiskowe: {
-            name: "Uzdrowiska i obiekty uzdrowiskowe",
+            name: "Uzdrowiska i obiekty lecznicze",
             icon: "images/markers/spa.png",
             category: 'uzdrowiskaIObiektyUzdrowiskowe'
         }
