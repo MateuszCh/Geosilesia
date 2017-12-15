@@ -93,7 +93,7 @@
     },
     {
       "position" : {"lat" : "50.296654", "lng" : "18.806545"},
-      "title" : "Sztolnia Królowa Luiza w Zabrzu – Szyb Carnall (w rewitalizacji)",
+      "title" : "Sztolnia Królowa Luiza w Zabrzu – Szyb Carnall",
       "place" : "Zabrze, ul. Wolności 410",
       "hyperlink" : "http://www.sztolnialuiza.pl/index.php/sztolnia-krolowa-luiza",
       "category" : "trasyPodziemne"
@@ -186,35 +186,35 @@
       "position" : {"lat" : "50.439148", "lng" : "19.667091"},
       "title" : "Ośrodek edukacyjny ZPKWŚ w Smoleniu",
       "place" : "Smoleń, Gmina Pilica",
-      "hyperlink" : "http://www.zpk.com.pl/index.php/osrodek-smolen",
+      "hyperlink" : "http://www.zpk.com.pl/osrodki-edukacyjne/osrodek-smolen",
       "category" : "muzeaGeologiczneIDinoparki"
     },
     {
       "position" : {"lat" : "50.313082", "lng" : "19.131317"},
       "title" : "Ośrodek edukacyjny ZPKWŚ w Będzinie",
       "place" : "Będzin, ul. I. Krasickiego 25",
-      "hyperlink" : "http://www.zpk.com.pl/index.php/bedzin",
+      "hyperlink" : "http://www.zpk.com.pl/osrodki-edukacyjne/bedzin",
       "category" : "muzeaGeologiczneIDinoparki"
     },
     {
       "position" : {"lat" : "50.734120", "lng" : "18.886205"},
       "title" : "Ośrodek edukacyjny ZPKWŚ w Kalinie",
       "place" : "Kalina, ul. Lompy 6",
-      "hyperlink" : "http://www.zpk.com.pl/index.php/osrodek-kalina",
+      "hyperlink" : "http://www.zpk.com.pl/osrodki-edukacyjne/osrodek-kalina",
       "category" : "muzeaGeologiczneIDinoparki"
     },
     {
       "position" : {"lat" : "50.191491", "lng" : "18.445949"},
       "title" : "Ośrodek edukacyjny ZPKWŚ w Rudach",
       "place" : "Rudy, ul. Raciborska 10",
-      "hyperlink" : "http://www.zpk.com.pl/index.php/osrodek-rudy",
+      "hyperlink" : "http://www.zpk.com.pl/osrodki-edukacyjne/osrodek-rudy",
       "category" : "muzeaGeologiczneIDinoparki"
     },
     {
       "position" : {"lat" : "49.691166", "lng" : "19.184952"},
       "title" : "Ośrodek edukacyjny ZPKWŚ w Żywcu",
       "place" : "Żywiec, ul. Łączki 44 a",
-      "hyperlink" : "http://www.zpk.com.pl/index.php/osrodek-zywiec",
+      "hyperlink" : "http://www.zpk.com.pl/osrodki-edukacyjne/osrodek-zywiec",
       "category" : "muzeaGeologiczneIDinoparki"
     },
     {

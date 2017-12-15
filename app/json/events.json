@@ -1,6 +1,14 @@
 {
   "news": [
     {
+      "header" : "Nowa trasa podziemna w Sztolni Królowa Luiza",
+      "dateAndPlace" : "30 września 2017, Zabrze ",
+      "hyperlink" : ["http://sztolnialuiza.pl/index.php/sztolnia-krolowa-luiza"],
+      "paragraphs" : [
+        "W Zabrzu w dniu 30 września otwarto nową trasę podziemną: Podziemna Podróż w Czasie. Trasa turystyczna rozpoczyna się w budynku Łaźni Łańcuszkowej przy ul. Wolności 408 i obejmuje wyrobiska zarówno Głównej Kluczowej Sztolni Dziedzicznej, jak i Kopalni Królowa Luiza."
+      ]
+    },
+    {
       "header" : "Podziemia Tarnogórsko-Bytomskie na Liście UNESCO",
       "dateAndPlace" : "10 lipca 2017, Kraków",
       "hyperlink" : ["http://whc.unesco.org/en/list/1539"],

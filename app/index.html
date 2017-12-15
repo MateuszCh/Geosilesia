@@ -6,13 +6,13 @@
         <title>Geosilesia</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/main.css">
-        <script src="minjs/libs.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmB631kh-m9oK9PL_i4OEmvkRqjcdeWzg" ></script>
-        <script src="minjs/app.js"></script>
     </head>
     <body ng-app="geosilesia" ng-controller="MainController" ng-class="{'closedScroll' : $root.blur && ($root.isS || $root.isM)}">
         <header></header>
         <div ng-view="" class="fade" id="page"></div>
         <button class="button-up" ng-show="showButtonUp" du-smooth-scroll="page"><img class="button-up__image" src="images/arrow-up.png"></button>
+        <script src="minjs/libs.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmB631kh-m9oK9PL_i4OEmvkRqjcdeWzg" ></script>
+        <script src="minjs/app.js"></script>
     </body>
 </html>
