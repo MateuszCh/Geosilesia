@@ -17,7 +17,7 @@
         var vm = this;
         vm.$onInit = onInit;
         vm.$onChanges = onChanges;
-        var map, currentCenter, centering, stopping, markers = [];
+        var map, currentCenter, centering, stopping, markerCluster, markers = [];
 
         var mapOptions = {
             center: {
@@ -129,6 +129,11 @@
                 })(marker));
                 markers.push(marker);
             });
+
+            markerCluster = new MarkerClusterer(map, markers, {
+                imagePath: 'images/markers/'
+            });
+
         }
 
         function setBounds(){
