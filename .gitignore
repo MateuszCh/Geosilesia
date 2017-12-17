@@ -1,5 +1,6 @@
 node_modules/
 .idea/
-app/minjs/
-app/css/
-app/.htaccess
+src/.htaccess
+tmp
+dist
+package-lock.json
