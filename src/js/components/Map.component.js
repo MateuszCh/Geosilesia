@@ -4,7 +4,8 @@
             places: '<',
             options: '<',
             centerMap: '<',
-            currentResult: '<'
+            currentResult: '<',
+            markerCluster: '<'
         },
         controllerAs: 'vm',
         controller: MapController,
@@ -107,7 +108,7 @@
                     position: position,
                     map: map,
                     title: place.title || "",
-                    animation: $rootScope.isS ? "" : google.maps.Animation.DROP,
+                    animation: ($rootScope.isS || vm.markerCluster) ? "" : google.maps.Animation.DROP,
                     icon: place.type ? ""  : iconsForMarkers[place.category].icon
                 });
                 google.maps.event.addListener(marker, 'click', (function(marker){
@@ -129,11 +130,16 @@
                 })(marker));
                 markers.push(marker);
             });
+ 
+            if(markerCluster){
+                markerCluster.clearMarkers();
+            }
 
-            markerCluster = new MarkerClusterer(map, markers, {
-                imagePath: 'images/markers/'
-            });
-
+            if(vm.markerCluster){
+                markerCluster = new MarkerClusterer(map, markers, {
+                    imagePath: 'images/markers/'
+                });
+            }
         }
 
         function setBounds(){
