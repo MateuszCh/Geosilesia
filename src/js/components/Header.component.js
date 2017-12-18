@@ -7,8 +7,8 @@
         controllerAs: 'vm',
         controller: HeaderController
     });
-    HeaderController.$inject = ['$window', '$location', '$scope', '$timeout', '$element'];
-    function HeaderController($window, $location, $scope, $timeout, $element){
+    HeaderController.$inject = ['$window', '$location', '$scope', '$timeout'];
+    function HeaderController($window, $location, $scope, $timeout){
 
         var vm = this;
         vm.$onInit = onInit;
@@ -75,14 +75,8 @@
             }, 500);
         }
         function hideHeader(){
-            var currentScroll = $window.scrollY;
-            var heightOfHeader = document.getElementById('header').offsetHeight;
-            if(previousScroll < currentScroll){
-                vm.hideHeader = true;
-                $element.children().addClass('header--hidden');
-            } else if(previousScroll > currentScroll && (!document.getElementById('search') || currentScroll < $window.innerHeight - heightOfHeader)) {
-                vm.hideHeader = false;
-            }
+            var currentScroll = window.scrollY;
+            vm.hideHeader = (((previousScroll < currentScroll) && (currentScroll * 2 > window.innerHeight)) || (!!document.getElementById('search') && (currentScroll > window.innerHeight - document.getElementById('header').offsetHeight)));
             previousScroll = currentScroll;
         }
     }
