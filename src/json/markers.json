@@ -281,6 +281,13 @@
       "category" : "uzdrowiskaIObiektyUzdrowiskowe"
     },
     {
+      "position" :{"lat": "50.104483", "lng" : "18.985581"},
+      "title": "Tężnia solankowa w Tychach",
+      "place" : "Tychy, ul. Uczniowska",
+      "hyperlink" : "http://umtychy.pl/artykul/4810/w-tychach-powstanie-teznia-solankowa",
+      "category" : "uzdrowiskaIObiektyUzdrowiskowe"
+    },
+    {
       "position" : {"lat" : "49.813844", "lng" : "18.719806"},
       "title" : "Tężnia solankowa w Dębowcu",
       "place" : "Dębowiec, ul. Katowicka / Szkolna",
