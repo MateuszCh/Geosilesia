@@ -5,16 +5,13 @@
   bottom: 0;
   left: 0;
   right: 0;
-  opacity: 1;
-  &.ng-hide {
-    opacity: 0;
-  }
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease, visibility 0s linear 0.2s;
 
-  &.ng-hide-remove {
-    transition: opacity .5s ease;
-  }
-
-  &.ng-hide-add {
+  &--hidden {
+    opacity: 1;
+    visibility: visible;
     transition: opacity .5s ease;
   }
 
@@ -26,7 +23,8 @@
     left: 0;
     right: 0;
     z-index: 6;
-    background-color: transparent;
+    background-color: white;
+    opacity: 0.5;
     @include laptop {
       display: block;
     }
