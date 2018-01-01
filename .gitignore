@@ -1,6 +1,9 @@
-node_modules/
+app/node_modules/
 .idea/
-src/.htaccess
-tmp
-dist
-package-lock.json
+app/public/.htaccess
+app/public/css
+app/public/html
+app/public/js
+app/public/index.html
+app/public/images
+app/package-lock.json
