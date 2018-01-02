@@ -25,7 +25,7 @@
         var geocoder = new google.maps.Geocoder();
 
         function onInit(){
-            $http.get("json/markers.json").then(function (response) {
+            $http.get("/api/markers").then(function (response) {
                 vm.places = response.data.obiekty;
                 vm.markers = vm.places.slice();
                 vm.markers.sort(function (a, b) {

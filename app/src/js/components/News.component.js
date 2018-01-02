@@ -16,7 +16,7 @@
         vm.$onInit = onInit;
 
         function onInit() {
-            $http.get("json/events.json").then(function (response) {
+            $http.get("/api/events").then(function (response) {
                 vm.news = response.data.news;
             });
         }

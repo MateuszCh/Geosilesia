@@ -17,10 +17,10 @@
         vm.prev = prev;
 
         function onInit() {
-            $http.get("json/galleries/" + $routeParams.galleryId + ".json").then(function (gallery) {
+            $http.get('/api/gallery?id=' + $routeParams.galleryId).then(function(gallery){
                 vm.gallery = gallery.data;
-                vm.numberOfImages = gallery.data.images.length;
-            });
+                vm.numberOfImages = vm.gallery.images.length;
+            })
         }
 
         function openFullMode(img) {

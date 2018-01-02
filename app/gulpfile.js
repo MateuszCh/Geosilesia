@@ -5,12 +5,11 @@ const gulp = require('gulp'),
       imagemin = require('gulp-imagemin'),
       uglify = require('gulp-uglify'),
       prefix = require('gulp-autoprefixer'),
-      browserSync = require('browser-sync'),
-      reload = browserSync.reload,
+      browserSync = require('browser-sync').create(),
       concat = require('gulp-concat'),
       htmlmin = require('gulp-htmlmin'),
       cleancss = require('gulp-clean-css'),
-      history = require('connect-history-api-fallback'),
+      nodemon = require('gulp-nodemon'),
       del = require('del');
 
 const paths = {
@@ -51,34 +50,33 @@ function errorLog(error){
 gulp.task('html', function () {
     return gulp.src(paths.srcHTML)
                .pipe(htmlmin({collapseWhitespace: true}))
-               .pipe(gulp.dest(paths.public))
-               .pipe(reload({stream: true}));
+               .pipe(gulp.dest(paths.public));
 });
 
 gulp.task('htmlWatch', function () {
     return gulp.src(paths.srcTemplates)
                .pipe(htmlmin({collapseWhitespace: true}))
                .pipe(gulp.dest(paths.publicHTML))
-               .pipe(reload({stream: true}));
+               .pipe(browserSync.stream());
 });
 
 gulp.task('css', function(){
-    gulp.src(paths.srcSCSS)
+   return gulp.src(paths.srcSCSS)
         .pipe(sass())
         .on('error', errorLog)
         .pipe(prefix('> 1%'))
         .pipe(cleancss())
         .pipe(gulp.dest(paths.publicCSS))
-        .pipe(reload({stream: true}));
+        .pipe(browserSync.stream());
 });
 
 gulp.task('js', function(){
-    gulp.src(vendor.concat([paths.srcJS]))
+    return gulp.src(vendor.concat([paths.srcJS]))
         .on('error', errorLog)
         .pipe(concat('app.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest(paths.publicJS))
-        .pipe(reload({stream: true}));
+        .pipe(browserSync.stream());
 });
 
 gulp.task('images', function(){
@@ -87,35 +85,39 @@ gulp.task('images', function(){
         .pipe(gulp.dest(paths.publicIMAGES));
 });
 
-// Browser-Sync Task
-gulp.task('browser-sync', function(){
-    browserSync({
-        server: {
-            baseDir: "./public/",
-            middleware: [ history() ]
-        }
-    })
-});
-
 gulp.task('copy', ['html', 'css', 'js', 'images']);
 
 gulp.task('inject', ['copy'], function(){
     const css = gulp.src('public/css/main.css');
     const js = gulp.src('public/js/app.min.js');
     return gulp.src(paths.publicIndex)
-               .pipe(inject( css.pipe(hash(opts) ), { relative: true }))
-               .pipe(inject( js.pipe(hash(opts)), { relative: true }))
-               .pipe(gulp.dest(paths.public))
-               .pipe(reload({stream: true}));
+        .pipe(inject( css.pipe(hash(opts) ), { relative: true }))
+        .pipe(inject( js.pipe(hash(opts)), { relative: true }))
+        .pipe(gulp.dest(paths.public));
 });
 
-gulp.task('watch', [ 'inject', 'browser-sync'], function () {
+gulp.task('nodemon', ['inject'], function(){
+    return nodemon({script: 'app.js'});
+});
+
+// Browser-Sync Task
+gulp.task('browser-sync', ['nodemon'], function(){
+    browserSync.init({
+        port: 3001,
+        proxy: {
+            target: 'localhost:3000',
+            ws: false
+        }
+    })
+});
+
+gulp.task('watch', [ 'browser-sync'], function () {
     gulp.watch([paths.srcTemplates],['htmlWatch']);
     gulp.watch([paths.srcSCSSs],['css']);
     gulp.watch([paths.srcJS],['js']);
 });
 
-gulp.task('default', ['inject']);
+gulp.task('default', ['nodemon']);
 
 gulp.task('clean', function () {
     del([paths.publicIndex, paths.publicHTML, paths.publicCSS, paths.publicJS, paths.publicIMAGES]);

@@ -28,7 +28,7 @@
         ];
 
         function onInit() {
-            $http.get("json/gallery.json").then(function (response) {
+            $http.get("/api/gallery").then(function (response) {
                 vm.galleries = response.data.gallery;
             });
         }
