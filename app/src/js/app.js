@@ -3,8 +3,6 @@
 
     angular.module('geosilesia').controller('MainController', ['$scope', '$window', '$rootScope', function($scope, $window, $rootScope){
 
-
-
         $scope.init = function(){
             setSize();
         };
@@ -14,13 +12,8 @@
             setSize(true);
         });
 
-
         function showButtonUp(){
-            if (this.pageYOffset >= 100) {
-                $scope.showButtonUp = true;
-            } else {
-                $scope.showButtonUp = false;
-            }
+            this.pageYOffset >= 100 ? $scope.showButtonUp = true : $scope.showButtonUp = false;
             $scope.$apply();
         }
 
