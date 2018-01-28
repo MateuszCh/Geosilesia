@@ -16,12 +16,12 @@
     cursor: pointer;
     font-family: $text-font;
     color: white;
-    font-weight: 800;
     padding: 1.5rem 3.125rem .625rem 3.125rem;
     background-color: $color3;
     position: relative;
     font-weight: normal;
     font-size: 1.3rem;
+    z-index: 5;
     @include tablet  {
       width: auto;
       padding: 2rem 1.25rem .625rem 1.25rem;
@@ -48,6 +48,32 @@
         border-top: 1.875rem solid white;
       }
     }
+    &__right,
+    &__left {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      //background-color: $color3;
+      width: 85px;
+      border-bottom: 85px solid $color3;
+    }
+
+    &__right {
+      left: 100%;
+      border-right: 85px solid transparent;
+    }
+    &__left {
+      right: 100%;
+      border-left: 85px solid transparent;
+    }
+  }
+  &__bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: $color3;
+    bottom: 0;
+    height: 25px;
   }
 }
 

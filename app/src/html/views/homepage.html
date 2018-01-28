@@ -1,8 +1,13 @@
 <section class="homepage-banner"
          ng-style="{'height' : ($root.isS || $root.isM) ? vm.bannerHeight : '100vh'}">
-    <h2 class="homepage-banner__heading"
-        du-smooth-scroll="search">Atrakcje Geoturystyczne Województwa Śląskiego
-    </h2>
+    <div>
+        <h2 class="homepage-banner__heading"
+            du-smooth-scroll="search">Atrakcje Geoturystyczne Województwa Śląskiego
+            <span class="homepage-banner__heading__left"></span>
+            <span class="homepage-banner__heading__right"></span>
+        </h2>
+        <span class="homepage-banner__bar"></span>
+    </div>
     <div class="info info--top">
         <div class="info__figure">
             <img class="info__figure__image"
