@@ -10,6 +10,7 @@
     function GalleryController($http, $routeParams, $rootScope, $timeout){
         var vm = this;
         vm.$onInit = onInit;
+        vm.$onDestroy = onDestroy;
         vm.showFullMode = false;
         vm.openFullMode = openFullMode;
         vm.closeFullScreenMode = closeFullScreenMode;
@@ -20,7 +21,33 @@
             $http.get('/api/gallery?id=' + $routeParams.galleryId).then(function(gallery){
                 vm.gallery = gallery.data;
                 vm.numberOfImages = vm.gallery.images.length;
-            })
+            });
+
+            window.addEventListener('keydown', setKeyEvent);
+
+        }
+
+        function onDestroy(){
+            window.removeEventListener('keydown', setKeyEvent);
+        }
+
+        function setKeyEvent(e){
+            if(e.defaultPrevented){
+                return;
+            }
+            switch(e.key){
+                case "ArrowLeft":
+                    prev();
+                    break;
+                case "ArrowRight":
+                    next();
+                    break;
+                case "Escape":
+                    closeFullScreenMode();
+                    break;
+                default:
+                    return;
+            }
         }
 
         function openFullMode(img) {

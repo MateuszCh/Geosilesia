@@ -9,7 +9,7 @@ const gulp = require('gulp'),
       concat = require('gulp-concat'),
       htmlmin = require('gulp-htmlmin'),
       cleancss = require('gulp-clean-css'),
-      nodemon = require('gulp-nodemon'),
+      // nodemon = require('gulp-nodemon'),
       del = require('del');
 
 const paths = {
@@ -96,12 +96,12 @@ gulp.task('inject', ['copy'], function(){
         .pipe(gulp.dest(paths.public));
 });
 
-gulp.task('nodemon', ['inject'], function(){
-    return nodemon({script: 'app.js'});
-});
+// gulp.task('nodemon', ['inject'], function(){
+//     return nodemon({script: 'app.js'});
+// });
 
 // Browser-Sync Task
-gulp.task('browser-sync', ['nodemon'], function(){
+gulp.task('browser-sync', ['inject'], function(){
     browserSync.init({
         port: 3001,
         proxy: {
@@ -117,7 +117,7 @@ gulp.task('watch', [ 'browser-sync'], function () {
     gulp.watch([paths.srcJS],['js']);
 });
 
-gulp.task('default', ['nodemon']);
+gulp.task('default', ['inject']);
 
 gulp.task('clean', function () {
     del([paths.publicIndex, paths.publicHTML, paths.publicCSS, paths.publicJS, paths.publicIMAGES]);
