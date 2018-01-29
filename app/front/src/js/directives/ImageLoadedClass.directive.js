@@ -2,13 +2,18 @@
     angular.module('geosilesia').directive('imageLoaded', function() {
         return {
             restrict: 'A',
-            link: link
+            link: link,
+            scope: {
+                loadClass: "@"
+            }
         };
         function link(scope, element){
-            var img = element.find('img');
-            img.bind('load', function () {
-                element.addClass('figury-up');
-            })
+            if(scope.loadClass){
+                var img = element.find('img');
+                img.bind('load', function () {
+                    element.addClass(scope.loadClass);
+                })
+            }
         }
     });
 })();

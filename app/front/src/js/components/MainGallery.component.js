@@ -18,19 +18,30 @@
         vm.changeCategory = changeCategory;
         var timer;
 
-        vm.categories = [
-            {category: 'wyzyna', categoryText : 'krainy geograficzne'},
-            {category: 'mineralySkaly', categoryText : 'minerały i skały'},
-            {category : 'dziedzictwo', categoryText : 'dziedzictwo poprzemysłowe'},
-            {category : 'sciezki', categoryText : 'ścieżki tematyczne'},
-            {category : 'wydarzenia', categoryText : 'wydarzenia'},
-            {category : 'all', categoryText: 'wszystkie'}
-        ];
-
         function onInit() {
-            $http.get("/api/gallery").then(function (response) {
+            // $http.get("/api/gallery").then(function (response) {
+            //     vm.galleries = response.data.gallery;
+            //     setCategories(vm.galleries);
+            // });
+            $http.get("json/gallery.json").then(function (response) {
                 vm.galleries = response.data.gallery;
+                setCategories(vm.galleries);
             });
+        }
+
+        function setCategories(galleries){
+            var categories = {};
+            galleries.forEach(function(gallery){
+                categories[gallery.category] = {
+                    category: gallery.category,
+                    categoryText: gallery.categoryTitle
+                }
+            });
+            categories.all = {
+                category: "all",
+                categoryText: "wszystkie"
+            };
+            vm.categories = categories;
         }
 
         function changeCategory(category){

@@ -6,7 +6,9 @@
            ng-repeat="desc in ::vm.gallery.description"></p>
         <figure class="gallery__figure"
                 ng-click="vm.openFullMode($index)"
-                ng-repeat="image in ::vm.gallery.images" image-loaded="">
+                ng-repeat="image in ::vm.gallery.images"
+                image-loaded
+                load-class="figury-up">
             <img class="gallery__figure__image"
                  ng-src="{{::image.src}}">
             <figcaption class="gallery__figure__text"

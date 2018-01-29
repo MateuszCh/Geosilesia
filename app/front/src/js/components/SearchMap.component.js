@@ -24,8 +24,17 @@
         var searchQty = 10;
 
         function onInit(){
-            loadGoogleMaps();
-            $http.get("/api/markers").then(function (response) {
+            if(!(angular.isDefined(window.google) && angular.isDefined(window.google.maps))){
+                loadGoogleMaps();
+            }
+            // $http.get("/api/markers").then(function (response) {
+            //     vm.places = response.data.obiekty;
+            //     vm.markers = vm.places.slice();
+            //     vm.markers.sort(function (a, b) {
+            //         return b.position.lat - a.position.lat;
+            //     });
+            // });
+            $http.get("json/markers.json").then(function (response) {
                 vm.places = response.data.obiekty;
                 vm.markers = vm.places.slice();
                 vm.markers.sort(function (a, b) {

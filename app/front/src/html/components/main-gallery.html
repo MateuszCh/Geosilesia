@@ -10,6 +10,7 @@
     <a class="photos__link"
        ng-href="galeria/{{gallery.id}}"
        image-loaded
+       load-class="figury-up"
        ng-attr-data-category="{{gallery.category}}"
        ng-repeat="gallery in vm.galleries"
        ng-show="vm.selectedCategory == 'all' || vm.selectedCategory == gallery.category">

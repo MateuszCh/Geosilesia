@@ -4,7 +4,7 @@
 
             $routeProvider.
             when('/',{
-                template: '<homepage></homepage>'
+                templateUrl: 'html/views/homepage.html'
             }).
             when('/o-nas', {
                 templateUrl: 'html/views/about.html'
@@ -25,19 +25,19 @@
                 template: '<gallery></gallery>'
             }).
             when('/polozenie', {
-                templateUrl: 'html/views/geoslask/location.html'
+                templateUrl: 'html/views/geosilesia/location.html'
             }).
             when('/rzezba', {
-                templateUrl: 'html/views/geoslask/terrain.html'
+                templateUrl: 'html/views/geosilesia/terrain.html'
             }).
             when('/budowa', {
-                templateUrl: 'html/views/geoslask/structure.html'
+                templateUrl: 'html/views/geosilesia/structure.html'
             }).
             when('/geostanowiska', {
-                templateUrl: 'html/views/geoslask/geosites.html'
+                templateUrl: 'html/views/geosilesia/geosites.html'
             }).
             when('/atrakcje', {
-                templateUrl: 'html/views/geoslask/attractions.html'
+                templateUrl: 'html/views/geosilesia/attractions.html'
             }).
             otherwise('/');
 

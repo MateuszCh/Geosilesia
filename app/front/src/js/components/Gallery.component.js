@@ -18,9 +18,13 @@
         vm.prev = prev;
 
         function onInit() {
-            $http.get('/api/gallery?id=' + $routeParams.galleryId).then(function(gallery){
+            // $http.get('/api/gallery?id=' + $routeParams.galleryId).then(function(gallery){
+            //     vm.gallery = gallery.data;
+            //     vm.numberOfImages = vm.gallery.images.length;
+            // });
+            $http.get("json/galleries/" + $routeParams.galleryId + ".json").then(function (gallery) {
                 vm.gallery = gallery.data;
-                vm.numberOfImages = vm.gallery.images.length;
+                vm.numberOfImages = gallery.data.images.length;
             });
 
             window.addEventListener('keydown', setKeyEvent);

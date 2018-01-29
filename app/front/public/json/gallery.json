@@ -5,6 +5,7 @@
       "title" : "Wyżyna Częstochowska cz. 1",
       "hyperlink" : "galleries/wyzyna1.html",
       "category" : "wyzyna",
+      "categoryTitle" : "krainy geograficzne",
       "id" : "wyzyna-1"
     },
     {
@@ -12,6 +13,7 @@
       "title" : "Wyżyna Częstochowska cz. 2",
       "hyperlink" : "galleries/wyzyna2.html",
       "category" : "wyzyna",
+      "categoryTitle" : "krainy geograficzne",
       "id" : "wyzyna-2"
     },
     {
@@ -19,6 +21,7 @@
       "title" : "Minerały województwa Śląskiego",
       "hyperlink" : "galleries/kolekcja.html",
       "category" : "mineralySkaly",
+      "categoryTitle" : "minerały i skały",
       "id" : "kolekcja"
     },
     {
@@ -26,6 +29,7 @@
       "title" : "Cieszynity, pikryty i syenity",
       "hyperlink" : "galleries/cieszynity.html",
       "category" : "mineralySkaly",
+      "categoryTitle" : "minerały i skały",
       "id" : "cieszynity"
     },
     {
@@ -33,6 +37,7 @@
       "title" : "Skały płaszczowiny magurskiej",
       "hyperlink" : "galleries/magurskiej.html",
       "category" : "mineralySkaly",
+      "categoryTitle" : "minerały i skały",
       "id" : "magurskiej"
     },
     {
@@ -40,6 +45,7 @@
       "title" : "Kamień w architekturze - Gliwice",
       "hyperlink" : "galleries/kamienGliwice.html",
       "category" : "mineralySkaly",
+      "categoryTitle" : "minerały i skały",
       "id" : "gliwice"
     },
     {
@@ -47,6 +53,7 @@
       "title" : "Kamień w architekturze - TUiTAM",
       "hyperlink" : "galleries/kamienTuITam.html",
       "category" : "mineralySkaly",
+      "categoryTitle" : "minerały i skały",
       "id" : "kamien-tu-i-tam"
     },
     {
@@ -54,6 +61,7 @@
       "title" : "Głazy narzutowe",
       "hyperlink" : "galleries/glazyNarzutowe.html",
       "category" : "mineralySkaly",
+      "categoryTitle" : "minerały i skały",
       "id" : "glazy-narzutowe"
     },
     {
@@ -61,6 +69,7 @@
       "title" : "Park Tradycji w Siemianowicach",
       "hyperlink" : "galleries/siemianowice.html",
       "category" : "dziedzictwo",
+      "categoryTitle" : "dziedzictwo poprzemysłowe",
       "id" : "siemianowice"
     },
     {
@@ -68,6 +77,7 @@
       "title" : "Kopalnia Ćwiczebna w Dąbrowie Górniczej",
       "hyperlink" : "galleries/kopaniaDG.html",
       "category" : "dziedzictwo",
+      "categoryTitle" : "dziedzictwo poprzemysłowe",
       "id" : "dabrowa-gornicza"
     },
     {
@@ -75,6 +85,7 @@
       "title" : "Skansen Górniczy Królowa Luiza w Zabrzu",
       "hyperlink" : "galleries/luizaZabrze.html",
       "category" : "dziedzictwo",
+      "categoryTitle" : "dziedzictwo poprzemysłowe",
       "id" : "luiza-zabrze"
     },
     {
@@ -82,6 +93,7 @@
       "title" : "Zabytkowa KWK „Ignacy” w Rybniku",
       "hyperlink" : "galleries/kwkIgnacy.html",
       "category" : "dziedzictwo",
+      "categoryTitle" : "dziedzictwo poprzemysłowe",
       "id" : "ignacy-rybnik"
     },
     {
@@ -89,6 +101,7 @@
       "title" : "Dziedzictwo poprzemysłowe - TUiTAM",
       "hyperlink" : "galleries/dziedzictwoPoprzemysloweTuITam.html",
       "category" : "dziedzictwo",
+      "categoryTitle" : "dziedzictwo poprzemysłowe",
       "id" : "tu-i-tam"
     },
     {
@@ -96,6 +109,7 @@
       "title" : "Rudniki - Kamieniołom Lipówka",
       "hyperlink" : "galleries/rudnikiLipowka.html",
       "category" : "sciezki",
+      "categoryTitle" : "ścieżki tematyczny",
       "id" : "lipowka"
     },
     {
@@ -103,6 +117,7 @@
       "title" : "Hutki-Kanki - Po rezerwacie Góra Chełm",
       "hyperlink" : "galleries/hutkiKanki.htm",
       "category" : "sciezki",
+      "categoryTitle" : "ścieżki tematyczny",
       "id" : "hutki"
     },
     {
@@ -110,6 +125,7 @@
       "title" : "Smoleń - Po Dolinie Wodącej",
       "hyperlink" : "galleries/smolen.html",
       "category" : "sciezki",
+      "categoryTitle" : "ścieżki tematyczny",
       "id" : "smolen"
     },
     {
@@ -117,6 +133,7 @@
       "title" : "10 pytań o Ziemię",
       "hyperlink" : "galleries/10pytan.html",
       "category" : "wydarzenia",
+      "categoryTitle" : "wydarzenia",
       "id" : "10-pytan"
     },
     {
@@ -124,6 +141,7 @@
       "title" : "Trasa turystyczna w Jaskini Głębokiej",
       "hyperlink" : "galleries/jaskiniaGleboka.html",
       "category" : "wydarzenia",
+      "categoryTitle" : "wydarzenia",
       "id" : "jaskinia"
     },
     {
@@ -131,6 +149,7 @@
       "title" : "Operacja Tyranozaur",
       "hyperlink" : "galleries/operacjaDino.html",
       "category" : "wydarzenia",
+      "categoryTitle" : "wydarzenia",
       "id" : "dinozaur"
     }
   ]
