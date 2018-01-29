@@ -10,11 +10,10 @@
         <!-- inject:css -->
         <!-- endinject -->
     </head>
-    <body ng-app="geosilesia" ng-controller="MainController" ng-class="{'closedScroll' : $root.blur && ($root.isS || $root.isM)}">
+    <body ng-app="geosilesia" ng-controller="MainController" ng-class="{'closedScroll' : $root.blur}">
         <header></header>
         <div ng-view="" class="fade" id="page"></div>
         <button class="button-up" ng-show="showButtonUp" du-smooth-scroll="page"><img class="button-up__image" src="images/strzalka_gora.png"></button>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmB631kh-m9oK9PL_i4OEmvkRqjcdeWzg" ></script>
         <!-- inject:js -->
         <!-- endinject -->
     </body>

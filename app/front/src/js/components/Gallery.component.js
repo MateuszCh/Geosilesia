@@ -1,6 +1,6 @@
 (function(){
     angular.module('geosilesia').component('gallery', {
-        templateUrl: 'html/views/gallery.html',
+        templateUrl: 'html/components/gallery.html',
         controllerAs: 'vm',
         controller: GalleryController
     });

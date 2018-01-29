@@ -26,7 +26,7 @@
                    ng-if="::item.link"
                    ng-href="{{::item.link}}"
                    ng-bind="::item.title"
-                   ng-click="$root.isS ? vm.openHam() : angular.noop(); vm.checkGeo(item)"></a>
+                   ng-click="vm.openHam(item)"></a>
                 <span class="nav__item__link"
                       ng-bind="::item.title"
                       ng-if="::item.submenu"></span>
@@ -39,7 +39,7 @@
                         <a class="subnav__item__link"
                            ng-href="{{::sub.link}}"
                            ng-bind="::sub.subtitle"
-                           ng-click="$root.isS ? vm.openHam() : angular.noop(); vm.checkGeo(sub); vm.hoverNavItem = false"></a>
+                           ng-click="vm.openHam(sub); vm.hoverNavItem = false"></a>
                     </li>
                 </ul>
             </li>

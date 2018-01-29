@@ -1,6 +1,6 @@
 (function(){
     angular.module('geosilesia').component('events', {
-            templateUrl: 'html/views/news.html',
+            templateUrl: 'html/components/news.html',
             bindings: {
                 custom: '<'
             },

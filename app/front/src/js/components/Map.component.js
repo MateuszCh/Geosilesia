@@ -2,7 +2,6 @@
     angular.module('geosilesia').component('map', {
         bindings: {
             places: '<',
-            options: '<',
             centerMap: '<',
             currentResult: '<',
             markerCluster: '<'
@@ -12,75 +11,93 @@
         template: '<div class="search__container__map"></div>'
     });
 
-    MapController.$inject = ['mapStyle', 'iconsForMarkers', '$timeout', '$window', '$element', '$interval', '$rootScope'];
-    function MapController(mapStyle, iconsForMarkers, $timeout, $window, $element, $interval, $rootScope){
+    MapController.$inject = ['mapStyle', 'iconsForMarkers', '$timeout', '$element', '$interval'];
+    function MapController(mapStyle, iconsForMarkers, $timeout, $element, $interval){
 
         var vm = this;
         vm.$onInit = onInit;
+        vm.$onDestroy = onDestroy;
         vm.$onChanges = onChanges;
         var map, currentCenter, centering, stopping, markerCluster, markers = [];
 
-        var mapOptions = {
-            center: {
-                lat: 50.277978,
-                lng: 19.020544
-            },
-            zoom: 9,
-            scrollwheel: false,
-            draggable: true,
-            mapTypeId: "styled_map",
-            fullscreenControl: true,
-            zoomControl: true,
-            zoomControlOptions: {
-                position: google.maps.ControlPosition.RIGHT_TOP
-            },
-            streetViewControl: true,
-            streetViewControlOptions: {
-                position: google.maps.ControlPosition.RIGHT_TOP
-            },
-            mapTypeControl: true,
-            mapTypeControlOptions: {
-                position: google.maps.ControlPosition.LEFT_TOP,
-                mapTypeIds: ["roadmap", "satellite", "hybrid", "terrain", "styled_map"],
-                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
-            },
-            scaleControl: true
-        };
-
         function onInit() {
             initMap();
-            $window.addEventListener('resize', function(){
-                centerMap();
-            })
+        }
+
+        function onDestroy(){
+            window.removeEventListener('resize', centerMap);
         }
 
         function initMap() {
-            var mapContainer = $element[0].firstChild;
-            map = new google.maps.Map(mapContainer, vm.options || mapOptions);
-            map.mapTypes.set('styled_map', mapStyle);
-            currentCenter = map.getCenter();
+            if(gmapApiReady()){
+                var mapContainer = $element[0].firstChild;
+                map = new google.maps.Map(mapContainer, {
+                    center: {
+                        lat: 50.277978,
+                        lng: 19.020544
+                    },
+                    zoom: 9,
+                    scrollwheel: false,
+                    draggable: true,
+                    mapTypeId: "styled_map",
+                    fullscreenControl: true,
+                    zoomControl: true,
+                    zoomControlOptions: {
+                        position: google.maps.ControlPosition.RIGHT_TOP
+                    },
+                    streetViewControl: true,
+                    streetViewControlOptions: {
+                        position: google.maps.ControlPosition.RIGHT_TOP
+                    },
+                    mapTypeControl: true,
+                    mapTypeControlOptions: {
+                        position: google.maps.ControlPosition.LEFT_TOP,
+                        mapTypeIds: ["roadmap", "satellite", "hybrid", "terrain", "styled_map"],
+                        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                    },
+                    scaleControl: true
+                });
+                map.mapTypes.set('styled_map', new google.maps.StyledMapType(mapStyle.style, mapStyle.name));
+                currentCenter = map.getCenter();
+                vm.places && updateMarkers();
+                window.addEventListener('resize', centerMap);
+                google.maps.event.addListener(map, 'dragend', function(){
+                    currentCenter = map.getCenter();
+                });
+                return;
+            }
+            $timeout(initMap, 10);
         }
 
         function onChanges(changes){
-            if(changes.places && changes.places.currentValue && map){
-                updateMarkers();
-            }
-            if(changes.centerMap && map){
-                if(centering && centering.$$state.value !== 'canceled'){
-                    $interval.cancel(centering);
-                    $timeout.cancel(stopping);
+            if(map){
+                if(changes.places && changes.places.currentValue){
+                    updateMarkers();
                 }
-                centering = $interval(function () {
-                    centerMap();
-                }, 1);
-                stopping = $timeout(function () {
-                    $interval.cancel(centering);
-                }, 1001);
+                if(changes.centerMap){
+                    if(centering && centering.$$state.value !== 'canceled'){
+                        $interval.cancel(centering);
+                        $timeout.cancel(stopping);
+                    }
+                    centering = $interval(function () {
+                        centerMap();
+                    }, 1);
+                    stopping = $timeout(function () {
+                        $interval.cancel(centering);
+                    }, 1001);
+                }
+                if(changes.currentResult && changes.currentResult.currentValue !== undefined){
+                    updateMarkers();
+                    var resultMarker = markers[changes.currentResult.currentValue];
+                    map.setZoom(18);
+                    map.panTo(resultMarker.position);
+                    google.maps.event.trigger(resultMarker, "click");
+                }
             }
-            if(changes.currentResult && changes.currentResult.currentValue !== undefined){
-                var resultMarker = markers[changes.currentResult.currentValue];
-                google.maps.event.trigger(resultMarker, "click");
-            }
+        }
+
+        function gmapApiReady(){
+            return angular.isDefined(window.google) && angular.isDefined(window.google.maps);
         }
 
         function updateMarkers(){
@@ -108,7 +125,6 @@
                     position: position,
                     map: map,
                     title: place.title || "",
-                    animation: ($rootScope.isS || vm.markerCluster) ? "" : google.maps.Animation.DROP,
                     icon: place.type ? ""  : iconsForMarkers[place.category].icon
                 });
                 google.maps.event.addListener(marker, 'click', (function(marker){
@@ -130,7 +146,6 @@
                 })(marker));
                 markers.push(marker);
             });
- 
             if(markerCluster){
                 markerCluster.clearMarkers();
             }
@@ -139,6 +154,11 @@
                 markerCluster = new MarkerClusterer(map, markers, {
                     imagePath: 'images/markers/'
                 });
+                google.maps.event.addListener(markerCluster, 'clusterclick', function(){
+                    $timeout(function(){
+                        currentCenter = map.getCenter();
+                    }, 100);
+                })
             }
         }
 

@@ -1,6 +1,6 @@
 (function(){
     angular.module('geosilesia').component('mainGallery', {
-        templateUrl: 'html/views/main-gallery.html',
+        templateUrl: 'html/components/main-gallery.html',
         bindings: {
             custom: '<'
         },

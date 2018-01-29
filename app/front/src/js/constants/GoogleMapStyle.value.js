@@ -1,6 +1,6 @@
 (function(){
-    angular.module('geosilesia').constant('mapStyle', new google.maps.StyledMapType(
-        [
+    angular.module('geosilesia').value('mapStyle', {
+        style: [
             {
                 "elementType": "geometry",
                 "stylers": [
@@ -159,6 +159,7 @@
                     }
                 ]
             }
-        ],{name: 'Custom'})
-    );
+        ],
+        name: {name: 'Custom'}
+    });
 })();

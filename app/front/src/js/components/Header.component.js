@@ -1,6 +1,6 @@
 (function(){
     angular.module('geosilesia').component('header', {
-        templateUrl: 'html/layout/header.html',
+        templateUrl: 'html/components/header.html',
         bindings: {
             custom: '<'
         },
@@ -13,7 +13,6 @@
         var vm = this;
         vm.$onInit = onInit;
         vm.openHam = openHam;
-        vm.checkGeo = checkGeo;
         vm.hamOpen = false;
         vm.activeGeo = false;
         var previousScroll = 0;
@@ -59,12 +58,14 @@
             }
         }
 
-        function openHam() {
-            return vm.hamOpen ? vm.hamOpen = false : vm.hamOpen = true;
-        }
+        function openHam(link) {
+            if(link){
+                vm.activeGeo = link.subtitle;
+            }
+            if(window.innerWidth < 568){
+                return vm.hamOpen ? vm.hamOpen = false : vm.hamOpen = true;
+            }
 
-        function checkGeo(link) {
-            vm.activeGeo = link.subtitle;
         }
 
         function resetHeader(){

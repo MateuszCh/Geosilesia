@@ -311,7 +311,9 @@
       width: 100%;
     }
     &--smaller {
-      width: 70%;
+      @include laptop {
+        width: 70%;
+      }
     }
     &__map   {
       height: 100vh;

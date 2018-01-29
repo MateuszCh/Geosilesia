@@ -6,12 +6,8 @@
 @import "general/general";
 
 // pages
-@import "pages/main-page";
-@import "pages/gallery";
 @import "pages/geoslask";
 @import "pages/about";
-@import "pages/news";
-@import "pages/main-gallery";
 @import "pages/atrakcje";
 
 // components
@@ -22,4 +18,8 @@
 @import "components/terrain-table";
 @import "components/info-div";
 @import "components/search-map";
+@import "components/main-page";
+@import "components/gallery";
+@import "components/news";
+@import "components/main-gallery";
 

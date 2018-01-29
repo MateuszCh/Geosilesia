@@ -1,6 +1,6 @@
 (function(){
     angular.module('geosilesia').component('homepage', {
-        templateUrl: 'html/views/homepage.html',
+        templateUrl: 'html/components/homepage.html',
         bindings: {
             custom: '<'
         },
