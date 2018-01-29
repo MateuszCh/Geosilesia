@@ -91,6 +91,7 @@
                     var resultMarker = markers[changes.currentResult.currentValue];
                     map.setZoom(18);
                     map.panTo(resultMarker.position);
+                    currentCenter = map.getCenter();
                     google.maps.event.trigger(resultMarker, "click");
                 }
             }
