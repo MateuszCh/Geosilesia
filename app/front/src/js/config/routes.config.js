@@ -16,7 +16,7 @@
                 templateUrl: 'html/views/dictionary.html'
             }).
             when('/wydarzenia', {
-                template: '<events></events>'
+                template: '<news></news>'
             }).
             when('/galeria', {
                 template: '<main-gallery></main-gallery>'

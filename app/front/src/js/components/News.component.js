@@ -1,9 +1,6 @@
 (function(){
-    angular.module('geosilesia').component('events', {
+    angular.module('geosilesia').component('news', {
             templateUrl: 'html/components/news.html',
-            bindings: {
-                custom: '<'
-            },
             controllerAs: 'vm',
             controller: NewsController
         });
@@ -12,7 +9,6 @@
 
     function NewsController($http) {
         var vm = this;
-        vm.news = [];
         vm.$onInit = onInit;
 
         function onInit() {

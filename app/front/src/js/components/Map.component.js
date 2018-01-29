@@ -11,8 +11,8 @@
         template: '<div class="search__container__map"></div>'
     });
 
-    MapController.$inject = ['mapStyle', 'iconsForMarkers', '$timeout', '$element', '$interval'];
-    function MapController(mapStyle, iconsForMarkers, $timeout, $element, $interval){
+    MapController.$inject = ['$timeout', '$element', '$interval', 'mapStyle', 'iconsForMarkers'];
+    function MapController($timeout, $element, $interval, mapStyle, iconsForMarkers){
 
         var vm = this;
         vm.$onInit = onInit;
@@ -24,8 +24,40 @@
             initMap();
         }
 
+        function onChanges(changes){
+            if(map){
+                if(changes.places && changes.places.currentValue){
+                    updateMarkers();
+                }
+                if(changes.centerMap){
+                    if(centering && centering.$$state.value !== 'canceled'){
+                        $interval.cancel(centering);
+                        $timeout.cancel(stopping);
+                    }
+                    centering = $interval(function () {
+                        centerMap();
+                    }, 1);
+                    stopping = $timeout(function () {
+                        $interval.cancel(centering);
+                    }, 1001);
+                }
+                if(changes.currentResult && changes.currentResult.currentValue !== undefined){
+                    updateMarkers();
+                    var resultMarker = markers[changes.currentResult.currentValue];
+                    map.setZoom(18);
+                    map.panTo(resultMarker.position);
+                    currentCenter = map.getCenter();
+                    google.maps.event.trigger(resultMarker, "click");
+                }
+            }
+        }
+
         function onDestroy(){
             window.removeEventListener('resize', centerMap);
+        }
+
+        function gmapApiReady(){
+            return angular.isDefined(window.google) && angular.isDefined(window.google.maps);
         }
 
         function initMap() {
@@ -67,38 +99,6 @@
                 return;
             }
             $timeout(initMap, 10);
-        }
-
-        function onChanges(changes){
-            if(map){
-                if(changes.places && changes.places.currentValue){
-                    updateMarkers();
-                }
-                if(changes.centerMap){
-                    if(centering && centering.$$state.value !== 'canceled'){
-                        $interval.cancel(centering);
-                        $timeout.cancel(stopping);
-                    }
-                    centering = $interval(function () {
-                        centerMap();
-                    }, 1);
-                    stopping = $timeout(function () {
-                        $interval.cancel(centering);
-                    }, 1001);
-                }
-                if(changes.currentResult && changes.currentResult.currentValue !== undefined){
-                    updateMarkers();
-                    var resultMarker = markers[changes.currentResult.currentValue];
-                    map.setZoom(18);
-                    map.panTo(resultMarker.position);
-                    currentCenter = map.getCenter();
-                    google.maps.event.trigger(resultMarker, "click");
-                }
-            }
-        }
-
-        function gmapApiReady(){
-            return angular.isDefined(window.google) && angular.isDefined(window.google.maps);
         }
 
         function updateMarkers(){
@@ -185,5 +185,6 @@
             map.setCenter(currentCenter);
             currentCenter = map.getCenter();
         }
+
     }
 })();

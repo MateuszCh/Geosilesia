@@ -1,14 +1,11 @@
 (function(){
     angular.module('geosilesia').component('header', {
         templateUrl: 'html/components/header.html',
-        bindings: {
-            custom: '<'
-        },
         controllerAs: 'vm',
         controller: HeaderController
     });
-    HeaderController.$inject = ['$window', '$location', '$scope', '$timeout'];
-    function HeaderController($window, $location, $scope, $timeout){
+    HeaderController.$inject = ['$location', '$scope', '$timeout', '$element', 'navigation'];
+    function HeaderController($location, $scope, $timeout, $element, navigation){
 
         var vm = this;
         vm.$onInit = onInit;
@@ -16,26 +13,15 @@
         vm.hamOpen = false;
         vm.activeGeo = false;
         var previousScroll = 0;
-
-        vm.nav = [
-            {title: 'O serwisie', link: '/o-nas'},
-            {title: 'Geośląsk', submenu : [
-                {subtitle: 'Położenie', link : '/polozenie'},
-                {subtitle: 'Rzeźba terenu', link: '/rzezba'},
-                {subtitle: 'Budowa geologiczna', link: '/budowa'},
-                {subtitle: 'Geostanowiska', link: '/geostanowiska'},
-                {subtitle: 'Atakcje geoturystyczne', link: '/atrakcje'}
-            ]},
-            {title: 'Wydarzenia', link: '/wydarzenia'},
-            {title: 'Słownik', link: '/slownik'},
-            {title: 'Galeria', link: '/galeria'},
-            {title: 'English', link: '/english'}
-        ];
+        var element;
+        var searchElement = document.getElementById('search');
 
         function onInit(){
-            $window.addEventListener('resize', resetHeader);
+            vm.nav = navigation.nav;
             $scope.$on("$routeChangeSuccess", setCurrentPath);
-            $window.addEventListener('scroll', hideHeader);
+            window.addEventListener('scroll', hideHeader);
+            window.addEventListener('resize', resetHeader);
+            element = $element[0].firstChild;
         }
 
         function setCurrentPath() {
@@ -76,8 +62,10 @@
             }, 500);
         }
         function hideHeader(){
+            console.log($element[0].firstChild);
             var currentScroll = window.scrollY;
-            vm.hideHeader = (((previousScroll < currentScroll) && (currentScroll * 2 > window.innerHeight)) || (!!document.getElementById('search') && (currentScroll > window.innerHeight - document.getElementById('header').offsetHeight)));
+            vm.hideHeader = (((previousScroll < currentScroll) && (currentScroll * 2 > window.innerHeight)) || (!!searchElement && (currentScroll > window.innerHeight - element.offsetHeight)));
+            vm.hideHeader ? element.classList.add('header--hidden') : element.classList.remove('header--hidden');
             previousScroll = currentScroll;
         }
     }

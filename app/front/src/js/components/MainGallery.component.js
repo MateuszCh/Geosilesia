@@ -1,9 +1,6 @@
 (function(){
     angular.module('geosilesia').component('mainGallery', {
         templateUrl: 'html/components/main-gallery.html',
-        bindings: {
-            custom: '<'
-        },
         controllerAs: 'vm',
         controller: MainGalleryController
     });
@@ -55,5 +52,6 @@
 
             }
         }
+
     }
 })();

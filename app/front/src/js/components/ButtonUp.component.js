@@ -14,10 +14,11 @@
         function onInit(){
             window.addEventListener('scroll', showButtonUp);
             element = $element[0].firstChild;
+            showButtonUp();
         }
 
         function showButtonUp(){
-            window.pageYOffset > 0 ? element.classList.add('ng-hide') : element.classList.remove('ng-hide');
+            window.pageYOffset === 0 ? element.classList.add('ng-hide') : element.classList.remove('ng-hide');
         }
     }
 })();

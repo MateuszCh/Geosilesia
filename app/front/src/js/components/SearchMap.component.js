@@ -5,9 +5,9 @@
         controller: SearchMapController
     });
 
-    SearchMapController.$inject = ['iconsForMarkers', '$http', '$q', '$rootScope', '$document', '$element', '$timeout', 'gmapConfig'];
+    SearchMapController.$inject = ['$http', '$q', '$rootScope', '$document', '$element', '$timeout', 'gmapConfig', 'iconsForMarkers'];
 
-    function SearchMapController(iconsForMarkers, $http, $q, $rootScope, $document, $element, $timeout, gmapConfig){
+    function SearchMapController($http, $q, $rootScope, $document, $element, $timeout, gmapConfig, iconsForMarkers){
         var vm = this;
         vm.$onInit = onInit;
         vm.search = search;
@@ -22,6 +22,7 @@
         vm.category = "";
         vm.currentResult = undefined;
         var searchQty = 10;
+        var searchForm = document.getElementById('search-form');
 
         function onInit(){
             if(!(angular.isDefined(window.google) && angular.isDefined(window.google.maps))){
@@ -43,7 +44,6 @@
             });
         }
 
-
         function loadGoogleMaps(){
             var script = document.createElement('script');
             script.src = "https://maps.googleapis.com/maps/api/js?key=" + gmapConfig.key;
@@ -54,9 +54,8 @@
             if(window.innerWidth > 849) {
                 vm.showSearch ? vm.showSearch = false : vm.showSearch = true;
             } else {
-                $document.scrollToElementAnimated(document.getElementById('search-form'));
+                $document.scrollToElementAnimated(searchForm);
             }
-
         }
 
         function search(input){
@@ -167,5 +166,6 @@
                 $document.scrollToElementAnimated($element);
             }
         }
+
     }
 })();
