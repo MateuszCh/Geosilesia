@@ -62,7 +62,6 @@
             }, 500);
         }
         function hideHeader(){
-            console.log($element[0].firstChild);
             var currentScroll = window.scrollY;
             vm.hideHeader = (((previousScroll < currentScroll) && (currentScroll * 2 > window.innerHeight)) || (!!searchElement && (currentScroll > window.innerHeight - element.offsetHeight)));
             vm.hideHeader ? element.classList.add('header--hidden') : element.classList.remove('header--hidden');

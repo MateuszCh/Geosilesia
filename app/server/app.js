@@ -1,17 +1,16 @@
 const express = require('express'),
-      path  = require('path'),
-      apiController = require('./apiController');
+      vhost = require('vhost'),
+      routes = require('./routes/routes'),
+      frodo = require('../frodo/server/app');
 
+const mainApp = express();
 const app = express();
 
+mainApp.use('/', express.static(`${__dirname}/../front/public`));
+routes(mainApp);
+
 app.set('port', process.env.PORT || 3000);
+app.use(vhost('frodo.*', frodo));
+app.use(vhost('*', mainApp));
 
-app.use('/', express.static(`${__dirname}/../front/public`));
-
-apiController(app);
-
-app.get(['*'], function(req, res){
-    res.sendFile(path.resolve(`${__dirname}/../front/public/index.html`));
-});
-
-app.listen(app.get('port'));
+module.exports = app;
