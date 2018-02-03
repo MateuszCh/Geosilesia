@@ -1,0 +1,21 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+
+  label {
+    margin-bottom: .5em;
+    cursor: pointer;
+  }
+
+  input[type=text] {
+    padding: .5em;
+    border: 1px solid $color1;
+    background-color: $color4;
+    transition: background-color .2s ease;
+    &:focus {
+      background-color: white;
+    }
+
+  }
+}

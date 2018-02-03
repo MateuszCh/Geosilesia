@@ -1,0 +1,26 @@
+<div class="custom-post-types">
+    <h2 class="custom-post-types__heading">Typy postów</h2>
+
+    <div class="custom-post-types__container--top-padding">
+        <div class="custom-post-types__container__left">
+            <a class="button"
+               ng-href="/custom-post-types/add">Dodaj nowy</a>
+        </div>
+        <div class="custom-post-types__container__right">
+            <p class="center"
+               ng-if="!vm.customPostTypes.length">Nie ma obecnie żadnych typów postów</p>
+            <div class="custom-post-types__item"
+                 ng-repeat="customPost in vm.customPostTypes track by customPost._id">
+                <a class="custom-post-types__item__title"
+                   ng-href="{{'/custom-post-types/edit/' + customPost.type}}"
+                   ng-bind="customPost.title || customPost.type"></a>
+                <a class="button button--inline"
+                   ng-href="{{'/custom-post-types/edit/' + customPost.type}}">Edytuj</a>
+                <span class="button button--inline"
+                      ng-click="vm.removeCustomPostType(customPost._id)"
+                      ng-class="{'bust' : vm.removeStatus.busy}">Usuń</span>
+            </div>
+        </div>
+    </div>
+
+</div>

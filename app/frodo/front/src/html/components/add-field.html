@@ -1,0 +1,36 @@
+<div class="add-field-container">
+    <div class="add-field-container__left">
+        <div class="add-field__remove">
+        <span class="button"
+              ng-click="vm.remove()">Usuń</span>
+        </div>
+    </div>
+    <div class="add-field-container__right">
+        <div class="add-field">
+            <div class="input">
+                <label for="fieldTitle">Tytuł:</label>
+                <input id="fieldTitle" type="text" ng-model="vm.fieldData.title">
+            </div>
+
+            <div class="input">
+                <label for="fieldId">Id:</label>
+                <input id="fieldId" type="text" ng-model="vm.fieldData.id">
+            </div>
+
+            <div class="add-field__type">
+                <span>Wybierz typ:</span>
+                <span ng-bind="vm.currentFieldType.name"></span>
+
+                <div class="add-field__type__all">
+                    <span ng-repeat="field in ::vm.fields track by field.type"
+                          ng-bind="field.name"
+                          ng-click="vm.setFieldType(field.type)"
+                          class="add-field__type__all__item"></span>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+

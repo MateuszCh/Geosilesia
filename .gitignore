@@ -9,4 +9,9 @@ app/front/public/images
 app/front/package-lock.json
 app/server/node_modules/
 app/server/package-lock.json
-app/frodo
+config.json
+app/frodo/front/node_modules/
+app/frodo/front/package-lock.json
+app/frodo/front/public/
+app/frodo/server/node_modules/
+app/frodo/server/package-lock.json

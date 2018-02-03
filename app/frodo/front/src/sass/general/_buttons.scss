@@ -1,0 +1,50 @@
+.button {
+  color: white;
+  display: inline-block;
+  position: relative;
+  background-color: $color1;
+  transition: background-color .2s ease-in-out;
+  padding: .5em;
+  font-size: .9em;
+  cursor: pointer;
+  &:hover {
+    background-color: $color2;
+    color: white;
+  }
+
+  &--inline {
+    background-color: transparent;
+    color: $text-color;
+    &:hover {
+      background-color: transparent;
+      color: lighten($text-color, 20%);
+    }
+    &.busy {
+      &:after,
+      &:before {
+        background-color: $color1 !important;
+      }
+    }
+
+  }
+
+  &.busy {
+    color: transparent;
+    &:after,
+    &:before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: calc(50% - 10px);
+      left: calc(50% - 10px);
+      border-radius: 50%;
+      background-color: white;
+      opacity: 0.6;
+      animation: sk-bounce 2.0s infinite ease-in-out;
+    }
+    &:before {
+      animation-delay: -1.0s;
+    }
+  }
+}
