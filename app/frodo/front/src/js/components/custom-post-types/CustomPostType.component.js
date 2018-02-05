@@ -65,7 +65,6 @@
                     $rootScope.$broadcast('customPostTypesUpdated');
 
                     if(vm.edit){
-                        vm.model = response.data;
                         setSaveStatus(false, "Custom post type updated successfully", response.status);
                         resultTimeout = $timeout(setSaveStatus, 10000);
                     } else {
