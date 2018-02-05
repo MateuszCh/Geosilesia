@@ -6,8 +6,10 @@ module.exports = (app) => {
 
     app.get('/frodo/customPostType', CustomPostTypeController.getAll);
 
-    app.get('/frodo/customPostType/:type', CustomPostTypeController.getByType);
+    app.get('/frodo/customPostType/:id', CustomPostTypeController.getById);
 
     app.delete('/frodo/customPostType/:id', CustomPostTypeController.delete);
+
+    app.put('/frodo/customPostType/edit/:id', CustomPostTypeController.edit);
 
 };

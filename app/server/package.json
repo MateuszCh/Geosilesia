@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "server": "nodemon --watch ./ --watch ../frodo/server server/index.js"
+    "start": "nodemon --watch ./ --watch ../frodo/server server/index.js"
   },
   "keywords": [],
   "author": "",

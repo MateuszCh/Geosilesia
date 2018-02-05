@@ -1,9 +1,21 @@
 .custom-post-types {
-  padding-bottom: 1em;
+  padding-bottom: 2em;
+
+  .postFields {
+    border-top: 1px solid darken($color4, 20%);
+  }
+
   &__heading {
     font-size: 2.5em;
     text-align: center;
   }
+
+  &__subheading {
+    font-size: 2em;
+    text-align: center;
+    padding-bottom: 1rem;
+  }
+
   &__item {
     display: flex;
     margin-bottom: .5em;
@@ -32,6 +44,9 @@
     color: red;
     font-size: .8em;
     padding-top: .5em;
+    &--ok {
+      color: green;
+    }
   }
 
 }

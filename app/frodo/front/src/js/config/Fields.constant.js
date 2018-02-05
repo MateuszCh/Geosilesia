@@ -1,3 +1,5 @@
+//property name and property of 'type' should be the same
+
 (function(){
     angular.module('frodo').constant('fields', {
             text: {
@@ -5,16 +7,20 @@
                 type: 'text'
             },
             textarea: {
-                name: 'Tekst area',
+                name: 'Pole tekstowe',
                 type: 'textarea'
             },
             checkbox: {
                 name: 'True/False',
                 type: 'checkbox'
+            },
+            select: {
+                name: 'Select',
+                type: 'select'
+            },
+            repeater: {
+                name: 'Repeater',
+                type: 'repeater'
             }
     });
 })();
-
-
-//select
-//repeat

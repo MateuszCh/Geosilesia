@@ -12,10 +12,10 @@
             <div class="custom-post-types__item"
                  ng-repeat="customPost in vm.customPostTypes track by customPost._id">
                 <a class="custom-post-types__item__title"
-                   ng-href="{{'/custom-post-types/edit/' + customPost.type}}"
+                   ng-href="{{customPost.url}}"
                    ng-bind="customPost.title || customPost.type"></a>
                 <a class="button button--inline"
-                   ng-href="{{'/custom-post-types/edit/' + customPost.type}}">Edytuj</a>
+                   ng-href="{{customPost.url}}">Edytuj</a>
                 <span class="button button--inline"
                       ng-click="vm.removeCustomPostType(customPost._id)"
                       ng-class="{'bust' : vm.removeStatus.busy}">Usuń</span>

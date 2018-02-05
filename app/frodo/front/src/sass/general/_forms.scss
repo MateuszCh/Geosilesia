@@ -3,6 +3,22 @@
   flex-direction: column;
   margin-bottom: 1em;
 
+  &--inline {
+    flex-direction: row;
+    align-items: center;
+
+    label {
+      margin-bottom: 0 !important;
+      padding-right: 1em;
+      width: 10%;
+    }
+
+    input[type=text] {
+      width: 90%;
+    }
+
+  }
+
   label {
     margin-bottom: .5em;
     cursor: pointer;

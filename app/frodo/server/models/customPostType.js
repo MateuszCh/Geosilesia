@@ -1,6 +1,5 @@
 const mongoose = require('mongoose'),
-      Schema = mongoose.Schema,
-      uniqueValidator = require('mongoose-unique-validator');
+      Schema = mongoose.Schema;
 
 const FieldSchema = new Schema ({
    title: {
@@ -14,6 +13,9 @@ const FieldSchema = new Schema ({
    id: {
       type: String,
       required: [true, 'id is required']
+   },
+   selectOptions: {
+      type: String
    }
 });
 
@@ -24,14 +26,21 @@ const CustomPostTypeSchema = new Schema({
    },
    type: {
       type: String,
-      unique: true,
       required: [true, 'type of custom post type is required'],
       index: true
    },
-   fields : [FieldSchema]
+   fields : [FieldSchema],
+   id: Number
+},{
+    toJSON: {
+        virtuals: true
+    }
 });
 
-CustomPostTypeSchema.plugin(uniqueValidator);
+CustomPostTypeSchema.virtual('url')
+    .get(function(){
+       return `/custom-post-types/edit/${this.id}`;
+    });
 
 const CustomPostType = mongoose.model('custom_post_type', CustomPostTypeSchema);
 

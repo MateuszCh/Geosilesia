@@ -1,12 +1,12 @@
 (function(){
-    angular.module('frodo').component('customPostTypes', {
-        templateUrl: 'html/components/custom-post-types/custom-post-types.html',
+    angular.module('frodo').component('customPostTypesListing', {
+        templateUrl: 'html/components/custom-post-types/custom-post-types-listing.html',
         controllerAs: 'vm',
-        controller: CustomPostTypesController
+        controller: CustomPostTypesListingController
     });
 
-    CustomPostTypesController.$inject = ['customPostTypesService', '$rootScope'];
-    function CustomPostTypesController(customPostTypesService, $rootScope){
+    CustomPostTypesListingController.$inject = ['customPostTypesService', '$rootScope'];
+    function CustomPostTypesListingController(customPostTypesService, $rootScope){
         var vm  = this;
         vm.$onInit = onInit;
         vm.removeCustomPostType = removeCustomPostType;

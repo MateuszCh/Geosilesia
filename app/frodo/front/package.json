@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "gulp"
+    "start": "gulp",
+    "watch": "gulp watch"
   },
   "author": "",
   "license": "ISC",

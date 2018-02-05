@@ -5,8 +5,8 @@
             return requestService.send('/frodo/customPostType', 'GET');
         }
 
-        function getByType(type){
-            return requestService.send('/frodo/customPostType/' + type, 'GET');
+        function getById(id){
+            return requestService.send('/frodo/customPostType/' + id, 'GET');
         }
 
         function removeById(id){
@@ -17,11 +17,16 @@
             return requestService.send('/frodo/customPostType', 'POST', data);
         }
 
+        function edit(id, data){
+            return requestService.send('/frodo/customPostType/edit/' + id, 'PUT', data);
+        }
+
         return {
             getAll: getAll,
             removeById: removeById,
             create: create,
-            getByType: getByType
+            getById: getById,
+            edit: edit
         }
 
     }]);

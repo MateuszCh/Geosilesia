@@ -4,7 +4,8 @@
         controllerAs: 'vm',
         bindings: {
             model: '=',
-            order: '@'
+            order: '<',
+            edit: '<'
         },
         controller: AddFieldController
     });
@@ -14,9 +15,8 @@
         var vm  = this;
         vm.setFieldType = setFieldType;
         vm.remove = remove;
-        vm.showTypes = false;
 
-        vm.fieldData = {
+        vm.fieldModel = {
           type: undefined,
           title: undefined,
           id: undefined
@@ -24,38 +24,32 @@
 
         vm.$onInit = function(){
             vm.fields = fields;
-            $scope.$on('fieldRemoved', function(e, position){
-               if(position <  vm.fieldData.order){
-                   vm.fieldData.order--;
-               }
-            });
-            vm.fieldData.order = parseInt(vm.order);
-            vm.model.fields.push(vm.fieldData);
-            for(var prop in vm.fields){
-                if(vm.fields.hasOwnProperty(prop)){
-                    vm.fieldData.type = vm.fields[prop].type;
-                    vm.currentFieldType = vm.fields[prop];
-                    break;
-                }
+            if(vm.edit){
+                vm.fieldModel = vm.model.fields[vm.order];
+                setFieldType(vm.fieldModel.type, vm.fields[vm.fieldModel.type].name);
+            } else {
+                vm.order = vm.model.fields.push(vm.fieldModel) - 1;
+                setFieldType('text', vm.fields.text.name);
             }
+            $scope.$on('fieldRemoved', function(e, position){
+                if(position < vm.order){
+                    vm.order--;
+                    console.log(vm.order);
+                }
+            })
         };
 
-        function setFieldType(type){
-            if(vm.fieldData.type === type){
+        function setFieldType(type, name){
+            if(vm.fieldModel.type === type){
                 return;
             }
-            for(var prop in vm.fields){
-                if(vm.fields[prop].type === type){
-                    vm.currentFieldType = vm.fields[prop];
-                }
-            }
-
-            vm.fieldData.type = type;
+            vm.currentFieldTypeName = name;
+            vm.fieldModel.type = type;
         }
 
         function remove(){
-            $rootScope.$broadcast('fieldRemoved', vm.fieldData.order);
-            vm.model.fields.splice(vm.fieldData.order, 1);
+            $rootScope.$broadcast('fieldRemoved', vm.order);
+            vm.model.fields.splice(vm.order, 1);
             $element.remove();
         }
 

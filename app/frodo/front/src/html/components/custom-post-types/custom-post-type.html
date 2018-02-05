@@ -1,0 +1,40 @@
+<div class="custom-post-types">
+    <h2 class="custom-post-types__heading">Dodaj nowy typ postów</h2>
+    <div class="custom-post-types__container--top-padding">
+        <div class="custom-post-types__container__left">
+            <span class="button"
+                  ng-class="{'busy' : vm.saveStatus.busy}"
+                  ng-click="vm.save()">Zapisz</span>
+            <p class="custom-post-types__result"
+               ng-class="{'custom-post-types__result--ok' : vm.saveStatus.status == 200}"
+               ng-bind="vm.saveStatus.result"
+               ng-if="vm.saveStatus.result"></p>
+        </div>
+        <div class="custom-post-types__container__right">
+            <div class="input input--inline">
+                <label for="title">Tytuł:</label>
+                <input id="title" ng-model="vm.model.title" required type="text">
+            </div>
+            <div class="input input--inline">
+                <label for="type">Typ:</label>
+                <input id="type" ng-model="vm.model.type" required type="text">
+            </div>
+        </div>
+    </div>
+    <h2 class="custom-post-types__subheading">Pola</h2>
+    <p ng-if="!vm.model.fields.length"
+       class="center">Obecnie posty tego typu nie mają żadnych pól</p>
+    <div id="postFields"
+         ng-class="{'postFields' :  vm.model.fields.length}">
+        <div ng-if="vm.edit">
+            <add-field ng-repeat="i in vm.fieldsNumber track by $index" edit="true" model="vm.model" order="$index"></add-field>
+        </div>
+    </div>
+    <div class="custom-post-types__container--top-padding">
+        <div class="custom-post-types__container__left"></div>
+        <div class="custom-post-types__container__right">
+                <span class="button"
+                      ng-click="vm.addField()">Dodaj nowe pole</span>
+        </div>
+    </div>
+</div>

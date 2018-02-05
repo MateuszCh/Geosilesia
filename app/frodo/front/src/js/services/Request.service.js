@@ -8,15 +8,12 @@
                 withCredentials: true,
                 url: url
             };
-
-            if(method === undefined || method === 'POST'){
+            if(method === 'POST'){
                 settings.headers = {
                     "Content-Type": 'application/json'
                 }
             }
-
             return $http(settings);
-
         }
 
         return {
