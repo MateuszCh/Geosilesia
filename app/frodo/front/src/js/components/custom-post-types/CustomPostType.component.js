@@ -49,7 +49,7 @@
 
         function addField(){
 
-            var html = '<add-field model="vm.model"></add-field>';
+            var html = '<add-field model="vm.model.fields"></add-field>';
             var newField = $compile(html)($scope);
             fieldsElement.append(newField);
         }

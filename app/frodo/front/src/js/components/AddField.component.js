@@ -19,16 +19,17 @@
         vm.fieldModel = {
           type: undefined,
           title: undefined,
-          id: undefined
+          id: undefined,
+          selectOptions: undefined
         };
 
         vm.$onInit = function(){
             vm.fields = fields;
             if(vm.edit){
-                vm.fieldModel = vm.model.fields[vm.order];
+                vm.fieldModel = vm.model[vm.order];
                 setFieldType(vm.fieldModel.type, vm.fields[vm.fieldModel.type].name);
             } else {
-                vm.order = vm.model.fields.push(vm.fieldModel) - 1;
+                vm.order = vm.model.push(vm.fieldModel) - 1;
                 setFieldType('text', vm.fields.text.name);
             }
             $scope.$on('fieldRemoved', function(e, position){
@@ -40,16 +41,15 @@
         };
 
         function setFieldType(type, name){
-            if(vm.fieldModel.type === type){
-                return;
-            }
             vm.currentFieldTypeName = name;
-            vm.fieldModel.type = type;
+            if(vm.fieldModel.type !== type){
+                vm.fieldModel.type = type;
+            }
         }
 
         function remove(){
             $rootScope.$broadcast('fieldRemoved', vm.order);
-            vm.model.fields.splice(vm.order, 1);
+            vm.model.splice(vm.order, 1);
             $element.remove();
         }
 

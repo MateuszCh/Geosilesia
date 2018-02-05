@@ -21,6 +21,14 @@
             repeater: {
                 name: 'Repeater',
                 type: 'repeater'
+            },
+            number: {
+                name: 'Liczba',
+                type: 'number'
+            },
+            image: {
+                name: 'Zdjęcie',
+                type: 'image'
             }
     });
 })();

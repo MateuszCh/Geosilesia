@@ -12,7 +12,7 @@ mongoose.connection.on('open', () => {
    Counter.findOne({})
        .then((counter) => {
           if(counter === null){
-            Counter.create({counter: 0})
+            Counter.create({counter: 1})
                 .then((counter) => {
                    console.log("Newly created:");
                    console.log(counter);

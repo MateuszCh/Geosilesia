@@ -28,6 +28,11 @@
                           class="add-field__type__all__item"></span>
                 </div>
             </div>
+            <div class="input input--inline add-field__type__select"
+                 ng-if="vm.fieldModel.type === 'select'">
+                <label for="selectOptions">Opcje:</label>
+                <input id="selectOptions" type="text" ng-model="vm.fieldModel.selectOptions">
+            </div>
         </div>
     </div>
 </div>
