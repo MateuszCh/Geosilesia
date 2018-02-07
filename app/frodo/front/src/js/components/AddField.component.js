@@ -32,6 +32,10 @@
             if(vm.edit){
                 vm.fieldModel = vm.model[vm.order];
                 setFieldType(vm.fieldModel.type, vm.fields[vm.fieldModel.type].name);
+
+                if(vm.fieldModel.type === 'repeater'){
+                    vm.repeaterFieldsNumder = new Array(vm.fieldModel.repeaterFields.length);
+                }
             } else {
                 vm.order = vm.model.push(vm.fieldModel) - 1;
                 setFieldType('text', vm.fields.text.name);
@@ -39,7 +43,6 @@
             $scope.$on('fieldRemoved', function(e, position){
                 if(position < vm.order){
                     vm.order--;
-                    console.log(vm.order);
                 }
             })
         };
@@ -60,7 +63,6 @@
         function addRepeaterField(){
             var html = '<add-field model="vm.fieldModel.repeaterFields"></add-field>';
             var newField = $compile(html)($scope);
-            console.log(newField);
             repeaterFieldsElement.append(newField[0]);
         }
 

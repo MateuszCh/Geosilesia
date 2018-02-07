@@ -70,7 +70,7 @@ const FieldSchema = new Schema ({
           },
           {
               validator: (repeaterFields) => !validateRepeaterIds(repeaterFields),
-              message: "Each field should have a different id"
+              message: "Each field in the same level should have a different id"
           }
       ]
    }
