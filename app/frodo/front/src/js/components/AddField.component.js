@@ -10,17 +10,21 @@
         controller: AddFieldController
     });
 
-    AddFieldController.$inject = ['$element', 'fields', '$rootScope', '$scope'];
-    function AddFieldController($element, fields, $rootScope, $scope){
+    AddFieldController.$inject = ['$element', 'fields', '$rootScope', '$scope', '$compile'];
+    function AddFieldController($element, fields, $rootScope, $scope, $compile){
         var vm  = this;
         vm.setFieldType = setFieldType;
         vm.remove = remove;
+        vm.addRepeaterField = addRepeaterField;
+
+        var repeaterFieldsElement = $element[0].querySelectorAll('.repeaterFields')[0];
 
         vm.fieldModel = {
           type: undefined,
           title: undefined,
           id: undefined,
-          selectOptions: undefined
+          selectOptions: undefined,
+          repeaterFields: []
         };
 
         vm.$onInit = function(){
@@ -51,6 +55,13 @@
             $rootScope.$broadcast('fieldRemoved', vm.order);
             vm.model.splice(vm.order, 1);
             $element.remove();
+        }
+
+        function addRepeaterField(){
+            var html = '<add-field model="vm.fieldModel.repeaterFields"></add-field>';
+            var newField = $compile(html)($scope);
+            console.log(newField);
+            repeaterFieldsElement.append(newField[0]);
         }
 
     }

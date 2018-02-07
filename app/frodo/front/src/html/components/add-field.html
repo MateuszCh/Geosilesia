@@ -33,7 +33,20 @@
                 <label for="selectOptions">Opcje:</label>
                 <input id="selectOptions" type="text" ng-model="vm.fieldModel.selectOptions">
             </div>
+
+            <div class="input input--inline add-field__type__select"
+                 ng-show="vm.fieldModel.type === 'repeater'">
+                <div class="repeaterFields">
+
+                </div>
+                <div class="custom-post-types__container--top-padding">
+                    <div class="custom-post-types__container__left"></div>
+                    <div class="custom-post-types__container__right">
+                <span class="button"
+                      ng-click="vm.addRepeaterField()">Dodaj nowe pole</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-

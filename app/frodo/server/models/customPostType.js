@@ -1,6 +1,42 @@
 const mongoose = require('mongoose'),
       Schema = mongoose.Schema;
 
+const validateRepeater = function validate(fields, prop){
+  return fields.some((field) => {
+     if(!field[prop]){
+        return true;
+     }
+     if(field.repeaterFields && field.repeaterFields.length){
+        return validate(field.repeaterFields, prop);
+     }
+     return false;
+  })
+};
+
+const validateRepeaterIds = function validate(fields) {
+   if(!(fields || fields.length)){
+      return false;
+   }
+
+   const ids = [];
+   const repeaterFields = [];
+   fields.forEach((field) => {
+      ids.push(field.id);
+       repeaterFields.push(field.repeaterFields);
+   });
+
+   if((new Set(ids)).size !== ids.length){
+      return true;
+   }
+
+   if(repeaterFields && repeaterFields.length){
+      return repeaterFields.some((fields) => {
+         return validate(fields);
+      })
+   }
+   return false;
+};
+
 const FieldSchema = new Schema ({
    title: {
       type: String,
@@ -13,10 +49,31 @@ const FieldSchema = new Schema ({
    id: {
       type: String,
       required: [true, 'id is required']
+   },
+   selectOptions: {
+      type: String
+   },
+   repeaterFields: {
+      type: [this],
+      validate: [
+          {
+             validator: (repeaterFields) => !validateRepeater(repeaterFields, 'title'),
+             message: "title of field is required"
+          },
+          {
+              validator: (repeaterFields) => !validateRepeater(repeaterFields, 'type'),
+              message: "type of field is required"
+          },
+          {
+              validator: (repeaterFields) => !validateRepeater(repeaterFields, 'id'),
+              message: "id of field is required"
+          },
+          {
+              validator: (repeaterFields) => !validateRepeaterIds(repeaterFields),
+              message: "Each field should have a different id"
+          }
+      ]
    }
-},{
-   discriminatorKey: 'type',
-   _id: false
 });
 
 const CustomPostTypeSchema = new Schema({
@@ -53,43 +110,10 @@ const CustomPostTypeSchema = new Schema({
     }
 });
 
-CustomPostTypeSchema.path('fields').required(true);
-
 CustomPostTypeSchema.virtual('url')
     .get(function(){
        return `/custom-post-types/edit/${this.id}`;
     });
-
-CustomPostTypeSchema.path('fields').discriminator('select', new Schema({
-   selectOptions: {
-      type: String,
-      required: [true, 'select options are required'  ]
-   }
-}, {_id: false}));
-
-CustomPostTypeSchema.path('fields').discriminator('repeater', new Schema({
-    repeaterFields: {
-       type: [FieldSchema],
-       validate: [{
-          validator: (repeaterFields) => repeaterFields && repeaterFields.length,
-          message: 'repeater fields are required'
-       }, {
-          validator: (repeaterFields) => {
-             if(!(repeaterFields || repeaterFields.length)){
-                return true;
-             }
-
-             const ids = [];
-             repeaterFields.forEach((repeaterField) => {
-                ids.push(repeaterField.id);
-             });
-
-             return (new Set(ids)).size === ids.length;
-          },
-          message: 'Each field should have a different id'
-       }]
-    }
-}, {_id: false}));
 
 const CustomPostType = mongoose.model('custom_post_type', CustomPostTypeSchema);
 
