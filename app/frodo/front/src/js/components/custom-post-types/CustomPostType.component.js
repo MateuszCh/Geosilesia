@@ -54,28 +54,46 @@
             fieldsElement.append(newField);
         }
 
+        function showInvalidInputs(){
+            var invalidInputs = document.getElementsByClassName("ng-invalid");
+
+            if(invalidInputs.length){
+                invalidInputs[0].scrollIntoView({behavior: "smooth"});
+                var collectionLength = invalidInputs.length;
+                var i = 0;
+                for(i; i < collectionLength; i++){
+                    invalidInputs[i].parentNode.classList.add("invalid");
+                }
+            }
+            return invalidInputs.length;
+        }
+
         function save(){
-            setSaveStatus(true);
             $timeout.cancel(resultTimeout);
 
-            var promise = vm.edit ? customPostTypesService.edit(vm.model._id, vm.model) : customPostTypesService.create(vm.model);
+            if(!showInvalidInputs()){
+                setSaveStatus(true);
+                var promise = vm.edit ? customPostTypesService.edit(vm.model._id, vm.model) : customPostTypesService.create(vm.model);
 
-            promise
-                .then(function(response){
-                    $rootScope.$broadcast('customPostTypesUpdated');
+                promise
+                    .then(function(response){
+                        $rootScope.$broadcast('customPostTypesUpdated');
+                        vm.submitted = false;
+                        if(vm.edit){
+                            setSaveStatus(false, "Custom post type updated successfully", response.status);
+                            resultTimeout = $timeout(setSaveStatus, 10000);
+                        } else {
+                            $location.path('/custom-post-types');
+                        }
 
-                    if(vm.edit){
-                        setSaveStatus(false, "Custom post type updated successfully", response.status);
+                    })
+                    .catch(function(err){
+                        setSaveStatus(false, err.data.error, err.status);
                         resultTimeout = $timeout(setSaveStatus, 10000);
-                    } else {
-                        $location.path('/custom-post-types');
-                    }
+                    })
+            }
 
-                })
-                .catch(function(err){
-                    setSaveStatus(false, err.data.error, err.status);
-                    resultTimeout = $timeout(setSaveStatus, 10000);
-                })
+
         }
 
         function setSaveStatus(busy, result, status){

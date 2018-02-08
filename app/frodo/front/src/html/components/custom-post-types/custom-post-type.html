@@ -12,12 +12,21 @@
         </div>
         <div class="custom-post-types__container__right">
             <div class="input input--inline">
-                <label for="title">Tytuł:</label>
-                <input id="title" ng-model="vm.model.title" required type="text">
+                <label for="title"
+                       class="required">Tytuł:</label>
+                <input id="title"
+                       ng-model="vm.model.title"
+                       required
+                       type="text">
+                <span class="input__notice"></span>
             </div>
             <div class="input input--inline">
-                <label for="type">Typ:</label>
-                <input id="type" ng-model="vm.model.type" required type="text">
+                <label for="type"
+                       class="required">Typ:</label>
+                <input id="type"
+                       ng-model="vm.model.type"
+                       required type="text">
+                <span class="input__notice"></span>
             </div>
         </div>
     </div>
@@ -27,7 +36,10 @@
     <div id="postFields"
          ng-class="{'postFields' :  vm.model.fields.length}">
         <div ng-if="vm.edit">
-            <add-field ng-repeat="i in vm.fieldsNumber track by $index" edit="true" model="vm.model.fields" order="$index"></add-field>
+            <add-field ng-repeat="i in vm.fieldsNumber track by $index"
+                       edit="true"
+                       model="vm.model.fields"
+                       order="$index"></add-field>
         </div>
     </div>
     <div class="custom-post-types__container--top-padding">

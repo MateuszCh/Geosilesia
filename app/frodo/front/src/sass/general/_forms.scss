@@ -3,14 +3,18 @@
   flex-direction: column;
   margin-bottom: 1em;
 
+  &__notice {
+    display: none;
+  }
+
   &--inline {
     flex-direction: row;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
     label {
       margin-bottom: 0 !important;
-      padding-right: 1em;
-      width: 15%;
     }
 
     input[type=text] {
@@ -24,6 +28,18 @@
     cursor: pointer;
   }
 
+  label.required {
+    position: relative;
+    &:after {
+      content: " *";
+      white-space: pre;
+      font-size: .8em;
+      color: red;
+      position: absolute;
+      top: 0;
+    }
+  }
+
   input[type=text] {
     padding: .5em;
     border: 1px solid $color1;
@@ -33,5 +49,25 @@
       background-color: white;
     }
 
+  }
+}
+
+.input.invalid {
+  position: relative;
+  padding-bottom: .7em;
+  .ng-invalid {
+    border: 1px solid red !important;
+    & + .input__notice {
+      width: 100%;
+      display: block;
+      &:after {
+        content: "To pole jest wymagane";
+        position: absolute;
+        left: 15%;
+        font-size: .8em;
+        color: red;
+        top: 85%;
+      }
+    }
   }
 }

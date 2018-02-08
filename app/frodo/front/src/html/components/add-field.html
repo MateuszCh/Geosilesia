@@ -8,13 +8,23 @@
     <div class="add-field-container__right">
         <div class="add-field">
             <div class="input input--inline">
-                <label for="fieldTitle">Tytuł:</label>
-                <input id="fieldTitle" type="text" ng-model="vm.fieldModel.title">
+                <label for="fieldTitle"
+                       class="required">Tytuł:</label>
+                <input id="fieldTitle"
+                       type="text"
+                       required
+                       ng-model="vm.fieldModel.title">
+                <span class="input__notice"></span>
             </div>
 
             <div class="input input--inline">
-                <label for="fieldId">Id:</label>
-                <input id="fieldId" type="text" ng-model="vm.fieldModel.id">
+                <label for="fieldId"
+                       class="required">Id:</label>
+                <input id="fieldId"
+                       type="text"
+                       required
+                       ng-model="vm.fieldModel.id">
+                <span class="input__notice"></span>
             </div>
 
             <div class="add-field__type">
@@ -40,7 +50,10 @@
             <div class="input input--inline add-field__type__repeater"
                  ng-show="vm.fieldModel.type === 'repeater'">
                 <div class="repeaterFields">
-                    <add-field ng-repeat="i in vm.repeaterFieldsNumder track by $index" edit="true" model="vm.fieldModel.repeaterFields" order="$index"></add-field>
+                    <add-field ng-repeat="i in vm.repeaterFieldsNumder track by $index"
+                               edit="true"
+                               model="vm.fieldModel.repeaterFields"
+                               order="$index"></add-field>
                 </div>
                 <div class="custom-post-types__container--top-padding">
                     <div class="custom-post-types__container__left"></div>
