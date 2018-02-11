@@ -21,6 +21,10 @@
       width: 85%;
     }
 
+    select {
+      width: 85%;
+    }
+
   }
 
   label {
@@ -48,8 +52,18 @@
     &:focus {
       background-color: white;
     }
-
   }
+
+  select {
+    padding: .5em;
+    border: 1px solid $color1;
+    background-color: $color4;
+    transition: background-color .2s ease;
+    &:focus {
+      background-color: white;
+    }
+  }
+
 }
 
 .input.invalid {

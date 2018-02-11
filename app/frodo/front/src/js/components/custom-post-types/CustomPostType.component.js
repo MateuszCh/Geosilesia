@@ -28,7 +28,8 @@
             title: '',
             pluralTitle: '',
             type: '',
-            fields: []
+            fields: [],
+            posts: []
         };
 
         function onInit(){

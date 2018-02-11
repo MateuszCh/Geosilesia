@@ -27,18 +27,23 @@
     <p ng-if="!vm.customPostType.fields.length"
        class="center">Obecnie posty tego typu nie mają żadnych pól</p>
     <div>
-        <div ng-repeat="field in ::vm.customPostType.fields track by field.id" ng-switch="field.type">
-            <div class="custom-post-types__container--top-padding">
-                <div class="custom-post-types__container__left">
+        <div class="custom-post-types__container">
+            <div class="custom-post-types__container__left">
 
-                </div>
-                <div class="custom-post-types__container__right">
+            </div>
+            <div class="custom-post-types__container__right">
+                <div ng-repeat="field in ::vm.customPostType.fields track by field.id" ng-switch="field.type">
                     <div class="input input--inline"
                          ng-switch-when="text">
-                        <label ng-bind="::field.title"></label>
+                        <label ng-bind="::field.title" ng-attr-for="{{field.id + '-1'}}"></label>
                         <input ng-model="vm.model.data[field.id]"
+                               ng-attr-id="{{field.id + '-1'}}"
                                type="text">
                     </div>
+                    <div class="input input--inline"
+                         ng-switch-when="select">
+                        <label ng-bind="::field.title" ng-attr-for="{{field.id + '-1'}}"></label>
+                        <select ng-attr-id="{{field.id + '-1'}}" ng-model="vm.model.data[field.id]" ng-options="item for item in field.options"></select>
                 </div>
             </div>
         </div>

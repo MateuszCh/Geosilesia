@@ -12,4 +12,6 @@ module.exports = (app) => {
 
     app.put('/frodo/customPostType/edit/:id', CustomPostTypeController.edit);
 
+    app.get('/frodo/customPostTypePosts/:id', CustomPostTypeController.getWithPosts);
+
 };

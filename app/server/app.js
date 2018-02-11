@@ -21,7 +21,8 @@ app.use(vhost('*', mainApp));
 app.use((err, req, res, next) => {
     console.log(err);
     console.log(err.message);
-    res.status(422).send({error: err});
+    const firstError = Object.keys(err.errors)[0];
+    res.status(422).send({error: err.errors[firstError].message});
 });
 
 module.exports = app;

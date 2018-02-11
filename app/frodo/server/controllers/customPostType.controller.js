@@ -11,8 +11,7 @@ module.exports = {
               if(existingType === null){
                   Counter.findOne({})
                       .then((counter) => {
-                          const count = counter.counter;
-                          customPostTypeProps.id = count;
+                          customPostTypeProps.id = counter.counter;
                           CustomPostType.create(customPostTypeProps)
                               .then(() => {
                                   res.send("Custom post type created successfully");
@@ -20,14 +19,9 @@ module.exports = {
                                       .then(() => {
                                           console.log("Counter incremented");
                                       })
-                                      .catch(function(err){
-                                          console.log(err);
-                                      })
+                                      .catch(next)
                               })
-                              .catch(function(err){
-                                  const firstError = Object.keys(err.errors)[0];
-                                  res.status(422).send({error: err.errors[firstError].message});
-                              });
+                              .catch(next);
                       })
                       .catch(next);
               } else {
@@ -49,6 +43,16 @@ module.exports = {
     const customPostTypeId = req.params.id;
 
     CustomPostType.findOne({id: customPostTypeId})
+        .then((customPostType) => {
+            console.log(customPostType);
+            res.send(customPostType)
+        })
+        .catch(next);
+  },
+  getWithPosts(req, res, next){
+    const customPostTypeId = req.params.id;
+    CustomPostType.findOne({id: customPostTypeId})
+        .populate('posts')
         .then((customPostType) => {
             res.send(customPostType)
         })
@@ -85,10 +89,7 @@ module.exports = {
                               .then((post) => {
                                   res.send(post);
                               })
-                              .catch(function(err){
-                                  const firstError = Object.keys(err.errors)[0];
-                                  res.status(422).send({error: err.errors[firstError].message});
-                              })
+                              .catch(next)
                       })
                       .catch(next);
               } else {

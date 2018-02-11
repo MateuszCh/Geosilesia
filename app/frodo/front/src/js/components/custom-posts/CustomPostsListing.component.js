@@ -16,7 +16,7 @@
         }
 
         function getCustomPostType(){
-            customPostTypesService.getById($routeParams.id)
+            customPostTypesService.getByIdWithPosts($routeParams.id)
                 .then(function(response){
                     if(!response.data){
                         $location.path('/');

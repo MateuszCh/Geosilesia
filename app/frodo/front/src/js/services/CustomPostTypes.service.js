@@ -9,6 +9,10 @@
             return requestService.send('/frodo/customPostType/' + id, 'GET');
         }
 
+        function getByIdWithPosts(id){
+            return requestService.send('/frodo/customPostTypePosts/' + id, 'GET');
+        }
+
         function removeById(id){
             return requestService.send('/frodo/customPostType/' + id, 'DELETE');
         }
@@ -26,7 +30,8 @@
             removeById: removeById,
             create: create,
             getById: getById,
-            edit: edit
+            edit: edit,
+            getByIdWithPosts: getByIdWithPosts
         }
 
     }]);

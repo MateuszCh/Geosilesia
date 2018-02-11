@@ -91,7 +91,25 @@ const FieldSchema = new Schema ({
           }
       ]
    }
+}, {
+    toJSON: {
+        virtuals: true
+    }
 });
+
+
+FieldSchema.virtual('options')
+    .get(function(){
+        if(!this.selectOptions){
+            return null;
+        }
+        let selectOptions = this.selectOptions.replace(/\s*;\s*/g, ";").split(";");
+        let options = [];
+        selectOptions.forEach((option) => {
+           if(option) options.push(option.replace(/;/g, ""));
+        });
+        return options
+    });
 
 const CustomPostTypeSchema = new Schema({
    title: {
@@ -124,11 +142,16 @@ const CustomPostTypeSchema = new Schema({
          message: 'Each field should have a different id'
       }
    },
+   posts : [{
+       type: Schema.Types.ObjectId,
+       ref: 'custom_post'
+   }],
    id: Number
 },{
     toJSON: {
         virtuals: true
-    }
+    },
+    usePushEach: true
 });
 
 CustomPostTypeSchema.pre('save', function(next){
@@ -137,6 +160,13 @@ CustomPostTypeSchema.pre('save', function(next){
    formatFieldsIds(customPostType.fields);
 
    next();
+});
+
+CustomPostTypeSchema.pre('remove', function(next){
+   const CustomPost = mongoose.model('custom_post');
+
+   CustomPost.remove({_id: {$in: this.posts}})
+       .then(() => next());
 });
 
 CustomPostTypeSchema.virtual('url')
