@@ -37,6 +37,23 @@ const validateRepeaterIds = function validate(fields) {
    return false;
 };
 
+const formatFieldsIds = function format(fields){
+    if(!(fields || fields.length)){
+        return true;
+    }
+    fields.forEach((field) => {
+        field.id = formatString(field.id);
+
+        if(field.repeaterFields || field.repeaterFields.length){
+            format(field.repeaterFields);
+        }
+    })
+};
+
+const formatString = function(str){
+    return str.replace(/\s+/g, "_").toLowerCase();
+};
+
 const FieldSchema = new Schema ({
    title: {
       type: String,
@@ -81,6 +98,10 @@ const CustomPostTypeSchema = new Schema({
       type: String,
       required: [true, 'title of custom post type is required']
    },
+   pluralTitle: {
+     type: String,
+     required: [true, 'plural title of custom post type is required']
+   },
    type: {
       type: String,
       required: [true, 'type of custom post type is required'],
@@ -108,6 +129,14 @@ const CustomPostTypeSchema = new Schema({
     toJSON: {
         virtuals: true
     }
+});
+
+CustomPostTypeSchema.pre('save', function(next){
+   let customPostType = this;
+   customPostType.type = formatString(customPostType.type);
+   formatFieldsIds(customPostType.fields);
+
+   next();
 });
 
 CustomPostTypeSchema.virtual('url')

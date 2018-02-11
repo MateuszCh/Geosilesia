@@ -10,25 +10,23 @@
         var vm  = this;
         vm.$onInit = onInit;
         vm.removeCustomPostType = removeCustomPostType;
-        vm.removeStatus = {
-            busy: false
-        };
+        vm.removeStatus = false
 
         function onInit(){
             getCustomPostTypes();
         }
 
         function removeCustomPostType(id){
-            vm.removeStatus.busy = true;
+            vm.removeStatus = id;
             customPostTypesService.removeById(id)
                 .then(function(response){
-                    vm.removeStatus.busy = false;
+                    vm.removeStatus = false;
                     getCustomPostTypes();
                     $rootScope.$broadcast('customPostTypesUpdated');
 
                 })
                 .catch(function(err){
-                    vm.removeStatus.busy = false;
+                    vm.removeStatus = false;
                     console.log(err);
                 })
         }

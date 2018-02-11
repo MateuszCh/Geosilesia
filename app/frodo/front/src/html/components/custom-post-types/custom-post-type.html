@@ -1,5 +1,6 @@
 <div class="custom-post-types">
-    <h2 class="custom-post-types__heading">Dodaj nowy typ postów</h2>
+    <h2 class="custom-post-types__heading"
+        ng-bind="vm.edit ? 'Edytuj typ postów' : 'Dodaj nowy typ postów'"></h2>
     <div class="custom-post-types__container--top-padding">
         <div class="custom-post-types__container__left">
             <span class="button"
@@ -13,9 +14,18 @@
         <div class="custom-post-types__container__right">
             <div class="input input--inline">
                 <label for="title"
-                       class="required">Tytuł:</label>
+                       class="required">Nazwa:</label>
                 <input id="title"
                        ng-model="vm.model.title"
+                       required
+                       type="text">
+                <span class="input__notice"></span>
+            </div>
+            <div class="input input--inline">
+                <label for="pluralTitle"
+                       class="required">Nazwa w l. mn.:</label>
+                <input id="pluralTitle"
+                       ng-model="vm.model.pluralTitle"
                        required
                        type="text">
                 <span class="input__notice"></span>
@@ -25,6 +35,7 @@
                        class="required">Typ:</label>
                 <input id="type"
                        ng-model="vm.model.type"
+                       ng-change="vm.formatTypeString()"
                        required type="text">
                 <span class="input__notice"></span>
             </div>

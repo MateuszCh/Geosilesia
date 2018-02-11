@@ -16,6 +16,7 @@
         vm.setFieldType = setFieldType;
         vm.remove = remove;
         vm.addRepeaterField = addRepeaterField;
+        vm.formatIdString = formatIdString;
 
         var repeaterFieldsElement = $element[0].querySelectorAll('.repeaterFields')[0];
 
@@ -64,6 +65,10 @@
             var html = '<add-field model="vm.fieldModel.repeaterFields"></add-field>';
             var newField = $compile(html)($scope);
             repeaterFieldsElement.append(newField[0]);
+        }
+
+        function formatIdString(){
+            vm.fieldModel.id = vm.fieldModel.id.replace(/\s+/g, "_").toLowerCase();
         }
 
     }

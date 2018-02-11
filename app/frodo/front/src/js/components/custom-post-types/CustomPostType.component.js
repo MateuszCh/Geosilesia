@@ -14,6 +14,7 @@
         vm.$onInit = onInit;
         vm.save = save;
         vm.addField = addField;
+        vm.formatTypeString = formatTypeString;
         var fieldsElement = angular.element(document.querySelector('#postFields'));
 
         vm.saveStatus = {
@@ -25,6 +26,7 @@
 
         vm.model = {
             title: '',
+            pluralTitle: '',
             type: '',
             fields: []
         };
@@ -66,6 +68,10 @@
                 }
             }
             return invalidInputs.length;
+        }
+
+        function formatTypeString(){
+            vm.model.type = vm.model.type.replace(/\s+/g, "_").toLowerCase();
         }
 
         function save(){

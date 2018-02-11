@@ -9,15 +9,15 @@
             <a class="block"
                ng-href="/pages">Strony</a>
         </p>
-        <p class="header__links__item"
-           ng-repeat="type in vm.customPostTypes track by type._id">
-            <a class="block"
-               ng-bind="type.title || type.type"
-               ng-href="{{'/custom-posts/' + type.type}}"></a>
-        </p>
         <p class="header__links__item">
             <a class="block"
                ng-href="/components">Komponenty</a>
+        </p>
+        <p class="header__links__item"
+           ng-repeat="type in vm.customPostTypes track by type._id">
+            <a class="block"
+               ng-bind="type.pluralTitle"
+               ng-href="{{'/custom-posts/' + type.id}}"></a>
         </p>
         <p class="header__links__item">
             <a class="block"

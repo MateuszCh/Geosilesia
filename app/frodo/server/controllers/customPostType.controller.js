@@ -79,6 +79,7 @@ module.exports = {
                           post.type = customPostTypeProps.type;
                           post.title = customPostTypeProps.title;
                           post.fields = customPostTypeProps.fields;
+                          post.pluralTitle = customPostTypeProps.pluralTitle;
 
                           post.save()
                               .then((post) => {

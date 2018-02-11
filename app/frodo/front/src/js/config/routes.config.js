@@ -20,6 +20,12 @@
            .when('/custom-post-types/edit/:id', {
                template: '<custom-post-type edit="true"></custom-post-type>'
            })
+           .when('/custom-posts/:id', {
+               template: '<custom-posts-listing></custom-posts-listing>'
+           })
+           .when('/custom-post/add/:id', {
+               template: '<custom-post></custom-post>'
+           })
            .otherwise('/dashboard');
 
    }])
