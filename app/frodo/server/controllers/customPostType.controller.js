@@ -44,34 +44,57 @@ module.exports = {
 
     CustomPostType.findOne({id: customPostTypeId})
         .then((customPostType) => {
-            console.log(customPostType);
             res.send(customPostType)
         })
         .catch(next);
+  },
+  getByType(req, res, next){
+    const customPostTypeType = req.params.type;
+
+    CustomPostType.findOne({type: customPostTypeType})
+        .then((customPostType) => {
+            res.send(customPostType);
+        })
+        .catch(next);
+  },
+  getByTypeWithPosts(req, res, next){
+      const customPostTypeType = req.params.type;
+
+      CustomPostType.findOne({type: customPostTypeType})
+          .populate('posts')
+          .then((customPostType) => {
+              res.send(customPostType);
+          })
+          .catch(next);
   },
   getWithPosts(req, res, next){
     const customPostTypeId = req.params.id;
     CustomPostType.findOne({id: customPostTypeId})
         .populate('posts')
         .then((customPostType) => {
-            res.send(customPostType)
+            res.send(customPostType);
         })
         .catch(next);
   },
   delete(req, res, next){
       const customPostTypeId = req.params.id;
 
-      CustomPostType.findByIdAndRemove(customPostTypeId)
-          .then(() => {
-              res.status(204).send("Custom post type removed successfully");
+      CustomPostType.findById(customPostTypeId)
+          .then((postToRemove) => {
+              postToRemove.remove()
+                  .then((post) => {
+                      res.status(204).send("Custom post type removed successfully")
+                  })
+                  .catch(next);
           })
           .catch(next);
+
   },
   edit(req, res, next){
       const customPostTypeId = req.params.id;
       const customPostTypeProps = req.body;
 
-      var id = mongoose.Types.ObjectId(customPostTypeProps._id);
+      let id = mongoose.Types.ObjectId(customPostTypeProps._id);
 
       CustomPostType.findOne({type: customPostTypeProps.type, _id : {$ne: id}})
           .then((existingType) => {

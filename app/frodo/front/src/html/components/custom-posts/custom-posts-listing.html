@@ -5,13 +5,13 @@
     <div class="custom-post-types__container--top-padding">
         <div class="custom-post-types__container__left">
             <a class="button"
-               ng-href="{{'/custom-post/add/' + vm.model.id}}">Dodaj nowy</a>
+               ng-href="{{'/custom-post/add/' + vm.model.type}}">Dodaj nowy</a>
             <a class="button"
                ng-href="{{'/custom-post-types/edit/' + vm.model.id}}">Edytuj typ postów</a>
         </div>
         <div class="custom-post-types__container__right">
             <p class="center"
-               ng-if="!vm.model.posts">Nie ma obecnie żadnych postów</p>
+               ng-if="!vm.model.posts.length">Nie ma obecnie żadnych postów</p>
             <div class="custom-post-types__item"
                  ng-repeat="post in vm.model.posts track by post._id">
                 <a class="custom-post-types__item__title"

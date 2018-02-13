@@ -150,8 +150,7 @@ const CustomPostTypeSchema = new Schema({
 },{
     toJSON: {
         virtuals: true
-    },
-    usePushEach: true
+    }
 });
 
 CustomPostTypeSchema.pre('save', function(next){
@@ -164,7 +163,6 @@ CustomPostTypeSchema.pre('save', function(next){
 
 CustomPostTypeSchema.pre('remove', function(next){
    const CustomPost = mongoose.model('custom_post');
-
    CustomPost.remove({_id: {$in: this.posts}})
        .then(() => next());
 });

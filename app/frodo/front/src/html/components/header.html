@@ -17,7 +17,7 @@
            ng-repeat="type in vm.customPostTypes track by type._id">
             <a class="block"
                ng-bind="type.pluralTitle"
-               ng-href="{{'/custom-posts/' + type.id}}"></a>
+               ng-href="{{'/custom-posts/' + type.type}}"></a>
         </p>
         <p class="header__links__item">
             <a class="block"

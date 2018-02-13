@@ -5,18 +5,19 @@
         controller: CustomPostsListingController
     });
 
-    CustomPostsListingController.$inject = ['customPostTypesService', '$routeParams', '$location'];
-    function CustomPostsListingController(customPostTypesService, $routeParams, $location){
+    CustomPostsListingController.$inject = ['customPostTypesService', 'customPostsService', '$routeParams', '$location'];
+    function CustomPostsListingController(customPostTypesService, customPostsService, $routeParams, $location){
         var vm  = this;
         vm.$onInit = onInit;
-        // vm.removeStatus = false;
+        vm.removeStatus = false;
+        vm.removeCustomPost = removeCustomPost;
 
         function onInit(){
             getCustomPostType();
         }
 
         function getCustomPostType(){
-            customPostTypesService.getByIdWithPosts($routeParams.id)
+            customPostTypesService.getByTypeWithPosts($routeParams.type)
                 .then(function(response){
                     if(!response.data){
                         $location.path('/');
@@ -26,6 +27,20 @@
                 })
                 .catch(function(err){
                     $location.path('/');
+                })
+        }
+
+        function removeCustomPost(id){
+            vm.removeStatus = id;
+            customPostsService.removeById(id)
+                .then(function(response){
+                    vm.removeStatus = false;
+                    getCustomPostType();
+
+                })
+                .catch(function(err){
+                    vm.removeStatus = false;
+                    console.log(err);
                 })
         }
 

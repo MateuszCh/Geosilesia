@@ -10,7 +10,7 @@
         var vm  = this;
         vm.$onInit = onInit;
         vm.removeCustomPostType = removeCustomPostType;
-        vm.removeStatus = false
+        vm.removeStatus = false;
 
         function onInit(){
             getCustomPostTypes();

@@ -16,7 +16,16 @@ const CustomPostSchema = new Schema({
    id: {
        type: Number
    }
+},{
+    toJSON: {
+        virtuals: true
+    }
 });
+
+CustomPostSchema.virtual('url')
+    .get(function(){
+        return `/custom-post/edit/${this.id}`;
+    });
 
 const CustomPost = mongoose.model('custom_post', CustomPostSchema);
 

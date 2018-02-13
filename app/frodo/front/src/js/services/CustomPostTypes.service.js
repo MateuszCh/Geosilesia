@@ -9,6 +9,14 @@
             return requestService.send('/frodo/customPostType/' + id, 'GET');
         }
 
+        function getByType(type){
+            return requestService.send('/frodo/customPostTypeByType/' + type, 'GET');
+        }
+
+        function getByTypeWithPosts(type){
+            return requestService.send('/frodo/customPostTypeByTypePosts/' + type, 'GET');
+        }
+
         function getByIdWithPosts(id){
             return requestService.send('/frodo/customPostTypePosts/' + id, 'GET');
         }
@@ -31,7 +39,9 @@
             create: create,
             getById: getById,
             edit: edit,
-            getByIdWithPosts: getByIdWithPosts
+            getByIdWithPosts: getByIdWithPosts,
+            getByType: getByType,
+            getByTypeWithPosts: getByTypeWithPosts
         }
 
     }]);

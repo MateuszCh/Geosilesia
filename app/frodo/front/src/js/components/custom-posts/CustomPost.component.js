@@ -29,19 +29,36 @@
         };
 
         function onInit(){
-            customPostTypesService.getById($routeParams.id)
-                .then(function(response){
-                    if(!response.data){
+            if(vm.edit){
+                customPostsService.getById($routeParams.id)
+                    .then(function(response){
+                        vm.model = response.data;
+                        customPostTypesService.getByType(vm.model.type)
+                            .then(function(response){
+                                vm.customPostType = response.data;
+                            })
+                            .catch(function(err){
+                                $location.path('/');
+                            })
+                    })
+                    .catch(function(err){
                         $location.path('/');
-                        return;
-                    }
-                    vm.customPostType = response.data;
-                    vm.model.type = vm.customPostType.type;
+                    })
+            } else {
+                customPostTypesService.getByType($routeParams.type)
+                    .then(function(response){
+                        if(!response.data){
+                            $location.path('/');
+                            return;
+                        }
+                        vm.customPostType = response.data;
+                        vm.model.type = vm.customPostType.type;
 
-                })
-                .catch(function(err){
-                    $location.path('/');
-                })
+                    })
+                    .catch(function(err){
+                        $location.path('/');
+                    })
+            }
         }
 
 
@@ -50,9 +67,16 @@
 
             setSaveStatus(true);
 
-            customPostsService.create(vm.model)
+            var promise = vm.edit ? customPostsService.edit(vm.model._id, vm.model) : customPostsService.create(vm.model);
+
+            promise
                 .then(function(response){
-                    $location.path('/custom-posts/' + vm.customPostType.id);
+                    if(vm.edit){
+                        setSaveStatus(false, "Custom post updated successfully", response.status);
+                        resultTimeout = $timeout(setSaveStatus, 10000);
+                    } else {
+                        $location.path('/custom-posts/' + vm.customPostType.id);
+                    }
                 })
                 .catch(function(err){
                     setSaveStatus(false, err.data.error, err.status);
