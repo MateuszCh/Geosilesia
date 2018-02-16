@@ -1,0 +1,48 @@
+<div ng-switch="vm.field.type">
+    <div class="input input--inline"
+         ng-switch-when="text">
+        <label ng-bind="::vm.field.title" ng-attr-for="{{vm.field.id + '-1'}}"></label>
+        <input ng-model="vm.model[vm.field.id]"
+               ng-attr-id="{{vm.field.id + '-1'}}"
+               type="text">
+    </div>
+    <div class="input input--inline"
+         ng-switch-when="select">
+        <label ng-bind="::vm.field.title" ng-attr-for="{{vm.field.id + '-1'}}"></label>
+        <select ng-attr-id="{{vm.field.id + '-1'}}" ng-model="vm.model[vm.field.id]" ng-options="item for item in vm.field.options"></select>
+    </div>
+    <div class="input input--inline"
+         ng-switch-when="textarea">
+        <label ng-bind="::vm.field.title" ng-attr-for="{{vm.field.id + '-1'}}"></label>
+        <textarea ng-attr-id="{{vm.field.id + '-1'}}" ng-model="vm.model[vm.field.id]"></textarea>
+    </div>
+    <div class="input input--inline"
+         ng-switch-when="checkbox">
+        <label ng-bind="::vm.field.title" ng-attr-for="{{vm.field.id + '-1'}}"></label>
+        <input type="checkbox"
+               ng-model="vm.model[vm.field.id]"
+               ng-attr-id="{{vm.field.id + '-1'}}">
+    </div>
+    <div class="input input--inline"
+         ng-switch-when="number">
+        <label ng-bind="::vm.field.title" ng-attr-for="{{vm.field.id + '-1'}}"></label>
+        <input type="number"
+               ng-model="vm.model[vm.field.id]"
+               ng-attr-id="{{vm.field.id + '-1'}}">
+    </div>
+    <div class="input input--inline"
+         ng-switch-when="image">
+        <label ng-bind="::vm.field.title" ng-attr-for="{{vm.field.id + '-1'}}"></label>
+        <input type="file"
+               ng-model="vm.model[vm.field.id]"
+               ng-attr-id="{{vm.field.id + '-1'}}">
+    </div>
+    <div class="input input--inline"
+         ng-switch-when="repeater">
+        <label ng-bind="::vm.field.title"></label>
+        <repeater parent-model="vm.model"
+                  class="repeater"
+                  field="vm.field"
+                  repeater-fields="vm.field.repeaterFields"></repeater>
+    </div>
+</div>

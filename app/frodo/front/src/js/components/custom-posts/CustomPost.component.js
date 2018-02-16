@@ -36,6 +36,7 @@
                         customPostTypesService.getByType(vm.model.type)
                             .then(function(response){
                                 vm.customPostType = response.data;
+                                checkModel();
                             })
                             .catch(function(err){
                                 $location.path('/');
@@ -61,6 +62,19 @@
             }
         }
 
+        function checkModel(){
+            var validIds = [];
+            vm.customPostType.fields.forEach(function(field){
+                validIds.push(field.id);
+            });
+            if(vm.model.data){
+                for (var prop in vm.model.data) {
+                    if(validIds.indexOf(prop) < 0){
+                        delete vm.model.data[prop];
+                    }
+                }
+            }
+        }
 
         function save(){
             $timeout.cancel(resultTimeout);
