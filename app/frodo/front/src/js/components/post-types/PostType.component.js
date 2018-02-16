@@ -1,15 +1,15 @@
 (function(){
-    angular.module('frodo').component('customPostType', {
-        templateUrl: 'html/components/custom-post-types/custom-post-type.html',
+    angular.module('frodo').component('postType', {
+        templateUrl: 'html/components/post-types/post-type.html',
         controllerAs: 'vm',
         bindings: {
             edit: '<'
         },
-        controller: CustomPostTypeController
+        controller: PostTypeController
     });
 
-    CustomPostTypeController.$inject = ['$scope', '$compile', 'customPostTypesService', '$rootScope', '$location', '$timeout', '$routeParams'];
-    function CustomPostTypeController($scope, $compile, customPostTypesService, $rootScope, $location, $timeout, $routeParams){
+    PostTypeController.$inject = ['$scope', '$compile', 'postTypesService', '$rootScope', '$location', '$timeout', '$routeParams'];
+    function PostTypeController($scope, $compile, postTypesService, $rootScope, $location, $timeout, $routeParams){
         var vm  = this;
         vm.$onInit = onInit;
         vm.save = save;
@@ -34,7 +34,7 @@
 
         function onInit(){
             if(vm.edit){
-                customPostTypesService.getById($routeParams.id)
+                postTypesService.getById($routeParams.id)
                     .then(function(response){
                         if(!response.data){
                             $location.path('/');
@@ -72,7 +72,9 @@
         }
 
         function formatTypeString(){
-            vm.model.type = vm.model.type.replace(/\s+/g, "_").toLowerCase();
+            if(vm.model.type){
+                vm.model.type = vm.model.type.replace(/\s+/g, "_").toLowerCase();
+            }
         }
 
         function save(){
@@ -80,17 +82,17 @@
 
             if(!showInvalidInputs()){
                 setSaveStatus(true);
-                var promise = vm.edit ? customPostTypesService.edit(vm.model._id, vm.model) : customPostTypesService.create(vm.model);
+                var promise = vm.edit ? postTypesService.edit(vm.model._id, vm.model) : postTypesService.create(vm.model);
 
                 promise
                     .then(function(response){
-                        $rootScope.$broadcast('customPostTypesUpdated');
+                        $rootScope.$broadcast('postTypesUpdated');
                         vm.submitted = false;
                         if(vm.edit){
                             setSaveStatus(false, "Custom post type updated successfully", response.status);
                             resultTimeout = $timeout(setSaveStatus, 10000);
                         } else {
-                            $location.path('/custom-post-types');
+                            $location.path('/post-types');
                         }
 
                     })

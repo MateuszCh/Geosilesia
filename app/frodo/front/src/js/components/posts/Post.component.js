@@ -1,15 +1,15 @@
 (function(){
-    angular.module('frodo').component('customPost', {
-        templateUrl: 'html/components/custom-posts/custom-post.html',
+    angular.module('frodo').component('post', {
+        templateUrl: 'html/components/posts/post.html',
         controllerAs: 'vm',
         bindings: {
             edit: '<'
         },
-        controller: CustomPostController
+        controller: PostController
     });
 
-    CustomPostController.$inject = ['$scope', '$compile', 'customPostsService', 'customPostTypesService', '$rootScope', '$location', '$timeout', '$routeParams'];
-    function CustomPostController($scope, $compile, customPostsService, customPostTypesService, $rootScope, $location, $timeout, $routeParams){
+    PostController.$inject = ['$scope', '$compile', 'postsService', 'postTypesService', '$rootScope', '$location', '$timeout', '$routeParams'];
+    function PostController($scope, $compile, postsService, postTypesService, $rootScope, $location, $timeout, $routeParams){
         var vm  = this;
         vm.$onInit = onInit;
         vm.save = save;
@@ -30,12 +30,12 @@
 
         function onInit(){
             if(vm.edit){
-                customPostsService.getById($routeParams.id)
+                postsService.getById($routeParams.id)
                     .then(function(response){
                         vm.model = response.data;
-                        customPostTypesService.getByType(vm.model.type)
+                        postTypesService.getByType(vm.model.type)
                             .then(function(response){
-                                vm.customPostType = response.data;
+                                vm.postType = response.data;
                                 checkModel();
                             })
                             .catch(function(err){
@@ -46,14 +46,14 @@
                         $location.path('/');
                     })
             } else {
-                customPostTypesService.getByType($routeParams.type)
+                postTypesService.getByType($routeParams.type)
                     .then(function(response){
                         if(!response.data){
                             $location.path('/');
                             return;
                         }
-                        vm.customPostType = response.data;
-                        vm.model.type = vm.customPostType.type;
+                        vm.postType = response.data;
+                        vm.model.type = vm.postType.type;
 
                     })
                     .catch(function(err){
@@ -64,7 +64,7 @@
 
         function checkModel(){
             var validIds = [];
-            vm.customPostType.fields.forEach(function(field){
+            vm.postType.fields.forEach(function(field){
                 validIds.push(field.id);
             });
             if(vm.model.data){
@@ -81,7 +81,7 @@
 
             setSaveStatus(true);
 
-            var promise = vm.edit ? customPostsService.edit(vm.model._id, vm.model) : customPostsService.create(vm.model);
+            var promise = vm.edit ? postsService.edit(vm.model._id, vm.model) : postsService.create(vm.model);
 
             promise
                 .then(function(response){
@@ -89,7 +89,7 @@
                         setSaveStatus(false, "Custom post updated successfully", response.status);
                         resultTimeout = $timeout(setSaveStatus, 10000);
                     } else {
-                        $location.path('/custom-posts/' + vm.customPostType.id);
+                        $location.path('/custom-posts/' + vm.postType.id);
                     }
                 })
                 .catch(function(err){

@@ -1,23 +1,23 @@
-const CustomPost = require('../models/customPost'),
+const Post = require('../models/post'),
       Counter = require('../models/counter'),
-      CustomPostType = require('../models/customPostType');
+      PostType = require('../models/postType');
 
 module.exports = {
     create(req, res, next){
-        const customPostProps = req.body;
-        Promise.all([Counter.findOne({}), CustomPostType.findOne({type: customPostProps.type})])
+        const postProps = req.body;
+        Promise.all([Counter.findOne({}), PostType.findOne({type: postProps.type})])
             .then((response) => {
-                const counter = response[0]
-                customPostProps.id = counter.counter;
+                const counter = response[0];
+                postProps.id = counter.counter;
                 const postType = response[1];
                 if(postType !== null){
-                    const newCustomPost = new CustomPost(customPostProps);
+                    const newPost = new Post(postProps);
 
-                    newCustomPost.save()
+                    newPost.save()
                         .then((response) => {
                             postType.update({$push: {posts: response._id}})
                                 .then(() => {
-                                    res.send("Custom post created successfully");
+                                    res.send("Post created successfully");
                                     Counter.update(counter, { $inc: {counter: 1}})
                                         .then(() => {
                                             console.log("Counter incremented");
@@ -29,23 +29,23 @@ module.exports = {
                         .catch(next);
 
                 } else {
-                    res.status(422).send({error: "There is no " + customPostProps.type + " post type."})
+                    res.status(422).send({error: "There is no " + postProps.type + " post type."})
                 }
             })
             .catch(next);
     },
     delete(req, res, next){
-        const customPostId = req.params.id;
+        const postId = req.params.id;
 
-        CustomPost.findById(customPostId)
+        Post.findById(postId)
             .then((postToRemove) => {
                 postToRemove.remove()
                     .then(() => {
-                        CustomPostType.update({type: postToRemove.type},
+                        PostType.update({type: postToRemove.type},
                             {$pull: {posts: postToRemove._id}})
                                     .then((updated) => {
                                         console.log(updated);
-                                        res.send("Custom post removed successfully");
+                                        res.send("Post removed successfully");
                                     })
 
                     })
@@ -54,27 +54,27 @@ module.exports = {
             .catch(next);
     },
     getById(req, res, next){
-        const customPostId = req.params.id;
+        const postId = req.params.id;
 
-        CustomPost.findOne({id: customPostId})
-            .then((customPost) => {
-                res.send(customPost);
+        Post.findOne({id: postId})
+            .then((post) => {
+                res.send(post);
             })
             .catch(next);
     },
     edit(req, res, next){
-        const customPostId = req.params.id;
-        const customPostProps = req.body;
+        const postId = req.params.id;
+        const postProps = req.body;
 
 
-        CustomPost.findById(customPostId)
-            .then((customPost) => {
-               customPost.title = customPostProps.title;
-               customPost.data = customPostProps.data;
+        Post.findById(postId)
+            .then((post) => {
+               post.title = postProps.title;
+               post.data = postProps.data;
 
-               customPost.save()
-                   .then((customPost) => {
-                       res.send(customPost);
+               post.save()
+                   .then((post) => {
+                       res.send(post);
                    })
                    .catch(next);
             })

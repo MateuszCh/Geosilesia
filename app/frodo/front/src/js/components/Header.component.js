@@ -5,24 +5,24 @@
         controller: HeaderController
     });
 
-    HeaderController.$inject = ['customPostTypesService', '$location', '$scope'];
-    function HeaderController(customPostTypesService, $location, $scope){
+    HeaderController.$inject = ['postTypesService', '$location', '$scope'];
+    function HeaderController(postTypesService, $location, $scope){
         var vm  = this;
         vm.$onInit = onInit;
 
         function onInit(){
             vm.websiteAddress = getWebsiteAddress();
-            getCustomPostTypes();
+            getPostTypes();
 
-            $scope.$on('customPostTypesUpdated', function(){
-                getCustomPostTypes();
+            $scope.$on('postTypesUpdated', function(){
+                getPostTypes();
             })
         }
 
-        function getCustomPostTypes(){
-            customPostTypesService.getAll()
+        function getPostTypes(){
+            postTypesService.getAll()
                 .then(function(response){
-                    vm.customPostTypes = response.data;
+                    vm.postTypes = response.data;
                 })
         }
 

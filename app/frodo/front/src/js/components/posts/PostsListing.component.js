@@ -1,23 +1,23 @@
 (function(){
-    angular.module('frodo').component('customPostsListing', {
-        templateUrl: 'html/components/custom-posts/custom-posts-listing.html',
+    angular.module('frodo').component('postsListing', {
+        templateUrl: 'html/components/posts/posts-listing.html',
         controllerAs: 'vm',
-        controller: CustomPostsListingController
+        controller: PostsListingController
     });
 
-    CustomPostsListingController.$inject = ['customPostTypesService', 'customPostsService', '$routeParams', '$location'];
-    function CustomPostsListingController(customPostTypesService, customPostsService, $routeParams, $location){
+    PostsListingController.$inject = ['postTypesService', 'postsService', '$routeParams', '$location'];
+    function PostsListingController(postTypesService, postsService, $routeParams, $location){
         var vm  = this;
         vm.$onInit = onInit;
         vm.removeStatus = false;
-        vm.removeCustomPost = removeCustomPost;
+        vm.removePost = removePost;
 
         function onInit(){
-            getCustomPostType();
+            getPostType();
         }
 
-        function getCustomPostType(){
-            customPostTypesService.getByTypeWithPosts($routeParams.type)
+        function getPostType(){
+            postTypesService.getByTypeWithPosts($routeParams.type)
                 .then(function(response){
                     if(!response.data){
                         $location.path('/');
@@ -30,12 +30,12 @@
                 })
         }
 
-        function removeCustomPost(id){
+        function removePost(id){
             vm.removeStatus = id;
-            customPostsService.removeById(id)
+            postsService.removeById(id)
                 .then(function(response){
                     vm.removeStatus = false;
-                    getCustomPostType();
+                    getPostType();
 
                 })
                 .catch(function(err){

@@ -68,7 +68,9 @@
         }
 
         function formatIdString(){
-            vm.fieldModel.id = vm.fieldModel.id.replace(/\s+/g, "_").toLowerCase();
+            if(vm.fieldModel.id){
+                vm.fieldModel.id = vm.fieldModel.id.replace(/\s+/g, "_").toLowerCase();
+            }
         }
 
     }

@@ -14,14 +14,14 @@
                ng-href="/components">Komponenty</a>
         </p>
         <p class="header__links__item"
-           ng-repeat="type in vm.customPostTypes track by type._id">
+           ng-repeat="type in vm.postTypes track by type._id">
             <a class="block"
                ng-bind="type.pluralTitle"
-               ng-href="{{'/custom-posts/' + type.type}}"></a>
+               ng-href="{{'/posts/' + type.type}}"></a>
         </p>
         <p class="header__links__item">
             <a class="block"
-               ng-href="/custom-post-types">Typy postów</a>
+               ng-href="/post-types">Typy postów</a>
         </p>
     </div>
 </div>

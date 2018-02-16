@@ -4,21 +4,21 @@
     <div class="custom-post-types__container--top-padding">
         <div class="custom-post-types__container__left">
             <a class="button"
-               ng-href="/custom-post-types/add">Dodaj nowy</a>
+               ng-href="/post-types/add">Dodaj nowy</a>
         </div>
         <div class="custom-post-types__container__right">
             <p class="center"
-               ng-if="!vm.customPostTypes.length">Nie ma obecnie żadnych typów postów</p>
+               ng-if="!vm.postTypes.length">Nie ma obecnie żadnych typów postów</p>
             <div class="custom-post-types__item"
-                 ng-repeat="customPost in vm.customPostTypes track by customPost._id">
+                 ng-repeat="post in vm.postTypes track by post._id">
                 <a class="custom-post-types__item__title"
-                   ng-href="{{customPost.url}}"
-                   ng-bind="customPost.title || customPost.type"></a>
+                   ng-href="{{post.url}}"
+                   ng-bind="post.title || post.type"></a>
                 <a class="button button--inline"
-                   ng-href="{{customPost.url}}">Edytuj</a>
+                   ng-href="{{post.url}}">Edytuj</a>
                 <span class="button button--inline"
-                      ng-click="vm.removeCustomPostType(customPost._id)"
-                      ng-class="{'busy' : vm.removeStatus === customPost._id}">Usuń</span>
+                      ng-click="vm.removeCustomPostType(post._id)"
+                      ng-class="{'busy' : vm.removeStatus === post._id}">Usuń</span>
             </div>
         </div>
     </div>

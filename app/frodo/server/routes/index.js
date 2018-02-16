@@ -1,7 +1,7 @@
-const customPostTypeRoutes = require('./customPostType.routes'),
-      customPostRoutes = require('./customPost.routes');
+const postTypeRoutes = require('./postType.routes'),
+      postRoutes = require('./post.routes');
 
 module.exports = (app) => {
-  customPostTypeRoutes(app);
-  customPostRoutes(app);
+  postTypeRoutes(app);
+  postRoutes(app);
 };

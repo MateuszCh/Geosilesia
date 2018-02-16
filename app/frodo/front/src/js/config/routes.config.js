@@ -11,23 +11,23 @@
            .when('/pages/add', {
                template: '<new-page></new-page>'
            })
-           .when('/custom-post-types', {
-               template: '<custom-post-types-listing></custom-post-types-listing>'
+           .when('/post-types', {
+               template: '<post-types-listing></post-types-listing>'
            })
-           .when('/custom-post-types/add', {
-               template: '<custom-post-type></custom-post-type>'
+           .when('/post-types/add', {
+               template: '<post-type></post-type>'
            })
-           .when('/custom-post-types/edit/:id', {
-               template: '<custom-post-type edit="true"></custom-post-type>'
+           .when('/post-types/edit/:id', {
+               template: '<post-type edit="true"></post-type>'
            })
-           .when('/custom-posts/:type', {
-               template: '<custom-posts-listing></custom-posts-listing>'
+           .when('/posts/:type', {
+               template: '<posts-listing></posts-listing>'
            })
-           .when('/custom-post/add/:type', {
-               template: '<custom-post></custom-post>'
+           .when('/post/add/:type', {
+               template: '<post></post>'
            })
-           .when('/custom-post/edit/:id', {
-               template: '<custom-post edit="true"></custom-post>'
+           .when('/post/edit/:id', {
+               template: '<post edit="true"></post>'
            })
            .otherwise('/dashboard');
 

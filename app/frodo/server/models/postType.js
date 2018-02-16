@@ -111,18 +111,18 @@ FieldSchema.virtual('options')
         return options
     });
 
-const CustomPostTypeSchema = new Schema({
+const PostTypeSchema = new Schema({
    title: {
       type: String,
-      required: [true, 'title of custom post type is required']
+      required: [true, 'title of post type is required']
    },
    pluralTitle: {
      type: String,
-     required: [true, 'plural title of custom post type is required']
+     required: [true, 'plural title of post type is required']
    },
    type: {
       type: String,
-      required: [true, 'type of custom post type is required'],
+      required: [true, 'type of post type is required'],
       index: true
    },
    fields : {
@@ -144,7 +144,7 @@ const CustomPostTypeSchema = new Schema({
    },
    posts : [{
        type: Schema.Types.ObjectId,
-       ref: 'custom_post'
+       ref: 'post'
    }],
    id: Number
 },{
@@ -153,25 +153,25 @@ const CustomPostTypeSchema = new Schema({
     }
 });
 
-CustomPostTypeSchema.pre('save', function(next){
-   let customPostType = this;
-   customPostType.type = formatString(customPostType.type);
-   formatFieldsIds(customPostType.fields);
+PostTypeSchema.pre('save', function(next){
+   let PostType = this;
+   PostType.type = formatString(PostType.type);
+   formatFieldsIds(PostType.fields);
 
    next();
 });
 
-CustomPostTypeSchema.pre('remove', function(next){
-   const CustomPost = mongoose.model('custom_post');
-   CustomPost.remove({_id: {$in: this.posts}})
+PostTypeSchema.pre('remove', function(next){
+   const Post = mongoose.model('post');
+   Post.remove({_id: {$in: this.posts}})
        .then(() => next());
 });
 
-CustomPostTypeSchema.virtual('url')
+PostTypeSchema.virtual('url')
     .get(function(){
-       return `/custom-post-types/edit/${this.id}`;
+       return `/post-types/edit/${this.id}`;
     });
 
-const CustomPostType = mongoose.model('custom_post_type', CustomPostTypeSchema);
+const PostType = mongoose.model('post_type', PostTypeSchema);
 
-module.exports = CustomPostType;
+module.exports = PostType;
