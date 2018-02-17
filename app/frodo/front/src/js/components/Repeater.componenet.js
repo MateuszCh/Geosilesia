@@ -23,6 +23,8 @@
                 vm.parentModel[vm.field.id] = [];
             }
             vm.model = vm.parentModel[vm.field.id];
+            checkModel();
+
         }
 
         function removeRow(index){
@@ -31,6 +33,22 @@
 
         function addRow(){
             vm.model.push({});
+        }
+
+        function checkModel(){
+            var validIds = [];
+            vm.field.repeaterFields.forEach((function(field){
+                validIds.push(field.id);
+            }));
+            if(vm.model[0]){
+                vm.model.forEach(function(model){
+                    for(var prop in model){
+                        if(validIds.indexOf(prop) < 0){
+                            delete model[prop];
+                        }
+                    }
+                })
+            }
         }
 
     }

@@ -78,7 +78,6 @@
 
         function save(){
             $timeout.cancel(resultTimeout);
-
             setSaveStatus(true);
 
             var promise = vm.edit ? postsService.edit(vm.model._id, vm.model) : postsService.create(vm.model);
@@ -89,7 +88,7 @@
                         setSaveStatus(false, "Custom post updated successfully", response.status);
                         resultTimeout = $timeout(setSaveStatus, 10000);
                     } else {
-                        $location.path('/custom-posts/' + vm.postType.id);
+                        $location.path('/posts/' + vm.postType.type);
                     }
                 })
                 .catch(function(err){
