@@ -6,19 +6,10 @@
                templateUrl: 'html/views/dashboard.html'
            })
            .when('/pages', {
-               template: '<pages></pages>'
+               template: '<pages-listing></pages-listing>'
            })
-           .when('/pages/add', {
-               template: '<new-page></new-page>'
-           })
-           .when('/post-types', {
-               template: '<post-types-listing></post-types-listing>'
-           })
-           .when('/post-types/add', {
-               template: '<post-type></post-type>'
-           })
-           .when('/post-types/edit/:id', {
-               template: '<post-type edit="true"></post-type>'
+           .when('/page/add', {
+               template: '<page></page>'
            })
            .when('/posts/:type', {
                template: '<posts-listing></posts-listing>'
@@ -28,6 +19,15 @@
            })
            .when('/post/edit/:id', {
                template: '<post edit="true"></post>'
+           })
+           .when('/post-types', {
+               template: '<post-types-listing></post-types-listing>'
+           })
+           .when('/post-types/add', {
+               template: '<post-type></post-type>'
+           })
+           .when('/post-types/edit/:id', {
+               template: '<post-type edit="true"></post-type>'
            })
            .otherwise('/dashboard');
 

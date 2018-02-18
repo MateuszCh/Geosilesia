@@ -1,4 +1,4 @@
-//property name and property of 'type' should be the same
+//property name and value of 'type' property should be the same
 
 (function(){
     angular.module('frodo').constant('fields', {

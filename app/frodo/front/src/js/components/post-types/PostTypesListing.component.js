@@ -18,7 +18,7 @@
 
         function removePostType(id){
             vm.removeStatus = id;
-            postTypesService.removeById(id)
+            postTypesService.remove(id)
                 .then(function(response){
                     vm.removeStatus = false;
                     getPostTypes();

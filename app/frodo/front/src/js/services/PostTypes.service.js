@@ -1,12 +1,24 @@
 (function(){
     angular.module('frodo').service('postTypesService', ['requestService', function(requestService){
 
+        function create(data){
+            return requestService.send('/frodo/postType', 'POST', data);
+        }
+
+        function edit(id, data){
+            return requestService.send('/frodo/postType/edit/' + id, 'PUT', data);
+        }
+
         function getAll(){
             return requestService.send('/frodo/postType', 'GET');
         }
 
         function getById(id){
             return requestService.send('/frodo/postType/' + id, 'GET');
+        }
+
+        function getByIdWithPosts(id){
+            return requestService.send('/frodo/postTypePosts/' + id, 'GET');
         }
 
         function getByType(type){
@@ -17,32 +29,19 @@
             return requestService.send('/frodo/postTypeByTypePosts/' + type, 'GET');
         }
 
-        function getByIdWithPosts(id){
-            return requestService.send('/frodo/postTypePosts/' + id, 'GET');
-        }
-
-        function removeById(id){
+        function remove(id){
             return requestService.send('/frodo/postType/' + id, 'DELETE');
         }
 
-        function create(data){
-            return requestService.send('/frodo/postType', 'POST', data);
-        }
-
-        function edit(id, data){
-            return requestService.send('/frodo/postType/edit/' + id, 'PUT', data);
-        }
-
         return {
-            getAll: getAll,
-            removeById: removeById,
             create: create,
-            getById: getById,
             edit: edit,
+            getAll: getAll,
+            getById: getById,
             getByIdWithPosts: getByIdWithPosts,
             getByType: getByType,
-            getByTypeWithPosts: getByTypeWithPosts
+            getByTypeWithPosts: getByTypeWithPosts,
+            remove: remove
         }
-
     }]);
 })();

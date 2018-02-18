@@ -1,0 +1,29 @@
+<div class="header">
+    <h1 class="header__heading">
+        <a class="block"
+           href="/">Frodo</a>
+    </h1>
+    <p class="header__website-address">Odwiedź stronę:&nbsp;<a target="_blank" href="{{vm.websiteAddress}}" ng-bind="vm.websiteAddress"></a></p>
+    <nav>
+        <ul class="header__links">
+            <li class="header__links__item">
+                <a class="block"
+                   ng-href="/pages">Strony</a>
+            </li>
+            <li class="header__links__item">
+                <a class="block"
+                   ng-href="/components">Komponenty</a>
+            </li>
+            <li class="header__links__item"
+               ng-repeat="type in vm.postTypes track by type._id">
+                <a class="block"
+                   ng-bind="type.pluralTitle"
+                   ng-href="{{'/posts/' + type.type}}"></a>
+            </li>
+            <li class="header__links__item">
+                <a class="block"
+                   ng-href="/post-types">Typy postów</a>
+            </li>
+        </ul>
+    </nav>
+</div>

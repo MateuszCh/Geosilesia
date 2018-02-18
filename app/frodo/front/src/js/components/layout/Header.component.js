@@ -1,6 +1,6 @@
 (function(){
     angular.module('frodo').component('header', {
-        templateUrl: 'html/components/header.html',
+        templateUrl: 'html/components/layout/header.html',
         controllerAs: 'vm',
         controller: HeaderController
     });

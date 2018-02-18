@@ -1,6 +1,6 @@
 (function(){
     angular.module('frodo').component('field', {
-        templateUrl: 'html/components/field.html',
+        templateUrl: 'html/components/fields/field.html',
         controllerAs: 'vm',
         bindings: {
             model: '=',

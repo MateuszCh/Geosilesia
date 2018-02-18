@@ -5,23 +5,23 @@
             return requestService.send('/frodo/post', 'POST', data);
         }
 
-        function removeById(id){
-            return requestService.send('/frodo/post/' + id, 'DELETE');
+        function edit(id, data){
+            return requestService.send('/frodo/post/edit/' + id, 'PUT', data);
         }
 
         function getById(id){
             return requestService.send('/frodo/post/' + id, 'GET');
         }
 
-        function edit(id, data){
-            return requestService.send('/frodo/post/edit/' + id, 'PUT', data);
+        function remove(id){
+            return requestService.send('/frodo/post/' + id, 'DELETE');
         }
 
         return {
             create: create,
-            removeById: removeById,
+            edit: edit,
             getById: getById,
-            edit: edit
+            remove: remove
         }
 
     }]);
