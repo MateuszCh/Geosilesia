@@ -33,6 +33,9 @@
                 postsService.getById($routeParams.id)
                     .then(function(response){
                         vm.model = response.data;
+                        if(!vm.model.data){
+                            vm.model.data = {};
+                        }
                         postTypesService.getByType(vm.model.type)
                             .then(function(response){
                                 vm.postType = response.data;
@@ -76,7 +79,10 @@
             }
         }
 
+
+
         function save(){
+
             $timeout.cancel(resultTimeout);
             setSaveStatus(true);
 
@@ -85,6 +91,7 @@
             promise
                 .then(function(response){
                     if(vm.edit){
+                        vm.model = response.data;
                         setSaveStatus(false, "Custom post updated successfully", response.status);
                         resultTimeout = $timeout(setSaveStatus, 10000);
                     } else {

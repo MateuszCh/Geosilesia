@@ -24,7 +24,6 @@
             }
             vm.model = vm.parentModel[vm.field.id];
             checkModel();
-
         }
 
         function removeRow(index){

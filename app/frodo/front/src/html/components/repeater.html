@@ -1,7 +1,7 @@
-<div ng-repeat="row in vm.model">
+<div ng-repeat="row in vm.model track by $index">
     <field ng-repeat="field in vm.repeaterFields" field="field" model="vm.model[$parent.$index]"></field>
 
     <span class="button" ng-click="vm.removeRow($index)">Usuń rząd</span>
 </div>
 
-<span class="button" ng-click="vm.addRow()">Dodaj nowy rząd</span>
+<span class="button m-t" ng-click="vm.addRow()">Dodaj nowy rząd</span>
