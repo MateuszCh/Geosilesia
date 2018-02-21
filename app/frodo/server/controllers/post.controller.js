@@ -54,7 +54,7 @@ module.exports = {
                 postToRemove.remove()
                     .then(() => {
                         PostType.update({type: postToRemove.type}, {$pull: {posts: postToRemove._id}})
-                                .then(() => res.send("Post removed successfully"))
+                                .then(() => res.status(200).send("Post removed successfully"))
                     })
                     .catch(next);
             })

@@ -1,15 +1,21 @@
-<div class="custom-post-types">
+<section class="custom-post-types">
+    <p ng-if="!vm.model.type && vm.edit"
+       ng-bind="'Loading...'"></p>
     <h2 class="custom-post-types__heading"
-        ng-bind="vm.edit ? 'Edytuj typ postów' : 'Dodaj nowy typ postów'"></h2>
+        ng-bind="vm.edit ? 'Edytuj typ postów: ' + vm.currentType : 'Dodaj nowy typ postów'"></h2>
     <div class="custom-post-types__container--top-padding">
         <div class="custom-post-types__container__left">
-            <span class="button"
-                  ng-class="{'busy' : vm.saveStatus.busy}"
-                  ng-click="vm.save()">Zapisz</span>
+            <button class="button"
+                    ng-class="{'busy' : vm.actionStatus.busyType == 'save'}"
+                    ng-click="vm.save()">Zapisz</button>
+            <button class="button"
+                    ng-if="vm.edit"
+                    ng-class="{'busy' : vm.actionStatus.busyType == 'remove'}"
+                    ng-click="vm.remove()">Usuń</button>
             <p class="custom-post-types__result"
-               ng-class="{'custom-post-types__result--ok' : vm.saveStatus.status == 200}"
-               ng-bind="vm.saveStatus.result"
-               ng-if="vm.saveStatus.result"></p>
+               ng-class="{'custom-post-types__result--ok' : vm.actionStatus.status == 200}"
+               ng-bind="vm.actionStatus.result"
+               ng-if="vm.actionStatus.result"></p>
         </div>
         <div class="custom-post-types__container__right">
             <div class="input input--inline">
@@ -56,8 +62,8 @@
     <div class="custom-post-types__container--top-padding">
         <div class="custom-post-types__container__left"></div>
         <div class="custom-post-types__container__right">
-                <span class="button"
-                      ng-click="vm.addField()">Dodaj nowe pole</span>
+                <button class="button"
+                        ng-click="vm.addField()">Dodaj nowe pole</button>
         </div>
     </div>
-</div>
+</section>

@@ -87,7 +87,7 @@ module.exports = {
         PostType.findById(req.params.id)
             .then(postToRemove => {
                 postToRemove.remove()
-                    .then(postType => res.status(204).send(`${postType.type} type removed successfully`))
+                    .then(postType => res.status(200).send(`${postType.type} type removed successfully`))
                     .catch(next);
             })
             .catch(next);

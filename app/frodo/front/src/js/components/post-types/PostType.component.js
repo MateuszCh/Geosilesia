@@ -11,18 +11,19 @@
     PostTypeController.$inject = ['$scope', '$compile', 'postTypesService', '$rootScope', '$location', '$timeout', '$routeParams'];
     function PostTypeController($scope, $compile, postTypesService, $rootScope, $location, $timeout, $routeParams){
         var vm  = this;
+        var resultTimeout;
+        var fieldsElement = angular.element(document.querySelector('#postFields'));
         vm.$onInit = onInit;
         vm.save = save;
+        vm.remove = remove;
         vm.addField = addField;
         vm.formatTypeString = formatTypeString;
-        var fieldsElement = angular.element(document.querySelector('#postFields'));
 
-        vm.saveStatus = {
+        vm.actionStatus = {
             busy: false,
             result: "",
             status: undefined,
         };
-        var resultTimeout;
 
         vm.model = {
             title: '',
@@ -37,21 +38,20 @@
                 postTypesService.getById($routeParams.id)
                     .then(function(response){
                         if(!response.data){
-                            $location.path('/');
-                            return;
+                            $location.path('/post-types');
+                        } else {
+                            vm.model = response.data;
+                            vm.currentType = vm.model.type;
+                            vm.fieldsNumber = new Array(vm.model.fields.length);
                         }
-                        vm.model = response.data;
-
-                        vm.fieldsNumber = new Array(vm.model.fields.length);
                     })
-                    .catch(function(err){
-                        $location.path('/');
+                    .catch(function(){
+                        $location.path('/post-types');
                     })
             }
         }
 
         function addField(){
-
             var html = '<add-field model="vm.model.fields"></add-field>';
             var newField = $compile(html)($scope);
             fieldsElement.append(newField);
@@ -79,39 +79,51 @@
 
         function save(){
             $timeout.cancel(resultTimeout);
-
             if(!showInvalidInputs()){
-                setSaveStatus(true);
+                setActionStatus('save');
                 var promise = vm.edit ? postTypesService.edit(vm.model._id, vm.model) : postTypesService.create(vm.model);
 
                 promise
                     .then(function(response){
                         $rootScope.$broadcast('postTypesUpdated');
-                        vm.submitted = false;
                         if(vm.edit){
                             vm.model = response.data;
-                            setSaveStatus(false, "Custom post type updated successfully", response.status);
-                            resultTimeout = $timeout(setSaveStatus, 10000);
+                            vm.currentType = vm.model.type;
+                            setActionStatus(false, vm.model.type +  " type updated successfully", response.status);
+                            resultTimeout = $timeout(setActionStatus, 10000);
                         } else {
                             $location.path('/post-types');
                         }
-
                     })
                     .catch(function(err){
-                        setSaveStatus(false, err.data.error, err.status);
-                        resultTimeout = $timeout(setSaveStatus, 10000);
+                        setActionStatus(false, err.data.error, err.status);
+                        resultTimeout = $timeout(setActionStatus, 10000);
                     })
             }
-
-
         }
 
-        function setSaveStatus(busy, result, status){
-            vm.saveStatus = {
-                busy: busy || false,
+        function remove(){
+            $timeout.cancel(resultTimeout);
+            setActionStatus('remove');
+            postTypesService.remove(vm.model._id)
+                .then(function(){
+                    setActionStatus();
+                    $rootScope.$broadcast('postTypesUpdated');
+                    $location.path('/post-types');
+                })
+                .catch(function(err){
+                    setActionStatus(false, 'There was error removing ' + vm.model.type + ' post type.', err.status);
+                    resultTimeout = $timeout(setActionStatus, 10000);
+                })
+        }
+
+        function setActionStatus(type, result, status){
+            vm.actionStatus = {
+                busyType: type || false,
                 result: result || "",
-                status: status || 0
+                status: status || undefined
             }
         }
+
     }
 })();

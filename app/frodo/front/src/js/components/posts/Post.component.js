@@ -13,6 +13,7 @@
         var vm  = this;
         vm.$onInit = onInit;
         vm.save = save;
+        vm.remove = remove;
         var resultTimeout;
 
         vm.model = {
@@ -22,7 +23,7 @@
             }
         };
 
-        vm.saveStatus = {
+        vm.actionStatus = {
             busy: false,
             result: "",
             status: undefined,
@@ -41,11 +42,11 @@
                                 vm.postType = response.data;
                                 checkModel();
                             })
-                            .catch(function(err){
+                            .catch(function(){
                                 $location.path('/');
                             })
                     })
-                    .catch(function(err){
+                    .catch(function(){
                         $location.path('/');
                     })
             } else {
@@ -59,7 +60,7 @@
                         vm.model.type = vm.postType.type;
 
                     })
-                    .catch(function(err){
+                    .catch(function(){
                         $location.path('/');
                     })
             }
@@ -79,12 +80,9 @@
             }
         }
 
-
-
         function save(){
-
             $timeout.cancel(resultTimeout);
-            setSaveStatus(true);
+            setActionStatus('save');
 
             var promise = vm.edit ? postsService.edit(vm.model._id, vm.model) : postsService.create(vm.model);
 
@@ -92,26 +90,37 @@
                 .then(function(response){
                     if(vm.edit){
                         vm.model = response.data;
-                        setSaveStatus(false, "Custom post updated successfully", response.status);
-                        resultTimeout = $timeout(setSaveStatus, 10000);
+                        setActionStatus(false, "Custom post updated successfully", response.status);
+                        resultTimeout = $timeout(setActionStatus, 10000);
                     } else {
                         $location.path('/posts/' + vm.postType.type);
                     }
                 })
                 .catch(function(err){
-                    setSaveStatus(false, err.data.error, err.status);
-                    resultTimeout = $timeout(setSaveStatus, 10000);
+                    setActionStatus(false, err.data.error, err.status);
+                    resultTimeout = $timeout(setActionStatus, 10000);
                 })
-
         }
 
-        function setSaveStatus(busy, result, status){
-            vm.saveStatus = {
-                busy: busy || false,
+        function remove(){
+            $timeout.cancel(resultTimeout);
+            setActionStatus('remove');
+            postsService.remove(vm.model._id)
+                .then(function(){
+                    $location.path('/posts/' + vm.postType.type);
+                })
+                .catch(function(err){
+                    setActionStatus(undefined, err.data.error, err.status);
+                    resultTimeout = $timeout(setActionStatus, 10000);
+                })
+        }
+
+        function setActionStatus(type, result, status){
+            vm.actionStatus = {
+                busyType: type || false,
                 result: result || "",
                 status: status || 0
             }
         }
-
     }
 })();

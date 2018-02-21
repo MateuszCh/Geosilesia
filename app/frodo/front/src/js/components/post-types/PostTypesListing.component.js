@@ -5,38 +5,57 @@
         controller: PostTypesListingController
     });
 
-    PostTypesListingController.$inject = ['postTypesService', '$rootScope'];
-    function PostTypesListingController(postTypesService, $rootScope){
+    PostTypesListingController.$inject = ['postTypesService', '$rootScope', '$timeout'];
+    function PostTypesListingController(postTypesService, $rootScope, $timeout){
         var vm  = this;
         vm.$onInit = onInit;
         vm.removePostType = removePostType;
-        vm.removeStatus = false;
+        vm.loadingPostTypes = true;
+        vm.removeStatus = {
+            busy: false,
+            result: "",
+            status: undefined,
+        };
+        var resultTimeout;
 
         function onInit(){
             getPostTypes();
         }
 
         function removePostType(id){
-            vm.removeStatus = id;
+            $timeout.cancel(resultTimeout);
+            setRemoveStatus(id);
             postTypesService.remove(id)
                 .then(function(response){
-                    vm.removeStatus = false;
-                    getPostTypes();
+                    setRemoveStatus(id, response.data, response.status);
+                    resultTimeout = $timeout(setRemoveStatus, 10000);
                     $rootScope.$broadcast('postTypesUpdated');
-
+                    getPostTypes();
                 })
                 .catch(function(err){
-                    vm.removeStatus = false;
-                    console.log(err);
+                    setRemoveStatus(false, err.data.error, err.status);
+                    resultTimeout = $timeout(setRemoveStatus, 10000);
                 })
         }
 
         function getPostTypes(){
+            vm.loadingPostTypes = true;
             postTypesService.getAll()
                 .then(function(response){
                     vm.postTypes = response.data;
+                    vm.loadingPostTypes = false;
+                })
+                .catch(function(){
+                    vm.loadingPostTypes = false;
                 })
         }
 
+        function setRemoveStatus(id, result, status){
+            vm.removeStatus = {
+                busy: id || false,
+                result: result || "",
+                status: status || undefined
+            };
+        }
     }
 })();
