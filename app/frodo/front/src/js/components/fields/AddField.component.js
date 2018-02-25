@@ -35,7 +35,7 @@
                 setFieldType(vm.fieldModel.type, vm.fields[vm.fieldModel.type].name);
 
                 if(vm.fieldModel.type === 'repeater'){
-                    vm.repeaterFieldsNumder = new Array(vm.fieldModel.repeaterFields.length);
+                    vm.repeaterFieldsNumber = new Array(vm.fieldModel.repeaterFields.length);
                 }
             } else {
                 vm.order = vm.model.push(vm.fieldModel) - 1;

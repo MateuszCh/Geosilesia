@@ -16,7 +16,6 @@
                        ng-model="vm.fieldModel.title">
                 <span class="input__notice"></span>
             </div>
-
             <div class="input input--inline">
                 <label for="fieldId"
                        class="required">Id:</label>
@@ -51,7 +50,7 @@
             <div class="input input--inline add-field__type__repeater"
                  ng-show="vm.fieldModel.type === 'repeater'">
                 <div class="repeaterFields">
-                    <add-field ng-repeat="i in vm.repeaterFieldsNumder track by $index"
+                    <add-field ng-repeat="i in vm.repeaterFieldsNumber track by $index"
                                edit="true"
                                model="vm.fieldModel.repeaterFields"
                                order="$index"></add-field>
