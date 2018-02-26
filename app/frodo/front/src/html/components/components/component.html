@@ -1,0 +1,60 @@
+<section class="custom-post-types">
+    <p ng-if="!vm.model.type && vm.edit"
+       ng-bind="'Loading...'"></p>
+    <h2 class="custom-post-types__heading"
+        ng-bind="vm.edit ? 'Edytuj komponent: ' + vm.currentType : 'Dodaj nowy komponent'"></h2>
+    <div class="custom-post-types__container--top-padding">
+        <div class="custom-post-types__container__left">
+            <button class="button"
+                    ng-class="{'busy' : vm.actionStatus.busyType == 'save'}"
+                    ng-click="vm.save()">Zapisz</button>
+            <button class="button"
+                    ng-if="vm.edit"
+                    ng-class="{'busy' : vm.actionStatus.busyType == 'remove'}"
+                    ng-click="vm.remove()">Usuń</button>
+            <p class="custom-post-types__result"
+               ng-class="{'custom-post-types__result--ok' : vm.actionStatus.status == 200}"
+               ng-bind="vm.actionStatus.result"
+               ng-if="vm.actionStatus.result"></p>
+        </div>
+        <div class="custom-post-types__container__right">
+            <div class="input input--inline">
+                <label for="title"
+                       class="required">Nazwa:</label>
+                <input id="title"
+                       ng-model="vm.model.title"
+                       required
+                       type="text">
+                <span class="input__notice"></span>
+            </div>
+            <div class="input input--inline">
+                <label for="type"
+                       class="required">Typ:</label>
+                <input id="type"
+                       ng-model="vm.model.type"
+                       ng-change="vm.formatTypeString()"
+                       required type="text">
+                <span class="input__notice"></span>
+            </div>
+        </div>
+    </div>
+    <h2 class="custom-post-types__subheading">Pola</h2>
+    <p ng-if="!vm.model.fields.length"
+       class="center">Obecnie ten komponent nie ma żadnych pól</p>
+    <div id="postFields"
+         ng-class="{'postFields' :  vm.model.fields.length}">
+        <div ng-if="vm.edit">
+            <add-field ng-repeat="i in vm.fieldsNumber track by $index"
+                       edit="true"
+                       model="vm.model.fields"
+                       order="$index"></add-field>
+        </div>
+    </div>
+    <div class="custom-post-types__container--top-padding">
+        <div class="custom-post-types__container__left"></div>
+        <div class="custom-post-types__container__right">
+            <button class="button"
+                    ng-click="vm.addField()">Dodaj nowe pole</button>
+        </div>
+    </div>
+</section>
