@@ -8,8 +8,8 @@
         controller: PostController
     });
 
-    PostController.$inject = ['$scope', '$compile', 'postsService', 'postTypesService', '$rootScope', '$location', '$timeout', '$routeParams'];
-    function PostController($scope, $compile, postsService, postTypesService, $rootScope, $location, $timeout, $routeParams){
+    PostController.$inject = ['$scope', '$compile', 'postsService', 'postTypesService', '$rootScope', '$location', '$timeout', '$routeParams', 'tools'];
+    function PostController($scope, $compile, postsService, postTypesService, $rootScope, $location, $timeout, $routeParams, tools){
         var vm  = this;
         vm.$onInit = onInit;
         vm.save = save;
@@ -82,24 +82,28 @@
 
         function save(){
             $timeout.cancel(resultTimeout);
-            setActionStatus('save');
 
-            var promise = vm.edit ? postsService.edit(vm.model._id, vm.model) : postsService.create(vm.model);
+            if(!tools.showInvalidInputs()){
+                setActionStatus('save');
 
-            promise
-                .then(function(response){
-                    if(vm.edit){
-                        vm.model = response.data;
-                        setActionStatus(false, "Custom post updated successfully", response.status);
+                var promise = vm.edit ? postsService.edit(vm.model._id, vm.model) : postsService.create(vm.model);
+
+                promise
+                    .then(function(response){
+                        if(vm.edit){
+                            vm.model = response.data;
+                            setActionStatus(false, "Custom post updated successfully", response.status);
+                            resultTimeout = $timeout(setActionStatus, 10000);
+                        } else {
+                            $location.path('/posts/' + vm.postType.type);
+                        }
+                    })
+                    .catch(function(err){
+                        setActionStatus(false, err.data.error, err.status);
                         resultTimeout = $timeout(setActionStatus, 10000);
-                    } else {
-                        $location.path('/posts/' + vm.postType.type);
-                    }
-                })
-                .catch(function(err){
-                    setActionStatus(false, err.data.error, err.status);
-                    resultTimeout = $timeout(setActionStatus, 10000);
-                })
+                    })
+            }
+
         }
 
         function remove(){

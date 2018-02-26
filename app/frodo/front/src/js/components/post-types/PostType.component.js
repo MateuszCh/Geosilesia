@@ -8,8 +8,8 @@
         controller: PostTypeController
     });
 
-    PostTypeController.$inject = ['$scope', '$compile', 'postTypesService', '$rootScope', '$location', '$timeout', '$routeParams'];
-    function PostTypeController($scope, $compile, postTypesService, $rootScope, $location, $timeout, $routeParams){
+    PostTypeController.$inject = ['$scope', '$compile', 'postTypesService', '$rootScope', '$location', '$timeout', '$routeParams', 'tools'];
+    function PostTypeController($scope, $compile, postTypesService, $rootScope, $location, $timeout, $routeParams, tools){
         var vm  = this;
         var resultTimeout;
         var fieldsElement = angular.element(document.querySelector('#postFields'));
@@ -57,20 +57,6 @@
             fieldsElement.append(newField);
         }
 
-        function showInvalidInputs(){
-            var invalidInputs = document.getElementsByClassName("ng-invalid");
-
-            if(invalidInputs.length){
-                invalidInputs[0].scrollIntoView({behavior: "smooth"});
-                var collectionLength = invalidInputs.length;
-                var i = 0;
-                for(i; i < collectionLength; i++){
-                    invalidInputs[i].parentNode.classList.add("invalid");
-                }
-            }
-            return invalidInputs.length;
-        }
-
         function formatTypeString(){
             if(vm.model.type){
                 vm.model.type = vm.model.type.replace(/\s+/g, "_").toLowerCase();
@@ -79,7 +65,7 @@
 
         function save(){
             $timeout.cancel(resultTimeout);
-            if(!showInvalidInputs()){
+            if(!tools.showInvalidInputs()){
                 setActionStatus('save');
                 var promise = vm.edit ? postTypesService.edit(vm.model._id, vm.model) : postTypesService.create(vm.model);
 

@@ -1,20 +1,28 @@
 const PostType = require('../models/postType'),
+      Component = require('../models/component'),
       mongoose = require('mongoose'),
-      Counter = require('../models/counter');
+      Counter = require('../models/counter'),
+      format = require('../models/tools/format');
 
 module.exports = {
     create(req, res, next){
+        const path = req.route.path;
+        let Model;
+        const isComponent = path.indexOf('component') >= 0;
+        isComponent ? Model = Component : Model = PostType;
         const postTypeProps = req.body;
 
-        PostType.findOne({type: postTypeProps.type})
+        postTypeProps.type = format.formatId(postTypeProps.type);
+
+        Model.findOne({type: postTypeProps.type})
             .then(existingType => {
                 if(existingType === null){
                     Counter.findOne({})
                         .then(counter => {
                             postTypeProps.id = counter.counter;
-                            PostType.create(postTypeProps)
+                            Model.create(postTypeProps)
                                 .then(() => {
-                                    res.send("Post type created successfully");
+                                    res.send(`${isComponent ? 'Component' : 'Post'} type created successfully`);
                                     Counter.update(counter, { $inc: {counter: 1}})
                                         .then(() => console.log("Counter incremented"))
                                         .catch(next)
@@ -29,15 +37,20 @@ module.exports = {
             .catch(next);
     },
     edit(req, res, next){
+        const path = req.route.path;
+        let Model;
+        const isComponent = path.indexOf('component') >= 0;
+        isComponent ? Model = Component : Model = PostType;
         const postTypeId = req.params.id;
         const postTypeProps = req.body;
+        postTypeProps.type = format.formatId(postTypeProps.type);
 
         const id = mongoose.Types.ObjectId(postTypeProps._id);
 
-        PostType.findOne({type: postTypeProps.type, _id : {$ne: id}})
+        Model.findOne({type: postTypeProps.type, _id : {$ne: id}})
             .then(existingType => {
                 if(existingType === null){
-                    PostType.findById(postTypeId)
+                    Model.findById(postTypeId)
                         .then((post) => {
 
                             post.type = postTypeProps.type;
@@ -57,12 +70,20 @@ module.exports = {
             .catch(next)
     },
     getAll(req, res, next){
-        PostType.find({})
+        const path = req.route.path;
+        let Model;
+        const isComponent = path.indexOf('component') >= 0;
+        isComponent ? Model = Component : Model = PostType;
+        Model.find({})
             .then(postTypes => res.send(postTypes))
             .catch(next);
     },
     getById(req, res, next){
-        PostType.findOne({id: req.params.id})
+        const path = req.route.path;
+        let Model;
+        const isComponent = path.indexOf('component') >= 0;
+        isComponent ? Model = Component : Model = PostType;
+        Model.findOne({id: req.params.id})
             .then(postType => res.send(postType))
             .catch(next);
     },
@@ -84,7 +105,11 @@ module.exports = {
             .catch(next);
     },
     delete(req, res, next){
-        PostType.findById(req.params.id)
+        const path = req.route.path;
+        let Model;
+        const isComponent = path.indexOf('component') >= 0;
+        isComponent ? Model = Component : Model = PostType;
+        Model.findById(req.params.id)
             .then(postToRemove => {
                 postToRemove.remove()
                     .then(postType => res.status(200).send(`${postType.type} type removed successfully`))
