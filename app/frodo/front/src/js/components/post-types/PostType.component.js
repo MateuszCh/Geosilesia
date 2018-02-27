@@ -67,7 +67,7 @@
             $timeout.cancel(resultTimeout);
             if(!tools.showInvalidInputs()){
                 setActionStatus('save');
-                var promise = vm.edit ? postTypesService.edit(vm.model._id, vm.model) : postTypesService.create(vm.model);
+                var promise = vm.edit ? postTypesService.edit(vm.model) : postTypesService.create(vm.model);
 
                 promise
                     .then(function(response){

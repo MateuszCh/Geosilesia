@@ -86,7 +86,7 @@
             if(!tools.showInvalidInputs()){
                 setActionStatus('save');
 
-                var promise = vm.edit ? postsService.edit(vm.model._id, vm.model) : postsService.create(vm.model);
+                var promise = vm.edit ? postsService.edit(vm.model) : postsService.create(vm.model);
 
                 promise
                     .then(function(response){

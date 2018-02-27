@@ -41,7 +41,6 @@ module.exports = {
         let Model;
         const isComponent = path.indexOf('component') >= 0;
         isComponent ? Model = Component : Model = PostType;
-        const postTypeId = req.params.id;
         const postTypeProps = req.body;
         postTypeProps.type = format.formatId(postTypeProps.type);
 
@@ -50,7 +49,7 @@ module.exports = {
         Model.findOne({type: postTypeProps.type, _id : {$ne: id}})
             .then(existingType => {
                 if(existingType === null){
-                    Model.findById(postTypeId)
+                    Model.findById(postTypeProps._id)
                         .then((post) => {
 
                             post.type = postTypeProps.type;

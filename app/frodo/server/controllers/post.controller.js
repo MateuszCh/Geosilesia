@@ -32,7 +32,7 @@ module.exports = {
     },
     edit(req, res, next){
         const postProps = req.body;
-        Post.findById(req.params.id)
+        Post.findById(postProps._id)
             .then(post => {
                 post.title = postProps.title;
                 post.data = postProps.data;

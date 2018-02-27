@@ -5,8 +5,8 @@
             return requestService.send('/frodo/post', 'POST', data);
         }
 
-        function edit(id, data){
-            return requestService.send('/frodo/post/edit/' + id, 'PUT', data);
+        function edit(data){
+            return requestService.send('/frodo/post/edit', 'PUT', data);
         }
 
         function getById(id){
