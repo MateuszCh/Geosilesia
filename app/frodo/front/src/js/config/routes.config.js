@@ -11,6 +11,9 @@
            .when('/page/add', {
                template: '<page></page>'
            })
+           .when('/page/edit/:id', {
+               template: '<page edit="true"></page>'
+           })
            .when('/posts/:type', {
                template: '<posts-listing></posts-listing>'
            })
