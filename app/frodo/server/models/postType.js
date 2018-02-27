@@ -1,6 +1,7 @@
 const mongoose = require('mongoose'),
       Schema = mongoose.Schema,
       PostTypeAbstractSchema = require('./abstract-schemas/postTypeAbstractSchema'),
+      Post = require('./post'),
       format = require('./tools/format'),
       extend = require('mongoose-extend-schema');
 
@@ -35,6 +36,12 @@ PostTypeSchema.pre('save', function(next){
     let PostType = this;
     format.formatFieldsIds(PostType.fields);
     next();
+});
+
+PostTypeSchema.post('save', function(postType, next){
+    Post.update({_id: {$in: postType.posts}}, {$set: {type: postType.type}}, {"multi": true})
+        .then(() => next())
+        .catch(next);
 });
 
 const PostType = mongoose.model('post_type', PostTypeSchema);

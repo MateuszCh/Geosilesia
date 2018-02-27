@@ -50,15 +50,14 @@ module.exports = {
             .then(existingType => {
                 if(existingType === null){
                     Model.findById(postTypeProps._id)
-                        .then((post) => {
+                        .then((postType) => {
+                            postType.type = postTypeProps.type;
+                            postType.title = postTypeProps.title;
+                            postType.fields = postTypeProps.fields;
+                            postType.pluralTitle = postTypeProps.pluralTitle;
 
-                            post.type = postTypeProps.type;
-                            post.title = postTypeProps.title;
-                            post.fields = postTypeProps.fields;
-                            post.pluralTitle = postTypeProps.pluralTitle;
-
-                            post.save()
-                                .then(post => res.send(post))
+                            postType.save()
+                                .then(postType => res.send(postType))
                                 .catch(next)
                         })
                         .catch(next);
