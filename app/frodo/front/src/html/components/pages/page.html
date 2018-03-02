@@ -40,21 +40,22 @@
     </div>
     <h2 class="custom-post-types__subheading">Komponenty</h2>
     <p ng-if="!vm.model.rows.length"
-       class="center">Obecnie ta stron anie ma żadnych komponentów</p>
-    <!--<div id="postFields"-->
-         <!--ng-class="{'postFields' :  vm.model.fields.length}">-->
-        <!--<div ng-if="vm.edit">-->
-            <!--<add-field ng-repeat="i in vm.fieldsNumber track by $index"-->
-                       <!--edit="true"-->
-                       <!--model="vm.model.fields"-->
-                       <!--order="$index"></add-field>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="custom-post-types__container&#45;&#45;top-padding">-->
-        <!--<div class="custom-post-types__container__left"></div>-->
-        <!--<div class="custom-post-types__container__right">-->
-            <!--<button class="button"-->
-                    <!--ng-click="vm.addField()">Dodaj nowe pole</button>-->
-        <!--</div>-->
-    <!--</div>-->
+       class="center">Obecnie ta strona nie ma żadnych komponentów</p>
+    <div id="components"
+         ng-class="{'postFields' :  vm.model.rows.length}">
+        <div ng-if="vm.edit">
+            <add-component ng-repeat="i in vm.rowsNumber track by $index"
+                       edit="true"
+                       rows="vm.model.rows"
+                       order="$index"
+                       components="::vm.components"></add-component>
+        </div>
+    </div>
+    <div class="custom-post-types__container--top-padding">
+        <div class="custom-post-types__container__left"></div>
+        <div class="custom-post-types__container__right">
+            <button class="button"
+                    ng-click="vm.addComponent()">Dodaj nowy komponent</button>
+        </div>
+    </div>
 </section>

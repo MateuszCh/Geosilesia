@@ -1,0 +1,16 @@
+<div class="custom-post-types__container--top-padding">
+    <div class="custom-post-types__container__left">
+        <button class="button"
+                ng-click="vm.remove()">Usuń</button>
+    </div>
+    <div class="custom-post-types__container__right">
+        <div class="input input--inline">
+            <label for="componentType">Typ</label>
+            <select id="componentType" ng-change="vm.onComponentSelect()" ng-model="vm.currentComponent" ng-options="item.title for item in vm.components"></select>
+        </div>
+        <field model="vm.model.data"
+               field="field"
+               ng-repeat="field in vm.currentComponent.fields track by field.id"
+               ng-if="vm.currentComponent"></field>
+    </div>
+</div>

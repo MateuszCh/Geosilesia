@@ -12,7 +12,7 @@ const PageSchema = new Schema({
         index: true
     },
     rows: {
-        type: [Object]
+        type: [{}]
     },
     id: {
         type: Number

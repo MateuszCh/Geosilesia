@@ -8,15 +8,15 @@
         controller: PageController
     });
 
-    PageController.$inject = ['$scope', '$compile', 'pagesService', '$rootScope', '$location', '$timeout', '$routeParams', 'tools'];
-    function PageController($scope, $compile, pagesService, $rootScope, $location, $timeout, $routeParams, tools){
+    PageController.$inject = ['$scope', '$compile', 'pagesService', '$rootScope', '$location', '$timeout', '$routeParams', 'tools', 'componentsService'];
+    function PageController($scope, $compile, pagesService, $rootScope, $location, $timeout, $routeParams, tools, componentsService){
         var vm  = this;
         var resultTimeout;
-        // var fieldsElement = angular.element(document.querySelector('#postFields'));
+        var componentsElement = angular.element(document.querySelector('#components'));
         vm.$onInit = onInit;
         vm.save = save;
         vm.remove = remove;
-        // vm.addField = addField;
+        vm.addComponent = addComponent;
         // vm.formatTypeString = formatTypeString;
 
         vm.actionStatus = {
@@ -40,25 +40,28 @@
                         } else {
                             vm.model = response.data;
                             vm.currentTitle = vm.model.title;
+                            vm.rowsNumber = new Array(vm.model.rows.length);
                         }
                     })
                     .catch(function(){
                         $location.path('/pages');
                     })
             }
+            componentsService.getAll()
+                .then(function(response){
+                    var components = {};
+                    response.data.forEach(function(component){
+                       components[component.type] = component;
+                    });
+                    vm.components = components;
+                })
         }
 
-        // function addField(){
-        //     var html = '<add-field model="vm.model.fields"></add-field>';
-        //     var newField = $compile(html)($scope);
-        //     fieldsElement.append(newField);
-        // }
-        //
-        // function formatTypeString(){
-        //     if(vm.model.type){
-        //         vm.model.type = vm.model.type.replace(/\s+/g, "_").toLowerCase();
-        //     }
-        // }
+        function addComponent(){
+            var html = '<add-component rows="vm.model.rows" components="::vm.components"></add-component>';
+            var newComponent = $compile(html)($scope);
+            componentsElement.append(newComponent);
+        }
 
         function save(){
             $timeout.cancel(resultTimeout);
@@ -69,6 +72,9 @@
                 .then(function(response){
                     if(vm.edit){
                         vm.model = response.data;
+                        $timeout(function(){
+                            $rootScope.$broadcast("pageSaved");
+                        }, 10);
                         vm.currentTitle = vm.model.title;
                         setActionStatus(false, vm.model.title +  " page updated successfully", response.status);
                         resultTimeout = $timeout(setActionStatus, 10000);

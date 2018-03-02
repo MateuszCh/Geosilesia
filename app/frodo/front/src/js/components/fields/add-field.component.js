@@ -46,6 +46,10 @@
                     vm.order--;
                 }
             })
+
+            $scope.$on('postTypeSaved', function(){
+                vm.fieldModel = vm.model[vm.order];
+            })
         };
 
         function setFieldType(type, name){
