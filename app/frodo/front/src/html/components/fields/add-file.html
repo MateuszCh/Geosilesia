@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="edit-new-files"
-             ng-if="vm.files">
+             ng-if="vm.files.length">
             <div class="edit-new-files__list">
                 <div ng-repeat="file in vm.files" class="edit-new-files__list__item" ng-click="vm.editIndex($index)">
                     <span class="edit-new-files__list__item__title" ng-bind="file.name"></span>
@@ -85,12 +85,73 @@
     <div ng-show="vm.activeView == 'choose'"
          class="add-file__inner__choose">
         <div class="choose-list">
-            <div ng-repeat="file in vm.allFiles" class="ratio-1-1 choose-list__item m-b m-r">
+            <div ng-repeat="file in vm.allFiles" class="ratio-1-1 choose-list__item m-b m-r" ng-click="vm.existingFilesIndex($index)">
                 <img src="{{::file.src}}" class="fill" ng-if="::file.type !== 'application/pdf'">
             </div>
         </div>
         <div class="choose-edit">
-
+            <div class="choose-edit__info m-b">
+                <h3 class="choose-edit__info__filename m-b" ng-bind="vm.allFiles[vm.currentExistingIndex].filename"></h3>
+                <div class="choose-edit__info__image m-b">
+                    <img src="{{vm.allFiles[vm.currentExistingIndex].src}}" ng-if="vm.allFiles[vm.currentExistingIndex].type !== 'application/pdf'">
+                </div>
+                <p class="choose-edit__info__label">Data utworzenia:</p>
+                <p class="choose-edit__info__field" ng-bind="vm.allFiles[vm.currentExistingIndex].created | date: 'medium'"></p>
+                <p class="choose-edit__info__label">Url:</p>
+                <a class="choose-edit__info__field" target="_blank" ng-href="{{vm.allFiles[vm.currentExistingIndex].src}}" ng-bind="vm.allFiles[vm.currentExistingIndex].src"></a>
+                <p class="choose-edit__info__label">Typ pliku:</p>
+                <p class="choose-edit__info__field" ng-bind="vm.allFiles[vm.currentExistingIndex].type"></p>
+            </div>
+            <div class="choose-edit__form">
+                <form name="editSavedFiles" novalidate>
+                    <div class="input input--inline">
+                        <label for="editTitle">Tytuł:</label>
+                        <input id="editTitle"
+                               type="text"
+                               ng-model="vm.allFiles[vm.currentExistingIndex].title">
+                        <span class="input__notice"></span>
+                    </div>
+                    <div class="input input--inline">
+                        <label for="editDescription">Opis:</label>
+                        <input id="editDescription"
+                               type="text"
+                               ng-model="vm.allFiles[vm.currentExistingIndex].description">
+                        <span class="input__notice"></span>
+                    </div>
+                    <div class="input input--inline">
+                        <label for="editAuthor">Autor:</label>
+                        <input id="editAuthor"
+                               type="text"
+                               ng-model="vm.allFiles[vm.currentExistingIndex].author">
+                        <span class="input__notice"></span>
+                    </div>
+                    <div class="input input--inline">
+                        <label for="editDate">Data:</label>
+                        <input id="editDate"
+                               type="date"
+                               ng-model="vm.allFiles[vm.currentExistingIndex].date">
+                        <span class="input__notice"></span>
+                    </div>
+                    <div class="input input--inline">
+                        <label for="editPlace">Miejsce:</label>
+                        <input id="editPlace"
+                               type="text"
+                               ng-model="vm.allFiles[vm.currentExistingIndex].place">
+                        <span class="input__notice"></span>
+                    </div>
+                    <div class="input input--inline">
+                        <label for="editCatalogue">Katalog:</label>
+                        <input id="editCatalogue"
+                               type="text"
+                               ng-model="vm.allFiles[vm.currentExistingIndex].catalogue">
+                        <span class="input__notice"></span>
+                    </div>
+                    <div class="input input--inline" ng-if="vm.catalogues.length">
+                        <label for="editSelectCatalogue">Wybierz z istniejących</label>
+                        <select id="editSelectCatalogue" ng-model="vm.allFiles[vm.currentExistingIndex].catalogue" ng-options="catalogue for catalogue in vm.catalogues"></select>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

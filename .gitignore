@@ -15,3 +15,4 @@ app/frodo/front/package-lock.json
 app/frodo/front/public/
 app/frodo/server/node_modules/
 app/frodo/server/package-lock.json
+app/uploads/*

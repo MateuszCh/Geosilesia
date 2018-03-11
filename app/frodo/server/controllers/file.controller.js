@@ -52,7 +52,11 @@ module.exports = {
 
                     for(let prop in fileProps){
                         if(fileProps[prop]){
-                            model[prop] = fileProps[prop];
+                            if(prop == 'catalogue'){
+                                model[prop] = fileProps[prop].toLowerCase();
+                            } else {
+                                model[prop] = fileProps[prop];
+                            }
                         }
                     }
 

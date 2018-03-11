@@ -18,7 +18,10 @@
         vm.onFilesSelect = onFilesSelect;
         vm.editIndex = editIndex;
         vm.removeFile = removeFile;
+        vm.existingFilesIndex = existingFilesIndex;
         vm.activeView = 'choose';
+        vm.catalogues = [];
+        vm.currentExistingIndex = 0;
 
         function onInit() {
             getAllFiles();
@@ -39,21 +42,15 @@
 
         function editIndex(index) {
             vm.currentIndex = index;
-            getAllCatalogues();
+            getCatalogues(vm.data);
+        }
+
+        function existingFilesIndex(index){
+            vm.currentExistingIndex = index;
         }
 
         function chooseView(panel) {
             vm.activeView = panel;
-        }
-
-        function getAllCatalogues(){
-            var catalogues = [];
-            vm.data.forEach(function(fileData){
-                if(fileData.catalogue){
-                    catalogues.push(fileData.catalogue);
-                }
-            });
-            vm.catalogues = catalogues;
         }
 
         function upload() {
@@ -66,9 +63,10 @@
             if (vm.files.length) {
                 filesService.upload(vm.files, data)
                     .then(function (response) {
-                        console.log(response.data);
                         if(response.data.length){
                             vm.allFiles = vm.allFiles.concat(response.data);
+                            vm.data = [];
+                            vm.files = [];
                             vm.activeView = 'choose';
                         }
                     })
@@ -81,7 +79,21 @@
             filesService.getAllFiles()
                 .then(function (r) {
                     vm.allFiles = r.data;
+                    getCatalogues(vm.allFiles);
                 })
+        }
+
+        function getCatalogues(arr){
+            var catalogues = [];
+            arr.forEach(function(fileData){
+                if(fileData.catalogue){
+                    var catalogue = fileData.catalogue.toLowerCase();
+                    if(vm.catalogues.indexOf(catalogue) === -1 && catalogues.indexOf(catalogue) === -1){
+                        catalogues.push(catalogue);
+                    }
+                }
+            });
+            vm.catalogues = vm.catalogues.concat(catalogues).sort();
         }
 
     }

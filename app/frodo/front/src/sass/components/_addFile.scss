@@ -133,7 +133,7 @@
 }
 
 .choose-list {
-  width: 80%;
+  width: 70%;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -141,7 +141,12 @@
   align-content: flex-start;
   overflow: auto;
   &__item {
-    width: 10%;
+    width: 8.74%;
+    cursor: pointer;
+    background-color: grey;
+    &--active {
+      border: 5px solid red;
+    }
     img {
       object-fit: cover;
     }
@@ -149,5 +154,36 @@
 }
 
 .choose-edit {
-  width: 20%;
+  width: 30%;
+  padding: 0 1em;
+  overflow: auto;
+  &__info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    &__filename {
+      font-size: 1.4em;
+      width: 100%;
+      text-align: center;
+    }
+    &__image {
+      width: 100%;
+      text-align: center;
+      img {
+        max-width: 200px;
+
+      }
+    }
+    &__label {
+      width: 30%;
+    }
+    &__field {
+      width: 70%;
+    }
+
+  }
+  &__form {
+
+  }
 }
