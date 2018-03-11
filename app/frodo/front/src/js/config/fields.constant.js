@@ -26,9 +26,9 @@
                 name: 'Liczba',
                 type: 'number'
             },
-            image: {
-                name: 'Zdjęcie',
-                type: 'image'
+            file: {
+                name: 'Plik',
+                type: 'file'
             }
     });
 })();

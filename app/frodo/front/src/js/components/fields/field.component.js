@@ -12,6 +12,7 @@
     FieldController.$inject = [];
     function FieldController(){
         var vm  = this;
+        vm.showFilePopup = false;
 
     }
 })();

@@ -13,6 +13,15 @@
     flex-wrap: wrap;
     justify-content: space-between;
 
+    &--button {
+      justify-content: flex-start;
+      align-items: center;
+
+      label {
+        width: 15%;
+      }
+    }
+
     label {
       margin-bottom: 0 !important;
     }

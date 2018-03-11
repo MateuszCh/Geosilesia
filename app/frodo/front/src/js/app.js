@@ -1,6 +1,7 @@
 (function(){
     angular.module('frodo', [
         'ngRoute',
-        'ngAnimate'
+        'ngAnimate',
+        'ngFileUpload'
     ])
 })();

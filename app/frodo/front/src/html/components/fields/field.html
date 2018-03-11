@@ -30,12 +30,11 @@
                ng-model="vm.model[vm.field.id]"
                ng-attr-id="{{vm.field.id + '-1'}}">
     </div>
-    <div class="input input--inline"
-         ng-switch-when="image">
+    <div class="input input--inline input--inline--button"
+         ng-switch-when="file">
         <label ng-bind="::vm.field.title" ng-attr-for="{{vm.field.id + '-1'}}"></label>
-        <input type="file"
-               ng-model="vm.model[vm.field.id]"
-               ng-attr-id="{{vm.field.id + '-1'}}">
+        <button class="button"
+                ng-click="vm.showFilePopup = true">Wybierz plik</button>
     </div>
     <div class="input input--inline"
          ng-switch-when="repeater">
@@ -45,4 +44,8 @@
                   field="vm.field"
                   repeater-fields="vm.field.repeaterFields"></repeater>
     </div>
+</div>
+<div ng-show="vm.showFilePopup" class="add-file">
+    <add-file model="vm.model[vm.field.id]"></add-file>
+    <span ng-click="vm.showFilePopup = false" class="add-file__close"></span>
 </div>

@@ -1,0 +1,153 @@
+.add-file {
+  position: fixed;
+  top: 1%;
+  left: 1%;
+  right: 1%;
+  bottom: 1%;
+  background-color: white;
+  &__inner {
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
+    box-shadow:  0 0 10px 2px grey;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 1em;
+    &__panel {
+      margin-bottom: 1em;
+      border-bottom: 5px solid $color1;
+    }
+    &__add,
+    &__choose {
+      flex-grow: 1;
+    }
+    &__add {
+      display: flex;
+      justify-content: center;
+    }
+    &__choose {
+      display: flex;
+    }
+  }
+  &__close  {
+    z-index: 101;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    height: 1.5rem;
+    width: 1.5rem;
+    cursor: pointer;
+    &:before,
+    &:after {
+      width: 1.5rem;
+      height: .3rem;
+      content: '';
+      position: absolute;
+      top: calc(50% - (0.3rem / 2));
+      left: 0;
+      display: block;
+      background-color: $header-color;
+      transition: all 0.2s ease-in-out;
+    }
+    &:after {
+      transform: rotate(45deg);
+
+    }
+    &:before {
+      transform: rotate(-45deg);
+    }
+    &:hover {
+      &:before {
+        background-color: $color3;
+      }
+      &:after {
+        background-color: $color3;
+      }
+    }
+  }
+}
+
+.new-files {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.edit-new-files {
+  width: 75%;
+  display: flex;
+  &__list {
+    width: 33%;
+    overflow-y: auto;
+    border-left: 4px solid $color1;
+    border-right: 4px solid $color1;
+    &__item {
+      padding: 0 1em;
+      cursor: pointer;
+      &:hover {
+        background-color: $color1;
+        transition: background-color .5s ease, color .5s ease;
+        color: #fff;
+
+      }
+      &__title {
+        display: block;
+        padding: .5em 0;
+        color: inherit;
+      }
+    }
+  }
+  &__editor {
+    width: 67%;
+    display: flex;
+    &__preview {
+      width: 33%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      &__image {
+        max-width: 100%;
+        width: 200px;
+        height: 200px;
+        img {
+          max-width: 100%;
+          max-height: 100%;
+          width: 100%;
+        }
+      }
+    }
+    &__form {
+      width: 67%;
+    }
+  }
+}
+
+.choose-list {
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  overflow: auto;
+  &__item {
+    width: 10%;
+    img {
+      object-fit: cover;
+    }
+  }
+}
+
+.choose-edit {
+  width: 20%;
+}

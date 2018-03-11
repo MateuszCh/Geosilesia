@@ -1,0 +1,96 @@
+<div class="add-file__inner">
+    <div class="add-file__inner__panel">
+        <button class="button" ng-click="vm.chooseView('choose')" ng-class="{'button--active' : vm.activeView == 'choose'}">Wybierz plik</button>
+        <button class="button" ng-click="vm.chooseView('add')" ng-class="{'button--active' : vm.activeView == 'add'}">Dodaj nowe pliki</button>
+    </div>
+    <div ng-show="vm.activeView == 'add'"
+         class="add-file__inner__add">
+        <div class="new-files">
+            <div class="new-files__form">
+                <button class="button" ngf-select ng-model="vm.files" name="files" ngf-change="vm.onFilesSelect()" ngf-multiple="true" ngf-pattern="'image/*,application/pdf'"
+                        ngf-accept="'image/*,application/pdf'">Wybierz pliki</button>
+                <button class="button block m-t" ng-click="vm.upload()">Zapisz</button>
+            </div>
+        </div>
+        <div class="edit-new-files"
+             ng-if="vm.files">
+            <div class="edit-new-files__list">
+                <div ng-repeat="file in vm.files" class="edit-new-files__list__item" ng-click="vm.editIndex($index)">
+                    <span class="edit-new-files__list__item__title" ng-bind="file.name"></span>
+                </div>
+            </div>
+            <div class="edit-new-files__editor" ng-if="vm.files.length">
+                <div class="edit-new-files__editor__preview">
+                    <h2 class="custom-post-types__subheading" ng-bind="vm.files[vm.currentIndex].name"></h2>
+                    <div class="edit-new-files__editor__preview__image">
+                        <img ngf-src="vm.files[vm.currentIndex]">
+                    </div>
+                    <button class="button" ng-click="vm.removeFile()">Usuń</button>
+                </div>
+                <div class="edit-new-files__editor__form">
+                    <form name="editFiles" novalidate>
+                        <div class="input input--inline">
+                            <label for="title">Tytuł:</label>
+                            <input id="title"
+                                   type="text"
+                                   ng-model="vm.data[vm.currentIndex].title">
+                            <span class="input__notice"></span>
+                        </div>
+                        <div class="input input--inline">
+                            <label for="description">Opis:</label>
+                            <input id="description"
+                                   type="text"
+                                   ng-model="vm.data[vm.currentIndex].description">
+                            <span class="input__notice"></span>
+                        </div>
+                        <div class="input input--inline">
+                            <label for="author">Autor:</label>
+                            <input id="author"
+                                   type="text"
+                                   ng-model="vm.data[vm.currentIndex].author">
+                            <span class="input__notice"></span>
+                        </div>
+                        <div class="input input--inline">
+                            <label for="date">Data:</label>
+                            <input id="date"
+                                   type="date"
+                                   ng-model="vm.data[vm.currentIndex].date">
+                            <span class="input__notice"></span>
+                        </div>
+                        <div class="input input--inline">
+                            <label for="place">Miejsce:</label>
+                            <input id="place"
+                                   type="text"
+                                   ng-model="vm.data[vm.currentIndex].place">
+                            <span class="input__notice"></span>
+                        </div>
+                        <div class="input input--inline">
+                            <label for="catalogue">Katalog:</label>
+                            <input id="catalogue"
+                                   type="text"
+                                   ng-model="vm.data[vm.currentIndex].catalogue">
+                            <span class="input__notice"></span>
+                        </div>
+                        <div class="input input--inline" ng-if="vm.catalogues.length">
+                            <label for="selectCatalogue">Wybierz z istniejących</label>
+                            <select id="selectCatalogue" ng-model="vm.data[vm.currentIndex].catalogue" ng-options="catalogue for catalogue in vm.catalogues"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div ng-show="vm.activeView == 'choose'"
+         class="add-file__inner__choose">
+        <div class="choose-list">
+            <div ng-repeat="file in vm.allFiles" class="ratio-1-1 choose-list__item m-b m-r">
+                <img src="{{::file.src}}" class="fill" ng-if="::file.type !== 'application/pdf'">
+            </div>
+        </div>
+        <div class="choose-edit">
+
+        </div>
+    </div>
+</div>

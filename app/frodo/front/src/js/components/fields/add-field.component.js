@@ -45,7 +45,7 @@
                 if(position < vm.order){
                     vm.order--;
                 }
-            })
+            });
 
             $scope.$on('postTypeSaved', function(){
                 vm.fieldModel = vm.model[vm.order];
