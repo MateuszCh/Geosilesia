@@ -9,10 +9,18 @@
         controller: FieldController
     });
 
-    FieldController.$inject = [];
-    function FieldController(){
+    FieldController.$inject = ['$scope'];
+    function FieldController($scope){
         var vm  = this;
         vm.showFilePopup = false;
+
+        vm.$onInit = onInit;
+
+        function onInit(){
+            $scope.$on('fileChoosen', function(){
+                vm.showFilePopup = false;
+            })
+        }
 
     }
 })();

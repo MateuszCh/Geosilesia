@@ -14,15 +14,20 @@
                 <a class="block"
                    ng-href="/components">Komponenty</a>
             </li>
-            <li class="header__links__item"
-                ng-repeat="type in vm.postTypes track by type._id">
-                <a class="block"
-                   ng-bind="type.pluralTitle"
-                   ng-href="{{'/posts/' + type.type}}"></a>
-            </li>
             <li class="header__links__item">
                 <a class="block"
                    ng-href="/post-types">Typy postów</a>
+            </li>
+            <li class="header__links__item">
+                <a class="block"
+                   ng-href="/files">Pliki</a>
+            </li>
+            <li class="header__links__item"
+                ng-repeat="type in vm.postTypes track by type._id"
+                ng-class="{'m-t' : $first}">
+                <a class="block"
+                   ng-bind="type.pluralTitle"
+                   ng-href="{{'/posts/' + type.type}}"></a>
             </li>
         </ul>
     </nav>

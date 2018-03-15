@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
 	   cb(null, `${__dirname}/../../../uploads/`);
    },
    filename: function(req, file, cb){
-	   cb(null, file.originalname + '-' + Date.now() + path.extname(file.originalname));
+	   cb(null, path.basename(file.originalname, path.extname(file.originalname)) + '-' + Date.now() + path.extname(file.originalname));
    }
 });
 
@@ -76,6 +76,25 @@ module.exports = {
             .catch(next);
 
     },
+    edit(req, res, next){
+        const fileProps = req.body;
+        File.findOne({_id : fileProps._id})
+            .then(existingFile => {
+                if(existingFile){
+                    existingFile.title = fileProps.title;
+                    existingFile.description = fileProps.description;
+                    existingFile.author = fileProps.author;
+                    existingFile.data = fileProps.date;
+                    existingFile.place = fileProps.place;
+                    existingFile.catalogue = fileProps.catalogue;
+
+                    existingFile.save()
+                        .then(file => res.send(file))
+                        .catch(next);
+                }
+            })
+            .catch(next)
+    },
     getAll(req, res, next){
         File.find({})
             .then(files => res.send(files))
@@ -91,11 +110,10 @@ module.exports = {
             .then(pdfs => res.send(pdfs))
             .catch(next);
     },
-    deleteOne(req, res, next){
+    delete(req, res, next){
         File.findByIdAndRemove(req.params.id)
             .then(file => {
                 if(file){
-                    console.log(file);
                     fs.unlink(`${__dirname}/../../../uploads/${file.filename}`, (err) => {
                         if(err) next();
                         res.status(200).send('File removed successfully');

@@ -2,9 +2,9 @@ const FileController = require('../controllers/file.controller');
 
 module.exports = app => {
 
-    // app.post('/frodo/file', FileController.upload.single('file'), FileController.create);
-
     app.post('/frodo/file', FileController.upload.array('files'), FileController.create);
+
+    app.put('/frodo/file/', FileController.edit);
 
     app.get('/frodo/file', FileController.getAll);
 
@@ -12,6 +12,6 @@ module.exports = app => {
 
     app.get('/frodo/file/pdfs', FileController.getAllPdfs);
 
-    app.delete('/frodo/file/:id', FileController.deleteOne);
+    app.delete('/frodo/file/:id', FileController.delete);
 
 };

@@ -30,11 +30,20 @@
                ng-model="vm.model[vm.field.id]"
                ng-attr-id="{{vm.field.id + '-1'}}">
     </div>
-    <div class="input input--inline input--inline--button"
-         ng-switch-when="file">
-        <label ng-bind="::vm.field.title" ng-attr-for="{{vm.field.id + '-1'}}"></label>
-        <button class="button"
-                ng-click="vm.showFilePopup = true">Wybierz plik</button>
+    <div ng-switch-when="file">
+        <div class="input input--inline input--inline--button">
+            <label ng-bind="::vm.field.title" ng-attr-for="{{vm.field.id + '-1'}}"></label>
+            <button class="button"
+                    ng-click="vm.showFilePopup = true">Wybierz plik</button>
+            <button class="button m-l"
+                    ng-click="vm.model[vm.field.id] = undefined"
+                    ng-if="vm.model[vm.field.id]">Usuń plik</button>
+            <span class="m-l" ng-bind="vm.model[vm.field.id].filename"></span>
+            <div ng-if="vm.model[vm.field.id]" class="field__file m-l" ng-switch="vm.model[vm.field.id].type == 'application/pdf'">
+                <img class="field__file__image" src="{{vm.model[vm.field.id].src}}" ng-switch-when="false">
+                <img ng-switch-when="true" class="field__file__image" src="images/pdf-placeholder.png">
+            </div>
+        </div>
     </div>
     <div class="input input--inline"
          ng-switch-when="repeater">

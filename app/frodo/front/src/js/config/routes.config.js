@@ -41,6 +41,9 @@
            .when('/component/edit/:id', {
                template: '<component edit="true"></component>'
            })
+           .when('/files', {
+               template: '<add-file section="true"></add-file>'
+           })
            .otherwise('/dashboard');
 
    }])
