@@ -1,0 +1,34 @@
+<md-list>
+    <md-list-item>
+        <md-button flex="100" ng-class="{'md-warn' : vm.currentFamily === 'dashboard'}" class="md-no-focus" aria-labelledby="dashboard przycisk">
+            <a ui-sref="dashboard" layout-align="left" layout="row">Dashboard</a>
+        </md-button>
+    </md-list-item>
+    <md-list-item>
+        <md-button  ng-class="{'md-warn' : vm.currentFamily === 'pages'}"flex="100" class="md-no-focus" aria-labelledby="strony przycisk">
+            <a ui-sref="pages" layout-align="left" layout="row">Strony</a>
+        </md-button>
+    </md-list-item>
+    <md-list-item>
+        <md-button  ng-class="{'md-warn' : vm.currentFamily === 'components'}" flex="100" class="md-no-focus" aria-labelledby="komponenty przycisk">
+            <a ui-sref="components" layout-align="left" layout="row">Komponenty</a>
+        </md-button>
+    </md-list-item>
+    <md-list-item>
+        <md-button  ng-class="{'md-warn' : vm.currentFamily === 'postTypes'}" flex="100" class="md-no-focus" aria-labelledby="typy postó przycisk">
+            <a ui-sref="postTypes" layout-align="left" layout="row">Typy postów</a>
+        </md-button>
+    </md-list-item>
+    <md-list-item>
+        <md-button  ng-class="{'md-warn' : vm.currentFamily === 'files'}" flex="100" class="md-no-focus" aria-labelledby="pliki przycisk">
+            <a ui-sref="files" layout-align="left" layout="row">Pliki</a>
+        </md-button>
+    </md-list-item>
+    <md-list-item ng-repeat="type in vm.postTypes track by type._id">
+        <md-button  ng-class="{'md-warn' : vm.currentFamily === 'posts' + type.type}" flex="100" class="md-no-focus" aria-label="{{type.pluralTitle + ' przycisk'}}">
+            <a ui-sref="posts({type: type.type})" layout-align="left" layout="row" ng-bind="::type.pluralTitle"></a>
+        </md-button>
+    </md-list-item>
+</md-list>
+
+<!--ui-sref="contacts.detail({ id: contact.id })-->

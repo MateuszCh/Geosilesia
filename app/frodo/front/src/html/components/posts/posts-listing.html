@@ -8,9 +8,9 @@
         <div class="custom-post-types__container--top-padding">
             <div class="custom-post-types__container__left">
                 <a class="button"
-                   ng-href="{{'/post/add/' + vm.model.type}}">Dodaj nowy</a>
+                   ui-sref="postsAdd({type: vm.model.type})">Dodaj nowy</a>
                 <a class="button"
-                   ng-href="{{'/post-type/edit/' + vm.model.id}}">Edytuj typ postów</a>
+                   ui-sref="postTypesEdit({id: vm.model.id})">Edytuj typ postów</a>
                 <p class="custom-post-types__result"
                    ng-class="{'custom-post-types__result--ok' : vm.removeStatus.status == 200}"
                    ng-bind="vm.removeStatus.result"
@@ -22,10 +22,10 @@
                 <div class="custom-post-types__item"
                      ng-repeat="post in vm.model.posts track by post._id">
                     <a class="custom-post-types__item__title"
-                       ng-href="{{post.url}}"
+                       ui-sref="postsEdit({id: post.id, type: post.type})"
                        ng-bind="post.title || post.type"></a>
                     <a class="button button--inline"
-                       ng-href="{{post.url}}">Edytuj</a>
+                       ui-sref="postsEdit({id: post.id, type: post.type})">Edytuj</a>
                     <button class="button button--inline"
                           ng-click="vm.removePost(post._id)"
                           ng-class="{'busy' : vm.removeStatus.id === post._id}">Usuń</button>

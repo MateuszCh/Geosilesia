@@ -47,15 +47,14 @@
 
         }
 
-        vm.$onChanges = function(changes){
-            console.log(changes);
-        };
+        // vm.$onChanges = function(changes){
+        //     console.log(changes);
+        // };
 
         function onComponentSelect(){
             vm.model.data = {};
             vm.model.title = vm.currentComponent.title;
             vm.model.type = vm.currentComponent.type;
-            console.log(vm.model);
         }
 
         function remove(){

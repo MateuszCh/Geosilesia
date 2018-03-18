@@ -5,7 +5,7 @@ const Page = require('../models/page'),
 module.exports = {
     create(req, res, next){
         const pageProps = req.body;
-        Page.findOne({url: pageProps.url})
+        Page.findOne({pageUrl: pageProps.pageUrl})
             .then(existingPage => {
                 if(existingPage === null){
                     Counter.findOne({})
@@ -22,7 +22,7 @@ module.exports = {
                         })
                         .catch(next);
                 } else {
-                    res.status(422).send({error: `There already is page with "${pageProps.url}" url.`})
+                    res.status(422).send({error: `There already is page with "${pageProps.pageUrl}" url.`})
                 }
             })
             .catch(next);
@@ -31,13 +31,13 @@ module.exports = {
         const pageProps = req.body;
         const id = mongoose.Types.ObjectId(pageProps._id);
 
-        Page.findOne({url: pageProps.url, _id : {$ne: id}})
+        Page.findOne({pageUrl: pageProps.pageUrl, _id : {$ne: id}})
             .then(existingPage => {
                 if(existingPage === null){
                     Page.findById(pageProps._id)
                         .then(page => {
                             page.title = pageProps.title;
-                            page.url = pageProps.url;
+                            page.pageUrl = pageProps.pageUrl;
                             page.rows = pageProps.rows;
 
                             page.save()
@@ -45,7 +45,7 @@ module.exports = {
                                 .catch(next);
                         })
                 } else {
-                    res.status(422).send({error: `There already is page with "${pageProps.url}" url.`});
+                    res.status(422).send({error: `There already is page with "${pageProps.pageUrl}" url.`});
                 }
             })
             .catch(next);

@@ -1,0 +1,11 @@
+<md-toolbar hide-gt-md>
+    <toolbar></toolbar>
+</md-toolbar>
+<div layout="row" flex>
+    <md-sidenav md-component-id="sidenav" flex-gt-md="20" layout="row" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4" flex="100">
+        <sidenav flex="100"></sidenav>
+    </md-sidenav>
+    <md-content flex-gt-md="80" flex="100"  layout-fill>
+        <ui-view id="page" class="fade" md-swipe-right="vm.openSidenav()" md-swipe-left="vm.closeSidenav()"></ui-view>
+    </md-content>
+</div>

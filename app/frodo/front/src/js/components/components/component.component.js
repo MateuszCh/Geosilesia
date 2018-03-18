@@ -8,8 +8,8 @@
         controller: ComponentController
     });
 
-    ComponentController.$inject = ['$scope', '$compile', 'componentsService', '$location', '$timeout', '$routeParams', 'tools'];
-    function ComponentController($scope, $compile, componentsService, $location, $timeout, $routeParams, tools){
+    ComponentController.$inject = ['$scope', '$compile', 'componentsService', '$location', '$timeout', 'tools', '$state'];
+    function ComponentController($scope, $compile, componentsService, $location, $timeout, tools, $state){
         var vm  = this;
         var resultTimeout;
         var fieldsElement = angular.element(document.querySelector('#postFields'));
@@ -33,7 +33,7 @@
 
         function onInit(){
             if(vm.edit){
-                componentsService.getById($routeParams.id)
+                componentsService.getById($state.params.id)
                     .then(function(response){
                         if(!response.data){
                             $location.path('/components');

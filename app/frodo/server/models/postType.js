@@ -23,7 +23,7 @@ const PostTypeSchema = extend(PostTypeAbstractSchema, {
 
 PostTypeSchema.virtual('url')
     .get(function(){
-        return `/post-type/edit/${this.id}`;
+        return `/post-types/edit/${this.id}`;
     });
 
 PostTypeSchema.pre('remove', function(next){

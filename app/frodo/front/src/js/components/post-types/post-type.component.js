@@ -8,8 +8,8 @@
         controller: PostTypeController
     });
 
-    PostTypeController.$inject = ['$scope', '$compile', 'postTypesService', '$rootScope', '$location', '$timeout', '$routeParams', 'tools'];
-    function PostTypeController($scope, $compile, postTypesService, $rootScope, $location, $timeout, $routeParams, tools){
+    PostTypeController.$inject = ['$scope', '$compile', 'postTypesService', '$rootScope', '$location', '$timeout', 'tools', '$state'];
+    function PostTypeController($scope, $compile, postTypesService, $rootScope, $location, $timeout, tools, $state){
         var vm  = this;
         var resultTimeout;
         var fieldsElement = angular.element(document.querySelector('#postFields'));
@@ -35,7 +35,7 @@
 
         function onInit(){
             if(vm.edit){
-                postTypesService.getById($routeParams.id)
+                postTypesService.getById($state.params.id)
                     .then(function(response){
                         if(!response.data){
                             $location.path('/post-types');

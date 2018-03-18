@@ -8,8 +8,8 @@
         controller: PageController
     });
 
-    PageController.$inject = ['$scope', '$compile', 'pagesService', '$rootScope', '$location', '$timeout', '$routeParams', 'tools', 'componentsService'];
-    function PageController($scope, $compile, pagesService, $rootScope, $location, $timeout, $routeParams, tools, componentsService){
+    PageController.$inject = ['$scope', '$compile', 'pagesService', '$rootScope', '$location', '$timeout', 'tools', 'componentsService', '$state'];
+    function PageController($scope, $compile, pagesService, $rootScope, $location, $timeout, tools, componentsService, $state){
         var vm  = this;
         var resultTimeout;
         var componentsElement = angular.element(document.querySelector('#components'));
@@ -27,13 +27,13 @@
 
         vm.model = {
             title: '',
-            url: '',
+            pageUrl: '',
             rows: []
         };
 
         function onInit(){
             if(vm.edit){
-                pagesService.getById($routeParams.id)
+                pagesService.getById($state.params.id)
                     .then(function(response){
                         if(!response.data){
                             $location.path('/pages');

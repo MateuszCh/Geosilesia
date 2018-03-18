@@ -24,7 +24,7 @@ const PostSchema = new Schema({
 
 PostSchema.virtual('url')
     .get(function(){
-        return `/post/edit/${this.id}`;
+        return `/posts/${this.type}/edit/${this.id}`;
     });
 
 const Post = mongoose.model('post', PostSchema);

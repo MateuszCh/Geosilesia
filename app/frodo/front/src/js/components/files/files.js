@@ -1,17 +1,17 @@
 (function () {
-    angular.module('frodo').component('addFile', {
-        templateUrl: 'html/components/fields/add-file.html',
+    angular.module('frodo').component('files', {
+        templateUrl: 'html/components/files/files.html',
         controllerAs: 'vm',
         bindings: {
             model: '=',
             section: '<'
         },
-        controller: AddFileController
+        controller: FilesController
     });
 
-    AddFileController.$inject = ['$scope', 'filesService', '$timeout', '$rootScope'];
+    FilesController.$inject = ['$scope', 'filesService', '$timeout', '$rootScope'];
 
-    function AddFileController($scope, filesService, $timeout, $rootScope) {
+    function FilesController($scope, filesService, $timeout, $rootScope) {
         var vm = this;
         vm.$onInit = onInit;
         vm.chooseView = chooseView;

@@ -1,5 +1,5 @@
 <section class="custom-post-types">
-    <p ng-if="!vm.model.url && vm.edit"
+    <p ng-if="!vm.model.pageUrl && vm.edit"
        ng-bind="'Loading...'"></p>
     <h2 class="custom-post-types__heading"
         ng-bind="vm.edit ? 'Edytuj stronę: ' + vm.currentTitle : 'Dodaj nową stronę'"></h2>
@@ -31,7 +31,7 @@
                 <label for="pluralTitle"
                        class="required">Url:</label>
                 <input id="pluralTitle"
-                       ng-model="vm.model.url"
+                       ng-model="vm.model.pageUrl"
                        required
                        type="text">
                 <span class="input__notice"></span>

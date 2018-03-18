@@ -11,7 +11,7 @@ const ComponentSchema = extend(PostTypeAbstractSchema, {}, {
 
 ComponentSchema.virtual('url')
     .get(function(){
-        return `/component/edit/${this.id}`;
+        return `/components/edit/${this.id}`;
     });
 
 ComponentSchema.pre('save', function(next){

@@ -6,7 +6,7 @@ const PageSchema = new Schema({
         type: String,
         required: [true, 'Title of page is required']
     },
-    url: {
+    pageUrl: {
         type: String,
         required: [true, 'Url of page is required'],
         index: true
@@ -17,7 +17,16 @@ const PageSchema = new Schema({
     id: {
         type: Number
     }
+},{
+    toJSON: {
+        virtuals: true
+    }
 });
+
+PageSchema.virtual('url')
+    .get(function(){
+        return `/pages/edit/${this.id}`;
+    });
 
 const Page = mongoose.model('page', PageSchema);
 

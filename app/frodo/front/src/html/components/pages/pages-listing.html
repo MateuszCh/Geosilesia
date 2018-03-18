@@ -3,7 +3,7 @@
     <div class="custom-post-types__container--top-padding">
         <div class="custom-post-types__container__left">
             <a class="button"
-               ng-href="/page/add">Dodaj nowy</a>
+               ui-sref="pagesAdd">Dodaj nowy</a>
             <p class="custom-post-types__result"
                ng-class="{'custom-post-types__result--ok' : vm.removeStatus.status == 200}"
                ng-bind="vm.removeStatus.result"
@@ -19,10 +19,10 @@
                 <div class="custom-post-types__item"
                      ng-repeat="page in vm.pages track by page._id">
                     <a class="custom-post-types__item__title"
-                       ng-href="{{'/page/edit/' + page.id}}"
+                       ui-sref="pagesEdit({id: page.id})"
                        ng-bind="page.title"></a>
                     <a class="button button--inline"
-                       ng-href="{{'/page/edit/' + page.id}}">Edytuj</a>
+                       ui-sref="pagesEdit({id: page.id})">Edytuj</a>
                     <button class="button button--inline"
                             ng-click="vm.removePage(page._id)"
                             ng-class="{'busy' : vm.removeStatus.busy === page._id && !vm.removeStatus.status}">Usuń</button>

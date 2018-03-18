@@ -8,8 +8,8 @@
         controller: PostController
     });
 
-    PostController.$inject = ['$scope', '$compile', 'postsService', 'postTypesService', '$rootScope', '$location', '$timeout', '$routeParams', 'tools'];
-    function PostController($scope, $compile, postsService, postTypesService, $rootScope, $location, $timeout, $routeParams, tools){
+    PostController.$inject = ['$scope', '$compile', 'postsService', 'postTypesService', '$rootScope', '$location', '$timeout', 'tools', '$state'];
+    function PostController($scope, $compile, postsService, postTypesService, $rootScope, $location, $timeout, tools, $state){
         var vm  = this;
         vm.$onInit = onInit;
         vm.save = save;
@@ -31,7 +31,7 @@
 
         function onInit(){
             if(vm.edit){
-                postsService.getById($routeParams.id)
+                postsService.getById($state.params.id)
                     .then(function(response){
                         vm.model = response.data;
                         if(!vm.model.data){
@@ -50,7 +50,7 @@
                         $location.path('/');
                     })
             } else {
-                postTypesService.getByType($routeParams.type)
+                postTypesService.getByType($state.params.type)
                     .then(function(response){
                         if(!response.data){
                             $location.path('/');

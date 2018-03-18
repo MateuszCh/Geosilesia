@@ -1,16 +1,10 @@
 .header {
-  position: fixed;
-  top:0;
-  left:0;
-  bottom:0;
-  right: 85%;
   padding: 1em;
-  background-color: $color4;
+  //background-color: $color4;
   color: $text-color;
   font-family: $text-font;
   display: flex;
   flex-direction: column;
-  border-right: 3px solid $color2 ;
 
   &__heading {
     font-size: 3em;

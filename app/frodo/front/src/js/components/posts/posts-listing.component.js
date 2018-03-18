@@ -5,8 +5,8 @@
         controller: PostsListingController
     });
 
-    PostsListingController.$inject = ['postTypesService', 'postsService', '$routeParams', '$location', '$timeout'];
-    function PostsListingController(postTypesService, postsService, $routeParams, $location, $timeout){
+    PostsListingController.$inject = ['postTypesService', 'postsService', '$location', '$timeout', '$state'];
+    function PostsListingController(postTypesService, postsService, $location, $timeout, $state){
         var vm  = this;
         vm.$onInit = onInit;
         vm.removePost = removePost;
@@ -24,7 +24,7 @@
 
         function getPostType(){
             vm.loadingPostType = true;
-            postTypesService.getByTypeWithPosts($routeParams.type)
+            postTypesService.getByTypeWithPosts($state.params.type)
                 .then(function(response){
                     vm.loadingPostType = false;
                     if(!response.data){

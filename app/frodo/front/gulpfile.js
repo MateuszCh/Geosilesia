@@ -7,8 +7,10 @@ const gulp = require('gulp'),
       prefix = require('gulp-autoprefixer'),
       browserSync = require('browser-sync').create(),
       concat = require('gulp-concat'),
+      concatCss = require('gulp-concat-css'),
       htmlmin = require('gulp-htmlmin'),
       cleancss = require('gulp-clean-css'),
+      series = require('stream-series'),
       del = require('del');
 
 const paths = {
@@ -19,6 +21,8 @@ const paths = {
     srcSCSSs: 'src/sass/**/*.scss',
     srcJS: 'src/js/**/*.js',
     srcIMAGES: 'src/images/**/*',
+
+    srcMaterialCss: 'node_modules/angular-material/angular-material.min.css',
 
     public: 'public',
     publicIndex: 'public/index.html',
@@ -60,22 +64,30 @@ gulp.task('htmlWatch', function () {
 });
 
 gulp.task('css', function(){
-   return gulp.src(paths.srcSCSS)
+   return gulp.src([paths.srcMaterialCss, paths.srcSCSS])
         .pipe(sass())
         .on('error', errorLog)
         .pipe(prefix('> 1%'))
+        .pipe(concatCss('main.css'))
         .pipe(cleancss())
         .pipe(gulp.dest(paths.publicCSS))
         .pipe(browserSync.stream());
 });
 
 gulp.task('js', function(){
-    return gulp.src(vendor.concat([paths.srcJS]))
+    return gulp.src(paths.srcJS)
         .on('error', errorLog)
         .pipe(concat('app.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest(paths.publicJS))
         .pipe(browserSync.stream());
+});
+
+gulp.task('jsLib', function(){
+   return gulp.src(vendor)
+       .on('error', errorLog)
+       .pipe(concat('libs.min.js'))
+       .pipe(gulp.dest(paths.publicJS));
 });
 
 gulp.task('images', function(){
@@ -87,11 +99,14 @@ gulp.task('images', function(){
 gulp.task('copy', ['html', 'css', 'js', 'images']);
 
 gulp.task('inject', ['copy'], function(){
+
     const css = gulp.src('public/css/main.css');
-    const js = gulp.src('public/js/app.min.js');
+    const vendorStream = gulp.src(['public/js/libs.min.js'], {read: false});
+    const appStream = gulp.src(['public/js/app.min.js'], {read: false});
+
     return gulp.src(paths.publicIndex)
+        .pipe(inject(series(vendorStream, appStream).pipe(hash(opts)), {relative: true}))
         .pipe(inject( css.pipe(hash(opts) ), { relative: true }))
-        .pipe(inject( js.pipe(hash(opts)), { relative: true }))
         .pipe(gulp.dest(paths.public));
 });
 
@@ -115,7 +130,7 @@ gulp.task('watch', [ 'browser-sync'], function () {
     gulp.watch([paths.srcJS],['js']);
 });
 
-gulp.task('default', ['inject']);
+gulp.task('default', ['jsLib', 'inject']);
 
 gulp.task('clean', function () {
     del([paths.publicIndex, paths.publicHTML, paths.publicCSS, paths.publicJS, paths.publicIMAGES]);
