@@ -24,7 +24,7 @@
                     <a class="button button--inline"
                        ui-sref="componentsEdit({id: component.id})">Edytuj</a>
                     <button class="button button--inline"
-                            ng-click="vm.removeComponent(component._id)"
+                            ng-click="vm.removeComponent(component._id, $index)"
                             ng-class="{'busy' : vm.removeStatus.busy === component._id && !vm.removeStatus.status}">Usuń</button>
                 </div>
             </div>

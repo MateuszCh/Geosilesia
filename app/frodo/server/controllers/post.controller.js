@@ -16,7 +16,7 @@ module.exports = {
                         .then(response => {
                             postType.update({$push: {posts: response._id}})
                                 .then(() => {
-                                    res.send("Post created successfully");
+                                    res.send(response);
                                     Counter.update(counter, { $inc: {counter: 1}})
                                         .then(() => console.log("Counter incremented"))
                                         .catch(next)

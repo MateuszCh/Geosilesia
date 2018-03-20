@@ -4,7 +4,7 @@
         controllerAs: 'vm',
         bindings: {
             model: '=',
-            section: '<'
+            allFiles: '<'
         },
         controller: FilesController
     });
@@ -26,7 +26,6 @@
         vm.activeView = 'choose';
         vm.catalogues = [];
         vm.data = [];
-        vm.loadingstatus = true;
         vm.currentExistingIndex = 0;
         var resultTimeout;
 
@@ -36,8 +35,19 @@
             status: undefined,
         };
 
-        function onInit() {
-            getAllFiles();
+        function onInit(){
+            if(!vm.allFiles){
+                vm.section = true;
+                filesService.getAllFiles()
+                    .then(function(response){
+                        vm.allFiles = response.data;
+                    })
+                    .catch(function(error){
+                        setActionStatus(false, error.data.error, error.status);
+                    })
+            } else {
+                vm.allFiles = vm.allFiles.data;
+            }
         }
 
         function editIndex(index) {
@@ -68,19 +78,6 @@
         function onFilesSelect() {
             vm.data = new Array(vm.files.length);
             vm.currentIndex = 0;
-        }
-
-        function getAllFiles() {
-            vm.loadingstatus = true;
-            filesService.getAllFiles()
-                .then(function (r) {
-                    vm.loadingstatus = false;
-                    vm.allFiles = r.data;
-                    getCatalogues(vm.allFiles);
-                })
-                .catch(function(e){
-                    vm.loadingstatus = false;
-                })
         }
 
         function upload() {

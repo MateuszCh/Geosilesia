@@ -12,8 +12,8 @@ module.exports = {
                         .then(counter => {
                             pageProps.id = counter.counter;
                             Page.create(pageProps)
-                                .then(() => {
-                                    res.send("New page created successfully");
+                                .then(page => {
+                                    res.send(page);
                                     Counter.update(counter, {$inc: {counter: 1}})
                                         .then(() => console.log("Counter incremented"))
                                         .catch(next);

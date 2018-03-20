@@ -27,7 +27,7 @@
                     <a class="button button--inline"
                        ui-sref="postsEdit({id: post.id, type: post.type})">Edytuj</a>
                     <button class="button button--inline"
-                          ng-click="vm.removePost(post._id)"
+                          ng-click="vm.removePost(post._id, $index)"
                           ng-class="{'busy' : vm.removeStatus.id === post._id}">Usuń</button>
                 </div>
             </div>

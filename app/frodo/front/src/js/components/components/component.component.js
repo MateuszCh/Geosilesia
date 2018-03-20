@@ -3,13 +3,14 @@
         templateUrl: 'html/components/components/component.html',
         controllerAs: 'vm',
         bindings: {
-            edit: '<'
+            edit: '<',
+            component: '<'
         },
         controller: ComponentController
     });
 
-    ComponentController.$inject = ['$scope', '$compile', 'componentsService', '$location', '$timeout', 'tools', '$state'];
-    function ComponentController($scope, $compile, componentsService, $location, $timeout, tools, $state){
+    ComponentController.$inject = ['$scope', '$compile', 'componentsService', '$location', '$timeout', 'tools'];
+    function ComponentController($scope, $compile, componentsService, $location, $timeout, tools){
         var vm  = this;
         var resultTimeout;
         var fieldsElement = angular.element(document.querySelector('#postFields'));
@@ -33,19 +34,9 @@
 
         function onInit(){
             if(vm.edit){
-                componentsService.getById($state.params.id)
-                    .then(function(response){
-                        if(!response.data){
-                            $location.path('/components');
-                        } else {
-                            vm.model = response.data;
-                            vm.currentType = vm.model.type;
-                            vm.fieldsNumber = new Array(vm.model.fields.length);
-                        }
-                    })
-                    .catch(function(){
-                        $location.path('/components');
-                    })
+                vm.model = vm.component;
+                vm.currentType = vm.model.type;
+                vm.fieldsNumber = new Array(vm.model.fields.length);
             }
         }
 
@@ -75,7 +66,7 @@
                             setActionStatus(false, vm.model.type +  " component updated successfully", response.status);
                             resultTimeout = $timeout(setActionStatus, 10000);
                         } else {
-                            $location.path('/components');
+                            $location.path(response.data.url);
                         }
                     })
                     .catch(function(err){

@@ -21,8 +21,8 @@ module.exports = {
                         .then(counter => {
                             postTypeProps.id = counter.counter;
                             Model.create(postTypeProps)
-                                .then(() => {
-                                    res.send(`${isComponent ? 'Component' : 'Post'} type created successfully`);
+                                .then(postType => {
+                                    res.send(postType);
                                     Counter.update(counter, { $inc: {counter: 1}})
                                         .then(() => console.log("Counter incremented"))
                                         .catch(next)

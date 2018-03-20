@@ -3,13 +3,14 @@
         templateUrl: 'html/components/post-types/post-type.html',
         controllerAs: 'vm',
         bindings: {
-            edit: '<'
+            edit: '<',
+            postType: '<'
         },
         controller: PostTypeController
     });
 
-    PostTypeController.$inject = ['$scope', '$compile', 'postTypesService', '$rootScope', '$location', '$timeout', 'tools', '$state'];
-    function PostTypeController($scope, $compile, postTypesService, $rootScope, $location, $timeout, tools, $state){
+    PostTypeController.$inject = ['$scope', '$compile', 'postTypesService', '$rootScope', '$location', '$timeout', 'tools'];
+    function PostTypeController($scope, $compile, postTypesService, $rootScope, $location, $timeout, tools){
         var vm  = this;
         var resultTimeout;
         var fieldsElement = angular.element(document.querySelector('#postFields'));
@@ -35,19 +36,9 @@
 
         function onInit(){
             if(vm.edit){
-                postTypesService.getById($state.params.id)
-                    .then(function(response){
-                        if(!response.data){
-                            $location.path('/post-types');
-                        } else {
-                            vm.model = response.data;
-                            vm.currentType = vm.model.type;
-                            vm.fieldsNumber = new Array(vm.model.fields.length);
-                        }
-                    })
-                    .catch(function(){
-                        $location.path('/post-types');
-                    })
+                vm.model = vm.postType;
+                vm.currentType = vm.model.type;
+                vm.fieldsNumber = new Array(vm.model.fields.length);
             }
         }
 
@@ -81,7 +72,7 @@
                             setActionStatus(false, vm.model.type +  " type updated successfully", response.status);
                             resultTimeout = $timeout(setActionStatus, 10000);
                         } else {
-                            $location.path('/post-types');
+                            $location.path(response.data.url);
                         }
                     })
                     .catch(function(err){

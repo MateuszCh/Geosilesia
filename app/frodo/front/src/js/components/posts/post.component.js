@@ -3,13 +3,15 @@
         templateUrl: 'html/components/posts/post.html',
         controllerAs: 'vm',
         bindings: {
-            edit: '<'
+            edit: '<',
+            post: '<',
+            postType: '<'
         },
         controller: PostController
     });
 
-    PostController.$inject = ['$scope', '$compile', 'postsService', 'postTypesService', '$rootScope', '$location', '$timeout', 'tools', '$state'];
-    function PostController($scope, $compile, postsService, postTypesService, $rootScope, $location, $timeout, tools, $state){
+    PostController.$inject = ['$scope', '$compile', 'postsService', 'postTypesService', '$rootScope', '$location', '$timeout', 'tools'];
+    function PostController($scope, $compile, postsService, postTypesService, $rootScope, $location, $timeout, tools){
         var vm  = this;
         vm.$onInit = onInit;
         vm.save = save;
@@ -30,39 +32,15 @@
         };
 
         function onInit(){
+            vm.postType = vm.postType.data;
             if(vm.edit){
-                postsService.getById($state.params.id)
-                    .then(function(response){
-                        vm.model = response.data;
-                        if(!vm.model.data){
-                            vm.model.data = {};
-                        }
-                        postTypesService.getByType(vm.model.type)
-                            .then(function(response){
-                                vm.postType = response.data;
-                                checkModel();
-                            })
-                            .catch(function(){
-                                $location.path('/');
-                            })
-                    })
-                    .catch(function(){
-                        $location.path('/');
-                    })
+                vm.model = vm.post.data;
+                if(!vm.model.data){
+                    vm.model.data = {};
+                }
+                checkModel();
             } else {
-                postTypesService.getByType($state.params.type)
-                    .then(function(response){
-                        if(!response.data){
-                            $location.path('/');
-                            return;
-                        }
-                        vm.postType = response.data;
-                        vm.model.type = vm.postType.type;
-
-                    })
-                    .catch(function(){
-                        $location.path('/');
-                    })
+                vm.model.type = vm.postType.type;
             }
         }
 
@@ -95,7 +73,7 @@
                             setActionStatus(false, "Custom post updated successfully", response.status);
                             resultTimeout = $timeout(setActionStatus, 10000);
                         } else {
-                            $location.path('/posts/' + vm.postType.type);
+                            $location.path(response.data.url);
                         }
                     })
                     .catch(function(err){

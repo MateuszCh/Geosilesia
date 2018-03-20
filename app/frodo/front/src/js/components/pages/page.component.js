@@ -3,13 +3,15 @@
         templateUrl: 'html/components/pages/page.html',
         controllerAs: 'vm',
         bindings: {
-            edit: '<'
+            edit: '<',
+            components: '<',
+            page: '<page'
         },
         controller: PageController
     });
 
-    PageController.$inject = ['$scope', '$compile', 'pagesService', '$rootScope', '$location', '$timeout', 'tools', 'componentsService', '$state'];
-    function PageController($scope, $compile, pagesService, $rootScope, $location, $timeout, tools, componentsService, $state){
+    PageController.$inject = ['$scope', '$compile', 'pagesService', '$rootScope', '$location', '$timeout'];
+    function PageController($scope, $compile, pagesService, $rootScope, $location, $timeout){
         var vm  = this;
         var resultTimeout;
         var componentsElement = angular.element(document.querySelector('#components'));
@@ -17,7 +19,6 @@
         vm.save = save;
         vm.remove = remove;
         vm.addComponent = addComponent;
-        // vm.formatTypeString = formatTypeString;
 
         vm.actionStatus = {
             busy: false,
@@ -32,29 +33,16 @@
         };
 
         function onInit(){
+            var componentsObject = {};
+            vm.components.data.forEach(function(component){
+                componentsObject[component.type] = component;
+            });
+            vm.components = componentsObject;
             if(vm.edit){
-                pagesService.getById($state.params.id)
-                    .then(function(response){
-                        if(!response.data){
-                            $location.path('/pages');
-                        } else {
-                            vm.model = response.data;
-                            vm.currentTitle = vm.model.title;
-                            vm.rowsNumber = new Array(vm.model.rows.length);
-                        }
-                    })
-                    .catch(function(){
-                        $location.path('/pages');
-                    })
+                vm.model = vm.page.data;
+                vm.currentTitle = vm.model.title;
+                vm.rowsNumber = new Array(vm.model.rows.length);
             }
-            componentsService.getAll()
-                .then(function(response){
-                    var components = {};
-                    response.data.forEach(function(component){
-                       components[component.type] = component;
-                    });
-                    vm.components = components;
-                })
         }
 
         function addComponent(){
@@ -79,7 +67,7 @@
                         setActionStatus(false, vm.model.title +  " page updated successfully", response.status);
                         resultTimeout = $timeout(setActionStatus, 10000);
                     } else {
-                        $location.path('/pages');
+                        $location.path(response.data.url);
                     }
                 })
                 .catch(function(err){

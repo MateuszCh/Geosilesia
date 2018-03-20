@@ -24,7 +24,7 @@
                     <a class="button button--inline"
                        ui-sref="pagesEdit({id: page.id})">Edytuj</a>
                     <button class="button button--inline"
-                            ng-click="vm.removePage(page._id)"
+                            ng-click="vm.removePage(page._id, $index)"
                             ng-class="{'busy' : vm.removeStatus.busy === page._id && !vm.removeStatus.status}">Usuń</button>
                 </div>
             </div>

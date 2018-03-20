@@ -2,6 +2,9 @@
     angular.module('frodo').component('pagesListing', {
         templateUrl: 'html/components/pages/pages-listing.html',
         controllerAs: 'vm',
+        bindings: {
+            pages: '<'
+        },
         controller: PagesListingController
     });
 
@@ -10,7 +13,6 @@
         var vm  = this;
         vm.$onInit = onInit;
         vm.removePage = removePage;
-        vm.loadingPages = true;
         vm.removeStatus = {
             busy: false,
             result: "",
@@ -19,33 +21,21 @@
         var resultTimeout;
 
         function onInit(){
-            getPages();
+            vm.pages = vm.pages.data;
         }
 
-        function removePage(id){
+        function removePage(id, i){
             $timeout.cancel(resultTimeout);
             setRemoveStatus(id);
             pagesService.remove(id)
                 .then(function(response){
                     setRemoveStatus(id, response.data, response.status);
                     resultTimeout = $timeout(setRemoveStatus, 10000);
-                    getPages();
+                    vm.pages.splice(i, 1);
                 })
                 .catch(function(err){
                     setRemoveStatus(false, err.data.error, err.status);
                     resultTimeout = $timeout(setRemoveStatus, 10000);
-                })
-        }
-
-        function getPages(){
-            vm.loadingPages = true;
-            pagesService.getAll()
-                .then(function(response){
-                    vm.pages = response.data;
-                    vm.loadingPages = false;
-                })
-                .catch(function(){
-                    vm.loadingPages = false;
                 })
         }
 

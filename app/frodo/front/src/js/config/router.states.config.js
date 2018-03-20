@@ -1,5 +1,5 @@
 (function(){
-   angular.module('frodo').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
+   angular.module('frodo').config(['$stateProvider', '$urlRouterProvider', 'statePromises', function($stateProvider, $urlRouterProvider, statePromises){
          var states = {
              dashboard: {
                  name: 'dashboard',
@@ -10,80 +10,115 @@
              pages: {
                  name: 'pages',
                  url: '/pages',
-                 template: '<pages-listing></pages-listing>',
-                 family: 'pages'
+                 component: 'pagesListing',
+                 family: 'pages',
+                 resolve: {
+                     pages: statePromises.pages
+                 }
              },
-             pagesAdd: {
+             pageAdd: {
                  name: 'pagesAdd',
                  url: '/pages/add',
-                 template: '<page></page>',
-                 family: 'pages'
+                 component: 'page',
+                 family: 'pages',
+                 resolve: {
+                     components: statePromises.components
+                 }
              },
-             pagesEdit: {
+             pageEdit: {
                  name: 'pagesEdit',
                  url: '/pages/edit/:id',
-                 template: '<page edit="true"></page>',
-                 family: 'pages'
+                 template: '<page components="$resolve.components" page="$resolve.page" edit="true"></page>',
+                 family: 'pages',
+                 resolve: {
+                     components: statePromises.components,
+                     page: statePromises.page
+                 }
              },
              posts: {
                  name: 'posts',
                  url: '/posts/:type',
-                 template: '<posts-listing></posts-listing>',
-                 family: 'posts'
+                 component: 'postsListing',
+                 family: 'posts',
+                 resolve: {
+                     postType: statePromises.postTypeWithPosts
+                 }
              },
-             postsAdd: {
+             postAdd: {
                  name: 'postsAdd',
                  url: '/posts/:type/add',
-                 template: '<post></post>',
-                 family: 'posts'
+                 component: 'post',
+                 family: 'posts',
+                 resolve: {
+                     postType: statePromises.postType
+                 }
              },
-             postsEdit: {
+             postEdit: {
                  name: 'postsEdit',
                  url: '/posts/:type/edit/:id',
-                 template: '<post edit="true"></post>',
-                 family: 'posts'
+                 template: '<post post="$resolve.post" post-type="$resolve.postType" edit="true"></post>',
+                 family: 'posts',
+                 resolve: {
+                     postType: statePromises.postType,
+                     post: statePromises.post
+                 }
              },
-             postsTypes: {
+             postTypes: {
                  name: 'postTypes',
                  url: '/post-types',
-                 template: '<post-types-listing></post-types-listing>',
-                 family: 'postTypes'
+                 component: 'postTypesListing',
+                 family: 'postTypes',
+                 resolve: {
+                     postTypes: statePromises.postTypes
+                 }
              },
-             postsTypeAdd: {
+             postTypeAdd: {
                  name: 'postTypesAdd',
                  url: '/post-types/add',
-                 template: '<post-type></post-type>',
+                 component: 'postType',
                  family: 'postTypes'
              },
-             postsTypeEdit: {
+             postTypeEdit: {
                  name: 'postTypesEdit',
                  url: '/post-types/edit/:id',
-                 template: '<post-type edit="true"></post-type>',
-                 family: 'postTypes'
+                 template: '<post-type post-type="$resolve.postType.data" edit="true"></post-type>',
+                 family: 'postTypes',
+                 resolve: {
+                     postType: statePromises.postTypeById
+                 }
              },
              components: {
                  name: 'components',
                  url: '/components',
-                 template: '<components-listing></components-listing>',
-                 family: 'components'
+                 component: 'componentsListing',
+                 family: 'components',
+                 resolve: {
+                     components: statePromises.components
+                 }
              },
-             componentsAdd: {
+             componentAdd: {
                  name: 'componentsAdd',
                  url: '/components/add',
-                 template: '<component></component>',
+                 component: 'component',
                  family: 'components'
              },
-             componentsEdit: {
+             componentEdit: {
                  name: 'componentsEdit',
                  url: '/components/edit/:id',
-                 template: '<component edit="true"></component>',
-                 family: 'components'
+                 template: '<component component="$resolve.component.data" edit="true"></component>',
+                 family: 'components',
+                 resolve: {
+                     component: statePromises.component
+                 }
              },
              files: {
                  name: 'files',
                  url: '/files',
-                 template: '<files section="true"></files>',
-                 family: 'files'
+                 component: 'files',
+                 family: 'files',
+                 resolve: {
+                     allFiles: statePromises.files
+                 }
              }
          };
 

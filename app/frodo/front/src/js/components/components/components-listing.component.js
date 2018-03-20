@@ -2,6 +2,9 @@
     angular.module('frodo').component('componentsListing', {
         templateUrl: 'html/components/components/components-listing.html',
         controllerAs: 'vm',
+        bindings: {
+          components: '<'
+        },
         controller: ComponentsListingController
     });
 
@@ -10,7 +13,6 @@
         var vm  = this;
         vm.$onInit = onInit;
         vm.removeComponent = removeComponent;
-        vm.loadingComponents = true;
         vm.removeStatus = {
             busy: false,
             result: "",
@@ -19,33 +21,21 @@
         var resultTimeout;
 
         function onInit(){
-            getComponents();
+            vm.components = vm.components.data;
         }
 
-        function removeComponent(id){
+        function removeComponent(id, i){
             $timeout.cancel(resultTimeout);
             setRemoveStatus(id);
             componentsService.remove(id)
                 .then(function(response){
                     setRemoveStatus(id, response.data, response.status);
                     resultTimeout = $timeout(setRemoveStatus, 10000);
-                    getComponents();
+                    vm.components.splice(i, 1);
                 })
                 .catch(function(err){
                     setRemoveStatus(false, err.data.error, err.status);
                     resultTimeout = $timeout(setRemoveStatus, 10000);
-                })
-        }
-
-        function getComponents(){
-            vm.loadingComponents = true;
-            componentsService.getAll()
-                .then(function(response){
-                    vm.components = response.data;
-                    vm.loadingComponents = false;
-                })
-                .catch(function(){
-                    vm.loadingComponents = false;
                 })
         }
 

@@ -2,6 +2,9 @@
     angular.module('frodo').component('postsListing', {
         templateUrl: 'html/components/posts/posts-listing.html',
         controllerAs: 'vm',
+        bindings: {
+          model: '<postType'
+        },
         controller: PostsListingController
     });
 
@@ -10,7 +13,6 @@
         var vm  = this;
         vm.$onInit = onInit;
         vm.removePost = removePost;
-        vm.loadingPostType = true;
         vm.removeStatus = {
             id: undefined,
             result: "",
@@ -19,38 +21,20 @@
         var resultTimeout;
 
         function onInit(){
-            getPostType();
+            vm.model = vm.model.data;
         }
 
-        function getPostType(){
-            vm.loadingPostType = true;
-            postTypesService.getByTypeWithPosts($state.params.type)
-                .then(function(response){
-                    vm.loadingPostType = false;
-                    if(!response.data){
-                        $location.path('/');
-                        return;
-                    }
-                    vm.model = response.data;
-                })
-                .catch(function(){
-                    vm.loadingPostType = false;
-                    $location.path('/');
-                })
-        }
-
-        function removePost(id){
+        function removePost(id, i){
             $timeout.cancel(resultTimeout);
             setRemoveStatus(id);
             postsService.remove(id)
                 .then(function(){
                     setRemoveStatus(undefined);
-                    getPostType();
+                    vm.model.posts.splice(i, 1);
                 })
                 .catch(function(err){
                     setRemoveStatus(undefined, err.data.error, err.status);
                     resultTimeout = $timeout(setRemoveStatus, 10000);
-                    console.log(err);
                 })
         }
 
