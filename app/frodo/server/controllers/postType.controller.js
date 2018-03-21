@@ -4,6 +4,19 @@ const PostType = require('../models/postType'),
       Counter = require('../models/counter'),
       format = require('../models/tools/format');
 
+function postTypeReturn(req, res, postType){
+    if(!postType){
+        let message = 'There is no post type with ';
+        if(req.params.id){
+            message += `id ${req.params.id}`;
+        } else if (req.params.type){
+            message += `type ${req.params.type}`;
+        }
+        return res.status(404).send({error: message});
+    }
+    return res.send(postType);
+}
+
 module.exports = {
     create(req, res, next){
         const path = req.route.path;
@@ -82,24 +95,24 @@ module.exports = {
         const isComponent = path.indexOf('component') >= 0;
         isComponent ? Model = Component : Model = PostType;
         Model.findOne({id: req.params.id})
-            .then(postType => res.send(postType))
+            .then(postType => postTypeReturn(req, res, postType))
             .catch(next);
     },
     getByIdWithPosts(req, res, next){
         PostType.findOne({id: req.params.id})
             .populate('posts')
-            .then(postType => res.send(postType))
+            .then(postType => postTypeReturn(req, res, postType))
             .catch(next);
     },
     getByType(req, res, next){
         PostType.findOne({type: req.params.type})
-            .then(postType => res.send(postType))
+            .then(postType => postTypeReturn(req, res, postType))
             .catch(next);
     },
     getByTypeWithPosts(req, res, next){
         PostType.findOne({type: req.params.type})
             .populate('posts')
-            .then(postType => res.send(postType))
+            .then(postType => postTypeReturn(req, res, postType))
             .catch(next);
     },
     delete(req, res, next){

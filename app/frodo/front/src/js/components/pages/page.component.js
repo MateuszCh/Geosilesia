@@ -3,15 +3,14 @@
         templateUrl: 'html/components/pages/page.html',
         controllerAs: 'vm',
         bindings: {
-            edit: '<',
             components: '<',
             page: '<page'
         },
         controller: PageController
     });
 
-    PageController.$inject = ['$scope', '$compile', 'pagesService', '$rootScope', '$location', '$timeout'];
-    function PageController($scope, $compile, pagesService, $rootScope, $location, $timeout){
+    PageController.$inject = ['$scope', '$compile', 'pagesService', '$rootScope', '$location', '$timeout', '$state'];
+    function PageController($scope, $compile, pagesService, $rootScope, $location, $timeout, $state){
         var vm  = this;
         var resultTimeout;
         var componentsElement = angular.element(document.querySelector('#components'));
@@ -33,6 +32,7 @@
         };
 
         function onInit(){
+            if($state.current.name === 'pagesEdit') vm.edit = true;
             var componentsObject = {};
             vm.components.data.forEach(function(component){
                 componentsObject[component.type] = component;

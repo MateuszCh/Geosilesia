@@ -3,14 +3,13 @@
         templateUrl: 'html/components/components/component.html',
         controllerAs: 'vm',
         bindings: {
-            edit: '<',
             component: '<'
         },
         controller: ComponentController
     });
 
-    ComponentController.$inject = ['$scope', '$compile', 'componentsService', '$location', '$timeout', 'tools'];
-    function ComponentController($scope, $compile, componentsService, $location, $timeout, tools){
+    ComponentController.$inject = ['$scope', '$compile', 'componentsService', '$location', '$timeout', 'tools', '$state'];
+    function ComponentController($scope, $compile, componentsService, $location, $timeout, tools, $state){
         var vm  = this;
         var resultTimeout;
         var fieldsElement = angular.element(document.querySelector('#postFields'));
@@ -33,8 +32,9 @@
         };
 
         function onInit(){
+            if($state.current.name === 'componentsEdit') vm.edit = true;
             if(vm.edit){
-                vm.model = vm.component;
+                vm.model = vm.component.data;
                 vm.currentType = vm.model.type;
                 vm.fieldsNumber = new Array(vm.model.fields.length);
             }

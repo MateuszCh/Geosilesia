@@ -1,9 +1,9 @@
 (function(){
-   angular.module('frodo').config(['$stateProvider', '$urlRouterProvider', 'statePromises', function($stateProvider, $urlRouterProvider, statePromises){
+   angular.module('frodo').config(['$stateProvider', 'statePromises', function($stateProvider, statePromises){
          var states = {
              dashboard: {
                  name: 'dashboard',
-                 url: '/dashboard',
+                 url: '/',
                  templateUrl: 'html/components/layout/dashboard.html',
                  family: 'dashboard'
              },
@@ -28,7 +28,7 @@
              pageEdit: {
                  name: 'pagesEdit',
                  url: '/pages/edit/:id',
-                 template: '<page components="$resolve.components" page="$resolve.page" edit="true"></page>',
+                 component: 'page',
                  family: 'pages',
                  resolve: {
                      components: statePromises.components,
@@ -56,7 +56,7 @@
              postEdit: {
                  name: 'postsEdit',
                  url: '/posts/:type/edit/:id',
-                 template: '<post post="$resolve.post" post-type="$resolve.postType" edit="true"></post>',
+                 component: 'post',
                  family: 'posts',
                  resolve: {
                      postType: statePromises.postType,
@@ -81,7 +81,7 @@
              postTypeEdit: {
                  name: 'postTypesEdit',
                  url: '/post-types/edit/:id',
-                 template: '<post-type post-type="$resolve.postType.data" edit="true"></post-type>',
+                 component: 'postType',
                  family: 'postTypes',
                  resolve: {
                      postType: statePromises.postTypeById
@@ -105,7 +105,7 @@
              componentEdit: {
                  name: 'componentsEdit',
                  url: '/components/edit/:id',
-                 template: '<component component="$resolve.component.data" edit="true"></component>',
+                 component: 'component',
                  family: 'components',
                  resolve: {
                      component: statePromises.component
@@ -119,14 +119,16 @@
                  resolve: {
                      allFiles: statePromises.files
                  }
+             },
+             error: {
+                 name: 'error',
+                 component: 'error'
              }
          };
 
         for(var prop in states){
             $stateProvider.state(states[prop]);
         }
-
-        $urlRouterProvider.otherwise(('/dashboard'));
 
    }])
 })();

@@ -3,14 +3,13 @@
         templateUrl: 'html/components/post-types/post-type.html',
         controllerAs: 'vm',
         bindings: {
-            edit: '<',
             postType: '<'
         },
         controller: PostTypeController
     });
 
-    PostTypeController.$inject = ['$scope', '$compile', 'postTypesService', '$rootScope', '$location', '$timeout', 'tools'];
-    function PostTypeController($scope, $compile, postTypesService, $rootScope, $location, $timeout, tools){
+    PostTypeController.$inject = ['$scope', '$compile', 'postTypesService', '$rootScope', '$location', '$timeout', 'tools', '$state'];
+    function PostTypeController($scope, $compile, postTypesService, $rootScope, $location, $timeout, tools, $state){
         var vm  = this;
         var resultTimeout;
         var fieldsElement = angular.element(document.querySelector('#postFields'));
@@ -35,8 +34,9 @@
         };
 
         function onInit(){
+            if($state.current.name === 'postTypesEdit') vm.edit = true;
             if(vm.edit){
-                vm.model = vm.postType;
+                vm.model = vm.postType.data;
                 vm.currentType = vm.model.type;
                 vm.fieldsNumber = new Array(vm.model.fields.length);
             }

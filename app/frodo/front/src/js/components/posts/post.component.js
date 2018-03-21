@@ -3,15 +3,14 @@
         templateUrl: 'html/components/posts/post.html',
         controllerAs: 'vm',
         bindings: {
-            edit: '<',
             post: '<',
             postType: '<'
         },
         controller: PostController
     });
 
-    PostController.$inject = ['$scope', '$compile', 'postsService', 'postTypesService', '$rootScope', '$location', '$timeout', 'tools'];
-    function PostController($scope, $compile, postsService, postTypesService, $rootScope, $location, $timeout, tools){
+    PostController.$inject = ['$scope', '$compile', 'postsService', 'postTypesService', '$rootScope', '$location', '$timeout', 'tools', '$state'];
+    function PostController($scope, $compile, postsService, postTypesService, $rootScope, $location, $timeout, tools, $state){
         var vm  = this;
         vm.$onInit = onInit;
         vm.save = save;
@@ -32,6 +31,7 @@
         };
 
         function onInit(){
+            if($state.current.name === 'postsEdit') vm.edit = true;
             vm.postType = vm.postType.data;
             if(vm.edit){
                 vm.model = vm.post.data;

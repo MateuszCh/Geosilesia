@@ -56,8 +56,14 @@ module.exports = {
             .catch(next);
     },
     getById(req, res, next){
+        if(isNaN(req.params.id)) return res.status(404).send({error: 'Invalid page id'});
         Page.findOne({id: req.params.id})
-            .then(page => res.send(page))
+            .then(page => {
+                if(!page){
+                    res.status(404).send({error: `There is no page with id ${req.params.id}`})
+                }
+                res.send(page);
+            })
             .catch(next);
     },
     delete(req, res, next){

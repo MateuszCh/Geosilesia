@@ -44,8 +44,14 @@ module.exports = {
             .catch(next);
     },
     getById(req, res, next){
+        if(isNaN(req.params.id)) return res.status(404).send({error: 'Invalid post id'});
         Post.findOne({id: req.params.id})
-            .then(post => res.send(post))
+            .then(post => {
+                if(!post){
+                    res.status(404).send({error: `There is no post with id ${req.params.id}`})
+                }
+                res.send(post);
+            })
             .catch(next);
     },
     delete(req, res, next){

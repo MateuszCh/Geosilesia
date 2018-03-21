@@ -6,6 +6,8 @@
         <sidenav flex="100"></sidenav>
     </md-sidenav>
     <md-content flex-gt-md="80" flex="100"  layout-fill>
-        <ui-view id="page" class="fade" md-swipe-right="vm.openSidenav()" md-swipe-left="vm.closeSidenav()"></ui-view>
+        <ui-view id="page" class="fade" md-swipe-right="vm.openSidenav()" md-swipe-left="vm.closeSidenav()">
+            <error ng-if="!$resolve"></error>
+        </ui-view>
     </md-content>
 </div>
