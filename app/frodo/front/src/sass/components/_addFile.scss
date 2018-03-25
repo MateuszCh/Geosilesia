@@ -20,7 +20,7 @@
     }
     &__panel {
       margin-bottom: 1em;
-      border-bottom: 5px solid $color1;
+      border-bottom: 5px solid map-get($colors-map, 2);
     }
     &__add,
     &__choose {
@@ -51,7 +51,7 @@
       top: calc(50% - (0.3rem / 2));
       left: 0;
       display: block;
-      background-color: $header-color;
+      @extend .bg-col-2;
       transition: all 0.2s ease-in-out;
     }
     &:after {
@@ -63,10 +63,10 @@
     }
     &:hover {
       &:before {
-        background-color: $color3;
+        @extend .bg-col-5;
       }
       &:after {
-        background-color: $color3;
+        @extend .bg-col-5;
       }
     }
   }
@@ -89,13 +89,13 @@
   &__list {
     width: 33%;
     overflow-y: auto;
-    border-left: 4px solid $color1;
-    border-right: 4px solid $color1;
+    border-left: 4px solid map-get($colors-map, 2);
+    border-right: 4px solid map-get($colors-map, 2);
     &__item {
       padding: 0 1em;
       cursor: pointer;
       &:hover {
-        background-color: $color1;
+        background-color: map-get($colors-map, 2);
         transition: background-color .5s ease, color .5s ease;
         color: #fff;
 

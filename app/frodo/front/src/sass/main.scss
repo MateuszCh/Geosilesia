@@ -1,15 +1,20 @@
-@import "general/fonts";
-@import 'general/variables.scss';
-@import 'general/general';
-@import 'general/media';
-@import "general/buttons";
-@import "general/animation";
-@import "general/forms";
+@import "settings";
+@import 'general/fonts';
+@import 'general/position';
+@import 'general/colors';
+@import 'general/ratio';
+@import 'general/display';
 
-@import "components/header";
+@import 'general/general';
+@import 'general/md-amends';
+
+
+@import 'general/media';
+@import "general/animation";
+
+@import "general/buttons";
+@import "general/forms";
 @import "components/customPostTypes";
 @import "components/addField";
 @import "components/addFile";
 @import "components/field";
-
-@import "shame";

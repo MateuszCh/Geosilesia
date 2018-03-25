@@ -3,7 +3,7 @@
         templateUrl: 'html/components/posts/posts-listing.html',
         controllerAs: 'vm',
         bindings: {
-          model: '<postType'
+          postType: '<'
         },
         controller: PostsListingController
     });
@@ -13,6 +13,7 @@
         var vm  = this;
         vm.$onInit = onInit;
         vm.removePost = removePost;
+        vm.redirect = redirect;
         vm.removeStatus = {
             id: undefined,
             result: "",
@@ -21,16 +22,21 @@
         var resultTimeout;
 
         function onInit(){
-            vm.model = vm.model.data;
+            vm.postType = vm.postType.data;
+        }
+
+        function redirect(to, params){
+            $state.go(to, params)
         }
 
         function removePost(id, i){
             $timeout.cancel(resultTimeout);
             setRemoveStatus(id);
             postsService.remove(id)
-                .then(function(){
-                    setRemoveStatus(undefined);
-                    vm.model.posts.splice(i, 1);
+                .then(function(response){
+                    setRemoveStatus(id, response.data, response.status);
+                    resultTimeout = $timeout(setRemoveStatus, 10000);
+                    vm.postType.posts.splice(i, 1);
                 })
                 .catch(function(err){
                     setRemoveStatus(undefined, err.data.error, err.status);

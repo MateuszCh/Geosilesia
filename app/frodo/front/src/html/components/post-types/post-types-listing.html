@@ -1,33 +1,43 @@
-<section class="custom-post-types">
-    <h2 class="custom-post-types__heading">Typy postów</h2>
-    <div class="custom-post-types__container--top-padding">
-        <div class="custom-post-types__container__left">
-            <a class="button"
-               ui-sref="postTypesAdd">Dodaj nowy</a>
-            <p class="custom-post-types__result"
-               ng-class="{'custom-post-types__result--ok' : vm.removeStatus.status == 200}"
+<section class="fill p-a-4 p-a-1-m p-a-1-s">
+    <h2 class="fs-6 center">typy postów</h2>
+    <div layout-xs="column" layout-gt-xs="row">
+        <div flex-xs="100"
+             flex-sm="30"
+             flex-gt-sm="20"
+             layout-align="start center"
+             layout-align-gt-xs="start start"
+             layout="row"
+             layout-gt-xs="column">
+            <md-button class="md-primary md-raised m-a-0-s"
+                       ng-click="vm.redirect('postTypesAdd')">
+                <span class="col-w">Dodaj nowy</span>
+            </md-button>
+            <p ng-class="{'col-6' : vm.removeStatus.status == 200}"
                ng-bind="vm.removeStatus.result"
                ng-if="vm.removeStatus.result"></p>
         </div>
-        <div class="custom-post-types__container__right">
-            <p ng-if="vm.loadingPostTypes"
-               ng-bind="'Loading...'"
-               class="center"></p>
-            <div ng-if="!vm.loadingPostTypes">
-                <p class="center"
-                   ng-if="!vm.postTypes.length">Nie ma obecnie żadnych typów postów</p>
-                <div class="custom-post-types__item"
-                     ng-repeat="post in vm.postTypes track by post._id">
-                    <a class="custom-post-types__item__title"
-                       ui-sref="postTypesEdit({id: post.id})"
-                       ng-bind="post.title"></a>
-                    <a class="button button--inline"
-                       ui-sref="postTypesEdit({id: post.id})">Edytuj</a>
-                    <button class="button button--inline"
-                          ng-click="vm.removePostType(post._id, $index)"
-                          ng-class="{'busy' : vm.removeStatus.busy === post._id && !vm.removeStatus.status}">Usuń</button>
-                </div>
-            </div>
+        <div flex-sm="100"
+             flex-md="70"
+             flex-gt-md="60">
+            <p class="center"
+               ng-if="!vm.postTypes.length">Nie ma obecnie żadnych typów postów</p>
+            <md-list>
+                <md-list-item layout="row"
+                              ng-repeat="postType in vm.postTypes track by postType._id"
+                              class="md-button md-raised"
+                              ng-class="{'m-b-2' : !$last}">
+                    <a flex="80"
+                       ui-sref="postTypesEdit({id: postType.id})"
+                       layout="row"
+                       layout-align="left center"
+                       ng-bind="::postType.title"></a>
+                    <md-button class="md-raised md-warn"
+                               flex="20"
+                               ng-click="vm.removePostType(postType._id, $index)"
+                               ng-class="{'busy' : vm.removeStatus.busy == postType._id && !vm.removeStatus.status}">Usuń</md-button>
+                </md-list-item>
+            </md-list>
         </div>
     </div>
 </section>
+

@@ -1,33 +1,42 @@
-<section class="custom-post-types">
-    <h2 class="custom-post-types__heading">Komponenty</h2>
-    <div class="custom-post-types__container--top-padding">
-        <div class="custom-post-types__container__left">
-            <a class="button"
-               ui-sref="componentsAdd">Dodaj nowy</a>
-            <p class="custom-post-types__result"
-               ng-class="{'custom-post-types__result--ok' : vm.removeStatus.status == 200}"
+<section class="fill p-a-4 p-a-1-m p-a-1-s">
+    <h2 class="fs-6 center">komponenty</h2>
+    <div layout-xs="column" layout-gt-xs="row">
+        <div flex-xs="100"
+             flex-sm="30"
+             flex-gt-sm="20"
+             layout-align="start center"
+             layout-align-gt-xs="start start"
+             layout="row"
+             layout-gt-xs="column">
+            <md-button class="md-primary md-raised m-a-0-s"
+                       ng-click="vm.redirect('componentsAdd')">
+                <span class="col-w">Dodaj nowy</span>
+            </md-button>
+            <p ng-class="{'col-6' : vm.removeStatus.status == 200}"
                ng-bind="vm.removeStatus.result"
                ng-if="vm.removeStatus.result"></p>
         </div>
-        <div class="custom-post-types__container__right">
-            <p ng-if="vm.loadingComponents"
-               ng-bind="'Loading...'"
-               class="center"></p>
-            <div ng-if="!vm.loadingComponents">
-                <p class="center"
-                   ng-if="!vm.components.length">Nie ma obecnie żadnych komponentów</p>
-                <div class="custom-post-types__item"
-                     ng-repeat="component in vm.components track by component._id">
-                    <a class="custom-post-types__item__title"
+        <div flex-sm="100"
+             flex-md="70"
+             flex-gt-md="60">
+            <p class="center"
+               ng-if="!vm.components.length">Nie ma obecnie żadnych komponentów</p>
+            <md-list>
+                <md-list-item layout="row"
+                              ng-repeat="component in vm.components track by component._id"
+                              class="md-button md-raised"
+                              ng-class="{'m-b-2' : !$last}">
+                    <a flex="80"
                        ui-sref="componentsEdit({id: component.id})"
-                       ng-bind="component.title"></a>
-                    <a class="button button--inline"
-                       ui-sref="componentsEdit({id: component.id})">Edytuj</a>
-                    <button class="button button--inline"
-                            ng-click="vm.removeComponent(component._id, $index)"
-                            ng-class="{'busy' : vm.removeStatus.busy === component._id && !vm.removeStatus.status}">Usuń</button>
-                </div>
-            </div>
+                       layout="row"
+                       layout-align="left center"
+                       ng-bind="::component.title"></a>
+                    <md-button class="md-raised md-warn"
+                               flex="20"
+                               ng-click="vm.removeComponent(component._id, $index)"
+                               ng-class="{'busy' : vm.removeStatus.busy == component._id && !vm.removeStatus.status}">Usuń</md-button>
+                </md-list-item>
+            </md-list>
         </div>
     </div>
 </section>

@@ -8,11 +8,12 @@
         controller: PagesListingController
     });
 
-    PagesListingController.$inject = ['pagesService', '$rootScope', '$timeout'];
-    function PagesListingController(pagesService, $rootScope, $timeout){
+    PagesListingController.$inject = ['pagesService', '$rootScope', '$timeout', '$state'];
+    function PagesListingController(pagesService, $rootScope, $timeout, $state){
         var vm  = this;
         vm.$onInit = onInit;
         vm.removePage = removePage;
+        vm.redirect = redirect;
         vm.removeStatus = {
             busy: false,
             result: "",
@@ -22,6 +23,10 @@
 
         function onInit(){
             vm.pages = vm.pages.data;
+        }
+
+        function redirect(to, params){
+            $state.go(to, params)
         }
 
         function removePage(id, i){

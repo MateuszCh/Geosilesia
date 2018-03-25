@@ -3,54 +3,38 @@
   display: inline-block;
   position: relative;
   border: none;
-  background-color: $color1;
+  background-color: map-get($colors-map, 2);
   transition: background-color .2s ease-in-out;
   padding: .5em;
   font-size: .9em;
   cursor: pointer;
   &:hover {
-    background-color: $color2;
+    @extend .bg-col-3;
     color: white;
   }
 
   &--active {
-    background-color: $color2;
+    @extend .bg-col-3;
   }
 
   &--inline {
     background-color: transparent;
-    color: $text-color;
+    @extend .col-b;
     &:hover {
       background-color: transparent;
-      color: lighten($text-color, 20%);
+      color: lighten(map-get($colors-map, b), 20%);
     }
     &.busy {
       &:after,
       &:before {
-        background-color: $color1 !important;
+        background-color: map-get($colors-map, 2) !important;
       }
     }
 
   }
 
-  &.busy {
-    color: transparent;
-    &:after,
-    &:before {
-      content: "";
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: calc(50% - 10px);
-      left: calc(50% - 10px);
-      border-radius: 50%;
-      background-color: white;
-      opacity: 0.6;
-      animation: sk-bounce 2.0s infinite ease-in-out;
-    }
-    &:before {
-      animation-delay: -1.0s;
-    }
-  }
+
 }
+
+
 

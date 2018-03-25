@@ -9,6 +9,35 @@
     function SidenavController(postTypesService, $location, $scope, $transitions, $state){
         var vm  = this;
         vm.$onInit = onInit;
+        vm.redirect = redirect;
+
+        vm.navigation = [
+            {
+                title: 'Dashboard',
+                family: 'dashboard',
+
+            },
+            {
+                title: 'Strony',
+                family: 'pages',
+
+            },
+            {
+                title: 'Komponenty',
+                family: 'components',
+
+            },
+            {
+                title: 'Typy postów',
+                family: 'postTypes',
+
+            },
+            {
+                title: 'Pliki',
+                family: 'files',
+
+            }
+        ];
 
         function onInit(){
             getPostTypes();
@@ -28,6 +57,10 @@
                     vm.currentFamily = undefined;
                 }
             })
+        }
+
+        function redirect(to, params){
+            $state.go(to, params)
         }
 
         function setCurrentFamily(family, type){

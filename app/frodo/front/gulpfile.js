@@ -11,6 +11,7 @@ const gulp = require('gulp'),
       htmlmin = require('gulp-htmlmin'),
       cleancss = require('gulp-clean-css'),
       series = require('stream-series'),
+      rename = require('gulp-rename'),
       del = require('del');
 
 const paths = {
@@ -64,7 +65,7 @@ gulp.task('htmlWatch', function () {
 });
 
 gulp.task('css', function(){
-   return gulp.src([paths.srcMaterialCss, paths.srcSCSS])
+   return gulp.src(paths.srcSCSS)
         .pipe(sass())
         .on('error', errorLog)
         .pipe(prefix('> 1%'))
@@ -72,6 +73,12 @@ gulp.task('css', function(){
         .pipe(cleancss())
         .pipe(gulp.dest(paths.publicCSS))
         .pipe(browserSync.stream());
+});
+
+gulp.task('cssLib', function(){
+   return gulp.src(paths.srcMaterialCss)
+       .pipe(rename('libs.min.css'))
+       .pipe(gulp.dest(paths.publicCSS));
 });
 
 gulp.task('js', function(){
@@ -100,13 +107,14 @@ gulp.task('copy', ['html', 'css', 'js', 'images']);
 
 gulp.task('inject', ['copy'], function(){
 
-    const css = gulp.src('public/css/main.css');
+    const css = gulp.src(['public/css/main.css'], {read: false});
+    const vendorCss = gulp.src(['public/css/libs.min.css'], {read: false});
     const vendorStream = gulp.src(['public/js/libs.min.js'], {read: false});
     const appStream = gulp.src(['public/js/app.min.js'], {read: false});
 
     return gulp.src(paths.publicIndex)
         .pipe(inject(series(vendorStream, appStream).pipe(hash(opts)), {relative: true}))
-        .pipe(inject( css.pipe(hash(opts) ), { relative: true }))
+        .pipe(inject(series(vendorCss, css).pipe(hash(opts)), {relative: true}))
         .pipe(gulp.dest(paths.public));
 });
 
@@ -130,7 +138,7 @@ gulp.task('watch', [ 'browser-sync'], function () {
     gulp.watch([paths.srcJS],['js']);
 });
 
-gulp.task('default', ['jsLib', 'inject']);
+gulp.task('default', ['cssLib', 'jsLib', 'inject']);
 
 gulp.task('clean', function () {
     del([paths.publicIndex, paths.publicHTML, paths.publicCSS, paths.publicJS, paths.publicIMAGES]);

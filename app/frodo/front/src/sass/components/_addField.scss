@@ -7,10 +7,10 @@
     display: flex;
     width: 80%;
     padding-top: 1em;
-    border-bottom: 1px solid darken($color4, 20%);
+    border-bottom: 1px solid darken(map-get($colors-map, w), 20%);
 
     &--last {
-      border-bottom: 1px solid darken($color4, 20%);
+      border-bottom: 1px solid darken(map-get($colors-map, w), 20%);
       margin-bottom: 1em;
     }
 
@@ -37,12 +37,12 @@
         margin-right: 1em;
         margin-bottom: .5em;
         color: white;
-        background-color: $color2;
+        @extend .bg-col-3;
         cursor: pointer;
         transition: background-color .5s ease, color .5s ease;
         &:hover {
           background-color: white;
-          color: $text-color;
+          @extend .bg-col-b;
         }
       }
     }

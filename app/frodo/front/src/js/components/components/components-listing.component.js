@@ -8,10 +8,11 @@
         controller: ComponentsListingController
     });
 
-    ComponentsListingController.$inject = ['componentsService', '$rootScope', '$timeout'];
-    function ComponentsListingController(componentsService, $rootScope, $timeout){
+    ComponentsListingController.$inject = ['componentsService', '$rootScope', '$timeout', '$state'];
+    function ComponentsListingController(componentsService, $rootScope, $timeout, $state){
         var vm  = this;
         vm.$onInit = onInit;
+        vm.redirect = redirect;
         vm.removeComponent = removeComponent;
         vm.removeStatus = {
             busy: false,
@@ -22,6 +23,10 @@
 
         function onInit(){
             vm.components = vm.components.data;
+        }
+
+        function redirect(to, params){
+            $state.go(to, params)
         }
 
         function removeComponent(id, i){

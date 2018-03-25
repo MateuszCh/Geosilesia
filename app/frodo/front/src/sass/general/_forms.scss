@@ -63,8 +63,8 @@
 
   input[type=text] {
     padding: .5em;
-    border: 1px solid $color1;
-    background-color: $color4;
+    border: 1px solid map-get($colors-map, 2);
+    @extend .bg-col-w;
     transition: background-color .2s ease;
     &:focus {
       background-color: white;
@@ -73,8 +73,8 @@
 
   select {
     padding: .5em;
-    border: 1px solid $color1;
-    background-color: $color4;
+    border: 1px solid map-get($colors-map, 2);
+    @extend .bg-col-w;
     transition: background-color .2s ease;
     &:focus {
       background-color: white;
@@ -85,8 +85,8 @@
     resize: vertical;
     min-height: 100px;
     padding: .5em;
-    border: 1px solid $color1;
-    background-color: $color4;
+    border: 1px solid map-get($colors-map, 2);
+    @extend .bg-col-w;
     transition: background-color .2s ease;
     &:focus {
       background-color: white;

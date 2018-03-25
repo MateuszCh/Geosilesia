@@ -8,11 +8,12 @@
         controller: PostTypesListingController
     });
 
-    PostTypesListingController.$inject = ['postTypesService', '$rootScope', '$timeout'];
-    function PostTypesListingController(postTypesService, $rootScope, $timeout){
+    PostTypesListingController.$inject = ['postTypesService', '$rootScope', '$timeout', '$state'];
+    function PostTypesListingController(postTypesService, $rootScope, $timeout, $state){
         var vm  = this;
         vm.$onInit = onInit;
         vm.removePostType = removePostType;
+        vm.redirect = redirect;
         vm.removeStatus = {
             busy: false,
             result: "",
@@ -22,6 +23,10 @@
 
         function onInit(){
             vm.postTypes = vm.postTypes.data;
+        }
+
+        function redirect(to, params){
+            $state.go(to, params)
         }
 
         function removePostType(id, i){
