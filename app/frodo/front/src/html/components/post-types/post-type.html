@@ -1,7 +1,7 @@
 <section class="custom-post-types">
     <p ng-if="!vm.model.type && vm.edit"
        ng-bind="'Loading...'"></p>
-    <h2 class="custom-post-types__heading"
+    <h2 class="font-2 custom-post-types__heading"
         ng-bind="vm.edit ? 'Edytuj typ postów: ' + vm.currentType : 'Dodaj nowy typ postów'"></h2>
     <div class="custom-post-types__container--top-padding">
         <div class="custom-post-types__container__left">
@@ -47,7 +47,7 @@
             </div>
         </div>
     </div>
-    <h2 class="custom-post-types__subheading">Pola</h2>
+    <h2 class="font-2 custom-post-types__subheading">Pola</h2>
     <p ng-if="!vm.model.fields.length"
        class="center">Obecnie posty tego typu nie mają żadnych pól</p>
     <div id="postFields"

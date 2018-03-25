@@ -6,6 +6,29 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: auto;
+}
+
+.sidenav {
+  width: 20%;
+}
+
+.page {
+  .size-l &,
+  .size-x & {
+    padding-left: 20%;
+
+  }
+}
+
+.scroll {
+  transform: scale(0);
+  &.scrolled {
+    transform: scale(1);
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -45,8 +68,4 @@ a {
   &:before {
     animation-delay: -1.0s;
   }
-}
-
-h1,h2,h3,h4,h5,h6 {
-  @extend .font-2;
 }

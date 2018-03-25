@@ -4,6 +4,7 @@
         'ui.router.state.events',
         'ngAnimate',
         'ngMaterial',
-        'ngFileUpload'
+        'ngFileUpload',
+        'duScroll'
     ])
 })();

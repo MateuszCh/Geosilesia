@@ -86,7 +86,7 @@
 
 @each $name in $positions {
   .pos-#{$name} {
-    position: #{$name};
+    position: #{$name} !important;
   }
 
   @each $sizeName, $valueName in $size-map {

@@ -1,11 +1,14 @@
 <header hide-gt-md></header>
-<div layout="row" flex>
-    <md-sidenav md-component-id="sidenav" flex-gt-md="20" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
-        <sidenav flex="100"></sidenav>
-    </md-sidenav>
-    <md-content flex-gt-md="80" layout-padding flex="100"  layout-fill>
-        <ui-view id="page" layout-padding class="fade" md-swipe-right="vm.openSidenav()">
-            <error ng-if="!$resolve"></error>
-        </ui-view>
-    </md-content>
-</div>
+<md-sidenav md-component-id="sidenav" class="pos-fixed sidenav" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
+    <sidenav></sidenav>
+</md-sidenav>
+<ui-view id="page" class="fade page p-t-8-s p-t-8-m" md-swipe-right="vm.openSidenav()">
+    <error ng-if="!$resolve"></error>
+</ui-view>
+<md-button class="md-fab md-fab-bottom-right scroll pos-fixed bg-col-1 hover-bg-1-4"
+           ng-class="{'scrolled' : vm.scrolled}"
+           du-smooth-scroll="page"
+           aria-label="Back to Top">
+    <md-tooltip md-direction="top">Back to Top</md-tooltip>
+    <md-icon md-svg-icon="arrow"></md-icon>
+</md-button>

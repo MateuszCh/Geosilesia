@@ -1,6 +1,8 @@
-<section class="fill p-a-4 p-a-1-m p-a-1-s">
-    <h2 class="fs-6 center">typy postów</h2>
-    <div layout-xs="column" layout-gt-xs="row">
+<section id="types" class="p-a-4 p-a-1-m p-a-1-s">
+    <h2 class="font-2 fs-6 center">typy postów</h2>
+    <div layout-xs="column"
+         layout-gt-xs="row"
+         class="m-t-4">
         <div flex-xs="100"
              flex-sm="30"
              flex-gt-sm="20"
@@ -8,7 +10,7 @@
              layout-align-gt-xs="start start"
              layout="row"
              layout-gt-xs="column">
-            <md-button class="md-primary md-raised m-a-0-s"
+            <md-button class="md-primary md-raised m-a-0-s m-t-0"
                        ng-click="vm.redirect('postTypesAdd')">
                 <span class="col-w">Dodaj nowy</span>
             </md-button>
@@ -21,7 +23,7 @@
              flex-gt-md="60">
             <p class="center"
                ng-if="!vm.postTypes.length">Nie ma obecnie żadnych typów postów</p>
-            <md-list>
+            <md-list class="p-t-0">
                 <md-list-item layout="row"
                               ng-repeat="postType in vm.postTypes track by postType._id"
                               class="md-button md-raised"

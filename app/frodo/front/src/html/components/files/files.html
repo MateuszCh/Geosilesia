@@ -25,7 +25,7 @@
             </div>
             <div class="edit-new-files__editor" ng-if="vm.files.length">
                 <div class="edit-new-files__editor__preview">
-                    <h2 class="custom-post-types__subheading" ng-bind="vm.files[vm.currentIndex].name"></h2>
+                    <h2 class="font-2 custom-post-types__subheading" ng-bind="vm.files[vm.currentIndex].name"></h2>
                     <div class="edit-new-files__editor__preview__image" ng-switch="vm.files[vm.currentIndex].type != 'application/pdf'">
                         <img ngf-src="vm.files[vm.currentIndex]" ng-switch-when="true">
                         <img ng-switch-when="false" src="images/pdf-placeholder.png">
