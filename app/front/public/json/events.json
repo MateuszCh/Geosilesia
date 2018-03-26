@@ -1,6 +1,14 @@
 {
   "news": [
     {
+      "header" : "IV Forum GEO-PRODUKT",
+      "dateAndPlace" : "27-28 września 2018, Jaworzno",
+      "hyperlink" : ["https://www.facebook.com/events/1984847671842327"],
+      "paragraphs" : [
+        "W GEOsferze w dniach 27-28 września 2018 r. odbędzie się IV Forum GEO-PRODUKT, które ma na celu promocję i integrację instytucji, firm i osób, które tworzą ogólnie rozumiane geo-produkty."
+      ]
+    },
+    {
       "header" : "Nowa trasa podziemna w Sztolni Królowa Luiza",
       "dateAndPlace" : "30 września 2017, Zabrze ",
       "hyperlink" : ["http://sztolnialuiza.pl/index.php/sztolnia-krolowa-luiza"],

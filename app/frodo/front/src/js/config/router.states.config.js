@@ -9,11 +9,13 @@
              },
              pages: {
                  name: 'pages',
+                 title: 'strony',
+                 pluralTitle: 'stron',
                  url: '/pages',
-                 component: 'pagesListing',
+                 component: 'listing',
                  family: 'pages',
                  resolve: {
-                     pages: statePromises.pages
+                     model: statePromises.pages
                  }
              },
              pageAdd: {
@@ -38,10 +40,10 @@
              posts: {
                  name: 'posts',
                  url: '/posts/:type',
-                 component: 'postsListing',
+                 component: 'listing',
                  family: 'posts',
                  resolve: {
-                     postType: statePromises.postTypeWithPosts
+                     model: statePromises.postTypeWithPosts
                  }
              },
              postAdd: {
@@ -65,11 +67,13 @@
              },
              postTypes: {
                  name: 'postTypes',
+                 title: 'typy postów',
+                 pluralTitle: 'typów postów',
                  url: '/post-types',
-                 component: 'postTypesListing',
+                 component: 'listing',
                  family: 'postTypes',
                  resolve: {
-                     postTypes: statePromises.postTypes
+                     model: statePromises.postTypes
                  }
              },
              postTypeAdd: {
@@ -89,11 +93,13 @@
              },
              components: {
                  name: 'components',
+                 title: 'komponenty',
+                 pluralTitle: 'komponentów',
                  url: '/components',
-                 component: 'componentsListing',
+                 component: 'listing',
                  family: 'components',
                  resolve: {
-                     components: statePromises.components
+                     model: statePromises.components
                  }
              },
              componentAdd: {
