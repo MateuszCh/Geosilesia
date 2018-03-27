@@ -35,7 +35,6 @@
                 vm.listing.postTypeId = vm.model.data.id;
             } else {
                 vm.listing.title = $state.current.title;
-                vm.listing.pluralTitle = $state.current.pluralTitle;
             }
             apiService = $injector.get(vm.listing.type + 'Service');
             setEditLink();

@@ -1,16 +1,16 @@
 <section class="custom-post-types">
     <p ng-if="vm.edit && !vm.model.type" ng-bind="'Loading...'"></p>
     <h2 class="font-2 custom-post-types__heading"
-        ng-bind="vm.edit ? 'Edytuj ' + vm.postType.title : 'Dodaj nowy ' + vm.postType.title"></h2>
+        ng-bind="vm.edit ? 'Edit ' + vm.postType.title : 'Add new ' + vm.postType.title"></h2>
     <div class="custom-post-types__container--top-padding">
         <div class="custom-post-types__container__left">
             <button class="button"
                   ng-class="{'busy' : vm.actionStatus.busyType == 'save'}"
-                  ng-click="vm.save()">Zapisz</button>
+                  ng-click="vm.save()">Save</button>
             <button class="button"
                     ng-if="vm.edit"
                     ng-class="{'busy' : vm.actionStatus.busyType == 'remove'}"
-                    ng-click="vm.remove()">Usuń</button>
+                    ng-click="vm.remove()">Delete</button>
             <p class="custom-post-types__result"
                ng-class="{'custom-post-types__result--ok' : vm.actionStatus.status == 200}"
                ng-bind="vm.actionStatus.result"
@@ -19,7 +19,7 @@
         <div class="custom-post-types__container__right">
             <div class="input input--inline">
                 <label for="title"
-                       class="required">Nazwa:</label>
+                       class="required">Title:</label>
                 <input id="title"
                        ng-model="vm.model.title"
                        required
@@ -28,9 +28,9 @@
             </div>
         </div>
     </div>
-    <h2 class="font-2 custom-post-types__subheading">Pola</h2>
+    <h2 class="font-2 custom-post-types__subheading">Fields</h2>
     <p ng-if="!vm.postType.fields.length"
-       class="center">Obecnie posty tego typu nie mają żadnych pól</p>
+       class="center">There are no fields yet</p>
     <div>
         <div class="custom-post-types__container">
             <div class="custom-post-types__container__left">

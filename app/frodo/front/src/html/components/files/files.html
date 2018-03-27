@@ -3,16 +3,16 @@
      ng-if="!vm.loadingstatus"
      ng-class="{'section' : vm.section}">
     <div class="add-file__inner__panel">
-        <button class="button" ng-click="vm.chooseView('choose')" ng-class="{'button--active' : vm.activeView == 'choose'}">Wybierz plik</button>
-        <button class="button" ng-click="vm.chooseView('add')" ng-class="{'button--active' : vm.activeView == 'add'}">Dodaj nowe pliki</button>
+        <button class="button" ng-click="vm.chooseView('choose')" ng-class="{'button--active' : vm.activeView == 'choose'}">Select files</button>
+        <button class="button" ng-click="vm.chooseView('add')" ng-class="{'button--active' : vm.activeView == 'add'}">Add new files</button>
     </div>
     <div ng-show="vm.activeView == 'add'"
          class="add-file__inner__add">
         <div class="new-files">
             <div class="new-files__form">
                 <button class="button" ngf-select ng-model="vm.files" name="files" ngf-change="vm.onFilesSelect()" ngf-multiple="true" ngf-pattern="'image/*,application/pdf'"
-                        ngf-accept="'image/*,application/pdf'">Wybierz pliki</button>
-                <button class="button block m-t" ng-click="vm.upload()" ng-class="{'busy' : vm.actionStatus.busyType === 'upload'}">Zapisz</button>
+                        ngf-accept="'image/*,application/pdf'">Select files</button>
+                <button class="button block m-t" ng-click="vm.upload()" ng-class="{'busy' : vm.actionStatus.busyType === 'upload'}">Save</button>
                 <p ng-bind="vm.actionStatus.result" ng-if="vm.actionStatus.result"></p>
             </div>
         </div>
@@ -30,54 +30,54 @@
                         <img ngf-src="vm.files[vm.currentIndex]" ng-switch-when="true">
                         <img ng-switch-when="false" src="images/pdf-placeholder.png">
                     </div>
-                    <button class="button" ng-click="vm.removeFile()">Usuń</button>
+                    <button class="button" ng-click="vm.removeFile()">Delete</button>
                 </div>
                 <div class="edit-new-files__editor__form">
                     <form name="editFiles" novalidate>
                         <div class="input input--inline">
-                            <label for="title">Tytuł:</label>
+                            <label for="title">Title:</label>
                             <input id="title"
                                    type="text"
                                    ng-model="vm.data[vm.currentIndex].title">
                             <span class="input__notice"></span>
                         </div>
                         <div class="input input--inline">
-                            <label for="description">Opis:</label>
+                            <label for="description">Description:</label>
                             <input id="description"
                                    type="text"
                                    ng-model="vm.data[vm.currentIndex].description">
                             <span class="input__notice"></span>
                         </div>
                         <div class="input input--inline">
-                            <label for="author">Autor:</label>
+                            <label for="author">Author:</label>
                             <input id="author"
                                    type="text"
                                    ng-model="vm.data[vm.currentIndex].author">
                             <span class="input__notice"></span>
                         </div>
                         <div class="input input--inline">
-                            <label for="date">Data:</label>
+                            <label for="date">Date:</label>
                             <input id="date"
                                    type="date"
                                    ng-model="vm.data[vm.currentIndex].date">
                             <span class="input__notice"></span>
                         </div>
                         <div class="input input--inline">
-                            <label for="place">Miejsce:</label>
+                            <label for="place">Place:</label>
                             <input id="place"
                                    type="text"
                                    ng-model="vm.data[vm.currentIndex].place">
                             <span class="input__notice"></span>
                         </div>
                         <div class="input input--inline">
-                            <label for="catalogue">Katalog:</label>
+                            <label for="catalogue">Catalogue:</label>
                             <input id="catalogue"
                                    type="text"
                                    ng-model="vm.data[vm.currentIndex].catalogue">
                             <span class="input__notice"></span>
                         </div>
                         <div class="input input--inline" ng-if="vm.catalogues.length">
-                            <label for="selectCatalogue">Wybierz z istniejących</label>
+                            <label for="selectCatalogue">Select from existing ones</label>
                             <select id="selectCatalogue" ng-model="vm.data[vm.currentIndex].catalogue" ng-options="catalogue for catalogue in vm.catalogues"></select>
                         </div>
                     </form>

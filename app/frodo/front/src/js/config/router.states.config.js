@@ -9,8 +9,7 @@
              },
              pages: {
                  name: 'pages',
-                 title: 'strony',
-                 pluralTitle: 'stron',
+                 title: 'pages',
                  url: '/pages',
                  component: 'listing',
                  family: 'pages',
@@ -67,8 +66,7 @@
              },
              postTypes: {
                  name: 'postTypes',
-                 title: 'typy postów',
-                 pluralTitle: 'typów postów',
+                 title: 'post types',
                  url: '/post-types',
                  component: 'listing',
                  family: 'postTypes',
@@ -93,8 +91,7 @@
              },
              components: {
                  name: 'components',
-                 title: 'komponenty',
-                 pluralTitle: 'komponentów',
+                 title: 'components',
                  url: '/components',
                  component: 'listing',
                  family: 'components',

@@ -2,16 +2,16 @@
     <p ng-if="!vm.model.pageUrl && vm.edit"
        ng-bind="'Loading...'"></p>
     <h2 class="font-2 custom-post-types__heading"
-        ng-bind="vm.edit ? 'Edytuj stronę: ' + vm.currentTitle : 'Dodaj nową stronę'"></h2>
+        ng-bind="vm.edit ? 'Edit ' + vm.currentTitle + ' page' : 'Add new page'"></h2>
     <div class="custom-post-types__container--top-padding">
         <div class="custom-post-types__container__left">
             <button class="button"
                     ng-class="{'busy' : vm.actionStatus.busyType == 'save'}"
-                    ng-click="vm.save()">Zapisz</button>
+                    ng-click="vm.save()">Save</button>
             <button class="button"
                     ng-if="vm.edit"
                     ng-class="{'busy' : vm.actionStatus.busyType == 'remove'}"
-                    ng-click="vm.remove()">Usuń</button>
+                    ng-click="vm.remove()">Delete</button>
             <p class="custom-post-types__result"
                ng-class="{'custom-post-types__result--ok' : vm.actionStatus.status == 200}"
                ng-bind="vm.actionStatus.result"
@@ -20,7 +20,7 @@
         <div class="custom-post-types__container__right">
             <div class="input input--inline">
                 <label for="title"
-                       class="required">Nazwa:</label>
+                       class="required">Title:</label>
                 <input id="title"
                        ng-model="vm.model.title"
                        required
@@ -38,9 +38,9 @@
             </div>
         </div>
     </div>
-    <h2 class="font-2 custom-post-types__subheading">Komponenty</h2>
+    <h2 class="font-2 custom-post-types__subheading">Components</h2>
     <p ng-if="!vm.model.rows.length"
-       class="center">Obecnie ta strona nie ma żadnych komponentów</p>
+       class="center">There are no components yet</p>
     <div id="components"
          ng-class="{'postFields' :  vm.model.rows.length}">
         <div ng-if="vm.edit">
@@ -55,7 +55,7 @@
         <div class="custom-post-types__container__left"></div>
         <div class="custom-post-types__container__right">
             <button class="button"
-                    ng-click="vm.addComponent()">Dodaj nowy komponent</button>
+                    ng-click="vm.addComponent()">Add new component</button>
         </div>
     </div>
 </section>

@@ -2,14 +2,14 @@
     <div class="add-field-container__left">
         <div class="add-field__remove">
         <button class="button"
-              ng-click="vm.remove()">Usuń</button>
+              ng-click="vm.remove()">Delete</button>
         </div>
     </div>
     <div class="add-field-container__right">
         <div class="add-field">
             <div class="input input--inline">
                 <label for="fieldTitle"
-                       class="required">Tytuł:</label>
+                       class="required">Title:</label>
                 <input id="fieldTitle"
                        type="text"
                        required
@@ -28,7 +28,7 @@
             </div>
 
             <div class="add-field__type">
-                <span>Wybierz typ:</span>
+                <span>Select type:</span>
                 <span ng-bind="vm.currentFieldTypeName"></span>
 
                 <div class="add-field__type__all">
@@ -41,10 +41,10 @@
             <div ng-if="vm.fieldModel.type === 'select'"
                  class="add-field__type__select">
                 <div class="input input--inline">
-                    <label for="selectOptions">Opcje:</label>
+                    <label for="selectOptions">Options:</label>
                     <input id="selectOptions" type="text" ng-model="vm.fieldModel.selectOptions">
                 </div>
-                <p class="add-field__type__select__info">Proszę wpisać opcje wyboru oddzielone średnikami</p>
+                <p class="add-field__type__select__info">Please enter options separated by commas</p>
             </div>
 
             <div class="input input--inline add-field__type__repeater"
@@ -59,7 +59,7 @@
                     <div class="custom-post-types__container__left"></div>
                     <div class="custom-post-types__container__right">
                 <span class="button"
-                      ng-click="vm.addRepeaterField()">Dodaj nowe pole</span>
+                      ng-click="vm.addRepeaterField()">Add new field</span>
                     </div>
                 </div>
             </div>

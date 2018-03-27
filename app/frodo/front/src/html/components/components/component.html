@@ -2,16 +2,16 @@
     <p ng-if="!vm.model.type && vm.edit"
        ng-bind="'Loading...'"></p>
     <h2 class="font-2 custom-post-types__heading"
-        ng-bind="vm.edit ? 'Edytuj komponent: ' + vm.currentType : 'Dodaj nowy komponent'"></h2>
+        ng-bind="vm.edit ? 'Edit ' + vm.currentType + ' component' : 'Add new component'"></h2>
     <div class="custom-post-types__container--top-padding">
         <div class="custom-post-types__container__left">
             <button class="button"
                     ng-class="{'busy' : vm.actionStatus.busyType == 'save'}"
-                    ng-click="vm.save()">Zapisz</button>
+                    ng-click="vm.save()">Save</button>
             <button class="button"
                     ng-if="vm.edit"
                     ng-class="{'busy' : vm.actionStatus.busyType == 'remove'}"
-                    ng-click="vm.remove()">Usuń</button>
+                    ng-click="vm.remove()">Delete</button>
             <p class="custom-post-types__result"
                ng-class="{'custom-post-types__result--ok' : vm.actionStatus.status == 200}"
                ng-bind="vm.actionStatus.result"
@@ -20,7 +20,7 @@
         <div class="custom-post-types__container__right">
             <div class="input input--inline">
                 <label for="title"
-                       class="required">Nazwa:</label>
+                       class="required">Name:</label>
                 <input id="title"
                        ng-model="vm.model.title"
                        required
@@ -29,7 +29,7 @@
             </div>
             <div class="input input--inline">
                 <label for="type"
-                       class="required">Typ:</label>
+                       class="required">Type:</label>
                 <input id="type"
                        ng-model="vm.model.type"
                        ng-change="vm.formatTypeString()"
@@ -38,9 +38,9 @@
             </div>
         </div>
     </div>
-    <h2 class="font-2 custom-post-types__subheading">Pola</h2>
+    <h2 class="font-2 custom-post-types__subheading">Fields</h2>
     <p ng-if="!vm.model.fields.length"
-       class="center">Obecnie ten komponent nie ma żadnych pól</p>
+       class="center">This component has no fields yet</p>
     <div id="postFields"
          ng-class="{'postFields' :  vm.model.fields.length}">
         <div ng-if="vm.edit">
@@ -54,7 +54,7 @@
         <div class="custom-post-types__container__left"></div>
         <div class="custom-post-types__container__right">
             <button class="button"
-                    ng-click="vm.addField()">Dodaj nowe pole</button>
+                    ng-click="vm.addField()">Add new field</button>
         </div>
     </div>
 </section>

@@ -14,12 +14,12 @@
             <div>
                 <md-button class="md-primary md-raised m-a-0"
                            ng-click="vm.add()">
-                    <span class="col-w">Dodaj</span>
+                    <span class="col-w">Add</span>
                 </md-button>
                 <md-button class="md-primary md-raised m-a-0 m-l-2"
                            ng-if="vm.listing.type === 'posts'"
                            ng-click="vm.editPostType()">
-                    <span class="col-w">Edytuj typ postów</span>
+                    <span class="col-w">Edit post type</span>
                 </md-button>
             </div>
             <p ng-class="vm.removeStatus.status == 200 ? 'col-6' : 'col-4'"
@@ -30,7 +30,7 @@
              flex-md="70"
              flex-gt-md="60">
             <p class="center"
-               ng-if="!vm.listing.models.length">Nie ma obecnie żadnych&nbsp;<span ng-bind="::vm.listing.pluralTitle || 'postów typu ' + vm.model.data.title.toLowerCase()"></span></p>
+               ng-if="!vm.listing.models.length">There are no&nbsp;<span ng-bind="::vm.listing.title || vm.model.data.title.toLowerCase()"></span>&nbsp;yet</p>
             <md-list class="p-t-0">
                 <md-list-item layout="row"
                               ng-repeat="model in vm.listing.models track by model._id"
@@ -44,7 +44,7 @@
                     <md-button class="md-raised md-warn"
                                flex="20"
                                ng-click="vm.remove(model._id, $index)"
-                               ng-class="{'busy' : vm.removeStatus.busy == model._id && !vm.removeStatus.status}">Usuń</md-button>
+                               ng-class="{'busy' : vm.removeStatus.busy == model._id && !vm.removeStatus.status}">Delete</md-button>
                 </md-list-item>
             </md-list>
         </div>

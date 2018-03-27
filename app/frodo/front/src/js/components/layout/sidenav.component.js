@@ -18,22 +18,22 @@
 
             },
             {
-                title: 'Strony',
+                title: 'Pages',
                 family: 'pages',
 
             },
             {
-                title: 'Komponenty',
+                title: 'Components',
                 family: 'components',
 
             },
             {
-                title: 'Typy postów',
+                title: 'Post Types',
                 family: 'postTypes',
 
             },
             {
-                title: 'Pliki',
+                title: 'Files',
                 family: 'files',
 
             }
