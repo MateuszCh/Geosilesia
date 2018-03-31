@@ -27,6 +27,11 @@ PostSchema.virtual('url')
         return `/posts/${this.type}/edit/${this.id}`;
     });
 
+PostSchema.virtual('created')
+    .get(function(){
+       return new Date(parseInt(this._id.toString().substring(0,8), 16) * 1000);
+    });
+
 const Post = mongoose.model('post', PostSchema);
 
 module.exports = Post;

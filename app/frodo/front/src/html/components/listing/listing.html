@@ -1,52 +1,92 @@
 <section class="p-a-4 p-a-1-m p-a-1-s">
-    <h2 class="font-2 fs-6 center"
-        ng-bind="::vm.listing.title"></h2>
+    <div class="pos-relative" layout="row" layout-align="center center">
+
+        <h2 class="font-2 fs-6 center"
+            flex="grow"
+            ng-bind="::vm.listing.title"></h2>
+        <div layout="row">
+            <md-button class="md-primary md-fab"
+                       ng-click="vm.listing.add()">
+                <span class="col-w">Add</span>
+                <md-tooltip md-direction="bottom">Add new {{::vm.listing.title}}</md-tooltip>
+            </md-button>
+            <md-button class="md-fab md-primary"
+                       ng-if="vm.listing.type === 'posts'"
+                       ng-click="vm.listing.postTypeEdit()">
+                <span class="col-w">Edit</span>
+                <md-tooltip md-direction="bottom">Edit {{::vm.listing.title}}</md-tooltip>
+            </md-button>
+            <md-menu md-position-mode="target-right target">
+                <md-button
+                        class="md-fab md-primary"
+                        aria-label="Sort by"
+                        ng-click="$mdMenu.open()">
+                    <md-icon md-svg-icon="sort"></md-icon>
+                    <md-tooltip md-direction="bottom">Sort By</md-tooltip>
+                </md-button>
+                <md-menu-content width="4">
+                    <md-menu-item ng-repeat="sort in vm.listing.sort.types">
+                        <md-button ng-click="vm.listing.sort.sortBy(sort.varName)"
+                                   class="transition"
+                                   ng-class="{'bg-col-1 col-w' : vm.listing.sort.currentType == sort.varName}">
+                            {{sort.name}}
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </div>
+    </div>
+
     <div layout-xs="column"
          layout-gt-xs="row"
          class="m-t-4">
-        <div flex-xs="100"
-             flex-sm="30"
-             flex-gt-sm="20"
-             layout-align="start center"
-             layout-align-gt-xs="start start"
-             layout="row"
-             layout-gt-xs="column">
-            <div>
-                <md-button class="md-primary md-raised m-a-0"
-                           ng-click="vm.add()">
-                    <span class="col-w">Add</span>
-                </md-button>
-                <md-button class="md-primary md-raised m-a-0 m-l-2"
-                           ng-if="vm.listing.type === 'posts'"
-                           ng-click="vm.editPostType()">
-                    <span class="col-w">Edit post type</span>
-                </md-button>
-            </div>
-            <p ng-class="vm.removeStatus.status == 200 ? 'col-6' : 'col-4'"
-               ng-bind="vm.removeStatus.result"
-               ng-if="vm.removeStatus.result"></p>
-        </div>
         <div flex-sm="100"
              flex-md="70"
-             flex-gt-md="60">
+             flex-gt-md="65">
             <p class="center"
                ng-if="!vm.listing.models.length">There are no&nbsp;<span ng-bind="::vm.listing.title || vm.model.data.title.toLowerCase()"></span>&nbsp;yet</p>
             <md-list class="p-t-0">
                 <md-list-item layout="row"
-                              ng-repeat="model in vm.listing.models track by model._id"
+                              ng-repeat="model in vm.listing.models | filter:vm.filter | orderBy: vm.listing.sort.currentType track by model._id"
                               class="md-button md-raised"
                               ng-class="{'m-b-2' : !$last}">
-                    <a flex="80"
-                       ui-sref="{{vm.editLink}}"
-                       layout="row"
-                       layout-align="left center"
-                       ng-bind="::model.title"></a>
-                    <md-button class="md-raised md-warn"
-                               flex="20"
-                               ng-click="vm.remove(model._id, $index)"
-                               ng-class="{'busy' : vm.removeStatus.busy == model._id && !vm.removeStatus.status}">Delete</md-button>
+                    <div layout="row" flex="100" ng-if="vm.listing.lastRemoved !== model">
+                        <a flex="80"
+                           ui-sref="{{vm.listing.postEdit}}"
+                           layout="row"
+                           layout-align="left center"
+                           ng-bind="::model.title"></a>
+                        <md-button class="md-raised md-warn"
+                                   flex="20"
+                                   ng-click="vm.listing.removeDialog($event, model)"
+                                   ng-class="{'busy' : vm.listing.removeStatus.busy == model._id && !vm.listing.removeStatus.status}">Delete</md-button>
+                    </div>
+                    <div ng-if="vm.listing.lastRemoved === model" flex="100" layout layout-align="center center">
+                        <p ng-class="vm.listing.removeStatus.status == 200 ? 'col-6' : 'col-4'"
+                           ng-bind="vm.listing.removeStatus.result"
+                           ng-if="vm.listing.removeStatus.result"></p>
+                    </div>
+
                 </md-list-item>
             </md-list>
+        </div>
+        <div class="p-r-2 p-l-2" flex="auto">
+            <md-autocomplete class="fix"
+                    md-floating-label="Search"
+                    md-no-cache="true"
+                    md-search-text-change="vm.searchTextChange(vm.searchText)"
+                    md-search-text="vm.searchText"
+                    md-selected-item-change="vm.searchTextChange(vm.searchText)"
+                    md-items="item in vm.searchModels(vm.searchText)"
+                    md-item-text="item.title"
+                    md-min-length="1">
+                <md-item-template>
+                    <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.title}}</span>
+                </md-item-template>
+                <md-not-found>
+                    <p class="m-a-0" ng-click="vm.add()">No {{vm.listing.title}} matching "{{vm.searchText}}" were found. Create a new one!</p>
+                </md-not-found>
+            </md-autocomplete>
         </div>
     </div>
 </section>

@@ -19,7 +19,7 @@
                    class="md-no-focus"
                    aria-label="{{::type.pluralTitle + ' przycisk'}}"
                    ng-click="vm.redirect('posts', {type: type.type})">
-            <span ng-bind="::type.pluralTitle"
+            <span ng-bind="type.pluralTitle"
                   class="transition"
                   ng-class="{'fs-3 col-7' : vm.currentFamily === 'posts' + type.type}"  ></span>
         </md-button>

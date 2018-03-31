@@ -47,9 +47,7 @@
                 vm.currentFamily = undefined;
             }
 
-            $scope.$on('postTypesUpdated', function(){
-                getPostTypes();
-            });
+            $scope.$on('postTypesUpdated', getPostTypes);
             $transitions.onSuccess({}, function ($transition$) {
                 if($transition$.$to().self.family){
                     $transition$.params().type ? setCurrentFamily($transition$.$to().self.family, $transition$.params().type) : setCurrentFamily($transition$.$to().self.family);

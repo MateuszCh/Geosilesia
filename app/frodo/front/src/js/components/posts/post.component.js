@@ -64,6 +64,12 @@
             if(!tools.showInvalidInputs()){
                 setActionStatus('save');
 
+                vm.postType.fields.forEach(function(field){
+                    if(!vm.model.data[field.id] && field.type === 'checkbox'){
+                        vm.model.data[field.id] = false;
+                    }
+                });
+
                 var promise = vm.edit ? postsService.edit(vm.model) : postsService.create(vm.model);
 
                 promise

@@ -66,7 +66,7 @@
                         if(vm.edit){
                             vm.model = response.data;
                             $timeout(function(){
-                                $rootScope.$broadcast('postTypeSaved');
+                                $rootScope.$broadcast('postTypesUpdated');
                             }, 10);
                             vm.currentType = vm.model.type;
                             setActionStatus(false, vm.model.type +  " type updated successfully", response.status);

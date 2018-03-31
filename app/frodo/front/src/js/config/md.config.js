@@ -3,7 +3,8 @@
         function ($mdIconProvider, $mdThemingProvider) {
 
             $mdIconProvider.icon('menu', './images/menu.svg', 24)
-                .icon('arrow', './images/arrow.svg', 24);
+                .icon('arrow', './images/arrow.svg', 24)
+                .icon('sort', './images/sort.svg', 24);
             //
             // $mdThemingProvider.theme('default')
             //     .primaryPalette('orange')

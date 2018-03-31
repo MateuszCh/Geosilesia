@@ -3,11 +3,11 @@
 (function(){
     angular.module('frodo').constant('fields', {
             text: {
-                name: 'Tekst',
+                name: 'Text',
                 type: 'text'
             },
             textarea: {
-                name: 'Pole tekstowe',
+                name: 'Textarea',
                 type: 'textarea'
             },
             checkbox: {
@@ -23,12 +23,16 @@
                 type: 'repeater'
             },
             number: {
-                name: 'Liczba',
+                name: 'Number',
                 type: 'number'
             },
             file: {
-                name: 'Plik',
+                name: 'File',
                 type: 'file'
+            },
+            date: {
+                name: 'Date',
+                type: 'date'
             }
     });
 })();
