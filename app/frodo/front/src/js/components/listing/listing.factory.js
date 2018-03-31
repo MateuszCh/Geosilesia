@@ -1,5 +1,63 @@
 (function(){
-    angular.module('frodo').service('listingFactory', ['$state', '$injector', '$timeout', '$rootScope', '$mdDialog', function($state, $injector, $timeout, $rootScope, $mdDialog){
+    angular.module('frodo').service('listingFactory', ListingFactory);
+
+    ListingFactory.$inject = ['$state', '$injector', '$timeout', '$rootScope', '$mdDialog'];
+
+    function ListingFactory($state, $injector, $timeout, $rootScope, $mdDialog){
+
+        function setRange(modelData, id){
+            var values = [];
+            modelData.posts.forEach(function(post){
+               values.push(post.data[id]);
+            });
+            values = values.filter(function(value){
+                return value !== undefined;
+            });
+            values.sort(function(a,b){
+                return a - b;
+            });
+            return [values[0], values[values.length - 1]];
+        }
+
+        function createFilters(modelData){
+            if(!modelData.fields.length){
+                return undefined;
+            }
+            var checkboxes = [];
+            var numbers = [];
+            var selects = [];
+
+            var filterableFields = ['checkbox', 'number', 'select'];
+
+            modelData.fields.forEach(function(field){
+               if(filterableFields.indexOf(field.type) > -1){
+                   var filterField = {
+                       id: field.id
+                   };
+                   switch(field.type){
+                       case 'checkbox':
+                           filterField.value = undefined;
+                           checkboxes.push(filterField);
+                           break;
+                       case 'number':
+                           filterField.minValue = undefined;
+                           filterField.maxValue = undefined;
+                           filterField.range = setRange(modelData, filterField.id);
+                           numbers.push(filterField);
+                           break;
+                       case 'select':
+                           filterField.values = [];
+                           selects.push(filterField);
+                   }
+               }
+            });
+
+            return {
+                checkboxes: checkboxes,
+                numbers: numbers,
+                selects: selects
+            };
+        }
 
         function onRemoveError(error, ev){
             $mdDialog.show(
@@ -103,6 +161,7 @@
                 listing.postType = model.data.type;
                 listing.postTypeId = model.data.id;
                 listing.postEdit = listing.type + 'Edit({id:model.id, type:model.type})';
+                listing.filters = createFilters(model.data);
             } else {
                 listing.title = $state.current.title;
                 listing.postEdit = listing.type + 'Edit({id:model.id})';
@@ -115,6 +174,5 @@
         return {
             create: createListing
         }
-
-    }]);
+    }
 })();
