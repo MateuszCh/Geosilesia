@@ -47,7 +47,7 @@
                ng-if="!vm.listing.models.length">There are no&nbsp;<span ng-bind="::vm.listing.title || vm.model.data.title.toLowerCase()"></span>&nbsp;yet</p>
             <md-list class="p-t-0">
                 <md-list-item layout="row"
-                              ng-repeat="model in vm.listing.models | filter:vm.filter | orderBy: vm.listing.sort.currentType track by model._id"
+                              ng-repeat="model in vm.listing.models | filter:vm.listing.filters.textFilter | orderBy: vm.listing.sort.currentType track by model._id"
                               class="md-button md-raised"
                               ng-class="{'m-b-2' : !$last}">
                     <div layout="row" flex="100" ng-if="vm.listing.lastRemoved !== model">
@@ -74,17 +74,15 @@
             <md-autocomplete class="fix"
                     md-floating-label="Search"
                     md-no-cache="true"
-                    md-search-text-change="vm.searchTextChange(vm.searchText)"
-                    md-search-text="vm.searchText"
-                    md-selected-item-change="vm.searchTextChange(vm.searchText)"
-                    md-items="item in vm.searchModels(vm.searchText)"
+                    md-search-text="vm.listing.filters.textFilter"
+                    md-items="item in vm.listing.models | filter: vm.listing.filters.textFilter"
                     md-item-text="item.title"
                     md-min-length="1">
                 <md-item-template>
                     <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.title}}</span>
                 </md-item-template>
                 <md-not-found>
-                    <p class="m-a-0" ng-click="vm.add()">No {{vm.listing.title}} matching "{{vm.searchText}}" were found. Create a new one!</p>
+                    <p class="m-a-0" ng-click="vm.add()">No {{vm.listing.title}} matching "{{vm.listing.filters.textFilter}}" were found. Create a new one!</p>
                 </md-not-found>
             </md-autocomplete>
         </div>

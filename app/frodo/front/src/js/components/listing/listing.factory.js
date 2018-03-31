@@ -20,6 +20,11 @@
         }
 
         function createFilters(modelData){
+            if($state.current.name !== 'posts'){
+                return {
+                    textFilter: undefined
+                }
+            }
             if(!modelData.fields.length){
                 return undefined;
             }
@@ -55,7 +60,8 @@
             return {
                 checkboxes: checkboxes,
                 numbers: numbers,
-                selects: selects
+                selects: selects,
+                textFilter: undefined
             };
         }
 
@@ -161,12 +167,12 @@
                 listing.postType = model.data.type;
                 listing.postTypeId = model.data.id;
                 listing.postEdit = listing.type + 'Edit({id:model.id, type:model.type})';
-                listing.filters = createFilters(model.data);
             } else {
                 listing.title = $state.current.title;
                 listing.postEdit = listing.type + 'Edit({id:model.id})';
             }
             listing.sort = createSort(listing, model.data.fields);
+            listing.filters = createFilters(model.data);
 
             return listing;
         }
