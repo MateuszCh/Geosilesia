@@ -2,23 +2,6 @@
   color: transparent !important;
 }
 
-md-autocomplete.fix {
-  position: relative;
-  md-autocomplete-wrap {
-    position: absolute;
-    top:0;
-    right:0;
-    left:0;
-    md-input-container {
-      position: relative;
-      input {
-        position: absolute;
-        top:0;
-      }
-    }
-  }
-}
-
 .menudemoBasicUsage .md-menu-demo {
   padding: 24px; }
 
@@ -28,3 +11,9 @@ md-autocomplete.fix {
 //body {
 //  position: relative !important;
 //}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

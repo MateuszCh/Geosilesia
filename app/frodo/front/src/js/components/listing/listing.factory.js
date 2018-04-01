@@ -13,6 +13,9 @@
             values = values.filter(function(value){
                 return value !== undefined;
             });
+            if(!values.length){
+                return undefined;
+            }
             values.sort(function(a,b){
                 return a - b;
             });
@@ -22,46 +25,54 @@
         function createFilters(modelData){
             if($state.current.name !== 'posts'){
                 return {
-                    textFilter: undefined
+                    textFilter: {
+                        type: 'text',
+                        value: undefined
+                    }
                 }
             }
             if(!modelData.fields.length){
                 return undefined;
             }
-            var checkboxes = [];
-            var numbers = [];
-            var selects = [];
+            var checkboxes = {type: 'checkbox', fields: []};
+            var numbers = {type: 'number', fields: []};
+            var selects = {type: 'select', fields: []};
 
             var filterableFields = ['checkbox', 'number', 'select'];
 
             modelData.fields.forEach(function(field){
                if(filterableFields.indexOf(field.type) > -1){
                    var filterField = {
-                       id: field.id
+                       id: field.id,
+                       title: field.title
                    };
                    switch(field.type){
                        case 'checkbox':
-                           filterField.value = undefined;
-                           checkboxes.push(filterField);
+                           filterField.value = 'all';
+                           checkboxes.fields.push(filterField);
                            break;
                        case 'number':
-                           filterField.minValue = undefined;
-                           filterField.maxValue = undefined;
                            filterField.range = setRange(modelData, filterField.id);
-                           numbers.push(filterField);
+                           filterField.minValue = filterField.range[0];
+                           filterField.maxValue = filterField.range[1];
+                           numbers.fields.push(filterField);
                            break;
                        case 'select':
+                           filterField.options = field.options;
                            filterField.values = [];
-                           selects.push(filterField);
+                           selects.fields.push(filterField);
                    }
                }
             });
 
             return {
+                textFilter: {
+                    type: 'text',
+                    value: undefined
+                },
                 checkboxes: checkboxes,
                 numbers: numbers,
-                selects: selects,
-                textFilter: undefined
+                selects: selects
             };
         }
 
