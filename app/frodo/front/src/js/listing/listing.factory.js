@@ -19,7 +19,7 @@
             values.sort(function(a,b){
                 return a - b;
             });
-            return [values[0], values[values.length - 1]];
+            return [Math.floor(values[0]), Math.ceil(values[values.length - 1])];
         }
 
         function createFilters(modelData){

@@ -47,7 +47,7 @@
                ng-if="!vm.listing.models.length">There are no&nbsp;<span ng-bind="::vm.listing.title || vm.model.data.title.toLowerCase()"></span>&nbsp;yet</p>
             <md-list class="p-t-0">
                 <md-list-item layout="row"
-                              ng-repeat="model in vm.listing.models | filter:vm.listing.filters.textFilter.value | orderBy: vm.listing.sort.currentType track by model._id"
+                              ng-repeat="model in vm.listing.models | listingFilter : vm.listing.filters | orderBy: vm.listing.sort.currentType track by model._id"
                               class="md-button md-raised"
                               ng-class="{'m-b-2' : !$last}">
                     <div layout="row" flex="100" ng-if="vm.listing.lastRemoved !== model">
