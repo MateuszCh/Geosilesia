@@ -5,13 +5,17 @@
 
     function ListingFilter($filter){
 
-        return function(models, filters){
+        return function(models, filters, type){
             if(!models.length){
                 return models;
             }
 
             // textFilter
             models = $filter('filter')(models, filters.textFilter.value);
+
+            if(type !== 'posts'){
+                return models;
+            }
 
             // checkboxes
             if(filters.checkboxes.fields.length){

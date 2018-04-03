@@ -76,6 +76,24 @@
             };
         }
 
+        function resetFilters(filters, type){
+            filters.textFilter.value = undefined;
+            if(type !== 'posts'){
+                return;
+            }
+            filters.checkboxes.fields.forEach(function(field){
+                field.value = 'all';
+            });
+            filters.numbers.fields.forEach(function(field){
+                field.minValue = field.range[0];
+                field.maxValue = field.range[1];
+            });
+            filters.selects.fields.forEach(function(field){
+                field.values = [];
+            })
+
+        }
+
         function onRemoveError(error, ev){
             $mdDialog.show(
                 $mdDialog.alert()
@@ -146,6 +164,7 @@
                             self.setRemoveStatus(model._id, response.data, response.status);
                             if(self.type === 'postTypes') $rootScope.$broadcast('postTypesUpdated');
                             self.lastRemoved = model;
+                            self.count--;
                             self.removeTimeout = $timeout(function(){
                                 self.models.splice(self.models.indexOf(model), 1);
                                 self.lastRemoved = undefined;
@@ -184,6 +203,8 @@
             }
             listing.sort = createSort(listing, model.data.fields);
             listing.filters = createFilters(model.data);
+            listing.resetFilters = resetFilters;
+            listing.count = listing.models.length;
 
             return listing;
         }

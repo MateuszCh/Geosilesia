@@ -13,6 +13,9 @@ html, body {
 
 .sidenav {
   width: 20%;
+  .size-m & {
+    width: 50%;
+  }
 }
 
 .page {
