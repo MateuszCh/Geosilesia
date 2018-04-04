@@ -28,7 +28,7 @@
                 }
 
                 if(windowOffset >= initOffset){
-                    var style = 'position: fixed; top: 0px; left:' + elLeft + 'px; right: ' + elRight + 'px;';
+                    var style = 'position: fixed; top: 0; left:' + elLeft + 'px; right: ' + elRight + 'px; bottom: 0; overflow: auto;';
                     el.style = style;
                 } else {
                     el.style = '';

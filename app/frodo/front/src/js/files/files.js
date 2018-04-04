@@ -137,7 +137,6 @@
                     resultTimeout = $timeout(setActionStatus, 5000);
                 })
                 .catch(function(e){
-                    console.log(e);
                     setActionStatus(false, e.data.error, e.status);
                     resultTimeout = $timeout(setActionStatus, 5000);
                 })

@@ -33,6 +33,10 @@ html, body {
   }
 }
 
+p,span {
+  white-space: normal;
+}
+
 a {
   color: inherit;
   text-decoration: none;

@@ -8,22 +8,22 @@
         </h2>
         <div layout="row" layout-align-xs="space-around center">
             <md-button class="md-primary"
-                       ng-class="{'md-fab' : !$root.$mdMedia('xs'), 'md-raised' : $root.$mdMedia('xs')}"
+                       ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs')}"
                        ng-click="vm.listing.add()">
                 <span class="col-w">Add</span>
                 <md-tooltip md-direction="bottom">Add new {{::vm.listing.title}}</md-tooltip>
             </md-button>
             <md-button class="md-primary"
-                       ng-class="{'md-fab' : !$root.$mdMedia('xs'), 'md-raised' : $root.$mdMedia('xs')}"
+                       ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs')}"
                        ng-if="vm.listing.type === 'posts'"
                        ng-click="vm.listing.postTypeEdit()">
                 <span class="col-w">Edit</span>
                 <md-tooltip md-direction="bottom">Edit {{::vm.listing.title}}</md-tooltip>
             </md-button>
-            <md-menu md-position-mode="target-right target">
+            <md-menu md-position-mode="target-right target" ng-if="vm.listing.models.length">
                 <md-button
                         class=" md-primary"
-                        ng-class="{'md-fab' : !$root.$mdMedia('xs'), 'md-raised' : $root.$mdMedia('xs')}"
+                        ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs')}"
                         aria-label="Sort by"
                         ng-click="$mdMenu.open()">
                     <md-icon md-svg-icon="sort"></md-icon>
@@ -41,7 +41,7 @@
             </md-menu>
             <md-button hide-gt-md
                        ng-click="vm.openFilters()"
-                       ng-class="{'md-fab' : !$root.$mdMedia('xs'), 'md-raised' : $root.$mdMedia('xs')}"
+                       ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs')}"
                        class="md-primary"
                        ng-if="vm.listing.type === 'posts'">
                 <span class="col-w">Filters</span>
@@ -58,7 +58,7 @@
             <p class="center"
                ng-if="!vm.listing.models.length">There are no&nbsp;<span ng-bind="::vm.listing.title || vm.model.data.title.toLowerCase()"></span>&nbsp;yet</p>
             <p class="center"
-               ng-if="(vm.listing.models | listingFilter: vm.listing.filters : vm.listing.type).length === 0">There are no <span ng-bind="::vm.listing.title.toLowerCase() || vm.model.data.title.toLowerCase()"></span> matching your selection</p>
+               ng-if="(vm.listing.models | listingFilter: vm.listing.filters : vm.listing.type).length === 0 && vm.listing.models.length">There are no <span ng-bind="::vm.listing.title.toLowerCase() || vm.model.data.title.toLowerCase()"></span> matching your selection</p>
             <md-list class="p-t-0">
                 <md-list-item layout="row"
                               ng-repeat="model in vm.listing.models | listingFilter : vm.listing.filters : vm.listing.type | orderBy: vm.listing.sort.currentType track by model._id"
@@ -84,7 +84,7 @@
                 </md-list-item>
             </md-list>
         </div>
-        <div class="p-r-2 p-l-4" flex="auto" hide-xs hide-sm sticky>
+        <div class="p-r-2 p-l-4" flex="auto" hide-xs hide-sm>
             <div ng-repeat="filterType in ::vm.listing.filters" ng-if="vm.listing.models.length" ng-switch="::filterType.type" layout-wrap>
                 <md-input-container class="md-block m-b-0" flex-gt-sm ng-switch-when="text" flex="100">
                     <label for="textFilter">Search</label>
@@ -130,7 +130,7 @@
                     </div>
                 </div>
             </div>
-            <div layout="row" layout-align="center end">
+            <div layout="row" layout-align="center end" ng-if="vm.listing.models.length">
                 <md-button class="md-raised md-primary m-a-0 p-r-2 p-l-2" ng-click="vm.listing.resetFilters(vm.listing.filters, vm.listing.type)">Reset Filters</md-button>
             </div>
         </div>
@@ -138,6 +138,7 @@
 </section>
 <md-sidenav md-component-id="filters" class="md-sidenav-right" hide-gt-md md-whiteframe="4">
     <div class="p-a-2">
+        <p flex="100" class="center" ng-if="!vm.listing.models.length">There are no <span ng-bind="vm.listing.title"></span> to filter</p>
         <div ng-repeat="filterType in ::vm.listing.filters" ng-if="vm.listing.models.length" ng-switch="::filterType.type" layout-wrap>
             <md-input-container class="md-block m-b-0" flex-gt-sm ng-switch-when="text" flex="100">
                 <label for="textFilter">Search</label>
@@ -183,7 +184,7 @@
                 </div>
             </div>
         </div>
-        <div layout="row" layout-align="center end">
+        <div layout="row" layout-align="center end" ng-if="vm.listing.models.length">
             <md-button class="md-raised md-primary m-a-0 p-r-2 p-l-2" ng-click="vm.listing.resetFilters(vm.listing.filters, vm.listing.type)">Reset Filters</md-button>
         </div>
     </div>

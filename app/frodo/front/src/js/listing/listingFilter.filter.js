@@ -42,9 +42,11 @@
             // numbers
             if(filters.numbers.fields.length){
                 filters.numbers.fields.forEach(function(number){
-                    models = models.filter(function(model){
-                        return (number.minValue <= model.data[number.id]) && (number.maxValue >= model.data[number.id]);
-                    })
+                    if(number.minValue !== number.range[0] || number.maxValue !== number.range[1]){
+                        models = models.filter(function(model){
+                            return ((number.minValue <= model.data[number.id]) && (number.maxValue >= model.data[number.id]));
+                        })
+                    }
                 })
             }
             return models

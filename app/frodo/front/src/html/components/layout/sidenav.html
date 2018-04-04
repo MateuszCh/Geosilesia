@@ -8,7 +8,7 @@
                    ng-click="vm.redirect(item.family)"
                    aria-label="{{::item.title + ' przycisk'}}">
             <span ng-bind="::item.title"
-                  class="transition"
+                  class="transition left"
                   ng-class="{'fs-3 col-7' : vm.currentFamily === item.family}"></span>
         </md-button>
     </md-list-item>
@@ -20,7 +20,7 @@
                    aria-label="{{::type.pluralTitle + ' przycisk'}}"
                    ng-click="vm.redirect('posts', {type: type.type})">
             <span ng-bind="type.pluralTitle"
-                  class="transition"
+                  class="transition left"
                   ng-class="{'fs-3 col-7' : vm.currentFamily === 'posts' + type.type}"  ></span>
         </md-button>
     </md-list-item>

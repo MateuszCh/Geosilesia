@@ -5,11 +5,13 @@
         controller: PageBodyController
     });
 
-    PageBodyController.$inject = ['$mdSidenav', '$timeout', '$transitions', '$window', 'tools', '$scope', '$document'];
-    function PageBodyController($mdSidenav, $timeout, $transitions, $window, tools, $scope, $document){
+    PageBodyController.$inject = ['$mdSidenav', '$timeout', '$transitions', '$window', 'tools', '$scope', '$document', '$mdMedia'];
+    function PageBodyController($mdSidenav, $timeout, $transitions, $window, tools, $scope, $document, $mdMedia){
         var vm  = this;
         vm.$onInit = onInit;
+        vm.$mdMedia = $mdMedia;
         vm.openSidenav = openSidenav;
+        vm.openFilters = openFilters;
 
         var throttledOnScroll = tools.throttle(onScroll, 100);
 
@@ -33,6 +35,10 @@
 
         function closeSidenav(){
             $mdSidenav('sidenav').close();
+        }
+
+        function openFilters(){
+            $mdSidenav('filters').open();
         }
     }
 })();

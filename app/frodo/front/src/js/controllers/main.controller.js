@@ -1,7 +1,5 @@
 (function(){
-    angular.module('frodo').controller('MainController',['$window', '$scope', 'tools', '$rootScope', '$mdMedia', function($window, $scope, tools, $rootScope, $mdMedia){
-
-        $rootScope.$mdMedia = $mdMedia;
+    angular.module('frodo').controller('MainController',['$window', '$scope', 'tools', function($window, $scope, tools){
 
         var debouncedOnResize = tools.debounce(onResize, 100);
 

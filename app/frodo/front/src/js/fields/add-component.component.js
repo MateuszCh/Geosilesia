@@ -47,10 +47,6 @@
 
         }
 
-        // vm.$onChanges = function(changes){
-        //     console.log(changes);
-        // };
-
         function onComponentSelect(){
             vm.model.data = {};
             vm.model.title = vm.currentComponent.title;

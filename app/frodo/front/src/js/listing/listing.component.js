@@ -8,10 +8,11 @@
         controller: ListingController
     });
 
-    ListingController.$inject = ['$filter', 'listingFactory', '$mdSidenav'];
-    function ListingController($filter, listingFactory, $mdSidenav){
+    ListingController.$inject = ['$filter', 'listingFactory', '$mdSidenav', '$mdMedia'];
+    function ListingController($filter, listingFactory, $mdSidenav, $mdMedia){
         var vm = this;
         vm.$onInit = onInit;
+        vm.$mdMedia = $mdMedia;
         vm.openFilters = openFilters;
 
         function onInit(){
