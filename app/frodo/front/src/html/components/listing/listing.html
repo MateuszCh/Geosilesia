@@ -54,12 +54,13 @@
          class="m-t-4">
         <div flex-sm="100"
              flex-md="70"
+             class="p-b-4-s p-b-4-m"
              flex-gt-md="65">
             <p class="center"
                ng-if="!vm.listing.models.length">There are no&nbsp;<span ng-bind="::vm.listing.title || vm.model.data.title.toLowerCase()"></span>&nbsp;yet</p>
             <p class="center"
                ng-if="(vm.listing.models | listingFilter: vm.listing.filters : vm.listing.type).length === 0 && vm.listing.models.length">There are no <span ng-bind="::vm.listing.title.toLowerCase() || vm.model.data.title.toLowerCase()"></span> matching your selection</p>
-            <md-list class="p-t-0">
+            <md-list class="p-t-0 p-b-8-s p-b-8-m">
                 <md-list-item layout="row"
                               ng-repeat="model in vm.listing.models | listingFilter : vm.listing.filters : vm.listing.type | orderBy: vm.listing.sort.currentType track by model._id"
                               class="md-button md-raised"
@@ -136,7 +137,7 @@
         </div>
     </div>
 </section>
-<md-sidenav md-component-id="filters" class="md-sidenav-right" hide-gt-md md-whiteframe="4">
+<md-sidenav md-component-id="filters" class="md-sidenav-right pos-fixed" hide-gt-md md-whiteframe="4">
     <div class="p-a-2">
         <p flex="100" class="center" ng-if="!vm.listing.models.length">There are no <span ng-bind="vm.listing.title"></span> to filter</p>
         <div ng-repeat="filterType in ::vm.listing.filters" ng-if="vm.listing.models.length" ng-switch="::filterType.type" layout-wrap>
@@ -187,6 +188,5 @@
         <div layout="row" layout-align="center end" ng-if="vm.listing.models.length">
             <md-button class="md-raised md-primary m-a-0 p-r-2 p-l-2" ng-click="vm.listing.resetFilters(vm.listing.filters, vm.listing.type)">Reset Filters</md-button>
         </div>
-    </div>
     </div>
 </md-sidenav>
