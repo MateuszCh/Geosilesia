@@ -1,69 +1,88 @@
-<section class="custom-post-types">
-    <p ng-if="!vm.model.type && vm.edit"
-       ng-bind="'Loading...'"></p>
-    <h2 class="font-2 custom-post-types__heading"
-        ng-bind="vm.edit ? 'Edit ' + vm.currentType + ' post type' : 'Add new post type'"></h2>
-    <div class="custom-post-types__container--top-padding">
-        <div class="custom-post-types__container__left">
-            <button class="button"
-                    ng-class="{'busy' : vm.actionStatus.busyType == 'save'}"
-                    ng-click="vm.save()">Save</button>
-            <button class="button"
-                    ng-if="vm.edit"
-                    ng-class="{'busy' : vm.actionStatus.busyType == 'remove'}"
-                    ng-click="vm.remove()">Delete</button>
-            <p class="custom-post-types__result"
-               ng-class="{'custom-post-types__result--ok' : vm.actionStatus.status == 200}"
-               ng-bind="vm.actionStatus.result"
-               ng-if="vm.actionStatus.result"></p>
+<section class="p-a-3 p-a-1-s p-a-1-m"
+         layout="column">
+    <div class="pos-relative"
+         layout="row"
+         layout-xs="column"
+         layout-align="center center"
+         flex="100">
+        <p ng-if="!vm.model.type && vm.edit"
+           class="center"
+           ng-bind="'Loading...'"></p>
+        <h2 class="font-2 fs-6 center"
+            flex="grow"
+            ng-bind="vm.edit ? 'Edit ' + vm.currentType + ' ' + vm.type : 'Add new ' + vm.type"></h2>
+        <div layout="row"
+             layout-align-xs="space-around center">
+            <md-button class="md-primary"
+                       ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs'), 'busy' : vm.actionStatus == 'save'}"
+                       ng-click="vm.save($event)">
+                <span class="col-w"
+                      ng-class="{'col-t' : vm.actionStatus == 'save'}">Save</span>
+            </md-button>
+            <md-button class="md-warn"
+                       ng-if="vm.edit"
+                       ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs'), 'busy' : vm.actionStatus == 'remove'}"
+                       ng-click="vm.removeDialog($event)">
+                <span class="col-w"
+                      ng-class="{'col-t' : vm.actionStatus == 'remove'}">Delete</span>
+            </md-button>
         </div>
-        <div class="custom-post-types__container__right">
-            <div class="input input--inline">
-                <label for="title"
-                       class="required">Title:</label>
+    </div>
+    <div class="m-t-4"
+         layout
+         layout-align="center">
+        <div flex="100" flex-gt-sm="60" layout="column" ng-form="postType">
+            <meta ng-init="vm.setForm(postType)">
+            <md-input-container>
+                <label for="title">Title</label>
                 <input id="title"
+                       name="title"
+                       type="text"
                        ng-model="vm.model.title"
-                       required
-                       type="text">
-                <span class="input__notice"></span>
-            </div>
-            <div class="input input--inline">
-                <label for="pluralTitle"
-                       class="required">Plural title:</label>
+                       required>
+                <div ng-messages="vm.form.title.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container ng-if="vm.type === 'post type'">
+                <label for="pluralTitle">Plural Title</label>
                 <input id="pluralTitle"
+                       type="text"
+                       name="pluralTitle"
                        ng-model="vm.model.pluralTitle"
-                       required
-                       type="text">
-                <span class="input__notice"></span>
-            </div>
-            <div class="input input--inline">
-                <label for="type"
-                       class="required">Type:</label>
+                       required>
+                <div ng-messages="vm.form.pluralTitle.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label for="type">Type</label>
                 <input id="type"
-                       ng-model="vm.model.type"
+                       name="type"
+                       type="text"
                        ng-change="vm.formatTypeString()"
-                       required type="text">
-                <span class="input__notice"></span>
+                       ng-model="vm.model.type"
+                       required>
+                <div ng-messages="vm.form.type.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            <div>
+                <h2 class="font-2 fs-4 center m-b-2">Fields</h2>
+                <p ng-if="!vm.model.fields.length"
+                   class="center m-t-1">There are no fields yet</p>
+                <div id="postFields">
+                    <div ng-if="vm.edit">
+                        <add-field ng-repeat="i in vm.fieldsNumber track by $index"
+                                   edit="true"
+                                   form="vm.form"
+                                   model="vm.model.fields"
+                                   order="$index"></add-field>
+                    </div>
+                </div>
+                <md-button class="md-primary md-raised m-a-0 m-b-4-s m-t-2-s"
+                           ng-click="vm.addField()">Add new field</md-button>
             </div>
-        </div>
-    </div>
-    <h2 class="font-2 custom-post-types__subheading">Fields</h2>
-    <p ng-if="!vm.model.fields.length"
-       class="center">There are no fields yet</p>
-    <div id="postFields"
-         ng-class="{'postFields' :  vm.model.fields.length}">
-        <div ng-if="vm.edit">
-            <add-field ng-repeat="i in vm.fieldsNumber track by $index"
-                       edit="true"
-                       model="vm.model.fields"
-                       order="$index"></add-field>
-        </div>
-    </div>
-    <div class="custom-post-types__container--top-padding">
-        <div class="custom-post-types__container__left"></div>
-        <div class="custom-post-types__container__right">
-                <button class="button"
-                        ng-click="vm.addField()">Add new field</button>
         </div>
     </div>
 </section>

@@ -1,68 +1,81 @@
-<div class="add-field-container">
-    <div class="add-field-container__left">
-        <div class="add-field__remove">
-        <button class="button"
-              ng-click="vm.remove()">Delete</button>
-        </div>
+<div layout="row"
+     class="m-b-2 bg-col-w p-a-2 box-shadow-inset">
+    <div class="m-r-2"
+         hide-xs>
+        <md-button class="md-warn md-raised m-a-0"
+                   ng-click="vm.remove()">Delete</md-button>
     </div>
-    <div class="add-field-container__right">
-        <div class="add-field">
-            <div class="input input--inline">
-                <label for="fieldTitle"
-                       class="required">Title:</label>
+    <div flex="grow"
+         layout="column">
+        <div layout="row">
+            <md-input-container flex="grow">
+                <label for="fieldTitle">Title</label>
                 <input id="fieldTitle"
+                       name="{{vm.repeat ? vm.repeat + vm.order + '.title' : vm.order + '.title'}}"
+                       type="text"
+                       ng-model="vm.fieldModel.title"
+                       required>
+                <div ng-messages="vm.form[vm.repeat ? vm.repeat + vm.order + '.title' : vm.order + '.title'].$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            <div hide-gt-xs>
+                <md-button class="md-fab md-warn"
+                           ng-click="vm.remove()">Delete</md-button>
+            </div>
+        </div>
+        <md-input-container>
+            <label for="fieldId">Id</label>
+            <input id="fieldId"
+                   name="{{vm.repeat ? vm.repeat + vm.order + '.id' : vm.order + '.id'}}"
+                   type="text"
+                   ng-change="vm.formatIdString()"
+                   ng-model="vm.fieldModel.id"
+                   required>
+            <div ng-messages="vm.form[vm.repeat ? vm.repeat + vm.order + '.id' : vm.order + '.id'].$error">
+                <div ng-message="required">This is required.</div>
+            </div>
+        </md-input-container>
+        <md-input-container>
+            <label>Select type</label>
+            <md-select ng-model="vm.fieldModel.type" required name="{{vm.repeat ? vm.repeat + vm.order + '.type' : vm.order + '.type'}}">
+                <md-option ng-value="field.type"
+                           ng-repeat="field in vm.fields track by field.type">{{field.name}}</md-option>
+            </md-select>
+            <div ng-messages="vm.form[vm.repeat ? vm.repeat + vm.order + '.type' : vm.order + '.type'].$error">
+                <div ng-message="required">This is required.</div>
+            </div>
+        </md-input-container>
+        <div ng-if="vm.fieldModel.type === 'select'"
+             layout="column">
+            <md-input-container>
+                <label for="selectOptions">Options (please enter options separated by semicolons)</label>
+                <input id="selectOptions"
+                       name="{{vm.repeat ? vm.repeat + vm.order + '.selectOptions' : vm.order + '.selectOptions'}}"
                        type="text"
                        required
-                       ng-model="vm.fieldModel.title">
-                <span class="input__notice"></span>
+                       ng-model="vm.fieldModel.selectOptions">
+                <div ng-messages="vm.form[vm.repeat ? vm.repeat + vm.order + '.selectOptions' : vm.order + '.selectOptions'].$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+        </div>
+        <div ng-show="vm.fieldModel.type === 'repeater'"
+             layout="column"
+             layout-align="start">
+            <div class="repeaterFields">
+                <add-field ng-repeat="i in vm.repeaterFieldsNumber track by $index"
+                           edit="true"
+                           form="vm.form"
+                           model="vm.fieldModel.repeaterFields"
+                           repeat="{{vm.repeat ? vm.repeat + vm.order : vm.order}}"
+                           order="$index"></add-field>
             </div>
-            <div class="input input--inline">
-                <label for="fieldId"
-                       class="required">Id:</label>
-                <input id="fieldId"
-                       type="text"
-                       required
-                       ng-change="vm.formatIdString()"
-                       ng-model="vm.fieldModel.id">
-                <span class="input__notice"></span>
+            <div class="right">
+                <md-button class="md-primary md-raised"
+                           ng-click="vm.addRepeaterField()">Add new repeater field</md-button>
             </div>
 
-            <div class="add-field__type">
-                <span>Select type:</span>
-                <span ng-bind="vm.currentFieldTypeName"></span>
-
-                <div class="add-field__type__all">
-                    <span ng-repeat="field in ::vm.fields track by field.type"
-                          ng-bind="field.name"
-                          ng-click="vm.setFieldType(field.type, field.name)"
-                          class="add-field__type__all__item"></span>
-                </div>
-            </div>
-            <div ng-if="vm.fieldModel.type === 'select'"
-                 class="add-field__type__select">
-                <div class="input input--inline">
-                    <label for="selectOptions">Options:</label>
-                    <input id="selectOptions" type="text" ng-model="vm.fieldModel.selectOptions">
-                </div>
-                <p class="add-field__type__select__info">Please enter options separated by semicolons</p>
-            </div>
-
-            <div class="input input--inline add-field__type__repeater"
-                 ng-show="vm.fieldModel.type === 'repeater'">
-                <div class="repeaterFields">
-                    <add-field ng-repeat="i in vm.repeaterFieldsNumber track by $index"
-                               edit="true"
-                               model="vm.fieldModel.repeaterFields"
-                               order="$index"></add-field>
-                </div>
-                <div class="custom-post-types__container--top-padding">
-                    <div class="custom-post-types__container__left"></div>
-                    <div class="custom-post-types__container__right">
-                <span class="button"
-                      ng-click="vm.addRepeaterField()">Add new field</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

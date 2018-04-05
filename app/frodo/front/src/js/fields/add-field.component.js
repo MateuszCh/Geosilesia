@@ -5,7 +5,9 @@
         bindings: {
             model: '=',
             order: '<',
-            edit: '<'
+            edit: '<',
+            form: '<',
+            repeat: '@'
         },
         controller: AddFieldController
     });
@@ -13,7 +15,6 @@
     AddFieldController.$inject = ['$element', 'fields', '$rootScope', '$scope', '$compile'];
     function AddFieldController($element, fields, $rootScope, $scope, $compile){
         var vm  = this;
-        vm.setFieldType = setFieldType;
         vm.remove = remove;
         vm.addRepeaterField = addRepeaterField;
         vm.formatIdString = formatIdString;
@@ -32,14 +33,13 @@
             vm.fields = fields;
             if(vm.edit){
                 vm.fieldModel = vm.model[vm.order];
-                setFieldType(vm.fieldModel.type, vm.fields[vm.fieldModel.type].name);
 
                 if(vm.fieldModel.type === 'repeater'){
                     vm.repeaterFieldsNumber = new Array(vm.fieldModel.repeaterFields.length);
                 }
             } else {
                 vm.order = vm.model.push(vm.fieldModel) - 1;
-                setFieldType('text', vm.fields.text.name);
+                vm.fieldModel.type = 'text';
             }
             $scope.$on('fieldRemoved', function(e, position){
                 if(position < vm.order){
@@ -52,13 +52,6 @@
             })
         };
 
-        function setFieldType(type, name){
-            vm.currentFieldTypeName = name;
-            if(vm.fieldModel.type !== type){
-                vm.fieldModel.type = type;
-            }
-        }
-
         function remove(){
             $rootScope.$broadcast('fieldRemoved', vm.order);
             vm.model.splice(vm.order, 1);
@@ -66,7 +59,7 @@
         }
 
         function addRepeaterField(){
-            var html = '<add-field model="vm.fieldModel.repeaterFields"></add-field>';
+            var html = '<add-field model="vm.fieldModel.repeaterFields" form="vm.form" repeat="{{vm.repeat ? vm.repeat + vm.order : vm.order}}"></add-field>';
             var newField = $compile(html)($scope);
             repeaterFieldsElement.append(newField[0]);
         }

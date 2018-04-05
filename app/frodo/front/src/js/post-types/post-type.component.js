@@ -8,33 +8,43 @@
         controller: PostTypeController
     });
 
-    PostTypeController.$inject = ['$scope', '$compile', 'postTypesService', '$rootScope', '$location', '$timeout', 'tools', '$state'];
-    function PostTypeController($scope, $compile, postTypesService, $rootScope, $location, $timeout, tools, $state){
+    PostTypeController.$inject = ['$scope', '$compile', '$injector', '$rootScope', '$location', '$state', '$mdMedia', '$mdDialog', 'tools'];
+    function PostTypeController($scope, $compile, $injector, $rootScope, $location, $state, $mdMedia, $mdDialog, tools){
         var vm  = this;
-        var resultTimeout;
+        vm.$mdMedia = $mdMedia;
         var fieldsElement = angular.element(document.querySelector('#postFields'));
         vm.$onInit = onInit;
         vm.save = save;
-        vm.remove = remove;
+        vm.removeDialog = removeDialog;
         vm.addField = addField;
         vm.formatTypeString = formatTypeString;
+        vm.setForm = setForm;
 
-        vm.actionStatus = {
-            busy: false,
-            result: "",
-            status: undefined,
-        };
+        var api;
 
-        vm.model = {
-            title: '',
-            pluralTitle: '',
-            type: '',
-            fields: [],
-            posts: []
-        };
+
 
         function onInit(){
-            if($state.current.name === 'postTypesEdit') vm.edit = true;
+            if($state.current.name === 'postTypesEdit' || $state.current.name === 'componentsEdit') vm.edit = true;
+            api = $injector.get($state.current.family + 'Service');
+            if($state.current.family === 'components'){
+                vm.type = 'component';
+                vm.model = {
+                    title: '',
+                    type: '',
+                    fields: []
+                };
+            } else {
+                vm.type = 'post type';
+                vm.model = {
+                    title: '',
+                    pluralTitle: '',
+                    type: '',
+                    fields: [],
+                    posts: []
+                };
+            }
+
             if(vm.edit){
                 vm.model = vm.postType.data;
                 vm.currentType = vm.model.type;
@@ -43,7 +53,7 @@
         }
 
         function addField(){
-            var html = '<add-field model="vm.model.fields"></add-field>';
+            var html = '<add-field model="vm.model.fields" form="vm.form"></add-field>';
             var newField = $compile(html)($scope);
             fieldsElement.append(newField);
         }
@@ -54,55 +64,75 @@
             }
         }
 
-        function save(){
-            $timeout.cancel(resultTimeout);
-            if(!tools.showInvalidInputs()){
-                setActionStatus('save');
-                var promise = vm.edit ? postTypesService.edit(vm.model) : postTypesService.create(vm.model);
+        function save(ev){
+            vm.form.$submitted = true;
+            if(vm.form.$valid){
+                vm.actionStatus = 'save';
+                var promise = vm.edit ? api.edit(vm.model) : api.create(vm.model);
 
                 promise
                     .then(function(response){
                         $rootScope.$broadcast('postTypesUpdated');
                         if(vm.edit){
+                            vm.actionStatus = '';
                             vm.model = response.data;
-                            $timeout(function(){
-                                $rootScope.$broadcast('postTypesUpdated');
-                            }, 10);
                             vm.currentType = vm.model.type;
-                            setActionStatus(false, vm.model.type +  " type updated successfully", response.status);
-                            resultTimeout = $timeout(setActionStatus, 10000);
+                            requestInfo(vm.model.type + ' updated successfully', ev);
                         } else {
                             $location.path(response.data.url);
                         }
                     })
                     .catch(function(err){
-                        setActionStatus(false, err.data.error, err.status);
-                        resultTimeout = $timeout(setActionStatus, 10000);
+                        vm.actionStatus = '';
+                        requestInfo(err.data.error || err.data, ev)
                     })
+            } else {
+                tools.scrollToError();
             }
+
         }
 
-        function remove(){
-            $timeout.cancel(resultTimeout);
-            setActionStatus('remove');
-            postTypesService.remove(vm.model._id)
+        function remove(ev){
+            vm.actionStatus = 'remove';
+            api.remove(vm.model._id)
                 .then(function(){
-                    setActionStatus();
                     $rootScope.$broadcast('postTypesUpdated');
                     $location.path('/post-types');
                 })
                 .catch(function(err){
-                    setActionStatus(false, 'There was error removing ' + vm.model.type + ' post type.', err.status);
-                    resultTimeout = $timeout(setActionStatus, 10000);
+                    vm.actionStatus = '';
+                    requestInfo('There was error removing ' + vm.model.type + ' ' + vm.type, ev);
                 })
         }
 
-        function setActionStatus(type, result, status){
-            vm.actionStatus = {
-                busyType: type || false,
-                result: result || "",
-                status: status || undefined
-            }
+        function requestInfo(info, ev){
+            $mdDialog.show(
+                $mdDialog.alert()
+                    .parent(angular.element(document.querySelector('body')))
+                    .clickOutsideToClose(true)
+                    .textContent(info)
+                    .ariaLabel('Error dialog')
+                    .ok('Ok')
+                    .targetEvent(ev)
+            )
+        }
+
+        function removeDialog(ev){
+            var confirm = $mdDialog.confirm()
+                .title('Are you sure you want to delete ' + vm.model.type + '?')
+                .ariaLabel('Remove dialog')
+                .clickOutsideToClose(true)
+                .targetEvent(ev)
+                .ok('Yes')
+                .cancel('No');
+            $mdDialog.show(confirm)
+                .then(function(){
+                    remove(ev);
+                }, function(){});
+        }
+
+        function setForm(form){
+            vm.form = form;
         }
 
     }

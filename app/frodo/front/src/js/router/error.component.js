@@ -11,7 +11,7 @@
         vm.$onInit = onInit;
 
         function onInit(){
-            vm.errorMessage = $state.current.error || 'Przepraszamy, nie znaleźliśmy takiej strony';
+            vm.errorMessage = $state.current.error || 'We can\'t find that page';
         }
     }
 })();

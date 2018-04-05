@@ -5,8 +5,8 @@
         controller: PageBodyController
     });
 
-    PageBodyController.$inject = ['$mdSidenav', '$timeout', '$transitions', '$window', 'tools', '$scope', '$document', '$mdMedia'];
-    function PageBodyController($mdSidenav, $timeout, $transitions, $window, tools, $scope, $document, $mdMedia){
+    PageBodyController.$inject = ['$mdSidenav', '$timeout', '$transitions', '$window', 'tools', '$scope', '$document', '$mdMedia', '$state'];
+    function PageBodyController($mdSidenav, $timeout, $transitions, $window, tools, $scope, $document, $mdMedia, $state){
         var vm  = this;
         vm.$onInit = onInit;
         vm.$mdMedia = $mdMedia;
@@ -38,7 +38,9 @@
         }
 
         function openFilters(){
-            $mdSidenav('filters').open();
+            if($state.current.name === 'posts'){
+                $mdSidenav('filters').open();
+            }
         }
     }
 })();

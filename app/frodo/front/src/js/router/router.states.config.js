@@ -102,16 +102,16 @@
              componentAdd: {
                  name: 'componentsAdd',
                  url: '/components/add',
-                 component: 'component',
+                 component: 'postType',
                  family: 'components'
              },
              componentEdit: {
                  name: 'componentsEdit',
                  url: '/components/edit/:id',
-                 component: 'component',
+                 component: 'postType',
                  family: 'components',
                  resolve: {
-                     component: statePromises.component
+                     postType: statePromises.component
                  }
              },
              files: {

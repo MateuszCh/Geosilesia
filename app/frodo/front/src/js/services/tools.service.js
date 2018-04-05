@@ -1,5 +1,5 @@
 (function(){
-    angular.module('frodo').service('tools', [function(){
+    angular.module('frodo').service('tools', ['$document', '$window', function($document, $window){
 
         function showInvalidInputs(){
             var invalidInputs = document.getElementsByClassName("ng-invalid");
@@ -13,6 +13,16 @@
                 }
             }
             return invalidInputs.length;
+        }
+
+        function scrollToError(){
+            var errorEl = angular.element(document.querySelectorAll('ui-view .ng-invalid'));
+            var windowTop = $window.pageYOffset;
+            var windowBottom = windowTop + $window.innerHeight;
+            var errorElTop = errorEl[1].getBoundingClientRect().top;
+            if(errorElTop < windowTop || errorElTop > windowBottom){
+                $document.scrollToElementAnimated(errorEl[1]);
+            }
         }
 
         // Returns a function, that, when invoked, will only be triggered at most once
@@ -90,9 +100,10 @@
         };
 
         return {
-            showInvalidInputs: showInvalidInputs,
+            scrollToError: scrollToError,
             throttle: throttle,
-            debounce: debounce
+            debounce: debounce,
+            showInvalidInputs : showInvalidInputs
         }
 
     }]);
