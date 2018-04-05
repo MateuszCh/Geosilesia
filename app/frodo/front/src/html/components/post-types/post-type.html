@@ -6,32 +6,28 @@
          layout-align="center center"
          flex="100">
         <p ng-if="!vm.model.type && vm.edit"
-           class="center"
-           ng-bind="'Loading...'"></p>
+           class="center">Loading...</p>
         <h2 class="font-2 fs-6 center"
             flex="grow"
             ng-bind="vm.edit ? 'Edit ' + vm.currentType + ' ' + vm.type : 'Add new ' + vm.type"></h2>
         <div layout="row"
              layout-align-xs="space-around center">
             <md-button class="md-primary"
-                       ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs'), 'busy' : vm.actionStatus == 'save'}"
-                       ng-click="vm.save($event)">
-                <span class="col-w"
-                      ng-class="{'col-t' : vm.actionStatus == 'save'}">Save</span>
-            </md-button>
+                       ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs'), 'busy col-t' : vm.actionStatus == 'save'}"
+                       ng-click="vm.save($event)">Save</md-button>
             <md-button class="md-warn"
                        ng-if="vm.edit"
-                       ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs'), 'busy' : vm.actionStatus == 'remove'}"
-                       ng-click="vm.removeDialog($event)">
-                <span class="col-w"
-                      ng-class="{'col-t' : vm.actionStatus == 'remove'}">Delete</span>
-            </md-button>
+                       ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs'), 'busy col-t' : vm.actionStatus == 'remove'}"
+                       ng-click="vm.removeDialog($event)">Delete</md-button>
         </div>
     </div>
     <div class="m-t-4"
          layout
          layout-align="center">
-        <div flex="100" flex-gt-sm="60" layout="column" ng-form="postType">
+        <div flex="100"
+             flex-gt-sm="60"
+             layout="column"
+             ng-form="postType">
             <meta ng-init="vm.setForm(postType)">
             <md-input-container>
                 <label for="title">Title</label>

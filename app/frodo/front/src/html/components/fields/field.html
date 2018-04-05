@@ -1,35 +1,64 @@
-<div ng-switch="vm.field.type">
-    <div class="input input--inline"
-         ng-switch-when="text">
-        <label ng-bind="::vm.field.title" ng-attr-for="{{vm.field.id + '-1'}}"></label>
-        <input ng-model="vm.model[vm.field.id]"
+<div ng-switch="vm.field.type"
+     layout="column"
+     class="field">
+
+    <md-input-container ng-switch-when="text" class="m-b-0">
+        <label ng-bind="::vm.field.title"
+               ng-attr-for="{{vm.field.id + '-1'}}"></label>
+        <input type="text"
                ng-attr-id="{{vm.field.id + '-1'}}"
-               type="text">
-    </div>
-    <div class="input input--inline"
-         ng-switch-when="select">
-        <label ng-bind="::vm.field.title" ng-attr-for="{{vm.field.id + '-1'}}"></label>
-        <select ng-attr-id="{{vm.field.id + '-1'}}" ng-model="vm.model[vm.field.id]" ng-options="item for item in vm.field.options"></select>
-    </div>
-    <div class="input input--inline"
-         ng-switch-when="textarea">
-        <label ng-bind="::vm.field.title" ng-attr-for="{{vm.field.id + '-1'}}"></label>
-        <textarea ng-attr-id="{{vm.field.id + '-1'}}" ng-model="vm.model[vm.field.id]"></textarea>
-    </div>
-    <div class="input input--inline"
-         ng-switch-when="checkbox">
-        <label ng-bind="::vm.field.title" ng-attr-for="{{vm.field.id + '-1'}}"></label>
-        <input type="checkbox"
-               ng-model="vm.model[vm.field.id]"
-               ng-attr-id="{{vm.field.id + '-1'}}">
-    </div>
-    <div class="input input--inline"
-         ng-switch-when="number">
-        <label ng-bind="::vm.field.title" ng-attr-for="{{vm.field.id + '-1'}}"></label>
+               ng-model="vm.model[vm.field.id]">
+    </md-input-container>
+
+    <md-input-container ng-switch-when="select">
+        <label ng-bind="::vm.field.title"
+               ng-attr-for="{{vm.field.id + '-1'}}"></label>
+        <md-select ng-model="vm.model[vm.field.id]"
+                   ng-attr-id="{{vm.field.id + '-1'}}">
+            <md-option ng-repeat="item in ::vm.field.options"
+                       ng-value="item"><span ng-bind="::item"></span></md-option>
+        </md-select>
+    </md-input-container>
+
+    <md-input-container ng-switch-when="textarea" class="m-b-0">
+        <label ng-bind="::vm.field.title"
+               ng-attr-for="{{vm.field.id + '-1'}}"></label>
+        <textarea ng-atrr-id="{{vm.field.id + '-1'}}"
+                  rows="3"
+                  max-rows="10"
+                  ng-model="vm.model[vm.field.id]"></textarea>
+    </md-input-container>
+
+    <md-input-container ng-switch-when="number" class="m-b-0">
+        <label ng-bind="::vm.field.title"
+               ng-attr-for="{{vm.field.id + '-1'}}"></label>
         <input type="number"
                ng-model="vm.model[vm.field.id]"
                ng-attr-id="{{vm.field.id + '-1'}}">
+    </md-input-container>
+
+    <div ng-switch-when="checkbox"
+         ng-init="!vm.model[vm.field.id] ? vm.model[vm.field.id] = false : null">
+        <md-checkbox ng-model="vm.model[vm.field.id]"
+                     class="m-a-0">
+            <span ng-bind="vm.field.title + ' : ' + vm.model[vm.field.id]"></span>
+        </md-checkbox>
     </div>
+
+    <md-input-container ng-switch-when="date" class="m-b-0">
+        <label ng-bind="::vm.field.title"
+               ng-attr-for="{{vm.field.id + '-1'}}"></label>
+        <md-datepicker ng-model="vm.model[vm.field.id]"
+                       md-open-on-focus=""></md-datepicker>
+    </md-input-container>
+
+    <div ng-switch-when="repeater" layout="column">
+        <span class="block repeater-title m-b-1" ng-bind="::vm.field.title"></span>
+        <div flex="grow">
+            <repeater parent-model="vm.model" field="vm.field" repeater-fields="vm.field.repeaterFields"></repeater>
+        </div>
+    </div>
+
     <div ng-switch-when="file">
         <div class="input input--inline input--inline--button">
             <label ng-bind="::vm.field.title" ng-attr-for="{{vm.field.id + '-1'}}"></label>
@@ -45,15 +74,9 @@
             </div>
         </div>
     </div>
-    <div class="input input--inline"
-         ng-switch-when="repeater">
-        <label ng-bind="::vm.field.title"></label>
-        <repeater parent-model="vm.model"
-                  class="repeater"
-                  field="vm.field"
-                  repeater-fields="vm.field.repeaterFields"></repeater>
-    </div>
+
 </div>
+
 <div ng-show="vm.showFilePopup" class="add-file">
     <files model="vm.model[vm.field.id]"></files>
     <span ng-click="vm.showFilePopup = false" class="add-file__close"></span>

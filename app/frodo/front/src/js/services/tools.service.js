@@ -1,19 +1,5 @@
 (function(){
-    angular.module('frodo').service('tools', ['$document', '$window', function($document, $window){
-
-        function showInvalidInputs(){
-            var invalidInputs = document.getElementsByClassName("ng-invalid");
-
-            if(invalidInputs.length){
-                invalidInputs[0].scrollIntoView({behavior: "smooth"});
-                var collectionLength = invalidInputs.length;
-                var i = 0;
-                for(i; i < collectionLength; i++){
-                    invalidInputs[i].parentNode.classList.add("invalid");
-                }
-            }
-            return invalidInputs.length;
-        }
+    angular.module('frodo').service('tools', ['$document', '$window', '$mdDialog', function($document, $window, $mdDialog){
 
         function scrollToError(){
             var errorEl = angular.element(document.querySelectorAll('ui-view .ng-invalid'));
@@ -97,13 +83,40 @@
 
                 return result;
             };
-        };
+        }
+
+        function infoDialog(info, ev){
+            $mdDialog.show(
+                $mdDialog.alert()
+                    .parent(angular.element(document.querySelector('body')))
+                    .clickOutsideToClose(true)
+                    .textContent(info)
+                    .ariaLabel('Error dialog')
+                    .ok('Ok')
+                    .targetEvent(ev)
+            )
+        }
+
+        function removeDialog(ev, callback, text){
+            var confirm = $mdDialog.confirm()
+                .title(text)
+                .ariaLabel('Remove dialog')
+                .clickOutsideToClose(true)
+                .targetEvent(ev)
+                .ok('Yes')
+                .cancel('No');
+            $mdDialog.show(confirm)
+                .then(function(){
+                    callback(ev);
+                }, function(){});
+        }
 
         return {
             scrollToError: scrollToError,
             throttle: throttle,
             debounce: debounce,
-            showInvalidInputs : showInvalidInputs
+            infoDialog: infoDialog,
+            removeDialog: removeDialog
         }
 
     }]);

@@ -40,7 +40,9 @@
             <label>Select type</label>
             <md-select ng-model="vm.fieldModel.type" required name="{{vm.repeat ? vm.repeat + vm.order + '.type' : vm.order + '.type'}}">
                 <md-option ng-value="field.type"
-                           ng-repeat="field in vm.fields track by field.type">{{field.name}}</md-option>
+                           ng-repeat="field in vm.fields track by field.type">
+                    <span ng-bind="::field.name"></span>
+                </md-option>
             </md-select>
             <div ng-messages="vm.form[vm.repeat ? vm.repeat + vm.order + '.type' : vm.order + '.type'].$error">
                 <div ng-message="required">This is required.</div>

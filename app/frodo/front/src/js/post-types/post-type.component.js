@@ -8,8 +8,8 @@
         controller: PostTypeController
     });
 
-    PostTypeController.$inject = ['$scope', '$compile', '$injector', '$rootScope', '$location', '$state', '$mdMedia', '$mdDialog', 'tools'];
-    function PostTypeController($scope, $compile, $injector, $rootScope, $location, $state, $mdMedia, $mdDialog, tools){
+    PostTypeController.$inject = ['$scope', '$compile', '$injector', '$rootScope', '$location', '$state', '$mdMedia', 'tools'];
+    function PostTypeController($scope, $compile, $injector, $rootScope, $location, $state, $mdMedia, tools){
         var vm  = this;
         vm.$mdMedia = $mdMedia;
         var fieldsElement = angular.element(document.querySelector('#postFields'));
@@ -21,8 +21,6 @@
         vm.setForm = setForm;
 
         var api;
-
-
 
         function onInit(){
             if($state.current.name === 'postTypesEdit' || $state.current.name === 'componentsEdit') vm.edit = true;
@@ -77,14 +75,14 @@
                             vm.actionStatus = '';
                             vm.model = response.data;
                             vm.currentType = vm.model.type;
-                            requestInfo(vm.model.type + ' updated successfully', ev);
+                            tools.infoDialog(vm.model.type + ' updated successfully', ev);
                         } else {
                             $location.path(response.data.url);
                         }
                     })
                     .catch(function(err){
                         vm.actionStatus = '';
-                        requestInfo(err.data.error || err.data, ev)
+                        tools.infoDialog(err.data.error || err.data, ev);
                     })
             } else {
                 tools.scrollToError();
@@ -101,34 +99,12 @@
                 })
                 .catch(function(err){
                     vm.actionStatus = '';
-                    requestInfo('There was error removing ' + vm.model.type + ' ' + vm.type, ev);
+                    tools.infoDialog('There was error removing ' + vm.model.type + ' ' + vm.type, ev);
                 })
         }
 
-        function requestInfo(info, ev){
-            $mdDialog.show(
-                $mdDialog.alert()
-                    .parent(angular.element(document.querySelector('body')))
-                    .clickOutsideToClose(true)
-                    .textContent(info)
-                    .ariaLabel('Error dialog')
-                    .ok('Ok')
-                    .targetEvent(ev)
-            )
-        }
-
         function removeDialog(ev){
-            var confirm = $mdDialog.confirm()
-                .title('Are you sure you want to delete ' + vm.model.type + '?')
-                .ariaLabel('Remove dialog')
-                .clickOutsideToClose(true)
-                .targetEvent(ev)
-                .ok('Yes')
-                .cancel('No');
-            $mdDialog.show(confirm)
-                .then(function(){
-                    remove(ev);
-                }, function(){});
+            tools.removeDialog(ev, remove, 'Are you sure you want to delete ' + vm.model.type + '?')
         }
 
         function setForm(form){

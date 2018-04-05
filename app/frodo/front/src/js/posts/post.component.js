@@ -9,25 +9,20 @@
         controller: PostController
     });
 
-    PostController.$inject = ['$scope', '$compile', 'postsService', 'postTypesService', '$rootScope', '$location', '$timeout', 'tools', '$state'];
-    function PostController($scope, $compile, postsService, postTypesService, $rootScope, $location, $timeout, tools, $state){
+    PostController.$inject = ['postsService', '$location', 'tools', '$state', '$mdMedia'];
+    function PostController(postsService, $location, tools, $state, $mdMedia){
         var vm  = this;
         vm.$onInit = onInit;
+        vm.$mdMedia = $mdMedia;
         vm.save = save;
-        vm.remove = remove;
-        var resultTimeout;
+        vm.setForm = setForm;
+        vm.removeDialog = removeDialog;
 
         vm.model = {
             title: "",
             type: "",
             data: {
             }
-        };
-
-        vm.actionStatus = {
-            busy: false,
-            result: "",
-            status: undefined,
         };
 
         function onInit(){
@@ -58,57 +53,57 @@
             }
         }
 
-        function save(){
-            $timeout.cancel(resultTimeout);
+        function save(ev){
+            vm.form.$submitted = true;
+            if(vm.form.$valid){
+                vm.actionStatus = 'save';
 
-            if(!tools.showInvalidInputs()){
-                setActionStatus('save');
-
-                vm.postType.fields.forEach(function(field){
-                    if(!vm.model.data[field.id] && field.type === 'checkbox'){
-                        vm.model.data[field.id] = false;
-                    }
-                });
+                // vm.postType.fields.forEach(function(field){
+                //     if(!vm.model.data[field.id] && field.type === 'checkbox'){
+                //         vm.model.data[field.id] = false;
+                //     }
+                // });
 
                 var promise = vm.edit ? postsService.edit(vm.model) : postsService.create(vm.model);
 
                 promise
                     .then(function(response){
                         if(vm.edit){
+                            vm.actionStatus = '';
                             vm.model = response.data;
-                            setActionStatus(false, "Custom post updated successfully", response.status);
-                            resultTimeout = $timeout(setActionStatus, 10000);
+                            tools.infoDialog(vm.model.title + ' updated successfully', ev);
                         } else {
                             $location.path(response.data.url);
                         }
                     })
                     .catch(function(err){
-                        setActionStatus(false, err.data.error, err.status);
-                        resultTimeout = $timeout(setActionStatus, 10000);
+                        vm.actionStatus = '';
+                        tools.infoDialog(err.data.error || err.data, ev);
                     })
+            } else {
+                tools.scrollToError();
             }
 
         }
 
-        function remove(){
-            $timeout.cancel(resultTimeout);
-            setActionStatus('remove');
+        function remove(ev){
+            vm.actionStatus = 'remove';
             postsService.remove(vm.model._id)
                 .then(function(){
                     $location.path('/posts/' + vm.postType.type);
                 })
                 .catch(function(err){
-                    setActionStatus(undefined, err.data.error, err.status);
-                    resultTimeout = $timeout(setActionStatus, 10000);
+                    vm.actionStatus = '';
+                    tools.infoDialog('There was error removing ' + (vm.model.title || vm.model.type + ' post'), ev);
                 })
         }
 
-        function setActionStatus(type, result, status){
-            vm.actionStatus = {
-                busyType: type || false,
-                result: result || "",
-                status: status || 0
-            }
+        function removeDialog(ev){
+            tools.removeDialog(ev, remove, 'Are you sure you want to delete ' + (vm.model.title || vm.model.type + ' post') + '?')
+        }
+
+        function setForm(form){
+            vm.form = form;
         }
     }
 })();
