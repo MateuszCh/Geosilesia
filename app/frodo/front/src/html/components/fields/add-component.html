@@ -1,12 +1,25 @@
-<div class="custom-post-types__container--top-padding">
-    <div class="custom-post-types__container__left">
-        <button class="button"
-                ng-click="vm.remove()">Delete</button>
+<div layout="row"
+     class="m-b-2 bg-col-w p-a-2 box-shadow-inset">
+    <div class="m-r-2"
+         hide-xs>
+        <md-button class="md-warn md-raised m-a-0" ng-click="vm.remove()">Delete</md-button>
     </div>
-    <div class="custom-post-types__container__right">
-        <div class="input input--inline">
-            <label for="componentType">Type</label>
-            <select id="componentType" ng-change="vm.onComponentSelect()" ng-model="vm.currentComponent" ng-options="item.title for item in vm.components"></select>
+    <div flex="grow"
+         layout="column">
+        <div layout="row">
+            <md-input-container flex="grow">
+                <label>Type</label>
+                <md-select ng-change="vm.onComponentSelect()"
+                           ng-model="vm.currentComponent">
+                    <md-option ng-repeat="item in ::vm.components track by item.id"
+                               ng-value="item">
+                        <span ng-bind="item.title"></span>
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <div hide-gt-xs>
+                <md-button class="md-fab md-warn" ng-click="vm.remove()">Delete</md-button>
+            </div>
         </div>
         <field model="vm.model.data"
                field="field"

@@ -5,8 +5,6 @@
          layout-xs="column"
          layout-align="center center"
          flex="100">
-        <p ng-if="vm.edit && !vm.model.type"
-           class="center">Loading...</p>
         <h2 class="font-2 fs-6 center"
             flex="grow"
             ng-bind="vm.edit ? 'Edit ' + vm.postType.title : 'Add new ' + vm.postType.title"></h2>

@@ -4,26 +4,21 @@
         controllerAs: 'vm',
         bindings: {
             components: '<',
-            page: '<page'
+            page: '<'
         },
         controller: PageController
     });
 
-    PageController.$inject = ['$scope', '$compile', 'pagesService', '$rootScope', '$location', '$timeout', '$state'];
-    function PageController($scope, $compile, pagesService, $rootScope, $location, $timeout, $state){
+    PageController.$inject = ['$scope', '$compile', 'pagesService', '$rootScope', '$location', '$timeout', '$state', '$mdMedia', 'tools'];
+    function PageController($scope, $compile, pagesService, $rootScope, $location, $timeout, $state, $mdMedia, tools){
         var vm  = this;
-        var resultTimeout;
+        vm.$mdMedia = $mdMedia;
         var componentsElement = angular.element(document.querySelector('#components'));
         vm.$onInit = onInit;
+        vm.setForm = setForm;
         vm.save = save;
-        vm.remove = remove;
+        vm.removeDialog = removeDialog;
         vm.addComponent = addComponent;
-
-        vm.actionStatus = {
-            busy: false,
-            result: "",
-            status: undefined,
-        };
 
         vm.model = {
             title: '',
@@ -51,51 +46,55 @@
             componentsElement.append(newComponent);
         }
 
-        function save(){
-            $timeout.cancel(resultTimeout);
-            setActionStatus('save');
-            var promise = vm.edit ? pagesService.edit(vm.model) : pagesService.create(vm.model);
+        function save(ev){
+            vm.form.$submitted = true;
+            if(vm.form.$valid){
+                vm.actionStatus = 'save';
+                var promise = vm.edit ? pagesService.edit(vm.model) : pagesService.create(vm.model);
 
-            promise
-                .then(function(response){
-                    if(vm.edit){
-                        vm.model = response.data;
-                        $timeout(function(){
-                            $rootScope.$broadcast("pageSaved");
-                        }, 10);
-                        vm.currentTitle = vm.model.title;
-                        setActionStatus(false, vm.model.title +  " page updated successfully", response.status);
-                        resultTimeout = $timeout(setActionStatus, 10000);
-                    } else {
-                        $location.path(response.data.url);
-                    }
-                })
-                .catch(function(err){
-                    setActionStatus(false, err.data.error, err.status);
-                    resultTimeout = $timeout(setActionStatus, 10000);
-                })
+                promise
+                    .then(function(response){
+                        if(vm.edit){
+                            vm.actionStatus = '';
+                            vm.model = response.data;
+                            $timeout(function(){
+                                $rootScope.$broadcast("pageSaved");
+                            }, 10);
+                            vm.currentTitle = vm.model.title;
+                            tools.infoDialog(vm.model.title + " page updated successfully", ev);
+                        } else {
+                            $location.path(response.data.url);
+                        }
+                    })
+                    .catch(function(err){
+                        vm.actionStatus = '';
+                        tools.infoDialog(err.data.error || err.data, ev);
+                    })
+            } else {
+                tools.scrollToError();
+            }
+
+
         }
 
-        function remove(){
-            $timeout.cancel(resultTimeout);
-            setActionStatus('remove');
+        function remove(ev){
+            vm.actionStatus = 'remove';
             pagesService.remove(vm.model._id)
                 .then(function(){
-                    setActionStatus();
                     $location.path('/pages');
                 })
                 .catch(function(err){
-                    setActionStatus(false, 'There was error removing ' + vm.model.title + ' page.', err.status);
-                    resultTimeout = $timeout(setActionStatus, 10000);
+                    vm.actionStatus = '';
+                    tools.infoDialog('There was error removing ' + vm.model.title + ' page', ev);
                 })
         }
 
-        function setActionStatus(type, result, status){
-            vm.actionStatus = {
-                busyType: type || false,
-                result: result || "",
-                status: status || undefined
-            }
+        function removeDialog(ev){
+            tools.removeDialog(ev, remove, 'Are you sure you want to delete ' + vm.model.title + '?');
+        }
+
+        function setForm(form){
+            vm.form = form;
         }
 
     }
