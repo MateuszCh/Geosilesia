@@ -1,6 +1,13 @@
 (function(){
-    angular.module('frodo').config(['$mdIconProvider', '$mdThemingProvider',
-        function ($mdIconProvider, $mdThemingProvider) {
+    angular.module('frodo').config(['$mdIconProvider', '$mdThemingProvider', '$mdDateLocaleProvider',
+        function ($mdIconProvider, $mdThemingProvider, $mdDateLocaleProvider) {
+
+            $mdDateLocaleProvider.formatDate = function(date) {
+                if(!date){
+                    return date;
+                }
+                return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+            };
 
             $mdIconProvider.icon('menu', './images/menu.svg', 24)
                 .icon('arrow', './images/arrow.svg', 24)

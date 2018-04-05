@@ -1,25 +1,23 @@
 (function(){
     angular.module('frodo').service('listingFactory', ListingFactory);
 
-    ListingFactory.$inject = ['$state', '$injector', '$timeout', '$rootScope', '$mdDialog'];
+    ListingFactory.$inject = ['$state', '$injector', '$timeout', '$rootScope', '$mdDialog', '$filter'];
 
-    function ListingFactory($state, $injector, $timeout, $rootScope, $mdDialog){
+    function ListingFactory($state, $injector, $timeout, $rootScope, $mdDialog, $filter){
 
-        function setRange(modelData, id){
+        function setRange(modelData, id, dates){
             var values = [];
             modelData.posts.forEach(function(post){
                values.push(post.data[id]);
             });
             values = values.filter(function(value){
-                return value !== undefined;
+                return value !== undefined && value !== null;
             });
             if(!values.length){
                 return undefined;
             }
-            values.sort(function(a,b){
-                return a - b;
-            });
-            return [Math.floor(values[0]), Math.ceil(values[values.length - 1])];
+            values = $filter('orderBy')(values);
+            return dates ? [new Date(values[0]), new Date(values[values.length - 1])] : [Math.floor(values[0]), Math.ceil(values[values.length - 1])];
         }
 
         function createFilters(modelData){
@@ -37,8 +35,9 @@
             var checkboxes = {type: 'checkbox', fields: []};
             var numbers = {type: 'number', fields: []};
             var selects = {type: 'select', fields: []};
+            var dates = {type: 'date', fields: []};
 
-            var filterableFields = ['checkbox', 'number', 'select'];
+            var filterableFields = ['checkbox', 'number', 'select', 'date'];
 
             modelData.fields.forEach(function(field){
                if(filterableFields.indexOf(field.type) > -1){
@@ -53,14 +52,24 @@
                            break;
                        case 'number':
                            filterField.range = setRange(modelData, filterField.id);
-                           filterField.minValue = filterField.range[0];
-                           filterField.maxValue = filterField.range[1];
-                           numbers.fields.push(filterField);
+                           if(filterField.range){
+                               filterField.minValue = filterField.range[0];
+                               filterField.maxValue = filterField.range[1];
+                               numbers.fields.push(filterField);
+                           }
                            break;
                        case 'select':
                            filterField.options = field.options;
                            filterField.values = [];
                            selects.fields.push(filterField);
+                           break;
+                       case 'date':
+                           filterField.range = setRange(modelData, filterField.id, true);
+                           if(filterField.range){
+                               filterField.minValue = filterField.range[0];
+                               filterField.maxValue = filterField.range[1];
+                               dates.fields.push(filterField);
+                           }
                    }
                }
             });
@@ -72,7 +81,8 @@
                 },
                 checkboxes: checkboxes,
                 numbers: numbers,
-                selects: selects
+                selects: selects,
+                dates: dates
             };
         }
 
@@ -90,6 +100,10 @@
             });
             filters.selects.fields.forEach(function(field){
                 field.values = [];
+            });
+            filters.dates.fields.forEach(function(field){
+                field.minValue = field.range[0];
+                field.maxValue = field.range[1];
             })
 
         }

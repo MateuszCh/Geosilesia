@@ -130,6 +130,19 @@
                         </md-input-container>
                     </div>
                 </div>
+                <div ng-switch-when="date" ng-repeat="field in ::filterType.fields track by field.id">
+                    <p ng-bind="field.title"></p>
+                    <div layout="row" class="m-t-2" layout-align="space-around center">
+                        <md-input-container class="m-b-0" flex="40">
+                            <label>From</label>
+                            <md-datepicker ng-model="field.minValue" onkeydown="return false;" md-open-on-focus md-min-date="field.range[0]" md-max-date="field.maxValue || field.range[1]"></md-datepicker>
+                        </md-input-container>
+                        <md-input-container class="m-b-0" flex="40">
+                            <label>To</label>
+                            <md-datepicker ng-model="field.maxValue" onkeydown="return false;" md-open-on-focus md-max-date="field.range[1]" md-min-date="field.minValue || field.range[0]"></md-datepicker>
+                        </md-input-container>
+                    </div>
+                </div>
             </div>
             <div layout="row" layout-align="center end" ng-if="vm.listing.models.length">
                 <md-button class="md-raised md-primary m-a-0 p-r-2 p-l-2" ng-click="vm.listing.resetFilters(vm.listing.filters, vm.listing.type)">Reset Filters</md-button>

@@ -45,12 +45,17 @@
         </md-checkbox>
     </div>
 
-    <md-input-container ng-switch-when="date" class="m-b-0">
-        <label ng-bind="::vm.field.title"
-               ng-attr-for="{{vm.field.id + '-1'}}"></label>
-        <md-datepicker ng-model="vm.model[vm.field.id]"
-                       md-open-on-focus=""></md-datepicker>
-    </md-input-container>
+    <div ng-switch-when="date" layout="row" layout-align="start center">
+        <md-input-container class="m-b-0">
+            <label ng-bind="::vm.field.title"
+                   ng-attr-for="{{vm.field.id + '-1'}}"></label>
+            <md-datepicker ng-model="vm.model[vm.field.id]"
+                           onkeydown="return false;"
+                           md-open-on-focus=""></md-datepicker>
+        </md-input-container>
+        <md-button class="md-raised md-primary" ng-click="vm.model[vm.field.id] = null">Clear</md-button>
+    </div>
+
 
     <div ng-switch-when="repeater" layout="column">
         <span class="block repeater-title m-b-1" ng-bind="::vm.field.title"></span>

@@ -49,6 +49,18 @@
                     }
                 })
             }
+
+            // dates
+            if(filters.dates.fields.length){
+                filters.dates.fields.forEach(function(date){
+                    if(date.minValue !== date.range[0] || date.maxValue !== date.range[1]){
+                        models = models.filter(function(model){
+                            return (model.data[date.id] && (date.minValue.getTime() <= (new Date(model.data[date.id])).getTime()) && (date.maxValue.getTime() >= (new Date(model.data[date.id])).getTime()));
+                        })
+                    }
+                })
+            }
+
             return models
         }
 
