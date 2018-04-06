@@ -91,6 +91,7 @@
                     .parent(angular.element(document.querySelector('body')))
                     .clickOutsideToClose(true)
                     .textContent(info)
+                    .multiple(true)
                     .ariaLabel('Error dialog')
                     .ok('Ok')
                     .targetEvent(ev)
@@ -104,6 +105,7 @@
                 .clickOutsideToClose(true)
                 .targetEvent(ev)
                 .ok('Yes')
+                .multiple(true)
                 .cancel('No');
             $mdDialog.show(confirm)
                 .then(function(){

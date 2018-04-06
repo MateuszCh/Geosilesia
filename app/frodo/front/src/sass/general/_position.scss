@@ -76,6 +76,16 @@
   height: 100%;
 }
 
+.fill-90 {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  left: 5%;
+  bottom: 5%;
+  width: 90%;
+  height: 90%;
+}
+
 @each $name, $value in $size-map {
   .fill-#{$name} {
     .#{$value} & {

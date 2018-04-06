@@ -11,7 +11,9 @@
 
             $mdIconProvider.icon('menu', './images/menu.svg', 24)
                 .icon('arrow', './images/arrow.svg', 24)
-                .icon('sort', './images/sort.svg', 24);
+                .icon('sort', './images/sort.svg', 24)
+                .icon('close', './images/close.svg', 24)
+                .icon('closeB', './images/close-black.svg', 24);
             //
             // $mdThemingProvider.theme('default')
             //     .primaryPalette('orange')

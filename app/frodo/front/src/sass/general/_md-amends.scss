@@ -21,3 +21,22 @@ input[type=number]::-webkit-outer-spin-button {
 md-backdrop {
   position: fixed;
 }
+
+.files-dialog {
+  max-height: 100vh;
+  max-width: 100vw;
+  height: 95vh;
+  width: 95vw;
+  position: relative;
+}
+
+//button.md-primary {
+//  color: white !important;
+//}
+
+.close {
+  position: absolute;
+  top:12px;
+  right:12px;
+  cursor: pointer;
+}

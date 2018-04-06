@@ -84,7 +84,7 @@ module.exports = {
                     existingFile.title = fileProps.title;
                     existingFile.description = fileProps.description;
                     existingFile.author = fileProps.author;
-                    existingFile.data = fileProps.date;
+                    existingFile.date = fileProps.date;
                     existingFile.place = fileProps.place;
                     existingFile.catalogue = fileProps.catalogue;
 

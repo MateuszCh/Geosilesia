@@ -3,15 +3,15 @@
         templateUrl: 'html/components/files/files.html',
         controllerAs: 'vm',
         bindings: {
-            model: '=',
-            allFiles: '<'
+            allFiles: '<',
+            isPopup: '<'
         },
         controller: FilesController
     });
 
-    FilesController.$inject = ['$scope', 'filesService', '$timeout', '$rootScope'];
+    FilesController.$inject = ['$scope', 'filesService', '$timeout', '$rootScope', '$mdDialog', 'tools'];
 
-    function FilesController($scope, filesService, $timeout, $rootScope) {
+    function FilesController($scope, filesService, $timeout, $rootScope, $mdDialog, tools) {
         var vm = this;
         vm.$onInit = onInit;
         vm.chooseView = chooseView;
@@ -20,6 +20,7 @@
         vm.editIndex = editIndex;
         vm.removeFile = removeFile;
         vm.deleteFile = deleteFile;
+        vm.deleteDialog = deleteDialog;
         vm.saveFile = saveFile;
         vm.chooseFile = chooseFile;
         vm.existingFilesIndex = existingFilesIndex;
@@ -27,27 +28,52 @@
         vm.catalogues = [];
         vm.data = [];
         vm.currentExistingIndex = 0;
-        var resultTimeout;
+        vm.actionStatus = '';
 
-        vm.actionStatus = {
-            busyType: false,
-            result: "",
-            status: undefined,
-        };
+        vm.search = {text: '', catalogues: []};
 
         function onInit(){
             if(!vm.allFiles){
                 vm.section = true;
+                vm.loadingFiles = true;
                 filesService.getAllFiles()
                     .then(function(response){
+                        vm.loadingFiles = false;
                         vm.allFiles = response.data;
+                        getCatalogues(vm.allFiles);
+                        setDates();
+                        setLocalId();
                     })
                     .catch(function(error){
-                        setActionStatus(false, error.data.error, error.status);
+                        vm.loadingFiles = false;
                     })
             } else {
                 vm.allFiles = vm.allFiles.data;
+                getCatalogues(vm.allFiles);
+                setDates();
+                setLocalId();
             }
+
+
+
+            $scope.$on('filesFiltered', function(ev, i, l){
+                if(vm.currentFilterLength !== l){
+                    vm.currentExistingIndex = i;
+                    vm.currentFilterLength = l;
+                }
+            })
+
+        }
+
+        function setDates(){
+            vm.allFiles.forEach(function(file){
+                file.date = new Date(file.date);
+
+                if(isNaN(file.date.getTime())){
+                    file.date = null;
+                }
+
+            })
         }
 
         function editIndex(index) {
@@ -72,15 +98,19 @@
 
         function chooseFile(){
             $rootScope.$broadcast('fileChoosen');
-            vm.model = vm.allFiles[vm.currentExistingIndex];
+            $mdDialog.hide(vm.allFiles[vm.currentExistingIndex]);
         }
 
         function onFilesSelect() {
             vm.data = new Array(vm.files.length);
+            var i = 0;
+            for(i; i < vm.data.length; i++){
+                vm.data[i] = {date: null};
+            }
             vm.currentIndex = 0;
         }
 
-        function upload() {
+        function upload(ev) {
 
             var data = {};
 
@@ -88,57 +118,68 @@
                 data[i] = fileData;
             });
             if (vm.files.length) {
-                $timeout.cancel(resultTimeout);
-                setActionStatus('upload');
+                vm.actionStatus = 'upload';
                 filesService.upload(vm.files, data)
                     .then(function (response) {
+                        vm.actionStatus = '';
                         if(response.data.length){
-                            setActionStatus(false, 'Files uploaded successfully', response.status);
                             vm.allFiles = vm.allFiles.concat(response.data);
+                            setLocalId();
                             vm.data = [];
                             vm.files = [];
+                            tools.infoDialog('Files uploaded successfully', ev);
                             vm.activeView = 'choose';
-                        } else {
-                            setActionStatus(false, 'There was error uploading files', response.status);
                         }
-                        resultTimeout = $timeout(setActionStatus, 5000);
+                    }, function(resp){}, function(evt){
+                        vm.progress = parseInt(100.0 * evt.loaded / evt.total);
                     })
                     .catch(function (e) {
-                        setActionStatus(false, e.data.error, e.status);
-                        resultTimeout = $timeout(setActionStatus, 5000);
+                        vm.actionStatus = '';
+                        tools.infoDialog(e.data.error || e.data, ev);
                     })
             }
         }
 
-        function deleteFile(){
-            $timeout.cancel(resultTimeout);
-            setActionStatus('delete');
+        function deleteFile(ev){
+            vm.actionStatus = 'delete';
             filesService.remove(vm.allFiles[vm.currentExistingIndex]._id)
                 .then(function(r){
-                    setActionStatus(false, 'File ' + vm.allFiles[vm.currentExistingIndex].filename + ' removed successfully', r.status);
-                    resultTimeout = $timeout(setActionStatus, 5000);
+                    vm.actionStatus = '';
+                    tools.infoDialog(vm.allFiles[vm.currentExistingIndex].filename + ' removed successfully', ev);
                     vm.allFiles.splice(vm.currentExistingIndex, 1);
-                    if(vm.currentExistingIndex !== 0){
-                        vm.currentExistingIndex--;
-                    }
+                    setLocalId();
+                    // if(vm.currentExistingIndex !== 0){
+                    //     vm.currentExistingIndex--;
+                    // }
+                    console.log(vm.currentExistingIndex);
                 })
                 .catch(function(e){
-                    setActionStatus(false, e.data.error, e.status);
-                    resultTimeout = $timeout(setActionStatus, 5000);
+                    vm.actionStatus = '';
+                    tools.infoDialog(e.data.error || e.data, ev);
                 })
         }
 
-        function saveFile(){
-            $timeout.cancel(resultTimeout);
-            setActionStatus('save');
+        function deleteDialog(ev){
+            tools.removeDialog(ev, deleteFile, 'Are you sure you want to delete ' + vm.allFiles[vm.currentExistingIndex].filename);
+        }
+
+        function setLocalId(){
+            var i = 0;
+            for(i; i < vm.allFiles.length; i++){
+                vm.allFiles[i].localId = i;
+            }
+        }
+
+        function saveFile(ev){
+            vm.actionStatus = 'save';
             filesService.edit(vm.allFiles[vm.currentExistingIndex])
                 .then(function(r){
-                    setActionStatus(false, 'File saved successfully', r.status);
-                    resultTimeout = $timeout(setActionStatus, 5000);
+                    vm.actionStatus = '';
+                    tools.infoDialog(vm.allFiles[vm.currentExistingIndex].filename + ' saved successfully', ev);
                 })
                 .catch(function(e){
-                    setActionStatus(false, e.data.error, e.status);
-                    resultTimeout = $timeout(setActionStatus, 5000);
+                    vm.actionStatus = '';
+                    tools.infoDialog(e.data.error || e.data, ev);
                 })
         }
 
@@ -153,14 +194,6 @@
                 }
             });
             vm.catalogues = vm.catalogues.concat(catalogues).sort();
-        }
-
-        function setActionStatus(type, result, status){
-            vm.actionStatus = {
-                busyType: type || false,
-                result: result || "",
-                status: status || undefined
-            }
         }
 
     }

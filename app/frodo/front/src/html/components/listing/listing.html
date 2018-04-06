@@ -86,12 +86,13 @@
             </md-list>
         </div>
         <div class="p-r-2 p-l-4" flex="auto" hide-xs hide-sm>
+            <h2 class="font-2 center fs-4">filters</h2>
             <div ng-repeat="filterType in ::vm.listing.filters" ng-if="vm.listing.models.length" ng-switch="::filterType.type" layout-wrap>
                 <md-input-container class="md-block m-b-0" flex-gt-sm ng-switch-when="text" flex="100">
                     <label for="textFilter">Search</label>
                     <input id="textFilter" ng-model="vm.listing.filters.textFilter.value">
                 </md-input-container>
-                <div ng-repeat="field in ::filterType.fields track by field.id" class="p-t-1 p-b-1" ng-switch-when="checkbox" flex="100">
+                <div ng-repeat="field in ::filterType.fields track by field.id" ng-switch-when="checkbox" flex="100" class="box-shadow-inset m-b-2 p-a-2">
                     <p class="p-b-1" ng-bind="field.title"></p>
                     <md-radio-group ng-model="field.value" layout="row">
                         <md-radio-button ng-value="true" class="md-primary m-r-8">True</md-radio-button>
@@ -99,7 +100,7 @@
                         <md-radio-button ng-value="'all'" class="md-primary m-r-8">All</md-radio-button>
                     </md-radio-group>
                 </div>
-                <div ng-repeat="field in ::filterType.fields track by field.id" ng-switch-when="select" flex="100" layout="row" layout-wrap>
+                <div ng-repeat="field in ::filterType.fields track by field.id" ng-switch-when="select" flex="100" layout="row" layout-wrap class="box-shadow-inset m-b-2 p-a-2">
                     <md-input-container class="block" flex="100">
                         <label ng-bind="'Select ' + field.title"></label>
                         <md-select ng-model="field.values" multiple>
@@ -107,7 +108,7 @@
                         </md-select>
                     </md-input-container>
                 </div>
-                <div ng-switch-when="number" ng-repeat="field in ::filterType.fields track by field.id">
+                <div ng-switch-when="number" ng-repeat="field in ::filterType.fields track by field.id" class="box-shadow-inset m-b-2 p-a-2">
                     <p ng-bind="field.title"></p>
                     <div layout="row">
                         <md-slider-container flex="80" layout="row">
@@ -130,7 +131,7 @@
                         </md-input-container>
                     </div>
                 </div>
-                <div ng-switch-when="date" ng-repeat="field in ::filterType.fields track by field.id">
+                <div ng-switch-when="date" ng-repeat="field in ::filterType.fields track by field.id" class="box-shadow-inset m-b-2 p-a-2">
                     <p ng-bind="field.title"></p>
                     <div layout="row" class="m-t-2" layout-align="space-around center">
                         <md-input-container class="m-b-0" flex="40">
