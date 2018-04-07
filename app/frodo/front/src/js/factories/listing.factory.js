@@ -1,9 +1,9 @@
 (function(){
     angular.module('frodo').service('listingFactory', ListingFactory);
 
-    ListingFactory.$inject = ['$state', '$injector', '$timeout', '$rootScope', '$mdDialog', '$filter'];
+    ListingFactory.$inject = ['$state', '$injector', '$timeout', '$rootScope', '$mdDialog', '$filter', 'filesService'];
 
-    function ListingFactory($state, $injector, $timeout, $rootScope, $mdDialog, $filter){
+    function ListingFactory($state, $injector, $timeout, $rootScope, $mdDialog, $filter, filesService){
 
         function setRange(modelData, id, dates){
             var values = [];
@@ -73,7 +73,7 @@
                            }
                            break;
                        case 'catalogue':
-                           filterField.options = $rootScope.catalogues;
+                           filterField.options = filesService.getCatalogues();
                            filterField.values = [];
                            catalogues.fields.push(filterField);
                            break;
