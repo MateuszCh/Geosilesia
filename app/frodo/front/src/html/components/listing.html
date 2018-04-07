@@ -86,7 +86,7 @@
             </md-list>
         </div>
         <div class="p-r-2 p-l-4" flex="auto" hide-xs hide-sm>
-            <h2 class="font-2 center fs-4">filters</h2>
+            <h2 class="font-2 center fs-4" ng-if="vm.listing.models.length">filters</h2>
             <div ng-repeat="filterType in ::vm.listing.filters" ng-if="vm.listing.models.length" ng-switch="::filterType.type" layout-wrap>
                 <md-input-container class="md-block m-b-0" flex-gt-sm ng-switch-when="text" flex="100">
                     <label for="textFilter">Search</label>

@@ -1,6 +1,6 @@
 (function(){
     angular.module('frodo').component('sidenav', {
-        templateUrl: 'html/components/layout/sidenav.html',
+        templateUrl: 'html/components/sidenav.html',
         controllerAs: 'vm',
         controller: SidenavController
     });

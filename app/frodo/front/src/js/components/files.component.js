@@ -1,6 +1,6 @@
 (function () {
     angular.module('frodo').component('files', {
-        templateUrl: 'html/components/files/files.html',
+        templateUrl: 'html/components/files.html',
         controllerAs: 'vm',
         bindings: {
             allFiles: '<',
@@ -101,7 +101,6 @@
         }
 
         function chooseFile(){
-            $rootScope.$broadcast('fileChoosen');
             $mdDialog.hide(vm.allFiles[vm.currentExistingIndex]);
         }
 
@@ -126,7 +125,6 @@
                 filesService.upload(vm.files, data)
                     .then(function (response) {
                         vm.actionStatus = '';
-                        $rootScope.$broadcast('filesUpdated');
                         if(response.data.length){
                             vm.allFiles = vm.allFiles.concat(response.data);
                             setLocalId();
@@ -150,7 +148,6 @@
             filesService.remove(vm.allFiles[vm.currentExistingIndex]._id)
                 .then(function(r){
                     vm.actionStatus = '';
-                    $rootScope.$broadcast('filesUpdated');
                     if($mdMedia('xs')){
                         vm.editPopUp = false;
                     }
@@ -184,7 +181,7 @@
             filesService.edit(vm.allFiles[vm.currentExistingIndex])
                 .then(function(r){
                     vm.actionStatus = '';
-                    $rootScope.$broadcast('filesUpdated');
+                    getCatalogues(vm.allFiles);
                     tools.infoDialog(vm.allFiles[vm.currentExistingIndex].filename + ' saved successfully', ev);
                 })
                 .catch(function(e){
@@ -204,6 +201,8 @@
                 }
             });
             vm.catalogues = vm.catalogues.concat(catalogues).sort();
+            filesService.setCatalogues(vm.catalogues);
+
         }
 
     }

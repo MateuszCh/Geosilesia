@@ -4,7 +4,7 @@
              dashboard: {
                  name: 'dashboard',
                  url: '/',
-                 templateUrl: 'html/components/layout/dashboard.html',
+                 templateUrl: 'html/dashboard.html',
                  family: 'dashboard'
              },
              pages: {

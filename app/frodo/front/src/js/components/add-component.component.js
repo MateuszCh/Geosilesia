@@ -1,6 +1,6 @@
 (function(){
     angular.module('frodo').component('addComponent', {
-        templateUrl: 'html/components/fields/add-component.html',
+        templateUrl: 'html/components/add-component.html',
         controllerAs: 'vm',
         bindings: {
             rows: '=',

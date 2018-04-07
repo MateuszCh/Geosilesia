@@ -1,6 +1,6 @@
 (function(){
     angular.module('frodo').component('pageBody', {
-        templateUrl: 'html/components/layout/page-body.html',
+        templateUrl: 'html/components/page-body.html',
         controllerAs: 'vm',
         controller: PageBodyController
     });

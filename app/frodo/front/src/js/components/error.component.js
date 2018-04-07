@@ -1,6 +1,6 @@
 (function(){
     angular.module('frodo').component('error', {
-        templateUrl: 'html/components/router/error.html',
+        templateUrl: 'html/components/error.html',
         controllerAs: 'vm',
         controller: ErrorController
     });

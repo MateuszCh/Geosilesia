@@ -1,6 +1,6 @@
 (function(){
     angular.module('frodo').component('repeater', {
-        templateUrl: 'html/components/fields/repeater.html',
+        templateUrl: 'html/components/repeater.html',
         controllerAs: 'vm',
         bindings: {
             parentModel: '=',

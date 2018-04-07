@@ -1,6 +1,6 @@
 (function(){
     angular.module('frodo').component('page', {
-        templateUrl: 'html/components/pages/page.html',
+        templateUrl: 'html/components/page.html',
         controllerAs: 'vm',
         bindings: {
             components: '<',

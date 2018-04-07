@@ -1,6 +1,6 @@
 (function(){
     angular.module('frodo').component('listing', {
-        templateUrl: 'html/components/listing/listing.html',
+        templateUrl: 'html/components/listing.html',
         controllerAs: 'vm',
         bindings: {
             model: '<'

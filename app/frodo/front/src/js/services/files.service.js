@@ -1,12 +1,22 @@
 (function(){
     angular.module('frodo').service('filesService', ['requestService', 'Upload', function(requestService, Upload){
 
+        var _catalogues;
+
         function getAllFiles(){
             return requestService.send('/frodo/file', 'GET');
         }
 
         function getCatalogues(){
-            return requestService.send('/frodo/file/catalogues', 'GET');
+            if(_catalogues){
+                return _catalogues;
+            } else {
+                return requestService.send('/frodo/file/catalogues', 'GET');
+            }
+        }
+
+        function setCatalogues(catalogues){
+            _catalogues = catalogues;
         }
 
         function getByCatalogue(catalogue){
@@ -35,6 +45,7 @@
         return {
             getAllFiles: getAllFiles,
             getCatalogues: getCatalogues,
+            setCatalogues: setCatalogues,
             getByCatalogue: getByCatalogue,
             upload: upload,
             edit: edit,

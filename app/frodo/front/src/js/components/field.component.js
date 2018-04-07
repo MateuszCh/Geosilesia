@@ -1,6 +1,6 @@
 (function(){
     angular.module('frodo').component('field', {
-        templateUrl: 'html/components/fields/field.html',
+        templateUrl: 'html/components/field.html',
         controllerAs: 'vm',
         bindings: {
             model: '=',
@@ -9,8 +9,8 @@
         controller: FieldController
     });
 
-    FieldController.$inject = ['$scope', '$mdDialog', 'filesService', '$rootScope'];
-    function FieldController($scope, $mdDialog, filesService, $rootScope){
+    FieldController.$inject = ['$scope', '$mdDialog', 'filesService'];
+    function FieldController($scope, $mdDialog, filesService){
         var vm  = this;
         vm.showFilePopup = false;
 
@@ -18,13 +18,13 @@
         vm.showFiles = showFiles;
 
         function onInit(){
-            vm.catalogues = $rootScope.catalogues;
+            vm.catalogues = filesService.getCatalogues();
         }
 
         function showFiles(ev){
             $mdDialog.show({
                 controller: FilesDialogController,
-                templateUrl: 'html/components/fields/files-dialog.html',
+                templateUrl: 'html/files-dialog.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 fullscreen: true,
