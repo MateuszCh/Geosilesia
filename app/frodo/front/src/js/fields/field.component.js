@@ -9,8 +9,8 @@
         controller: FieldController
     });
 
-    FieldController.$inject = ['$scope', '$mdDialog'];
-    function FieldController($scope, $mdDialog){
+    FieldController.$inject = ['$scope', '$mdDialog', 'filesService', '$rootScope'];
+    function FieldController($scope, $mdDialog, filesService, $rootScope){
         var vm  = this;
         vm.showFilePopup = false;
 
@@ -18,9 +18,7 @@
         vm.showFiles = showFiles;
 
         function onInit(){
-            $scope.$on('fileChoosen', function(){
-                vm.showFilePopup = false;
-            })
+            vm.catalogues = $rootScope.catalogues;
         }
 
         function showFiles(ev){

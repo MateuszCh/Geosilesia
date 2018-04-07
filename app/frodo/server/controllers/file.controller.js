@@ -100,6 +100,16 @@ module.exports = {
             .then(files => res.send(files))
             .catch(next)
     },
+    getCatalogues(req, res, next){
+        File.find({}).distinct('catalogue')
+            .then(catalogues => res.send(catalogues))
+            .catch(next)
+    },
+    getByCatalogue(req, res, next){
+        File.find({catalogue: req.params.catalogue})
+            .then(files => res.send(files))
+            .catch(next)
+    },
     getAllImages(req, res, next){
         File.find({type: /^image/})
             .then(images => res.send(images))

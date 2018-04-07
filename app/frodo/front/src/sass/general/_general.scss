@@ -177,3 +177,11 @@ ul {
 .overflow-scroll {
   overflow: scroll;
 }
+
+.down {
+  transform: scale(0);
+}
+
+.up {
+  transform: scale(1) !important;
+}

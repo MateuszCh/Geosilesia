@@ -17,6 +17,8 @@
                 return models;
             }
 
+            console.log(filters);
+
             // checkboxes
             if(filters.checkboxes.fields.length){
                 filters.checkboxes.fields.forEach(function(checkbox){
@@ -34,6 +36,17 @@
                     if(select.values.length){
                         models = models.filter(function(model){
                             return select.values.indexOf(model.data[select.id]) > -1;
+                        })
+                    }
+                })
+            }
+
+            // catalogues
+            if(filters.catalogues.fields.length){
+                filters.catalogues.fields.forEach(function(catalogue){
+                    if(catalogue.values.length){
+                        models = models.filter(function(model){
+                            return catalogue.values.indexOf(model.data[catalogue.id]) > -1;
                         })
                     }
                 })

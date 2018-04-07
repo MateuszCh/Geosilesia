@@ -9,11 +9,12 @@
         controller: FilesController
     });
 
-    FilesController.$inject = ['$scope', 'filesService', '$timeout', '$rootScope', '$mdDialog', 'tools'];
+    FilesController.$inject = ['$scope', 'filesService', '$timeout', '$rootScope', '$mdDialog', 'tools', '$mdMedia'];
 
-    function FilesController($scope, filesService, $timeout, $rootScope, $mdDialog, tools) {
+    function FilesController($scope, filesService, $timeout, $rootScope, $mdDialog, tools, $mdMedia) {
         var vm = this;
         vm.$onInit = onInit;
+        vm.$mdMedia = $mdMedia;
         vm.chooseView = chooseView;
         vm.upload = upload;
         vm.onFilesSelect = onFilesSelect;
@@ -84,6 +85,9 @@
         function existingFilesIndex(index){
             vm.currentExistingIndex = index;
             getCatalogues(vm.allFiles);
+            if($mdMedia('xs')){
+                vm.editPopUp = true;
+            }
         }
 
         function chooseView(view) {
@@ -122,6 +126,7 @@
                 filesService.upload(vm.files, data)
                     .then(function (response) {
                         vm.actionStatus = '';
+                        $rootScope.$broadcast('filesUpdated');
                         if(response.data.length){
                             vm.allFiles = vm.allFiles.concat(response.data);
                             setLocalId();
@@ -145,6 +150,10 @@
             filesService.remove(vm.allFiles[vm.currentExistingIndex]._id)
                 .then(function(r){
                     vm.actionStatus = '';
+                    $rootScope.$broadcast('filesUpdated');
+                    if($mdMedia('xs')){
+                        vm.editPopUp = false;
+                    }
                     tools.infoDialog(vm.allFiles[vm.currentExistingIndex].filename + ' removed successfully', ev);
                     vm.allFiles.splice(vm.currentExistingIndex, 1);
                     setLocalId();
@@ -175,6 +184,7 @@
             filesService.edit(vm.allFiles[vm.currentExistingIndex])
                 .then(function(r){
                     vm.actionStatus = '';
+                    $rootScope.$broadcast('filesUpdated');
                     tools.infoDialog(vm.allFiles[vm.currentExistingIndex].filename + ' saved successfully', ev);
                 })
                 .catch(function(e){

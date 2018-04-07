@@ -36,8 +36,9 @@
             var numbers = {type: 'number', fields: []};
             var selects = {type: 'select', fields: []};
             var dates = {type: 'date', fields: []};
+            var catalogues = {type: 'catalogue', fields: []};
 
-            var filterableFields = ['checkbox', 'number', 'select', 'date'];
+            var filterableFields = ['checkbox', 'number', 'select', 'date', 'catalogue'];
 
             modelData.fields.forEach(function(field){
                if(filterableFields.indexOf(field.type) > -1){
@@ -70,6 +71,12 @@
                                filterField.maxValue = filterField.range[1];
                                dates.fields.push(filterField);
                            }
+                           break;
+                       case 'catalogue':
+                           filterField.options = $rootScope.catalogues;
+                           filterField.values = [];
+                           catalogues.fields.push(filterField);
+                           break;
                    }
                }
             });
@@ -82,7 +89,8 @@
                 checkboxes: checkboxes,
                 numbers: numbers,
                 selects: selects,
-                dates: dates
+                dates: dates,
+                catalogues: catalogues
             };
         }
 
@@ -104,6 +112,9 @@
             filters.dates.fields.forEach(function(field){
                 field.minValue = field.range[0];
                 field.maxValue = field.range[1];
+            });
+            filters.catalogues.fields.forEach(function(field){
+                field.values = [];
             })
 
         }
@@ -131,7 +142,7 @@
             };
 
             if(listing.type === 'posts'){
-                var sortingFields = ['text','checkbox','select','number', 'date'];
+                var sortingFields = ['text','checkbox','select','number', 'date', 'catalogue'];
                 fields.forEach(function(field){
                     if(sortingFields.indexOf(field.type) > -1){
                         var negative = '';

@@ -8,6 +8,10 @@ module.exports = app => {
 
     app.get('/frodo/file', FileController.getAll);
 
+    app.get('/frodo/file/catalogues', FileController.getCatalogues);
+
+    app.get('/frodo/file/:catalogue', FileController.getByCatalogue);
+
     app.get('/frodo/file/images', FileController.getAllImages);
 
     app.get('/frodo/file/pdfs', FileController.getAllPdfs);

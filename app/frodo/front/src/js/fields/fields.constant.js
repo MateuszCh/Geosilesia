@@ -33,6 +33,10 @@
             date: {
                 name: 'Date',
                 type: 'date'
+            },
+            catalogue: {
+                name: 'Catalogue',
+                type: 'catalogue'
             }
     });
 })();

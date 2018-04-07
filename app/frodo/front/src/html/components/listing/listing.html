@@ -108,6 +108,16 @@
                         </md-select>
                     </md-input-container>
                 </div>
+                <div ng-repeat="field in ::filterType.fields track by field.id" ng-switch-when="catalogue" flex="100" layout="row" layout-wrap class="box-shadow-inset m-b-2 p-a-2">
+                    <md-input-container class="block" flex="100">
+                        <label ng-bind="'Select ' + field.title"></label>
+                        <md-select ng-model="field.values" multiple>
+                            <md-option ng-value="catalogue" ng-repeat="catalogue in ::field.options">
+                                <span ng-bind="catalogue"></span>
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
                 <div ng-switch-when="number" ng-repeat="field in ::filterType.fields track by field.id" class="box-shadow-inset m-b-2 p-a-2">
                     <p ng-bind="field.title"></p>
                     <div layout="row">
@@ -171,7 +181,19 @@
                 <md-input-container class="block" flex="100">
                     <label ng-bind="'Select ' + field.title"></label>
                     <md-select ng-model="field.values" multiple>
-                        <md-option ng-value="option" ng-repeat="option in ::field.options">{{option}}</md-option>
+                        <md-option ng-value="option" ng-repeat="option in ::field.options">
+                            <span ng-bind="option"></span>
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div ng-repeat="field in ::filterType.fields track by field.id" ng-switch-when="catalogue" flex="100" layout="row" layout-wrap>
+                <md-input-container class="block" flex="100">
+                    <label ng-bind="'Select ' + field.title"></label>
+                    <md-select ng-model="field.values" multiple>
+                        <md-option ng-value="catalogue" ng-repeat="catalogue in ::field.options">
+                            <span ng-bind="catalogue"></span>
+                        </md-option>
                     </md-select>
                 </md-input-container>
             </div>
@@ -195,6 +217,19 @@
                     <md-input-container flex="20">
                         <label>Maximum</label>
                         <input type="number" class="center" ng-min="{{field.minValue || field.range[0]}}" ng-max="{{field.range[1]}}" flex="100" ng-model="field.maxValue">
+                    </md-input-container>
+                </div>
+            </div>
+            <div ng-switch-when="date" ng-repeat="field in ::filterType.fields track by field.id">
+                <p ng-bind="field.title"></p>
+                <div layout="row" class="m-t-2" layout-align="start center">
+                    <md-input-container class="m-b-0" flex="40">
+                        <label>From</label>
+                        <md-datepicker ng-model="field.minValue" onkeydown="return false;" md-open-on-focus md-min-date="field.range[0]" md-max-date="field.maxValue || field.range[1]"></md-datepicker>
+                    </md-input-container>
+                    <md-input-container class="m-b-0" flex="40">
+                        <label>To</label>
+                        <md-datepicker ng-model="field.maxValue" onkeydown="return false;" md-open-on-focus md-max-date="field.range[1]" md-min-date="field.minValue || field.range[0]"></md-datepicker>
                     </md-input-container>
                 </div>
             </div>

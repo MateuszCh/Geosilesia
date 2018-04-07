@@ -1,5 +1,5 @@
 (function(){
-    angular.module('frodo').controller('MainController',['$window', '$scope', 'tools', function($window, $scope, tools){
+    angular.module('frodo').controller('MainController',['$window', '$scope', 'tools', 'filesService', '$rootScope', function($window, $scope, tools, filesService, $rootScope){
 
         var debouncedOnResize = tools.debounce(onResize, 100);
 
@@ -7,6 +7,18 @@
         function onResize(){
             size();
             $scope.$apply();
+        }
+
+        $scope.$on('filesUpdated', getCatalogues);
+
+        function getCatalogues(){
+            filesService.getCatalogues()
+                .then(function(response){
+                    $rootScope.catalogues = response.data;
+                })
+                .catch(function(error){
+
+                });
         }
 
         function size(){
@@ -25,5 +37,6 @@
         }
 
         size();
+        getCatalogues();
     }])
 })();
