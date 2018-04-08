@@ -17,8 +17,6 @@
                 return models;
             }
 
-            console.log(filters);
-
             // checkboxes
             if(filters.checkboxes.fields.length){
                 filters.checkboxes.fields.forEach(function(checkbox){

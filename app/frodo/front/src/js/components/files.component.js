@@ -94,9 +94,9 @@
             vm.activeView = view;
         }
 
-        function removeFile() {
-            vm.files.splice(vm.currentIndex, 1);
-            vm.data.splice(vm.currentIndex, 1);
+        function removeFile(i) {
+            vm.files.splice(i, 1);
+            vm.data.splice(i, 1);
             vm.currentIndex = 0;
         }
 
@@ -108,9 +108,10 @@
             vm.data = new Array(vm.files.length);
             var i = 0;
             for(i; i < vm.data.length; i++){
-                vm.data[i] = {date: null};
+                vm.data[i] = {date: null, isOpen: false};
             }
             vm.currentIndex = 0;
+            vm.data[0].isOpen = true;
         }
 
         function upload(ev) {
@@ -128,6 +129,8 @@
                         if(response.data.length){
                             vm.allFiles = vm.allFiles.concat(response.data);
                             setLocalId();
+                            setDates();
+                            getCatalogues(vm.allFiles);
                             vm.data = [];
                             vm.files = [];
                             tools.infoDialog('Files uploaded successfully', ev);
@@ -154,10 +157,6 @@
                     tools.infoDialog(vm.allFiles[vm.currentExistingIndex].filename + ' removed successfully', ev);
                     vm.allFiles.splice(vm.currentExistingIndex, 1);
                     setLocalId();
-                    // if(vm.currentExistingIndex !== 0){
-                    //     vm.currentExistingIndex--;
-                    // }
-                    console.log(vm.currentExistingIndex);
                 })
                 .catch(function(e){
                     vm.actionStatus = '';

@@ -45,6 +45,7 @@ module.exports = {
                         filename : file.filename,
                         created : Date.now(),
                         type : file.mimetype,
+                        size: file.size,
                         id: counter.counter + i
                     };
 

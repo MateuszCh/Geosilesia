@@ -6,19 +6,19 @@
             <span class="font-2" ng-bind="::vm.listing.title"></span>
             <span class="font-2 fs-1" ng-bind="'(' + vm.listing.count + ')'"></span>
         </h2>
-        <div layout="row" layout-align-xs="space-around center">
+        <div class="center">
             <md-button class="md-primary"
                        ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs')}"
                        ng-click="vm.listing.add()">
                 <span class="col-w">Add</span>
-                <md-tooltip md-direction="bottom">Add new {{::vm.listing.title}}</md-tooltip>
+                <md-tooltip hide-xs hide-sm md-direction="bottom">Add new {{::vm.listing.title}}</md-tooltip>
             </md-button>
             <md-button class="md-primary"
                        ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs')}"
                        ng-if="vm.listing.type === 'posts'"
                        ng-click="vm.listing.postTypeEdit()">
                 <span class="col-w">Edit</span>
-                <md-tooltip md-direction="bottom">Edit {{::vm.listing.title}}</md-tooltip>
+                <md-tooltip hide-xs hide-sm md-direction="bottom">Edit {{::vm.listing.title}}</md-tooltip>
             </md-button>
             <md-menu md-position-mode="target-right target" ng-if="vm.listing.models.length">
                 <md-button
@@ -27,7 +27,7 @@
                         aria-label="Sort by"
                         ng-click="$mdMenu.open()">
                     <md-icon md-svg-icon="sort"></md-icon>
-                    <md-tooltip md-direction="bottom">Sort By</md-tooltip>
+                    <md-tooltip hide-xs hide-sm md-direction="bottom">Sort By</md-tooltip>
                 </md-button>
                 <md-menu-content width="4">
                     <md-menu-item ng-repeat="sort in vm.listing.sort.types">

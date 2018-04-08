@@ -46,7 +46,8 @@ $body-fs-map: (
 
 $ratio-map: (
   "1-1": 1/1,
-  "2-1": 1/2
+  "2-1": 1/2,
+  "16-9": 9/16
 );
 
 $padding-max: 8;
@@ -57,7 +58,7 @@ $position-max: 8;
 $position-min: 0;
 $font-size-max: 8;
 $font-size-min: 0;
-$z-index-max: 10;
+$z-index-max: 30;
 $z-index-min: 0;
 
 $text-positions: left, right, center;

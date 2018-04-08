@@ -24,6 +24,9 @@ const FileSchema = new Schema({
    type: {
        type: String
    },
+   size: {
+       type: Number
+   },
    catalogue: {
        type: String
    },

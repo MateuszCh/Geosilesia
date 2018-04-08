@@ -1,6 +1,10 @@
 <section ng-class="{'p-t-8-s p-t-8-m p-a-3 p-a-1-m p-a-1-s' : !vm.isPopup, 'vh-100' : !vm.isPopup && !(vm.$mdMedia('xs') || vm.$mdMedia('sm')), 'fill' : !vm.isPopup && (vm.$mdMedia('xs') || vm.$mdMedia('sm'))}" layout="column">
-    <h2 class="font-2 fs-6 center" ng-if="!vm.isPopup">Files</h2>
+    <h2 class="font-2 fs-6 center" ng-if="!vm.isPopup">
+        <span class="font-2">Files</span>
+        <span class="font-2 fs-1" ng-bind="'(' + vm.allFiles.length + ')'"></span>
+    </h2>
     <div ng-class="{'pos-relative' : !vm.isPopup}" flex="grow">
+        <!-- select tab -->
         <md-tabs md-border-bottom="true"
                  class="fill">
             <md-tab id="choose"
@@ -12,13 +16,13 @@
                         <div flex="100" ng-if="!vm.allFiles.length && !vm.loadingFiles" layout="column" layout-align="center center">There is no files yet</div>
                         <div flex="100" ng-if="!vm.allFiles.length && vm.loadingFiles" layout="column" layout-align="center center">Loading...</div>
                         <div ng-if="vm.allFiles.length" flex="100" layout="row">
-                            <div flex-xs="100" flex-gt-sm="70" flex-sm="50" class="overflow-auto" layout="row" layout-wrap layout-align="start start">
-                                <div flex="100" class="b-b" layout="row" layout-align-gt-sm="start start" layout-align-xs="center start" layout-align-sm="center start">
+                            <div flex-xs="100" flex-gt-sm="70" flex-sm="50"layout="column">
+                                <div class="b-b p-l-2-x p-l-2-l" layout="row" layout-align-gt-sm="start start" layout-align-xs="center start" layout-align-sm="center start">
                                     <md-input-container class="m-b-0">
                                         <label>Search</label>
                                         <input type="text" ng-model="vm.search.text">
                                     </md-input-container>
-                                    <md-input-container class="m-b-0">
+                                    <md-input-container class="m-b-0" ng-if="vm.catalogues.length">
                                         <label>Select catalogue</label>
                                         <md-select ng-model="vm.search.catalogues" multiple>
                                             <md-option ng-repeat="catalogue in vm.catalogues track by catalogue" ng-value="catalogue">
@@ -27,39 +31,38 @@
                                         </md-select>
                                     </md-input-container>
                                 </div>
-                                <div ng-repeat="file in vm.allFiles | filesFilter: vm.search" class="ratio-1-1 transition-2" flex-xs="25" flex-gt-sm="10" flex-sm="20" ng-click="vm.existingFilesIndex(file.localId)" ng-switch="::file.type != 'application/pdf'" ng-class="{'current-file' : vm.currentExistingIndex === file.localId}">
-                                    <div class="fill-90 transition down" ng-switch-when="true" image-loaded="up">
-                                        <img src="{{::file.src}}" class="fill object-fit-cover">
-                                    </div>
-                                    <div class="fill-90 transition down" ng-switch-when="false" image-loaded="up">
-                                        <img class="fill" src="images/pdf-placeholder.png">
+                                <div layout-wrap layout-align="start start" layout="row" flex="grow" class="overflow-auto">
+                                    <div ng-repeat="file in vm.allFiles | filesFilter: vm.search" class="ratio-1-1 cursor-pointer transition-2" flex-xs="25" flex-gt-sm="10" flex-sm="20" ng-click="vm.existingFilesIndex(file.localId)" ng-switch="::file.type != 'application/pdf'" ng-class="{'current-file' : vm.currentExistingIndex === file.localId}">
+                                        <div class="fill-90 transition down" ng-switch-when="true" image-loaded="up">
+                                            <img src="{{::file.src}}" class="fill object-fit-cover">
+                                        </div>
+                                        <div class="fill-90 transition down" ng-switch-when="false" image-loaded="up">
+                                            <img class="fill" src="images/pdf-placeholder.png">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div flex-gt-sm="30" flex-sm="50" hide-xs class="overflow-auto" layout="column" ng-if="vm.currentExistingIndex !== undefined">
+                            <!-- edit for gt xs -->
+                            <div flex-gt-sm="30" flex-sm="50" hide-xs class="overflow-auto b-l" layout="column" ng-if="vm.currentExistingIndex !== undefined">
                                 <h3 class="font-2 p-t-1 p-b-1 center"
                                     ng-bind="vm.allFiles[vm.currentExistingIndex].filename"></h3>
-                                <div layout="row" layout-align="space-around center" class="p-b-2 b-b">
+                                <div class="p-b-2 b-b center">
                                     <md-button flex="30" class="md-raised md-primary" ng-click="vm.saveFile($event)" ng-class="{'busy col-t' : vm.actionStatus === 'save'}">Save</md-button>
                                     <md-button flex="30" class="md-raised md-primary" ng-click="vm.deleteDialog($event)" ng-class="{'busy col-t' : vm.actionStatus === 'delete'}">Delete</md-button>
                                     <md-button flex="30" class="md-raised md-primary" ng-click="vm.chooseFile()" ng-if="vm.isPopup">Choose</md-button>
                                 </div>
-                                <div layout="row"
-                                     class="b-b p-t-2 p-b-2">
-                                    <div flex="50"
-                                         layout="column"
-                                         class="p-l-2"
-                                         layout-align="space-between start">
-                                        <p ng-bind="vm.allFiles[vm.currentExistingIndex].created | date: 'medium'"></p>
-                                        <a target="_blank" ng-href="{{vm.allFiles[vm.currentExistingIndex].src}}" ng-bind="vm.allFiles[vm.currentExistingIndex].src"></a>
-                                        <p ng-bind="vm.allFiles[vm.currentExistingIndex].type"></p>
-
+                                <div class="b-b p-t-2 p-b-2">
+                                    <div class="p-r-2 p-l-2">
+                                        <p layout="row"><span flex="20">Date:</span><span ng-bind="vm.allFiles[vm.currentExistingIndex].created | date: 'medium'"></span></p>
+                                        <p layout="row"><span flex="20">Url:</span><a target="_blank" ng-href="{{vm.allFiles[vm.currentExistingIndex].src}}" ng-bind="vm.allFiles[vm.currentExistingIndex].src"></a></p>
+                                        <p layout="row"><span flex="20">Type:</span><span ng-bind="vm.allFiles[vm.currentExistingIndex].type"></span></p>
+                                        <p layout="row" ng-if="vm.allFiles[vm.currentExistingIndex].size"><span flex="20">Size:</span><span ng-bind="vm.allFiles[vm.currentExistingIndex].size | bytes"></span></p>
                                     </div>
-                                    <div flex="50"
-                                         layout="row"
+                                    <div layout="row"
+                                         class="p-t-2"
                                          layout-align="center center"
                                          ng-switch="vm.allFiles[vm.currentExistingIndex].type !== 'application/pdf'">
-                                        <div class="ratio-1-1"
+                                        <div class="ratio-16-9"
                                              flex="70">
                                             <img src="{{vm.allFiles[vm.currentExistingIndex].src}}" ng-switch-when="true" class="fill object-fit-contain">
                                             <img ng-switch-when="false" src="images/pdf-placeholder.png">
@@ -116,15 +119,108 @@
                     </div>
                 </md-tab-body>
             </md-tab>
+            <!-- add tab -->
             <md-tab id="add"
                     md-active="vm.activeView == 'add'"
                     md-on-select="vm.chooseView('add')">
                 <md-tab-label>Add new files</md-tab-label>
                 <md-tab-body>
                     <div class="fill"
-                         layout="row">
-                        <div flex="vm.files.length ? 30 : 100"
-                             layout="column"
+                         layout-xs="column" layout-sm="column" layout-gt-sm="row">
+
+                        <!-- add for xs, sm -->
+                        <div hide-gt-sm ng-if="vm.files.length" layout="column" flex="grow" class="overflow-auto">
+                            <div class="center p-t-2 p-b-2 b-b">
+                                <md-button class="md-primary md-raised"
+                                           ngf-select
+                                           ng-model="vm.files"
+                                           name="files"
+                                           ngf-change="vm.onFilesSelect()"
+                                           ngf-multiple="true"
+                                           ngf-pattern="'image/*,application/pdf'"
+                                           ngf-accept="'image/*,application/pdf'">Select files</md-button>
+                                <md-button class="md-primary md-raised"
+                                           ng-click="vm.upload($event)"
+                                           ng-class="{'busy col-t' : vm.actionStatus === 'upload'}"
+                                           ng-if="vm.files.length">Upload</md-button>
+                                <md-button class="md-primary md-raised"
+                                           ng-click="vm.files = []"
+                                           ng-if="vm.files.length">Delete files</md-button>
+                                <md-progress-linear md-mode="determinate" value="{{vm.progress}}" ng-if="vm.actionStatus === 'upload'" style="width: 100%"></md-progress-linear>
+                            </div>
+                            <div flex="grow" class="overflow-auto">
+                                <div ng-repeat="file in vm.files" class="b-t b-b overflow-hidden" layout="column">
+                                    <span class="center p-a-1 transition" ng-bind="file.name" ng-click="vm.editIndex($index); vm.data[$index].isOpen = !vm.data[$index].isOpen" ng-class="{'bg-col-1 col-w' : vm.data[$index].isOpen}"></span>
+                                    <div ng-show="vm.data[$index].isOpen" class="slide-up">
+                                        <div class="center p-a-2">
+                                            <p><span>Size:&nbsp;</span><span ng-bind="file.size | bytes"></span></p>
+                                            <md-button class="md-primary md-raised" ng-click="vm.removeFile($index)">Delete</md-button>
+                                        </div>
+                                        <div layout="row" layout-align="center center" class="p-a-2 b-b">
+                                            <div class="ratio-16-9" flex="70">
+                                                <img ngf-src="vm.files[$index]" ng-show="vm.data[$index].isOpen && vm.files[$index].type != 'application/pdf'" class="fill object-fit-contain transition fade">
+                                                <img src="images/pdf-placeholder.png" class="fill object-fit-contain transition fade" ng-show="vm.data[$index].isOpen && vm.files[$index].type == 'application/pdf'">
+                                            </div>
+                                        </div>
+                                        <div layout="column" class="p-a-2">
+                                            <md-input-container class="m-b-0">
+                                                <label>Title</label>
+                                                <input type="text"
+                                                       ng-model="vm.data[$index].title">
+                                            </md-input-container>
+                                            <md-input-container class="m-b-0">
+                                                <label>Description</label>
+                                                <input type="text"
+                                                       ng-model="vm.data[$index].description">
+                                            </md-input-container>
+                                            <md-input-container class="m-b-0">
+                                                <label>Author</label>
+                                                <input type="text"
+                                                       ng-model="vm.data[$index].author">
+                                            </md-input-container>
+                                            <div layout="row"
+                                                 class="m-b-2 m-t-2"
+                                                 layout-align="start center">
+                                                <md-input-container class="m-b-0">
+                                                    <label>Date</label>
+                                                    <md-datepicker ng-model="vm.data[$index].date"
+                                                                   onkeydown="return false;"
+                                                                   md-open-on-focus></md-datepicker>
+                                                </md-input-container>
+                                                <md-button class="md-raised md-primary"
+                                                           ng-click="vm.data[$index].date = null">Clear</md-button>
+                                            </div>
+                                            <md-input-container class="m-b-0">
+                                                <label>Place</label>
+                                                <input type="text"
+                                                       ng-model="vm.data[$index].place">
+                                            </md-input-container>
+                                            <div layout="row">
+                                                <md-input-container class="m-b-0" flex="vm.catalogues.length ? 50 : 100">
+                                                    <label>Catalogue</label>
+                                                    <input type="text"
+                                                           ng-model="vm.data[$index].catalogue">
+                                                </md-input-container>
+                                                <md-input-container ng-if="vm.catalogues.length" flex="50">
+                                                    <label>Select from existing ones</label>
+                                                    <md-select ng-model="vm.data[$index].catalogue">
+                                                        <md-option ng-repeat="catalogue in vm.catalogues" ng-value="catalogue">
+                                                            <span ng-bind="catalogue"></span>
+                                                        </md-option>
+                                                    </md-select>
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- add for gt sm -->
+                        <div flex="{{vm.files.length ? 30 : 100}}"
+                             ng-if="!vm.files.length || vm.$mdMedia('md') || vm.$mdMedia('lg') || vm.$mdMedia('xl')"
+                             layout-gt-sm="column"
+                             layout-xs="row"
+                             layout-sm="row"
                              layout-align="center center">
                             <md-button class="md-primary md-raised"
                                        ngf-select
@@ -138,13 +234,18 @@
                                        ng-click="vm.upload($event)"
                                        ng-class="{'busy col-t' : vm.actionStatus === 'upload'}"
                                        ng-if="vm.files.length">Upload</md-button>
+                            <md-button class="md-primary md-raised"
+                                       ng-click="vm.files = []"
+                                       ng-if="vm.files.length">Delete files</md-button>
                             <md-progress-linear md-mode="determinate" value="{{vm.progress}}" ng-if="vm.actionStatus === 'upload'" style="width: 50%"></md-progress-linear>
                         </div>
                         <div flex="70"
+                             hide-xs
+                             hide-sm
                              layout="row"
                              ng-if="vm.files.length">
                             <div layout="column"
-                                 flex="40"
+                                 flex="50"
                                  class="b-l b-r overflow-auto">
                                 <ul class="p-a-1">
                                     <li ng-repeat="file in vm.files"
@@ -156,28 +257,24 @@
                                 </ul>
                             </div>
                             <div layout="column"
-                                 flex="60"
+                                 flex="50"
                                  class="overflow-auto">
-                                <div layout="row"
-                                     class="b-b p-t-2 p-b-2">
-                                    <div flex="50"
-                                         layout="column"
-                                         layout-align="center center">
-                                        <h2 class="font-2 p-b-2 center fs-4"
+                                <div class="b-b p-b-2">
+                                    <div class="center p-a-2">
+                                        <h2 class="font-2 p-b-1 center fs-4"
                                             ng-bind="vm.files[vm.currentIndex].name"></h2>
+                                        <p><span>Size:&nbsp;</span><span ng-bind="vm.files[vm.currentIndex].size | bytes"></span></p>
                                         <md-button class="md-primary md-raised"
-                                                   ng-click="vm.removeFile()">Delete</md-button>
+                                                   ng-click="vm.removeFile(vm.currentIndex)">Delete</md-button>
                                     </div>
-                                    <div flex="50"
-                                         layout="row"
-                                         layout-align="center center"
-                                         ng-switch="vm.files[vm.currentIndex].type != 'application/pdf'">
-                                        <div class="ratio-1-1"
+                                    <div layout="row" layout-align="center center" ng-switch="vm.files[vm.currentIndex].type != 'application/pdf'">
+                                        <div class="ratio-16-9"
                                              flex="70">
                                             <img ngf-src="vm.files[vm.currentIndex]"
                                                  ng-switch-when="true"
                                                  class="fill object-fit-contain">
                                             <img ng-switch-when="false"
+                                                 class="fill object-fit-contain"
                                                  src="images/pdf-placeholder.png">
                                         </div>
                                     </div>
@@ -240,34 +337,27 @@
         </md-tabs>
     </div>
 </section>
-<div ng-if="vm.editPopUp" class="fill bg-col-w overflow-auto" style="position: fixed; z-index: 21;">
+<!-- edit for xs -->
+<div ng-if="vm.editPopUp" class="fill bg-col-w overflow-auto pos-fixed z-21">
     <md-icon md-svg-icon="closeB"
              class="close"
              ng-click="vm.editPopUp = false;"></md-icon>
-    <div flex="100"layout="column" ng-if="vm.currentExistingIndex !== undefined">
-        <h3 class="font-2 p-t-1 p-b-1 center"
+    <div flex="100" ng-if="vm.currentExistingIndex !== undefined">
+        <h3 class="font-2 p-t-1 p-l-4 p-r-4 p-b-1 center"
             ng-bind="vm.allFiles[vm.currentExistingIndex].filename"></h3>
-        <div layout="row" layout-align="space-around center" class="p-b-2 b-b">
+        <div class="p-b-2 b-b center">
             <md-button flex="30" class="md-raised md-primary" ng-click="vm.saveFile($event)" ng-class="{'busy col-t' : vm.actionStatus === 'save'}">Save</md-button>
             <md-button flex="30" class="md-raised md-primary" ng-click="vm.deleteDialog($event)" ng-class="{'busy col-t' : vm.actionStatus === 'delete'}">Delete</md-button>
             <md-button flex="30" class="md-raised md-primary" ng-click="vm.chooseFile()" ng-if="vm.isPopup">Choose</md-button>
         </div>
-        <div layout="row"
-             class="b-b p-t-2 p-b-2">
-            <div flex="50"
-                 layout="column"
-                 class="p-l-2"
-                 layout-align="space-between start">
-                <p ng-bind="vm.allFiles[vm.currentExistingIndex].created | date: 'medium'"></p>
-                <a target="_blank" ng-href="{{vm.allFiles[vm.currentExistingIndex].src}}" ng-bind="vm.allFiles[vm.currentExistingIndex].src"></a>
-                <p ng-bind="vm.allFiles[vm.currentExistingIndex].type"></p>
-
+        <div class="b-b p-t-2 p-b-2">
+            <div class="p-r-2 p-l-2">
+                <p layout="row"><span flex="20">Date:</span><span ng-bind="vm.allFiles[vm.currentExistingIndex].created | date: 'medium'"></span></p>
+                <p layout="row"><span flex="20">Url:</span><a target="_blank" ng-href="{{vm.allFiles[vm.currentExistingIndex].src}}" ng-bind="vm.allFiles[vm.currentExistingIndex].src"></a></p>
+                <p layout="row"><span flex="20">Type:</span><span ng-bind="vm.allFiles[vm.currentExistingIndex].type"></span></p>
             </div>
-            <div flex="50"
-                 layout="row"
-                 layout-align="center center"
-                 ng-switch="vm.allFiles[vm.currentExistingIndex].type !== 'application/pdf'">
-                <div class="ratio-1-1"
+            <div layout="row" class="p-t-2" layout-align="center center" ng-switch="vm.allFiles[vm.currentExistingIndex].type !== 'application/pdf'">
+                <div class="ratio-16-9"
                      flex="70">
                     <img src="{{vm.allFiles[vm.currentExistingIndex].src}}" ng-switch-when="true" class="fill object-fit-contain">
                     <img ng-switch-when="false" src="images/pdf-placeholder.png">
