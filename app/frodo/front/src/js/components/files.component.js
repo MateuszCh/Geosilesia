@@ -25,12 +25,14 @@
         vm.saveFile = saveFile;
         vm.chooseFile = chooseFile;
         vm.existingFilesIndex = existingFilesIndex;
+        vm.incrementLimit = incrementLimit;
         vm.activeView = 'choose';
         vm.catalogues = [];
         vm.data = [];
         vm.currentExistingIndex = 0;
         vm.actionStatus = '';
-
+        vm.limit = 80;
+        var increment = 40;
         vm.search = {text: '', catalogues: []};
 
         function onInit(){
@@ -54,8 +56,6 @@
                 setDates();
                 setLocalId();
             }
-
-
 
             $scope.$on('filesFiltered', function(ev, i, l){
                 if(vm.currentFilterLength !== l){
@@ -202,6 +202,17 @@
             vm.catalogues = vm.catalogues.concat(catalogues).sort();
             filesService.setCatalogues(vm.catalogues);
 
+        }
+
+        function incrementLimit(){
+            if(vm.allFiles.length > vm.limit){
+                console.log('ech');
+                vm.limit += increment;
+                $scope.$apply();
+            }
+            if(vm.limit >= vm.allFiles.length){
+                $rootScope.$broadcast('loadFinished');
+            }
         }
 
     }

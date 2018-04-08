@@ -31,8 +31,8 @@
                                         </md-select>
                                     </md-input-container>
                                 </div>
-                                <div layout-wrap layout-align="start start" layout="row" flex="grow" class="overflow-auto">
-                                    <div ng-repeat="file in vm.allFiles | filesFilter: vm.search" class="ratio-1-1 cursor-pointer transition-2" flex-xs="25" flex-gt-sm="10" flex-sm="20" ng-click="vm.existingFilesIndex(file.localId)" ng-switch="::file.type != 'application/pdf'" ng-class="{'current-file' : vm.currentExistingIndex === file.localId}">
+                                <div layout-wrap layout-align="start start" layout="row" flex="grow" class="overflow-auto" listing-load="80" listing-load-function="vm.incrementLimit">
+                                    <div ng-repeat="file in vm.allFiles | filesFilter: vm.search | limitTo: vm.limit" class="ratio-1-1 cursor-pointer transition-2" flex-xs="25" flex-gt-sm="10" flex-sm="20" ng-click="vm.existingFilesIndex(file.localId)" ng-switch="::file.type != 'application/pdf'" ng-class="{'current-file' : vm.currentExistingIndex === file.localId}">
                                         <div class="fill-90 transition down" ng-switch-when="true" image-loaded="up">
                                             <img src="{{::file.src}}" class="fill object-fit-cover">
                                         </div>
