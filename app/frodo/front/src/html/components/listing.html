@@ -1,12 +1,15 @@
-<section class="p-a-3 p-a-1-m p-a-1-s">
-    <div class="pos-relative" layout="row" layout-xs="column" layout-align="center center">
-
+<section class="p-a-3 p-a-1-m p-a-1-s p-t-8-s p-t-8-m vh-100-l vh-100-x fill-s fill-m"
+         layout="column">
+    <div layout-gt-xs="row"
+         flex-gt-sm="15"
+         flex-sm="10"
+         layout-align-gt-xs="center center">
         <h2 class="font-2 fs-6 center"
             flex="grow">
             <span class="font-2" ng-bind="::vm.listing.title"></span>
             <span class="font-2 fs-1" ng-bind="'(' + vm.listing.count + ')'"></span>
         </h2>
-        <div class="center">
+        <div layout-xs="row" layout-wrap layout-align-xs="center center">
             <md-button class="md-primary"
                        ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs')}"
                        ng-click="vm.listing.add()">
@@ -51,18 +54,21 @@
 
     <div layout-xs="column"
          layout-gt-xs="row"
-         class="m-t-4">
+         class="m-t-2-s m-t-2-m m-t-4-l m-t-4-x">
         <div flex-sm="100"
              flex-md="70"
-             class="p-b-4-s p-b-4-m"
+             class="overflow-auto"
+             id="scroll"
+             listing-load="80"
+             listing-load-function="vm.incrementLimit"
              flex-gt-md="65">
             <p class="center"
                ng-if="!vm.listing.models.length">There are no&nbsp;<span ng-bind="::vm.listing.title || vm.model.data.title.toLowerCase()"></span>&nbsp;yet</p>
             <p class="center"
                ng-if="(vm.listing.models | listingFilter: vm.listing.filters : vm.listing.type).length === 0 && vm.listing.models.length">There are no <span ng-bind="::vm.listing.title.toLowerCase() || vm.model.data.title.toLowerCase()"></span> matching your selection</p>
-            <md-list class="p-t-0 p-b-8-s p-b-8-m">
+            <md-list class="p-r-2 p-l-2 p-r-3-s p-l-3-s">
                 <md-list-item layout="row"
-                              ng-repeat="model in vm.listing.models | listingFilter : vm.listing.filters : vm.listing.type | orderBy: vm.listing.sort.currentType track by model._id"
+                              ng-repeat="model in vm.listing.models | listingFilter : vm.listing.filters : vm.listing.type | orderBy: vm.listing.sort.currentType | limitTo: vm.limit track by model._id"
                               class="md-button md-raised"
                               ng-class="{'m-b-2' : !$last}">
                     <div layout="row" flex="100" ng-if="vm.listing.lastRemoved !== model">
@@ -85,7 +91,7 @@
                 </md-list-item>
             </md-list>
         </div>
-        <div class="p-r-2 p-l-4" flex="auto" hide-xs hide-sm>
+        <div class="p-r-2 p-b-2 p-l-2 overflow-auto" flex="auto" hide-xs hide-sm>
             <h2 class="font-2 center fs-4" ng-if="vm.listing.models.length">filters</h2>
             <div ng-repeat="filterType in ::vm.listing.filters" ng-if="vm.listing.models.length" ng-switch="::filterType.type" layout-wrap>
                 <md-input-container class="md-block m-b-0" flex-gt-sm ng-switch-when="text" flex="100">
@@ -94,7 +100,7 @@
                 </md-input-container>
                 <div ng-repeat="field in ::filterType.fields track by field.id" ng-switch-when="checkbox" flex="100" class="box-shadow-inset m-b-2 p-a-2">
                     <p class="p-b-1" ng-bind="field.title"></p>
-                    <md-radio-group ng-model="field.value" layout="row">
+                    <md-radio-group ng-model="field.value" layout="row" layout-wrap="">
                         <md-radio-button ng-value="true" class="md-primary m-r-8">True</md-radio-button>
                         <md-radio-button ng-value="false" class="md-primary m-r-8">False</md-radio-button>
                         <md-radio-button ng-value="'all'" class="md-primary m-r-8">All</md-radio-button>
@@ -143,19 +149,19 @@
                 </div>
                 <div ng-switch-when="date" ng-repeat="field in ::filterType.fields track by field.id" class="box-shadow-inset m-b-2 p-a-2">
                     <p ng-bind="field.title"></p>
-                    <div layout="row" class="m-t-2" layout-align="space-around center">
-                        <md-input-container class="m-b-0" flex="40">
+                    <div layout="row" class="m-t-2" layout-wrap layout-align="start center">
+                        <md-input-container class="m-b-0">
                             <label>From</label>
                             <md-datepicker ng-model="field.minValue" onkeydown="return false;" md-open-on-focus md-min-date="field.range[0]" md-max-date="field.maxValue || field.range[1]"></md-datepicker>
                         </md-input-container>
-                        <md-input-container class="m-b-0" flex="40">
+                        <md-input-container class="m-b-0">
                             <label>To</label>
                             <md-datepicker ng-model="field.maxValue" onkeydown="return false;" md-open-on-focus md-max-date="field.range[1]" md-min-date="field.minValue || field.range[0]"></md-datepicker>
                         </md-input-container>
                     </div>
                 </div>
             </div>
-            <div layout="row" layout-align="center end" ng-if="vm.listing.models.length">
+            <div layout="row" layout-align="center end" ng-if="vm.listing.models.length && vm.listing.type === 'posts'">
                 <md-button class="md-raised md-primary m-a-0 p-r-2 p-l-2" ng-click="vm.listing.resetFilters(vm.listing.filters, vm.listing.type)">Reset Filters</md-button>
             </div>
         </div>
@@ -171,7 +177,7 @@
             </md-input-container>
             <div ng-repeat="field in ::filterType.fields track by field.id" class="p-t-1 p-b-1" ng-switch-when="checkbox" flex="100">
                 <p class="p-b-1" ng-bind="field.title"></p>
-                <md-radio-group ng-model="field.value" layout="row">
+                <md-radio-group ng-model="field.value" layout="row" layout-wrap>
                     <md-radio-button ng-value="true" class="md-primary m-r-8">True</md-radio-button>
                     <md-radio-button ng-value="false" class="md-primary m-r-8">False</md-radio-button>
                     <md-radio-button ng-value="'all'" class="md-primary m-r-8">All</md-radio-button>
@@ -222,19 +228,19 @@
             </div>
             <div ng-switch-when="date" ng-repeat="field in ::filterType.fields track by field.id">
                 <p ng-bind="field.title"></p>
-                <div layout="row" class="m-t-2" layout-align="start center">
-                    <md-input-container class="m-b-0" flex="40">
+                <div layout="row" layout-wrap class="m-t-2" layout-align="start center">
+                    <md-input-container class="m-b-0">
                         <label>From</label>
                         <md-datepicker ng-model="field.minValue" onkeydown="return false;" md-open-on-focus md-min-date="field.range[0]" md-max-date="field.maxValue || field.range[1]"></md-datepicker>
                     </md-input-container>
-                    <md-input-container class="m-b-0" flex="40">
+                    <md-input-container class="m-b-0">
                         <label>To</label>
                         <md-datepicker ng-model="field.maxValue" onkeydown="return false;" md-open-on-focus md-max-date="field.range[1]" md-min-date="field.minValue || field.range[0]"></md-datepicker>
                     </md-input-container>
                 </div>
             </div>
         </div>
-        <div layout="row" layout-align="center end" ng-if="vm.listing.models.length">
+        <div layout="row" layout-align="center end" ng-if="vm.listing.models.length && vm.listing.type === 'posts'" >
             <md-button class="md-raised md-primary m-a-0 p-r-2 p-l-2" ng-click="vm.listing.resetFilters(vm.listing.filters, vm.listing.type)">Reset Filters</md-button>
         </div>
     </div>

@@ -86,10 +86,20 @@
   height: 90%;
 }
 
+.vh-100 {
+  height: 100vh;
+}
+
 @each $name, $value in $size-map {
   .fill-#{$name} {
     .#{$value} & {
       @extend .fill;
+    }
+  }
+
+  .vh-100-#{$name} {
+    .#{$value} & {
+      @extend .vh-100;
     }
   }
 }

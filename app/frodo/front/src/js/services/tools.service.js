@@ -1,13 +1,15 @@
 (function(){
-    angular.module('frodo').service('tools', ['$document', '$window', '$mdDialog', function($document, $window, $mdDialog){
+    angular.module('frodo').service('tools', ['$document', '$window', '$mdDialog', '$timeout', function($document, $window, $mdDialog, $timeout){
 
         function scrollToError(){
             var errorEl = angular.element(document.querySelectorAll('ui-view .ng-invalid'));
-            var windowTop = $window.pageYOffset;
-            var windowBottom = windowTop + $window.innerHeight;
-            var errorElTop = errorEl[1].getBoundingClientRect().top;
-            if(errorElTop < windowTop || errorElTop > windowBottom){
-                $document.scrollToElementAnimated(errorEl[1]);
+            var scrollEl = angular.element(document.querySelector('#scroll'));
+
+            if(scrollEl[0].clientHeight !== scrollEl[0].scrollHeight){
+                var diff = scrollEl.scrollTop() - errorEl[1].parentNode.offsetTop + 16;
+                if(diff !== 0){
+                    scrollEl.scrollToElementAnimated(errorEl[1], 18);
+                }
             }
         }
 

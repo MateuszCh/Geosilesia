@@ -12,21 +12,37 @@
         vm.$mdMedia = $mdMedia;
         vm.openSidenav = openSidenav;
         vm.openFilters = openFilters;
+        vm.scroll = scroll;
+
+        var scrollEl;
+
 
         var throttledOnScroll = tools.throttle(onScroll, 100);
 
         function onInit(){
             $transitions.onSuccess({}, function(){
                 $timeout(closeSidenav, 150);
-                // $window.scrollTo(0,0);
-                if(window.pageYOffset > 0) $document.scrollTop(0, 100);
+                $timeout(registerScroll, 1000);
             });
-            $window.addEventListener('scroll', throttledOnScroll);
+        }
+
+        function registerScroll(){
+            if(scrollEl){
+                scrollEl.off('scroll', throttledOnScroll);
+            }
+            scrollEl = angular.element(document.querySelector('#scroll'));
+            if(scrollEl){
+                scrollEl.on('scroll', throttledOnScroll);
+            }
         }
 
         function onScroll(){
-            vm.scrolled = window.pageYOffset > 0;
+            vm.scrolled = scrollEl.scrollTop() > 0;
             $scope.$apply();
+        }
+
+        function scroll(){
+            scrollEl.scrollTopAnimated(0);
         }
 
         function openSidenav(){

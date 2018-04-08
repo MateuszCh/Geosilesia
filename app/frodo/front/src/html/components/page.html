@@ -1,15 +1,14 @@
-<section class="p-a-3 p-a-1-s p-a-1-m"
+<section class="p-a-3 p-a-1-m p-a-1-s p-t-8-s p-t-8-m vh-100-l vh-100-x fill-s fill-m"
          layout="column">
-    <div class="pos-relative"
-         layout="row"
-         layout-xs="column"
-         layout-align="center center"
-         flex="100">
+    <div layout-gt-xs="row"
+         flex-gt-sm="15"
+         flex-sm="10"
+         layout-align-gt-xs="center center">
         <h2 class="font-2 fs-6 center"
             flex="grow"
             ng-bind="vm.edit ? 'Edit ' + vm.currentTitle + ' page' : 'Add new page'"></h2>
         <div layout="row"
-             layout-align-xs="space-around center">
+             layout-align-xs="center center">
             <md-button class="md-primary"
                        ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs'), 'busy col-t' : vm.actionStatus == 'save'}"
                        ng-click="vm.save($event)">Save</md-button>
@@ -19,7 +18,8 @@
                        ng-click="vm.removeDialog($event)">Delete</md-button>
         </div>
     </div>
-    <div class="m-t-4"
+    <div class="m-t-2 m-t-4-x m-t-4-l overflow-auto pos-relative"
+         id="scroll"
          layout
          layout-align="center">
         <div flex="100"

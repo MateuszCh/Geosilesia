@@ -206,7 +206,6 @@
 
         function incrementLimit(){
             if(vm.allFiles.length > vm.limit){
-                console.log('ech');
                 vm.limit += increment;
                 $scope.$apply();
             }

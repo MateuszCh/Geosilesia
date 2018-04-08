@@ -30,7 +30,6 @@
                 fullscreen: true,
                 clickOutsideToClose: true
             }).then(function(answer){
-                console.log(answer);
                 if(answer) vm.model[vm.field.id] = answer;
 
             }, function(){})

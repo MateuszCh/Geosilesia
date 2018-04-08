@@ -1,4 +1,4 @@
-<section ng-class="{'p-t-8-s p-t-8-m p-a-3 p-a-1-m p-a-1-s' : !vm.isPopup, 'vh-100' : !vm.isPopup && !(vm.$mdMedia('xs') || vm.$mdMedia('sm')), 'fill' : !vm.isPopup && (vm.$mdMedia('xs') || vm.$mdMedia('sm'))}" layout="column">
+<section ng-class="{'p-t-8-s p-t-8-m p-a-3 p-a-1-m p-a-1-s fill-s fill-m vh-100-l vh-100-x' : !vm.isPopup}" layout="column">
     <h2 class="font-2 fs-6 center" ng-if="!vm.isPopup">
         <span class="font-2">Files</span>
         <span class="font-2 fs-1" ng-bind="'(' + vm.allFiles.length + ')'"></span>
@@ -31,7 +31,7 @@
                                         </md-select>
                                     </md-input-container>
                                 </div>
-                                <div layout-wrap layout-align="start start" layout="row" flex="grow" class="overflow-auto" listing-load="80" listing-load-function="vm.incrementLimit">
+                                <div layout-wrap layout-align="start start" layout="row" flex="grow" class="overflow-auto" id="scroll" listing-load="80" listing-load-function="vm.incrementLimit">
                                     <div ng-repeat="file in vm.allFiles | filesFilter: vm.search | limitTo: vm.limit" class="ratio-1-1 cursor-pointer transition-2" flex-xs="25" flex-gt-sm="10" flex-sm="20" ng-click="vm.existingFilesIndex(file.localId)" ng-switch="::file.type != 'application/pdf'" ng-class="{'current-file' : vm.currentExistingIndex === file.localId}">
                                         <div class="fill-90 transition down" ng-switch-when="true" image-loaded="up">
                                             <img src="{{::file.src}}" class="fill object-fit-cover">
