@@ -23,6 +23,7 @@
             $transitions.onSuccess({}, function(){
                 $timeout(closeSidenav, 150);
                 $timeout(registerScroll, 1000);
+                vm.scrolled = false;
             });
         }
 

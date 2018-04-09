@@ -20,7 +20,7 @@
                            ng-value="item"><span ng-bind="::item"></span></md-option>
             </md-select>
         </md-input-container>
-        <md-button class="md-raised md-primary" ng-click="vm.model[vm.field.id] = null">Clear</md-button>
+        <md-button class="md-raised md-warn" ng-click="vm.model[vm.field.id] = null">Clear</md-button>
     </div>
 
     <div ng-switch-when="catalogue" layout="row" layout-align="start center">
@@ -35,7 +35,7 @@
                 </md-option>
             </md-select>
         </md-input-container>
-        <md-button class="md-raised md-primary" ng-click="vm.model[vm.field.id] = null">Clear</md-button>
+        <md-button class="md-raised md-warn" ng-click="vm.model[vm.field.id] = null">Clear</md-button>
     </div>
 
     <md-input-container ng-switch-when="textarea" class="m-b-0">
@@ -72,7 +72,7 @@
                            onkeydown="return false;"
                            md-open-on-focus=""></md-datepicker>
         </md-input-container>
-        <md-button class="md-raised md-primary" ng-click="vm.model[vm.field.id] = null">Clear</md-button>
+        <md-button class="md-raised md-warn" ng-click="vm.model[vm.field.id] = null">Clear</md-button>
     </div>
 
     <div ng-switch-when="repeater" layout="column">
@@ -86,11 +86,11 @@
         <div layout="column" layout-align="start start">
             <p ng-bind="::vm.field.title"></p>
             <md-button class="md-primary md-raised m-l-0 m-r-0" ng-click="vm.showFiles($event)">Select file</md-button>
-            <md-button class="md-primary md-raised m-l-0 m-r-0" ng-click="vm.model[vm.field.id] = undefined" ng-if="vm.model[vm.field.id]">Clear</md-button>
+            <md-button class="md-warn md-raised m-l-0 m-r-0" ng-click="vm.model[vm.field.id] = undefined" ng-if="vm.model[vm.field.id]">Clear</md-button>
         </div>
         <div layout="row" layout-wrap="" layout-align="center start" flex="grow" class="p-l-4" ng-if="vm.model[vm.field.id]">
             <p flex="100" class="m-b-2">Selected file: <span ng-bind="vm.model[vm.field.id].filename"></span></p>
-            <div flex="50" class="ratio-1-1" ng-if="vm.model[vm.field.id].type !== 'application/pdf'">
+            <div flex="50" class="ratio-16-9" ng-if="vm.model[vm.field.id].type !== 'application/pdf'">
                 <img src="{{vm.model[vm.field.id].src}}" class="fill object-fit-contain">
             </div>
         </div>

@@ -1,20 +1,17 @@
-@import "settings";
-@import 'general/fonts';
-@import 'general/position';
-@import 'general/colors';
-@import 'general/ratio';
-@import 'general/display';
+@import 'styles/settings';
+@import 'styles/fonts';
+@import 'styles/position';
+@import 'styles/colors';
+@import 'styles/ratio';
+@import 'styles/display';
+@import 'styles/animation';
+@import 'styles/borders';
+@import 'styles/overflow';
 
-@import 'general/general';
-@import 'general/md-amends';
+@import 'styles/general';
+@import 'styles/md-amends';
+@import 'styles/components';
+@import 'styles/images';
+@import 'styles/inputs';
 
 
-@import 'general/media';
-@import "general/animation";
-
-@import "general/buttons";
-@import "general/forms";
-@import "components/customPostTypes";
-@import "components/addField";
-@import "components/addFile";
-@import "components/field";

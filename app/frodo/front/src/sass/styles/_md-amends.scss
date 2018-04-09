@@ -8,10 +8,6 @@
 .menudemoBasicUsage .menu-demo-container {
   min-height: 200px; }
 
-//body {
-//  position: relative !important;
-//}
-
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -30,13 +26,13 @@ md-backdrop {
   position: relative;
 }
 
-//button.md-primary {
-//  color: white !important;
-//}
-
 .close {
   position: absolute;
   top:12px;
   right:12px;
   cursor: pointer;
+}
+
+button.md-primary {
+  color: white !important;
 }

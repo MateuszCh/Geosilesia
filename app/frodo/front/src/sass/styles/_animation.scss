@@ -35,3 +35,28 @@
       transform: scale(1.0);
     }
 }
+
+.transition {
+  transition: all .5s ease;
+}
+
+.transition-2 {
+  transition: all .2s ease;
+}
+
+.down {
+  transform: scale(0);
+}
+
+.up {
+  transform: scale(1) !important;
+}
+
+.slide-up {
+  max-height: 1200px;
+  transition: all .5s ease;
+}
+
+.slide-up.ng-hide {
+  max-height: 0;
+}

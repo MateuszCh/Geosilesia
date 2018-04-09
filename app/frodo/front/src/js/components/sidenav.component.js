@@ -13,11 +13,6 @@
 
         vm.navigation = [
             {
-                title: 'Dashboard',
-                family: 'dashboard',
-
-            },
-            {
                 title: 'Pages',
                 family: 'pages',
 
