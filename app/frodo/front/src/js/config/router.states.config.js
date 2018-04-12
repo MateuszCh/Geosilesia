@@ -114,7 +114,7 @@
                     postType: statePromises.component
                 }
             },
-                files: {
+            files: {
                 name: 'files',
                 url: '/files',
                 component: 'files',

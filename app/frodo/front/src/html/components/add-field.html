@@ -1,10 +1,10 @@
 <div layout="row"
+     layout-align="start start"
      class="m-b-2 bg-col-w p-a-2 box-shadow-inset">
-    <div class="m-r-2"
-         hide-xs>
-        <md-button class="md-warn md-raised m-a-0"
-                   ng-click="vm.remove()">Delete</md-button>
-    </div>
+    <md-button class="md-warn md-raised m-a-0 m-r-2"
+               hide-xs
+               aria-label="delete field"
+               ng-click="vm.remove()">Delete</md-button>
     <div flex="grow"
          layout="column">
         <div layout="row">
@@ -21,6 +21,7 @@
             </md-input-container>
             <div hide-gt-xs>
                 <md-button class="md-fab md-warn"
+                           aria-label="delete field"
                            ng-click="vm.remove()">Delete</md-button>
             </div>
         </div>
@@ -75,6 +76,7 @@
             </div>
             <div class="right">
                 <md-button class="md-primary md-raised"
+                           aria-label="add repeater"
                            ng-click="vm.addRepeaterField()">Add new repeater field</md-button>
             </div>
 

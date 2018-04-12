@@ -9,13 +9,12 @@
         controller: FilesController
     });
 
-    FilesController.$inject = ['$scope', 'filesService', '$timeout', '$rootScope', '$mdDialog', 'tools', '$mdMedia'];
+    FilesController.$inject = ['$scope', 'filesService', '$rootScope', '$mdDialog', 'tools', '$mdMedia', '$mdSidenav'];
 
-    function FilesController($scope, filesService, $timeout, $rootScope, $mdDialog, tools, $mdMedia) {
+    function FilesController($scope, filesService, $rootScope, $mdDialog, tools, $mdMedia, $mdSidenav) {
         var vm = this;
         vm.$onInit = onInit;
         vm.$mdMedia = $mdMedia;
-        vm.chooseView = chooseView;
         vm.upload = upload;
         vm.onFilesSelect = onFilesSelect;
         vm.editIndex = editIndex;
@@ -26,6 +25,7 @@
         vm.chooseFile = chooseFile;
         vm.existingFilesIndex = existingFilesIndex;
         vm.incrementLimit = incrementLimit;
+        vm.openEdit = openEdit;
         vm.activeView = 'choose';
         vm.catalogues = [];
         vm.data = [];
@@ -37,13 +37,12 @@
 
         function onInit(){
             if(!vm.allFiles){
-                vm.section = true;
                 vm.loadingFiles = true;
                 filesService.getAllFiles()
                     .then(function(response){
                         vm.loadingFiles = false;
                         vm.allFiles = response.data;
-                        getCatalogues(vm.allFiles);
+                        setCatalogues(vm.allFiles);
                         setDates();
                         setLocalId();
                     })
@@ -52,7 +51,7 @@
                     })
             } else {
                 vm.allFiles = vm.allFiles.data;
-                getCatalogues(vm.allFiles);
+                setCatalogues(vm.allFiles);
                 setDates();
                 setLocalId();
             }
@@ -63,7 +62,6 @@
                     vm.currentFilterLength = l;
                 }
             })
-
         }
 
         function setDates(){
@@ -73,35 +71,41 @@
                 if(isNaN(file.date.getTime())){
                     file.date = null;
                 }
-
             })
+        }
+
+        function setLocalId(){
+            var i = 0;
+            for(i; i < vm.allFiles.length; i++){
+                vm.allFiles[i].localId = i;
+            }
+        }
+
+        function setCatalogues(arr){
+            var catalogues = [];
+            arr.forEach(function(fileData){
+                if(fileData.catalogue){
+                    var catalogue = fileData.catalogue.toLowerCase();
+                    if(vm.catalogues.indexOf(catalogue) === -1 && catalogues.indexOf(catalogue) === -1){
+                        catalogues.push(catalogue);
+                    }
+                }
+            });
+            vm.catalogues = vm.catalogues.concat(catalogues).sort();
+            filesService.setCatalogues(vm.catalogues);
         }
 
         function editIndex(index) {
             vm.currentIndex = index;
-            getCatalogues(vm.data);
+            setCatalogues(vm.data);
         }
 
         function existingFilesIndex(index){
             vm.currentExistingIndex = index;
-            getCatalogues(vm.allFiles);
-            if($mdMedia('xs')){
-                vm.editPopUp = true;
+            setCatalogues(vm.allFiles);
+            if($mdMedia('xs') || $mdMedia('sm')){
+                openEdit();
             }
-        }
-
-        function chooseView(view) {
-            vm.activeView = view;
-        }
-
-        function removeFile(i) {
-            vm.files.splice(i, 1);
-            vm.data.splice(i, 1);
-            vm.currentIndex = 0;
-        }
-
-        function chooseFile(){
-            $mdDialog.hide(vm.allFiles[vm.currentExistingIndex]);
         }
 
         function onFilesSelect() {
@@ -112,6 +116,12 @@
             }
             vm.currentIndex = 0;
             vm.data[0].isOpen = true;
+        }
+
+        function removeFile(i) {
+            vm.files.splice(i, 1);
+            vm.data.splice(i, 1);
+            vm.currentIndex = 0;
         }
 
         function upload(ev) {
@@ -130,7 +140,7 @@
                             vm.allFiles = vm.allFiles.concat(response.data);
                             setLocalId();
                             setDates();
-                            getCatalogues(vm.allFiles);
+                            setCatalogues(vm.allFiles);
                             vm.data = [];
                             vm.files = [];
                             tools.infoDialog('Files uploaded successfully', ev);
@@ -146,14 +156,15 @@
             }
         }
 
+        function chooseFile(){
+            $mdDialog.hide(vm.allFiles[vm.currentExistingIndex]);
+        }
+
         function deleteFile(ev){
             vm.actionStatus = 'delete';
             filesService.remove(vm.allFiles[vm.currentExistingIndex]._id)
                 .then(function(r){
                     vm.actionStatus = '';
-                    if($mdMedia('xs')){
-                        vm.editPopUp = false;
-                    }
                     tools.infoDialog(vm.allFiles[vm.currentExistingIndex].filename + ' removed successfully', ev);
                     vm.allFiles.splice(vm.currentExistingIndex, 1);
                     setLocalId();
@@ -168,40 +179,18 @@
             tools.removeDialog(ev, deleteFile, 'Are you sure you want to delete ' + vm.allFiles[vm.currentExistingIndex].filename);
         }
 
-        function setLocalId(){
-            var i = 0;
-            for(i; i < vm.allFiles.length; i++){
-                vm.allFiles[i].localId = i;
-            }
-        }
-
         function saveFile(ev){
             vm.actionStatus = 'save';
             filesService.edit(vm.allFiles[vm.currentExistingIndex])
                 .then(function(r){
                     vm.actionStatus = '';
-                    getCatalogues(vm.allFiles);
+                    setCatalogues(vm.allFiles);
                     tools.infoDialog(vm.allFiles[vm.currentExistingIndex].filename + ' saved successfully', ev);
                 })
                 .catch(function(e){
                     vm.actionStatus = '';
                     tools.infoDialog(e.data.error || e.data, ev);
                 })
-        }
-
-        function getCatalogues(arr){
-            var catalogues = [];
-            arr.forEach(function(fileData){
-                if(fileData.catalogue){
-                    var catalogue = fileData.catalogue.toLowerCase();
-                    if(vm.catalogues.indexOf(catalogue) === -1 && catalogues.indexOf(catalogue) === -1){
-                        catalogues.push(catalogue);
-                    }
-                }
-            });
-            vm.catalogues = vm.catalogues.concat(catalogues).sort();
-            filesService.setCatalogues(vm.catalogues);
-
         }
 
         function incrementLimit(){
@@ -212,6 +201,10 @@
             if(vm.limit >= vm.allFiles.length){
                 $rootScope.$broadcast('loadFinished');
             }
+        }
+
+        function openEdit(){
+            $mdSidenav('editFiles').open();
         }
 
     }

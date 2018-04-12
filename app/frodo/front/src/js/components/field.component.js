@@ -31,19 +31,10 @@
                 clickOutsideToClose: true
             }).then(function(answer){
                 if(answer) vm.model[vm.field.id] = answer;
-
             }, function(){})
         }
 
-
-
     }
-
-    angular.module('frodo').controller('filesDialogController', ['$scope', '$mdDialog', function($scope, $mdDialog){
-        $scope.hide = function(){
-            $mdDialog.hide();
-        }
-    }]);
 
     FilesDialogController.$inject = ['$scope', '$mdDialog'];
 

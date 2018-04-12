@@ -33,6 +33,7 @@ md-backdrop {
   cursor: pointer;
 }
 
-button.md-primary {
+button.md-primary.md-fab,
+button.md-primary.md-raised{
   color: white !important;
 }

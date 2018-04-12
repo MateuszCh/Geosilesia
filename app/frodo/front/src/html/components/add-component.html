@@ -1,9 +1,10 @@
 <div layout="row"
+     layout-align="start start"
      class="m-b-2 bg-col-w p-a-2 box-shadow-inset">
-    <div class="m-r-2"
-         hide-xs>
-        <md-button class="md-warn md-raised m-a-0" ng-click="vm.remove()">Delete</md-button>
-    </div>
+    <md-button class="md-warn md-raised m-a-0 m-r-2"
+               hide-xs
+               ng-click="vm.remove()"
+               aria-label="delete component">Delete</md-button>
     <div flex="grow"
          layout="column">
         <div layout="row">
@@ -13,12 +14,14 @@
                            ng-model="vm.currentComponent">
                     <md-option ng-repeat="item in ::vm.components track by item.id"
                                ng-value="item">
-                        <span ng-bind="item.title"></span>
+                        <span ng-bind="::item.title"></span>
                     </md-option>
                 </md-select>
             </md-input-container>
             <div hide-gt-xs>
-                <md-button class="md-fab md-warn" ng-click="vm.remove()">Delete</md-button>
+                <md-button class="md-fab md-warn"
+                           ng-click="vm.remove()"
+                           aria-label="delete component">Delete</md-button>
             </div>
         </div>
         <field model="vm.model.data"
