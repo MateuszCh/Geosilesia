@@ -31,6 +31,19 @@
                             hide-sm
                             md-direction="bottom">Edit {{::vm.listing.title}}</md-tooltip>
             </md-button>
+            <md-button class="md-primary"
+                       ngf-select
+                       ng-click="vm.listing.importClickEvent = $event"
+                       ngf-change="vm.listing.importPosts($event)"
+                       ngf-accept="'.json'"
+                       ngf-pattern="'.json'"
+                       ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs')}"
+                       ng-if="vm.listing.type === 'posts'">
+                <span class="col-w">Import</span>
+                <md-tooltip hide-xs
+                            hide-sm
+                            md-direction="bottom">Import from JSON</md-tooltip>
+            </md-button>
             <md-menu md-position-mode="target-right target"
                      ng-if="vm.listing.models.length">
                 <md-button
@@ -63,6 +76,8 @@
 
     <div layout-xs="column"
          layout-gt-xs="row"
+         flex-gt-sm="85"
+         flex-sm="90"
          class="m-t-2-s m-t-2-m m-t-4-l m-t-4-x overflow-auto">
         <div flex-sm="100"
              flex-md="70"
@@ -80,7 +95,7 @@
                               ng-repeat="model in vm.listing.models | listingFilter : vm.listing.filters : vm.listing.type | orderBy: vm.listing.sort.currentType | limitTo: vm.limit track by model._id"
                               class="md-button md-raised"
                               ng-class="{'m-b-2' : !$last}">
-                    <div layout="row" flex="100" ng-if="vm.listing.lastRemoved !== model">
+                    <div layout="row" layout-align="center center" flex="100" ng-if="vm.listing.lastRemoved !== model">
                         <a flex="80"
                            ui-sref="{{vm.listing.postEdit}}"
                            layout="row"
@@ -108,7 +123,7 @@
              hide-xs
              hide-sm>
             <h2 class="font-2 center fs-4" ng-if="vm.listing.models.length">filters</h2>
-            <div ng-repeat="filterType in ::vm.listing.filters"
+            <div ng-repeat="filterType in vm.listing.filters"
                  ng-if="vm.listing.models.length"
                  ng-switch="::filterType.type"
                  layout-wrap>
@@ -177,6 +192,7 @@
                         <md-slider-container flex="80"
                                              layout="row">
                             <md-slider min="{{field.range[0]}}"
+                                       step="0.1"
                                        max="{{field.maxValue || field.range[1]}}"
                                        ng-model="field.minValue"></md-slider>
                         </md-slider-container>
@@ -194,6 +210,7 @@
                         <md-slider-container flex="80"
                                              layout="row">
                             <md-slider max="{{field.range[1]}}"
+                                       step="0.1"
                                        min="{{field.minValue || field.range[0]}}"
                                        ng-model="field.maxValue"></md-slider>
                         </md-slider-container>
@@ -254,7 +271,7 @@
            ng-if="!vm.listing.models.length">There are no <span ng-bind="vm.listing.title"></span> to filter</p>
         <h2 class="font-2 center fs-4"
             ng-if="vm.listing.models.length">filters</h2>
-        <div ng-repeat="filterType in ::vm.listing.filters"
+        <div ng-repeat="filterType in vm.listing.filters"
              ng-if="vm.listing.models.length"
              ng-switch="::filterType.type"
              layout-wrap>

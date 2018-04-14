@@ -1,9 +1,9 @@
 (function(){
     angular.module('frodo').service('listingFactory', ListingFactory);
 
-    ListingFactory.$inject = ['$state', '$injector', '$timeout', '$rootScope', '$mdDialog', '$filter', 'filesService'];
+    ListingFactory.$inject = ['$state', '$injector', '$timeout', '$rootScope', '$mdDialog', '$filter', 'filesService', 'tools'];
 
-    function ListingFactory($state, $injector, $timeout, $rootScope, $mdDialog, $filter, filesService){
+    function ListingFactory($state, $injector, $timeout, $rootScope, $mdDialog, $filter, filesService, tools){
 
         function setRange(modelData, id, dates){
             var values = [];
@@ -176,6 +176,7 @@
                 },
                 removeTimeout: undefined,
                 lastRemoved: undefined,
+                importClickEvent: undefined,
                 remove: function(model, ev){
                     $timeout.cancel(this.removeTimeout);
                     if(this.lastRemoved){
@@ -200,6 +201,52 @@
                             self.setRemoveStatus();
                             onRemoveError(error.data, ev);
                         })
+                },
+                importPosts: function(e){
+                    var self = this;
+                    var reader = new FileReader();
+                    reader.onload = function(e){
+                        var posts = JSON.parse(e.target.result);
+                        var correctPosts = [];
+                        posts.forEach(function(post){
+                           var props = Object.keys(post);
+                           if(props.length === 1 && post.title){
+                               correctPosts.push(post);
+                           } else if (props.length === 2 && post.title && post.data){
+                               correctPosts.push(post);
+                           }
+                        });
+                        if(correctPosts.length){
+                            var data = {
+                                postType : self.postType,
+                                posts : correctPosts
+                            };
+                            self.apiService.importPosts(data)
+                                .then(function(response){
+                                    var currentLength = response.data.posts.length;
+                                    var added = currentLength - self.count;
+                                    self.models = response.data.posts;
+                                    self.count = currentLength;
+                                    self.sort = createSort(self, response.data.fields);
+                                    self.filters = createFilters(response.data);
+                                    tools.infoDialog(added + ' ' + self.title + (added > 1 ? ' were' : ' was') +  ' successfully imported', self.importClickEvent);
+                                })
+                                .catch(function(error){
+                                    tools.infoDialog('There was error importing ' + self.title, self.importClickEvent);
+                                })
+                        }
+                    };
+
+                    if(e.target.files && e.target.files[0]){
+                        var error = e.target.files[0].$error;
+                        if(error){
+                            if(error === 'pattern'){
+                                tools.infoDialog('Wrong file format!', self.importClickEvent);
+                            }
+                        } else {
+                            reader.readAsText(e.target.files[0]);
+                        }
+                    }
                 },
                 removeDialog: function(ev, model){
                     var confirm = $mdDialog.confirm()

@@ -5,6 +5,10 @@
             return requestService.send('/frodo/post', 'POST', data);
         }
 
+        function importPosts(posts){
+            return requestService.send('/frodo/import', 'POST', posts);
+        }
+
         function edit(data){
             return requestService.send('/frodo/post/edit', 'PUT', data);
         }
@@ -19,6 +23,7 @@
 
         return {
             create: create,
+            importPosts: importPosts,
             edit: edit,
             getById: getById,
             remove: remove

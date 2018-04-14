@@ -25,10 +25,66 @@ module.exports = {
                         })
                         .catch(next);
                 } else {
-                    res.status(422).send({error: "There is no " + postProps.type + " post type."})
+                    res.status(422).send({error: "There is no " + postProps.type + " post type."});
                 }
             })
             .catch(next);
+    },
+    import(req, res, next){
+        const postType = req.body.postType;
+        const correctPosts = req.body.posts.filter(post => {
+           const props = Object.keys(post);
+           if(props.length === 1 && post.title){
+               return true;
+           } else if (props.length === 2 && post.title && post.data){
+               return true;
+           } else {
+               return false;
+           }
+        });
+        if(correctPosts.length){
+            Promise.all([Counter.findOne({}), PostType.findOne({type: postType}).populate('posts')])
+                .then(response =>{
+                    const counter = response[0];
+                    const postTypeModel = response[1];
+
+                    const postModels = [];
+
+                    correctPosts.forEach((post, i) => {
+                       const model = {
+                           title: post.title,
+                           data: post.data,
+                           type: postType,
+                           id: counter.counter + i
+                       };
+                       postModels.push(model);
+                    });
+
+                    Post.create(postModels)
+                        .then(posts => {
+                            const ids = [];
+                            posts.forEach(post => {
+                                ids.push(post._id);
+                            });
+
+                            postTypeModel.update({$push: {posts: {$each: ids}}})
+                                .then(() =>{
+                                    Promise.all([Counter.update(counter, {$inc: {counter: posts.length}}), PostType.findOne({type: postType}).populate('posts')])
+                                        .then(response => {
+                                            console.log("Counter incremented");
+                                            res.send(response[1]);
+                                        })
+                                        .catch(next);
+                                })
+                                .catch(next);
+                        })
+                        .catch(next);
+
+                })
+                .catch(next);
+        } else{
+            res.status(422).send({error: "There is no valid posts to import"});
+        }
     },
     edit(req, res, next){
         const postProps = req.body;
