@@ -9,6 +9,14 @@
             return requestService.send('/frodo/import', 'POST', posts);
         }
 
+        function exportPosts(postType){
+            return requestService.send('/frodo/export/' + postType, 'GET');
+        }
+
+        function removeTmpFile(postType){
+            return requestService.send('/frodo/removeTmpFile/' + postType, 'DELETE');
+        }
+
         function edit(data){
             return requestService.send('/frodo/post/edit', 'PUT', data);
         }
@@ -24,6 +32,8 @@
         return {
             create: create,
             importPosts: importPosts,
+            exportPosts: exportPosts,
+            removeTmpFile: removeTmpFile,
             edit: edit,
             getById: getById,
             remove: remove

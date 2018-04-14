@@ -33,6 +33,9 @@ mongoose.connection.on('open', () => {
 const frodo = express();
 
 frodo.use('/uploads', express.static(`${__dirname}/../../uploads`));
+
+frodo.use('/export', express.static(__dirname));
+
 frodo.use('/', express.static(`${__dirname}/../front/public`));
 
 frodo.get(['*'], function(req, res){

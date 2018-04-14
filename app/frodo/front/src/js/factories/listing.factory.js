@@ -252,6 +252,34 @@
                         }
                     }
                 },
+                exportStatus: undefined,
+                exportTimeout: undefined,
+                exportPosts: function(e){
+                    var self = this;
+                    $timeout.cancel(self.exportTimeout);
+                    self.exportStatus = true;
+                    self.apiService.exportPosts(self.postType)
+                        .then(function(response){
+                            self.exportStatus = false;
+                            var file = document.createElement("a");
+                            file.setAttribute('href', response.data);
+                            file.setAttribute('download', '');
+                            file.click();
+                            self.exportTimeout = $timeout(function(){
+                                self.apiService.removeTmpFile(self.postType)
+                                    .then(function(response){
+                                        // console.log(response);
+                                    })
+                                    .catch(function(error){
+                                        console.log(error);
+                                    })
+                            }, 10000);
+                        })
+                        .catch(function(error){
+                            self.exportStatus = false;
+                            tools.infoDialog('There was erorr exporting', e);
+                        })
+                },
                 removeDialog: function(ev, model){
                     var confirm = $mdDialog.confirm()
                         .title('Are you sure you want to delete ' + model.title + '?')

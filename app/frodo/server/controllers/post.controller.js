@@ -1,5 +1,6 @@
 const Post = require('../models/post'),
       Counter = require('../models/counter'),
+      fs = require('fs'),
       PostType = require('../models/postType');
 
 module.exports = {
@@ -30,7 +31,7 @@ module.exports = {
             })
             .catch(next);
     },
-    import(req, res, next){
+    importPosts(req, res, next){
         const postType = req.body.postType;
         const correctPosts = req.body.posts.filter(post => {
            const props = Object.keys(post);
@@ -85,6 +86,30 @@ module.exports = {
         } else{
             res.status(422).send({error: "There is no valid posts to import"});
         }
+    },
+    exportPosts(req, res, next){
+        const postType = req.params.postType;
+        Post.find({type: postType})
+            .then(posts => {
+                const formattedPosts = JSON.stringify(posts.map(post => {
+                    return {
+                        title: post.title,
+                        data: post.data
+                    }
+                }), null, 4);
+                fs.writeFile(`${__dirname}/../${postType}.json`, formattedPosts, err => {
+                    if(err) next();
+                    res.send(`/export/${postType}.json`);
+                })
+            })
+            .catch(next);
+    },
+    removeTmpFile(req, res, next){
+        const postType = req.params.postType;
+        fs.unlink(`${__dirname}/../${postType}.json`, (err) => {
+            if(err) next();
+            res.send('temporary file removed');
+        });
     },
     edit(req, res, next){
         const postProps = req.body;
