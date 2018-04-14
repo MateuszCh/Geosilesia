@@ -202,6 +202,7 @@
                             onRemoveError(error.data, ev);
                         })
                 },
+                importStatus : undefined,
                 importPosts: function(e){
                     var self = this;
                     var reader = new FileReader();
@@ -221,8 +222,10 @@
                                 postType : self.postType,
                                 posts : correctPosts
                             };
+                            self.importStatus = true;
                             self.apiService.importPosts(data)
                                 .then(function(response){
+                                    self.importStatus = false;
                                     var currentLength = response.data.posts.length;
                                     var added = currentLength - self.count;
                                     self.models = response.data.posts;
@@ -232,6 +235,7 @@
                                     tools.infoDialog(added + ' ' + self.title + (added > 1 ? ' were' : ' was') +  ' successfully imported', self.importClickEvent);
                                 })
                                 .catch(function(error){
+                                    self.importStatus = false;
                                     tools.infoDialog('There was error importing ' + self.title, self.importClickEvent);
                                 })
                         }

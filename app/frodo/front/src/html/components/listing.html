@@ -37,7 +37,7 @@
                        ngf-change="vm.listing.importPosts($event)"
                        ngf-accept="'.json'"
                        ngf-pattern="'.json'"
-                       ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs')}"
+                       ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs'), 'busy' : vm.listing.importStatus}"
                        ng-if="vm.listing.type === 'posts'">
                 <span class="col-w">Import</span>
                 <md-tooltip hide-xs

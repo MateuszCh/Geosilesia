@@ -36,4 +36,10 @@ md-backdrop {
 button.md-primary.md-fab,
 button.md-primary.md-raised{
   color: white !important;
+  &.busy {
+    color: transparent !important;
+    span {
+      color: transparent !important;
+    }
+  }
 }
