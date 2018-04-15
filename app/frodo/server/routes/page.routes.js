@@ -10,4 +10,8 @@ module.exports = app => {
     app.get('/frodo/page/:id', PageController.getById);
 
     app.delete('/frodo/page/:id', PageController.delete);
+
+    app.get('/frodo/exportPages', PageController.exportPages);
+
+    app.post('/frodo/importPages', PageController.importPages);
 };

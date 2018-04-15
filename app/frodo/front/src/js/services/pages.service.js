@@ -21,12 +21,22 @@
             return requestService.send('/frodo/page/' + id, 'DELETE');
         }
 
+        function exportPosts(){
+            return requestService.send('/frodo/exportPages', 'GET');
+        }
+
+        function importPosts(data){
+            return requestService.send('/frodo/importPages', 'POST', data);
+        }
+
         return {
             create: create,
             edit: edit,
             getAll: getAll,
             getById: getById,
-            remove: remove
+            remove: remove,
+            exportPosts: exportPosts,
+            importPosts: importPosts
         }
 
     }]);

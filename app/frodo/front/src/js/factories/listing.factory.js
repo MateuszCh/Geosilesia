@@ -238,7 +238,7 @@
                                 })
                                 .catch(function(error){
                                     self.importStatus = false;
-                                    tools.infoDialog('There was error importing ' + self.title, self.importClickEvent);
+                                    tools.infoDialog(error.data.error, self.importClickEvent);
                                 })
                         } else {
                             tools.infoDialog('There is no correct posts to import', e);
