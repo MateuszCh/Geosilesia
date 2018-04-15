@@ -135,5 +135,12 @@ module.exports = {
 
             })
             .catch(next);
+    },
+    deleteExportFile(req, res, next){
+        const filename = req.params.filename;
+        fs.unlink(`${__dirname}/../${filename}.json`, err =>{
+            if(err) next();
+            res.send('export file removed');
+        })
     }
 };

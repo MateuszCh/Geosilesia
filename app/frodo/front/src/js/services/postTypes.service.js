@@ -33,6 +33,14 @@
             return requestService.send('/frodo/postType/' + id, 'DELETE');
         }
 
+        function exportPosts(){
+            return requestService.send('/frodo/exportPostTypes', 'GET');
+        }
+
+        function importPosts(data){
+            return requestService.send('/frodo/importPostTypes', 'POST', data);
+        }
+
         return {
             create: create,
             edit: edit,
@@ -41,7 +49,9 @@
             getByIdWithPosts: getByIdWithPosts,
             getByType: getByType,
             getByTypeWithPosts: getByTypeWithPosts,
-            remove: remove
+            remove: remove,
+            exportPosts: exportPosts,
+            importPosts: importPosts
         }
     }]);
 })();

@@ -18,4 +18,6 @@ module.exports = app => {
 
     app.delete('/frodo/file/:id', FileController.delete);
 
+    app.delete('/frodo/file/exportfile/:filename', FileController.deleteExportFile);
+
 };

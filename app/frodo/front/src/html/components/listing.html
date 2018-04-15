@@ -37,8 +37,7 @@
                        ngf-change="vm.listing.importPosts($event)"
                        ngf-accept="'.json'"
                        ngf-pattern="'.json'"
-                       ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs'), 'busy' : vm.listing.importStatus}"
-                       ng-if="vm.listing.type === 'posts'">
+                       ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs'), 'busy' : vm.listing.importStatus}">
                 <span class="col-w">Import</span>
                 <md-tooltip hide-xs
                             hide-sm
@@ -46,7 +45,7 @@
             </md-button>
             <md-button class="md-primary"
                        ng-class="{'md-fab' : !vm.$mdMedia('xs'), 'md-raised' : vm.$mdMedia('xs'), 'busy' : vm.listing.exportStatus}"
-                       ng-if="vm.listing.type === 'posts' && vm.listing.models.length"
+                       ng-if="vm.listing.models.length"
                        ng-click="vm.listing.exportPosts($event)">
                 <span class="col-w">Export</span>
                 <md-tooltip hide-xs

@@ -42,6 +42,10 @@
             })
         }
 
+        function deleteExportFile(filename){
+            return requestService.send('/frodo/file/exportfile/' + filename, 'DELETE');
+        }
+
         return {
             getAllFiles: getAllFiles,
             getCatalogues: getCatalogues,
@@ -49,7 +53,8 @@
             getByCatalogue: getByCatalogue,
             upload: upload,
             edit: edit,
-            remove: remove
+            remove: remove,
+            deleteExportFile: deleteExportFile
         }
     }]);
 })();

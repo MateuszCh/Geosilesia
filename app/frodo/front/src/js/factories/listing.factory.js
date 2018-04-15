@@ -176,7 +176,6 @@
                 },
                 removeTimeout: undefined,
                 lastRemoved: undefined,
-                importClickEvent: undefined,
                 remove: function(model, ev){
                     $timeout.cancel(this.removeTimeout);
                     if(this.lastRemoved){
@@ -203,41 +202,46 @@
                         })
                 },
                 importStatus : undefined,
+                importClickEvent: undefined,
                 importPosts: function(e){
                     var self = this;
                     var reader = new FileReader();
                     reader.onload = function(e){
                         var posts = JSON.parse(e.target.result);
-                        var correctPosts = [];
-                        posts.forEach(function(post){
-                           var props = Object.keys(post);
-                           if(props.length === 1 && post.title){
-                               correctPosts.push(post);
-                           } else if (props.length === 2 && post.title && post.data){
-                               correctPosts.push(post);
-                           }
-                        });
-                        if(correctPosts.length){
+
+                        if(posts.length){
+
                             var data = {
-                                postType : self.postType,
-                                posts : correctPosts
+                                posts: posts
                             };
+                            if(self.postType) data.postType = self.postType;
+
                             self.importStatus = true;
                             self.apiService.importPosts(data)
                                 .then(function(response){
                                     self.importStatus = false;
-                                    var currentLength = response.data.posts.length;
+                                    var currentLength;
+                                    if(response.data.posts){
+                                        currentLength = response.data.posts.length;
+                                    } else {
+                                        currentLength = response.data.length;
+                                    }
                                     var added = currentLength - self.count;
-                                    self.models = response.data.posts;
+                                    self.models = response.data.posts || response.data;
                                     self.count = currentLength;
-                                    self.sort = createSort(self, response.data.fields);
-                                    self.filters = createFilters(response.data);
+                                    if(self.type === 'posts'){
+                                        self.sort = createSort(self, response.data.fields);
+                                        self.filters = createFilters(response.data);
+                                    }
+
                                     tools.infoDialog(added + ' ' + self.title + (added > 1 ? ' were' : ' was') +  ' successfully imported', self.importClickEvent);
                                 })
                                 .catch(function(error){
                                     self.importStatus = false;
                                     tools.infoDialog('There was error importing ' + self.title, self.importClickEvent);
                                 })
+                        } else {
+                            tools.infoDialog('There is no correct posts to import', e);
                         }
                     };
 
@@ -266,7 +270,7 @@
                             file.setAttribute('download', '');
                             file.click();
                             self.exportTimeout = $timeout(function(){
-                                self.apiService.removeTmpFile(self.postType)
+                                filesService.deleteExportFile(self.postType || self.type)
                                     .then(function(response){
                                         // console.log(response);
                                     })

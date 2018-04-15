@@ -10,4 +10,8 @@ module.exports = app => {
     app.get('/frodo/component/:id', PostTypeController.getById);
 
     app.delete('/frodo/component/:id', PostTypeController.delete);
+
+    app.get('/frodo/exportComponents', PostTypeController.exportPostTypes);
+
+    app.post('/frodo/importComponents', PostTypeController.importPostTypes);
 };

@@ -16,4 +16,8 @@ module.exports = app => {
     app.get('/frodo/postTypeByTypePosts/:type', PostTypeController.getByTypeWithPosts);
 
     app.delete('/frodo/postType/:id', PostTypeController.delete);
+
+    app.get('/frodo/exportPostTypes', PostTypeController.exportPostTypes);
+
+    app.post('/frodo/importPostTypes', PostTypeController.importPostTypes);
 };

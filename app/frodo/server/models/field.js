@@ -15,7 +15,7 @@ const FieldSchema = new Schema ({
         type: String,
         required: [true, 'id of field is required']
     },
-        selectOptions: {
+    selectOptions: {
         type: String
     },
     repeaterFields: {
