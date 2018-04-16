@@ -3,7 +3,7 @@ const PostTypeController = require('../controllers/postType.controller');
 module.exports = app => {
     app.post('/frodo/component', PostTypeController.create);
 
-    app.put('/frodo/component/edit/:id', PostTypeController.edit);
+    app.put('/frodo/component/edit', PostTypeController.edit);
 
     app.get('/frodo/component', PostTypeController.getAll);
 

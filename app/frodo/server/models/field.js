@@ -56,7 +56,8 @@ FieldSchema.virtual('options')
         selectOptions.forEach((option) => {
             if(option) options.push(option.replace(/;/g, ""));
         });
-        return options
+
+        return Array.from((new Set(options)).values());
     });
 
 module.exports = FieldSchema;

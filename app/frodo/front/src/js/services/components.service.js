@@ -5,8 +5,8 @@
             return requestService.send('/frodo/component', 'POST', data);
         }
 
-        function edit(id, data){
-            return requestService.send('/frodo/component/edit/' + id, 'PUT', data);
+        function edit(data){
+            return requestService.send('/frodo/component/edit', 'PUT', data);
         }
 
         function getAll(){

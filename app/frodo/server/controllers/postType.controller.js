@@ -147,7 +147,7 @@ module.exports = {
                             repeaterFields: field.repeaterFields
                         };
 
-                        if(field.selectOptions) newField.selectOptions = field.selectedOptions;
+                        if(field.selectOptions) newField.selectOptions = field.selectOptions;
                         return newField;
                     });
 

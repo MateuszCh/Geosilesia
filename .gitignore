@@ -7,8 +7,8 @@ app/front/public/js
 app/front/public/index.html
 app/front/public/images
 app/front/package-lock.json
-app/server/node_modules/
-app/server/package-lock.json
+app/node_modules/
+app/package-lock.json
 config.json
 app/frodo/front/node_modules/
 app/frodo/front/package-lock.json

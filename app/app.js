@@ -1,9 +1,9 @@
 const express = require('express'),
       vhost = require('vhost'),
-      routes = require('./routes/routes'),
+      routes = require('./server/routes/routes'),
       bodyParser = require('body-parser'),
-      frodo = require('../frodo/server/app'),
-      frodoRoutes = require('../frodo/server/routes');;
+      frodo = require('./frodo/server/app'),
+      frodoRoutes = require('./frodo/server/routes');;
 
 const mainApp = express();
 const app = express();
@@ -37,4 +37,4 @@ app.use((err, req, res, next) => {
     }
 });
 
-module.exports = app;
+app.listen(app.get('port'), () => console.log("Running on port 3000"));
