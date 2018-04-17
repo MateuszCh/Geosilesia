@@ -4,7 +4,9 @@ const express = require('express'),
       config = require('../../config'),
       Counter = require('./models/counter');
 
-mongoose.connect(config.mongoUrl);
+mongoose.connect(config.mongoUrl).then(
+    () => {console.log("Connected to mongoDb")},
+    (err) => {throw err});
 mongoose.Promise = global.Promise;
 
 mongoose.connection.on('open', () => {
