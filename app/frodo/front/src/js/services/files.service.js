@@ -4,14 +4,14 @@
         var _catalogues;
 
         function getAllFiles(){
-            return requestService.send('/frodo/file', 'GET');
+            return requestService.send('/api/file', 'GET');
         }
 
         function getCatalogues(){
             if(_catalogues){
                 return _catalogues;
             } else {
-                return requestService.send('/frodo/file/catalogues', 'GET');
+                return requestService.send('/api/file/catalogues', 'GET');
             }
         }
 
@@ -20,20 +20,20 @@
         }
 
         function getByCatalogue(catalogue){
-            return requestService.send('/frodo/file/' + catalogue, 'GET');
+            return requestService.send('/api/file/' + catalogue, 'GET');
         }
 
         function remove(id){
-            return requestService.send('/frodo/file/' + id, 'DELETE');
+            return requestService.send('/api/file/' + id, 'DELETE');
         }
 
         function edit(data){
-            return requestService.send('/frodo/file', 'PUT', data);
+            return requestService.send('/api/file', 'PUT', data);
         }
 
         function upload(files, filesData){
             return Upload.upload({
-                url: '/frodo/file',
+                url: '/api/file',
                 data: {
                     files: files,
                     filesData: filesData
@@ -43,7 +43,7 @@
         }
 
         function deleteExportFile(filename){
-            return requestService.send('/frodo/file/exportfile/' + filename, 'DELETE');
+            return requestService.send('/api/file/exportfile/' + filename, 'DELETE');
         }
 
         return {

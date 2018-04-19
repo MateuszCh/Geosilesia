@@ -1,25 +1,17 @@
 const express = require('express'),
-      vhost = require('vhost'),
       bodyParser = require('body-parser'),
-      path = require('path'),
-      frodo = require('./frodo/server/app'),
-      frodoRoutes = require('./frodo/server/routes');;
+      path = require('path');
 
-const mainApp = express();
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-mainApp.use('/uploads', express.static(`${__dirname}/uploads`));
-mainApp.use('/', express.static(`${__dirname}/front/public`));
-mainApp.get(['*'], (req, res) => res.sendFile(path.resolve(`${__dirname}/front/public/index.html`)));
+app.use('/uploads', express.static(`${__dirname}/frodo/uploads`));
+app.use('/', express.static(`${__dirname}/front/public`));
+app.get(['*'], (req, res) => res.sendFile(path.resolve(`${__dirname}/front/public/index.html`)));
 
-frodoRoutes(app);
-
-app.set('port', process.env.PORT || 3000);
-app.use(vhost('frodo.*', frodo));
-app.use(vhost('*', mainApp));
+app.set('port', process.env.PORT || 3001);
 
 app.use((err, req, res, next) => {
     console.log(err);
@@ -39,4 +31,4 @@ app.use((err, req, res, next) => {
     }
 });
 
-app.listen(app.get('port'), () => console.log("Running on port 3000"));
+app.listen(app.get('port'), () => console.log("Running on port 3001"));

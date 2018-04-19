@@ -1,17 +1,17 @@
 const PageController = require('../controllers/page.controller');
 
 module.exports = app => {
-    app.post('/frodo/page', PageController.create);
+    app.post('/api/page', PageController.create);
 
-    app.put('/frodo/page/edit', PageController.edit);
+    app.put('/api/page/edit', PageController.edit);
 
-    app.get('/frodo/page', PageController.getAll);
+    app.get('/api/page', PageController.getAll);
 
-    app.get('/frodo/page/:id', PageController.getById);
+    app.get('/api/page/:id', PageController.getById);
 
-    app.delete('/frodo/page/:id', PageController.delete);
+    app.delete('/api/page/:id', PageController.delete);
 
-    app.get('/frodo/exportPages', PageController.exportPages);
+    app.get('/api/exportPages', PageController.exportPages);
 
-    app.post('/frodo/importPages', PageController.importPages);
+    app.post('/api/importPages', PageController.importPages);
 };

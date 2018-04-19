@@ -6,7 +6,7 @@ const multer = require('multer'),
 
 const storage = multer.diskStorage({
    destination: function(req, file, cb){
-	   cb(null, `${__dirname}/../../../uploads/`);
+	   cb(null, `${__dirname}/../../uploads/`);
    },
    filename: function(req, file, cb){
 	   cb(null, path.basename(file.originalname, path.extname(file.originalname)) + '-' + Date.now() + path.extname(file.originalname));
@@ -125,7 +125,7 @@ module.exports = {
         File.findByIdAndRemove(req.params.id)
             .then(file => {
                 if(file){
-                    fs.unlink(`${__dirname}/../../../uploads/${file.filename}`, (err) => {
+                    fs.unlink(`${__dirname}/../../uploads/${file.filename}`, (err) => {
                         if(err) next();
                         res.status(200).send('File removed successfully');
                     });

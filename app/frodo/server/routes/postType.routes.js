@@ -1,23 +1,23 @@
 const PostTypeController = require('../controllers/postType.controller');
 
 module.exports = app => {
-    app.post('/frodo/postType', PostTypeController.create);
+    app.post('/api/postType', PostTypeController.create);
 
-    app.put('/frodo/postType/edit', PostTypeController.edit);
+    app.put('/api/postType/edit', PostTypeController.edit);
 
-    app.get('/frodo/postType', PostTypeController.getAll);
+    app.get('/api/postType', PostTypeController.getAll);
 
-    app.get('/frodo/postType/:id', PostTypeController.getById);
+    app.get('/api/postType/:id', PostTypeController.getById);
 
-    app.get('/frodo/postTypePosts/:id', PostTypeController.getByIdWithPosts);
+    app.get('/api/postTypePosts/:id', PostTypeController.getByIdWithPosts);
 
-    app.get('/frodo/postTypeByType/:type', PostTypeController.getByType);
+    app.get('/api/postTypeByType/:type', PostTypeController.getByType);
 
-    app.get('/frodo/postTypeByTypePosts/:type', PostTypeController.getByTypeWithPosts);
+    app.get('/api/postTypeByTypePosts/:type', PostTypeController.getByTypeWithPosts);
 
-    app.delete('/frodo/postType/:id', PostTypeController.delete);
+    app.delete('/api/postType/:id', PostTypeController.delete);
 
-    app.get('/frodo/exportPostTypes', PostTypeController.exportPostTypes);
+    app.get('/api/exportPostTypes', PostTypeController.exportPostTypes);
 
-    app.post('/frodo/importPostTypes', PostTypeController.importPostTypes);
+    app.post('/api/importPostTypes', PostTypeController.importPostTypes);
 };

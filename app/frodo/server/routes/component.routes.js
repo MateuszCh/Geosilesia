@@ -1,17 +1,17 @@
 const PostTypeController = require('../controllers/postType.controller');
 
 module.exports = app => {
-    app.post('/frodo/component', PostTypeController.create);
+    app.post('/api/component', PostTypeController.create);
 
-    app.put('/frodo/component/edit', PostTypeController.edit);
+    app.put('/api/component/edit', PostTypeController.edit);
 
-    app.get('/frodo/component', PostTypeController.getAll);
+    app.get('/api/component', PostTypeController.getAll);
 
-    app.get('/frodo/component/:id', PostTypeController.getById);
+    app.get('/api/component/:id', PostTypeController.getById);
 
-    app.delete('/frodo/component/:id', PostTypeController.delete);
+    app.delete('/api/component/:id', PostTypeController.delete);
 
-    app.get('/frodo/exportComponents', PostTypeController.exportPostTypes);
+    app.get('/api/exportComponents', PostTypeController.exportPostTypes);
 
-    app.post('/frodo/importComponents', PostTypeController.importPostTypes);
+    app.post('/api/importComponents', PostTypeController.importPostTypes);
 };

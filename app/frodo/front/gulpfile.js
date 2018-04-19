@@ -121,12 +121,9 @@ gulp.task('inject', ['copy'], function(){
 // Browser-Sync Task
 gulp.task('browser-sync', ['inject'], function(){
     browserSync.init({
-        port: 3001,
+        port: 3002,
         proxy: {
             target: 'localhost:3000',
-            reqHeaders: {
-                host: 'frodo.localhost:3000'
-            },
             ws: false
         }
     })

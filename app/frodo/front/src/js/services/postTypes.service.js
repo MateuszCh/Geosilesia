@@ -2,43 +2,43 @@
     angular.module('frodo').service('postTypesService', ['requestService', function(requestService){
 
         function create(data){
-            return requestService.send('/frodo/postType', 'POST', data);
+            return requestService.send('/api/postType', 'POST', data);
         }
 
         function edit(data){
-            return requestService.send('/frodo/postType/edit', 'PUT', data);
+            return requestService.send('/api/postType/edit', 'PUT', data);
         }
 
         function getAll(){
-            return requestService.send('/frodo/postType', 'GET');
+            return requestService.send('/api/postType', 'GET');
         }
 
         function getById(id){
-            return requestService.send('/frodo/postType/' + id, 'GET');
+            return requestService.send('/api/postType/' + id, 'GET');
         }
 
         function getByIdWithPosts(id){
-            return requestService.send('/frodo/postTypePosts/' + id, 'GET');
+            return requestService.send('/api/postTypePosts/' + id, 'GET');
         }
 
         function getByType(type){
-            return requestService.send('/frodo/postTypeByType/' + type, 'GET');
+            return requestService.send('/api/postTypeByType/' + type, 'GET');
         }
 
         function getByTypeWithPosts(type){
-            return requestService.send('/frodo/postTypeByTypePosts/' + type, 'GET');
+            return requestService.send('/api/postTypeByTypePosts/' + type, 'GET');
         }
 
         function remove(id){
-            return requestService.send('/frodo/postType/' + id, 'DELETE');
+            return requestService.send('/api/postType/' + id, 'DELETE');
         }
 
         function exportPosts(){
-            return requestService.send('/frodo/exportPostTypes', 'GET');
+            return requestService.send('/api/exportPostTypes', 'GET');
         }
 
         function importPosts(data){
-            return requestService.send('/frodo/importPostTypes', 'POST', data);
+            return requestService.send('/api/importPostTypes', 'POST', data);
         }
 
         return {

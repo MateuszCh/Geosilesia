@@ -2,31 +2,31 @@
     angular.module('frodo').service('pagesService', ['requestService', function(requestService){
 
         function create(data){
-            return requestService.send('/frodo/page', 'POST', data);
+            return requestService.send('/api/page', 'POST', data);
         }
 
         function edit(data){
-            return requestService.send('/frodo/page/edit', 'PUT', data);
+            return requestService.send('/api/page/edit', 'PUT', data);
         }
 
         function getAll(){
-            return requestService.send('/frodo/page', 'GET');
+            return requestService.send('/api/page', 'GET');
         }
 
         function getById(id){
-            return requestService.send('/frodo/page/' + id, 'GET');
+            return requestService.send('/api/page/' + id, 'GET');
         }
 
         function remove(id){
-            return requestService.send('/frodo/page/' + id, 'DELETE');
+            return requestService.send('/api/page/' + id, 'DELETE');
         }
 
         function exportPosts(){
-            return requestService.send('/frodo/exportPages', 'GET');
+            return requestService.send('/api/exportPages', 'GET');
         }
 
         function importPosts(data){
-            return requestService.send('/frodo/importPages', 'POST', data);
+            return requestService.send('/api/importPages', 'POST', data);
         }
 
         return {
