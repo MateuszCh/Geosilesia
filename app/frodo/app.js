@@ -8,6 +8,7 @@ const express = require('express'),
       mongoose = require('mongoose'),
       config = require('../config'),
       UserController = require('./server/controllers/user.controller'),
+      MongoStore = require('connect-mongo')(session),
       Counter = require('./server/models/counter'),
       routes = require('./server/routes');
 
@@ -50,7 +51,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
 app.use(session({
-    cookie: {maxAge: 60000},
+    cookie: {maxAge: 600000},
+    store: new MongoStore({mongooseConnection: mongoose.connection}),
     name: 'frodo',
     secret: 'secret',
     saveUninitialized: true,

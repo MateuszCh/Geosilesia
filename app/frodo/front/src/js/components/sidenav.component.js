@@ -11,6 +11,7 @@
         vm.$onInit = onInit;
         vm.redirect = redirect;
         vm.logout = logout;
+        vm.userService = userService;
 
         vm.navigation = [
             {
@@ -81,6 +82,7 @@
             userService.logout()
                 .then(function(response){
                     vm.logoutStatus = false;
+                    userService.setUser();
                     $location.path('/login');
                 })
                 .catch(function(err){

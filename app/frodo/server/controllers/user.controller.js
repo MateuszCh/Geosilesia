@@ -56,6 +56,20 @@ module.exports = {
           .then(user => res.send(!!user))
           .catch(next);
   },
+  isAuthenticated(req, res, next){
+      if(req.user){
+          res.send('Authenticated');
+      } else {
+          res.status(401).send({error: 'unauthorized'});
+      }
+  },
+  getUser(req, res, next){
+      if(req.user){
+          res.send({username: req.user.username, id: req.user.id});
+      } else {
+          res.send(undefined);
+      }
+  },
   createUsers(){
       const users = config.users.filter(user => user.username && user.password);
       if(users.length){

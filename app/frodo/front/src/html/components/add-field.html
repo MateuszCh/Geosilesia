@@ -9,9 +9,8 @@
          layout="column">
         <div layout="row">
             <md-input-container flex="grow">
-                <label for="fieldTitle">Title</label>
-                <input id="fieldTitle"
-                       name="{{vm.repeat ? vm.repeat + vm.order + '.title' : vm.order + '.title'}}"
+                <label>Title</label>
+                <input name="{{vm.repeat ? vm.repeat + vm.order + '.title' : vm.order + '.title'}}"
                        type="text"
                        ng-model="vm.fieldModel.title"
                        required>
@@ -26,9 +25,8 @@
             </div>
         </div>
         <md-input-container>
-            <label for="fieldId">Id</label>
-            <input id="fieldId"
-                   name="{{vm.repeat ? vm.repeat + vm.order + '.id' : vm.order + '.id'}}"
+            <label>Id</label>
+            <input name="{{vm.repeat ? vm.repeat + vm.order + '.id' : vm.order + '.id'}}"
                    type="text"
                    ng-change="vm.formatIdString()"
                    ng-model="vm.fieldModel.id"

@@ -6,4 +6,8 @@ module.exports = app => {
     app.get('/user/exist', UserController.exist);
 
     app.get('/user/logout', UserController.logout);
+
+    app.get('/user/isAuthenticated', UserController.isAuthenticated);
+
+    app.get('/user', UserController.getUser);
 };

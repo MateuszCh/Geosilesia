@@ -8,8 +8,8 @@
         }
     });
 
-    LoginController.$inject = ['userService', '$location'];
-    function LoginController(userService, $location){
+    LoginController.$inject = ['userService', '$state'];
+    function LoginController(userService, $state){
         var vm = this;
         vm.$onInit = onInit;
         vm.login = login;
@@ -26,9 +26,11 @@
             if(vm.form.$valid){
                 vm.actionStatus = true;
                 userService.login(vm.data)
-                    .then(function(){
+                    .then(function(response){
                         vm.actionStatus = false;
-                        $location.path('/pages');
+                        var user = response.data;
+                        userService.setUser(user.username, user.id, 1);
+                        $state.go('main');
                     })
                     .catch(function(error){
                         vm.actionStatus = false;

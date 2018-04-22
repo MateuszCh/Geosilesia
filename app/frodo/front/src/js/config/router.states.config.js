@@ -1,12 +1,17 @@
 (function(){
    angular.module('frodo').config(['$stateProvider', 'statePromises', '$urlRouterProvider', function($stateProvider, statePromises, $urlRouterProvider){
 
-       $urlRouterProvider.when('/', ['$state', function($state){
-           $state.go('pages');
-       }]);
-
-
         var states = {
+            main: {
+                name: 'main',
+                title: 'pages',
+                url: '/',
+                component: 'listing',
+                family: 'pages',
+                resolve: {
+                    model: statePromises.pages
+                }
+            },
             pages: {
                 name: 'pages',
                 title: 'pages',

@@ -17,6 +17,7 @@
             <input type="text"
                    id="username"
                    required
+                   ng-enter="vm.login()"
                    name="username"
                    ng-model="vm.data.username">
             <div ng-messages="vm.form.username.$error">
@@ -28,6 +29,7 @@
             <input type="password"
                    id="password"
                    name="password"
+                   ng-enter="vm.login()"
                    required
                    ng-model="vm.data.password">
             <div ng-messages="vm.form.password.$error">

@@ -8,7 +8,7 @@
                    layout="row"
                    layout-align="left"
                    ng-click="vm.redirect(item.family)"
-                   aria-label="{{::item.title + ' przycisk'}}">
+                   aria-label="{{::item.title + ' button'}}">
             <span ng-bind="::item.title"
                   class="transition left"
                   ng-class="{'fs-3 col-7' : vm.currentFamily === item.family}"></span>
@@ -19,15 +19,30 @@
                    layout-align="left"
                    layout="row"
                    class="md-no-focus"
-                   aria-label="{{::type.pluralTitle + ' przycisk'}}"
+                   aria-label="{{::type.pluralTitle + ' button'}}"
                    ng-click="vm.redirect('posts', {type: type.type})">
             <span ng-bind="type.pluralTitle"
                   class="transition left"
                   ng-class="{'fs-3 col-7' : vm.currentFamily === 'posts' + type.type}"></span>
         </md-button>
     </md-list-item>
-    <md-list-item class="m-t-4">
+    <md-list-item class="m-t-4"
+                  ng-if="vm.userService.isLogged()">
+        <md-button flex="100"
+                   aria-label="account button"
+                   layout-align="left"
+                   layout="row"
+                   class="md-no-focus">
+            <span ng-bind="vm.userService.getUser().username"></span>
+        </md-button>
+    </md-list-item>
+    <md-list-item>
         <md-button ng-click="vm.logout()"
+                   flex="100"
+                   aria-label="logout button"
+                   layout-align="left"
+                   layout="row"
+                   class="md-no-focus"
                    ng-class="{'busy' : vm.logoutStatus}">
             <span>Logout</span>
         </md-button>

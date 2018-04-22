@@ -21,7 +21,7 @@
         }
 
         function createFilters(modelData){
-            if($state.current.name !== 'posts'){
+            if($state.current.family !== 'posts'){
                 return {
                     textFilter: {
                         type: 'text',
@@ -156,16 +156,16 @@
 
         function createListing(model){
             var listing = {
-                type: $state.current.name,
+                type: $state.current.family,
                 models: model.data.posts || model.data,
-                id: model.data.id || $state.current.name,
+                id: model.data.id || $state.current.family,
                 add : function(){
                     $state.go(this.type + 'Add', this.postType ? {type: this.postType} : undefined);
                 },
                 postTypeEdit: function(){
                     $state.go('postTypesEdit', {id: this.postTypeId})
                 },
-                apiService: $injector.get($state.current.name + 'Service'),
+                apiService: $injector.get($state.current.family + 'Service'),
                 removeStatus: undefined,
                 setRemoveStatus: function(id, result, status){
                     this.removeStatus = {
@@ -233,7 +233,7 @@
                                         self.sort = createSort(self, response.data.fields);
                                         self.filters = createFilters(response.data);
                                     }
-
+                                    if($state.current.family === 'postTypes') $rootScope.$broadcast('postTypesUpdated');
                                     tools.infoDialog(added + ' ' + self.title + (added > 1 ? ' were' : ' was') +  ' successfully imported', self.importClickEvent);
                                 })
                                 .catch(function(error){
