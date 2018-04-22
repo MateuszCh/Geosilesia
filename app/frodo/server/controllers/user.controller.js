@@ -56,39 +56,81 @@ module.exports = {
           .then(user => res.send(!!user))
           .catch(next);
   },
-  createAdmin(){
-      User.findOne({})
-          .then(user => {
-              if(user === null){
-                  if(config && config.admin && config.admin.username && config.admin.password){
+  createUsers(){
+      const users = config.users.filter(user => user.username && user.password);
+      if(users.length){
+          const usersPromises = users.map(user => {
+              return User.findOne({username: user.username})
+          });
+          Promise.all(usersPromises)
+              .then(response => {
+                  const usersToCreate = response.map((user, i) => !user && i).filter(i => i || i === 0);
+                  if(usersToCreate.length){
                       Counter.findOne({})
                           .then(counter => {
-                              bcrypt.genSalt(12, (err, salt) => {
-                                  bcrypt.hash(config.admin.password, salt, (err, hash) => {
-                                      User.create({
-                                          username: config.admin.username,
-                                          password: hash,
-                                          id: counter.counter
-                                      }).then(() => {
-                                          console.log('User created');
-                                          Counter.update(counter, {$inc: {counter: 1}})
-                                              .then(() => console.log("Counter incremented"))
-                                              .catch(err => console.log(err));
-                                      }).catch(err => {
-                                          console.log(err);
+                              console.log(usersToCreate);
+                              usersToCreate.forEach((user, i) => {
+                                  bcrypt.genSalt(12, (err, salt) => {
+                                      bcrypt.hash(users[user].password, salt, (err, hash) => {
+                                          User.create({
+                                              username: users[user].username,
+                                              password: hash,
+                                              id: counter.counter + i
+                                          }).then(userCreated => {
+                                              console.log(`${userCreated.username} user was successfully created`);
+                                          }).catch(err => {
+                                              console.log(users[user]);
+                                              console.log(err);
+                                          })
                                       })
                                   })
-                              })
+                              });
+                              Counter.update(counter, {$inc: {counter: usersToCreate.length}})
+                                  .then(counter => console.log("Counter incremented"))
+                                  .catch(err => console.log(err));
                           })
                           .catch(err => console.log(err));
                   } else {
-                      console.log('incorrect config');
+                      console.log('There is no users to create');
                   }
-              } else {
-                  console.log('user already exists');
-              }
-          })
-          .catch(err => console.log(err));
+              })
+              .catch(err => console.log(err));
+      } else {
+          console.log('There is no correct user in config');
+      }
+
+      // User.findOne({})
+      //     .then(user => {
+      //         if(user === null){
+      //             if(config && config.admin && config.admin.username && config.admin.password){
+      //                 Counter.findOne({})
+      //                     .then(counter => {
+      //                         bcrypt.genSalt(12, (err, salt) => {
+      //                             bcrypt.hash(config.admin.password, salt, (err, hash) => {
+      //                                 User.create({
+      //                                     username: config.admin.username,
+      //                                     password: hash,
+      //                                     id: counter.counter
+      //                                 }).then(() => {
+      //                                     console.log('User created');
+      //                                     Counter.update(counter, {$inc: {counter: 1}})
+      //                                         .then(() => console.log("Counter incremented"))
+      //                                         .catch(err => console.log(err));
+      //                                 }).catch(err => {
+      //                                     console.log(err);
+      //                                 })
+      //                             })
+      //                         })
+      //                     })
+      //                     .catch(err => console.log(err));
+      //             } else {
+      //                 console.log('incorrect config');
+      //             }
+      //         } else {
+      //             console.log('user already exists');
+      //         }
+      //     })
+      //     .catch(err => console.log(err));
   }
 };
 

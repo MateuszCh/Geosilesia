@@ -6,10 +6,10 @@ const express = require('express'),
       session = require('express-session'),
       passport = require('passport'),
       mongoose = require('mongoose'),
-      routes = require('./server/routes'),
       config = require('../config'),
       UserController = require('./server/controllers/user.controller'),
-      Counter = require('./server/models/counter');
+      Counter = require('./server/models/counter'),
+      routes = require('./server/routes');
 
 mongoose.connect(config.mongoUrl).then(
     () => {console.log("Connected to mongoDb")},
@@ -25,7 +25,7 @@ mongoose.connection.on('open', () => {
                 .then((counter) => {
                    console.log("Newly created:");
                    console.log(counter);
-                   UserController.createAdmin();
+                   UserController.createUsers();
                 })
                 .catch((err) => {
                    console.log(err);
@@ -33,7 +33,7 @@ mongoose.connection.on('open', () => {
           } else {
              console.log("Exists:");
              console.log(counter);
-             UserController.createAdmin();
+             UserController.createUsers();
           }
        })
        .catch((err) => {
