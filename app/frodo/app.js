@@ -1,9 +1,14 @@
 const express = require('express'),
       path = require('path'),
       bodyParser = require('body-parser'),
+      cookieParser = require('cookie-parser'),
+      expressValidator = require('express-validator'),
+      session = require('express-session'),
+      passport = require('passport'),
       mongoose = require('mongoose'),
       routes = require('./server/routes'),
       config = require('../config'),
+      UserController = require('./server/controllers/user.controller'),
       Counter = require('./server/models/counter');
 
 mongoose.connect(config.mongoUrl).then(
@@ -20,6 +25,7 @@ mongoose.connection.on('open', () => {
                 .then((counter) => {
                    console.log("Newly created:");
                    console.log(counter);
+                   UserController.createAdmin();
                 })
                 .catch((err) => {
                    console.log(err);
@@ -27,6 +33,7 @@ mongoose.connection.on('open', () => {
           } else {
              console.log("Exists:");
              console.log(counter);
+             UserController.createAdmin();
           }
        })
        .catch((err) => {
@@ -39,6 +46,36 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({extended: false}));
+
+app.use(cookieParser());
+
+app.use(session({
+    cookie: {maxAge: 60000},
+    name: 'frodo',
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// app.use(expressValidator({
+//     errorFormatter: function(param, msg, value) {
+//         var namespace = param.split('.')
+//             , root    = namespace.shift()
+//             , formParam = root;
+//
+//         while(namespace.length) {
+//             formParam += '[' + namespace.shift() + ']';
+//         }
+//         return {
+//             param : formParam,
+//             msg   : msg,
+//             value : value
+//         };
+//     }
+// }));
 
 routes(app);
 

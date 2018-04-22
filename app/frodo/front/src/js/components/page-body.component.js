@@ -20,7 +20,9 @@
         var throttledOnScroll = tools.throttle(onScroll, 100);
 
         function onInit(){
-            $transitions.onSuccess({}, function(){
+            vm.login = $state.current.name === 'login';
+            $transitions.onSuccess({}, function(e){
+                vm.login = $state.current.name === 'login';
                 $timeout(closeSidenav, 150);
                 $timeout(registerScroll, 1000);
                 vm.scrolled = false;

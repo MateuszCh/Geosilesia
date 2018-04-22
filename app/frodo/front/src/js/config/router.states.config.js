@@ -123,6 +123,14 @@
                     allFiles: statePromises.files
                 }
             },
+            login: {
+                name: 'login',
+                url:'/login',
+                component: 'login',
+                resolve: {
+                    exist: statePromises.exist
+                }
+            },
             error: {
                 name: 'error',
                 component: 'error'

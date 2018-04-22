@@ -23,7 +23,13 @@
                    ng-click="vm.redirect('posts', {type: type.type})">
             <span ng-bind="type.pluralTitle"
                   class="transition left"
-                  ng-class="{'fs-3 col-7' : vm.currentFamily === 'posts' + type.type}"  ></span>
+                  ng-class="{'fs-3 col-7' : vm.currentFamily === 'posts' + type.type}"></span>
+        </md-button>
+    </md-list-item>
+    <md-list-item class="m-t-4">
+        <md-button ng-click="vm.logout()"
+                   ng-class="{'busy' : vm.logoutStatus}">
+            <span>Logout</span>
         </md-button>
     </md-list-item>
 </md-list>

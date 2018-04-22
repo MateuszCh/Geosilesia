@@ -5,11 +5,12 @@
         controller: SidenavController
     });
 
-    SidenavController.$inject = ['postTypesService', '$location', '$scope', '$transitions', '$state'];
-    function SidenavController(postTypesService, $location, $scope, $transitions, $state){
+    SidenavController.$inject = ['postTypesService', '$location', '$scope', '$transitions', '$state', 'userService'];
+    function SidenavController(postTypesService, $location, $scope, $transitions, $state, userService){
         var vm  = this;
         vm.$onInit = onInit;
         vm.redirect = redirect;
+        vm.logout = logout;
 
         vm.navigation = [
             {
@@ -72,6 +73,19 @@
             postTypesService.getAll()
                 .then(function(response){
                     vm.postTypes = response.data;
+                })
+        }
+
+        function logout(){
+            vm.logoutStatus = true;
+            userService.logout()
+                .then(function(response){
+                    vm.logoutStatus = false;
+                    $location.path('/login');
+                })
+                .catch(function(err){
+                    vm.logoutStatus = false;
+                    console.log(err);
                 })
         }
 

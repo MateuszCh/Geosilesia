@@ -20,6 +20,9 @@
   .size-x & {
     padding-left: 20%;
   }
+  &--login {
+    padding-left: 0 !important;
+  }
 }
 
 // scrollbars

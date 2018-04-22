@@ -39,6 +39,9 @@
         // get all files
         files: ['filesService', function(filesService){
             return filesService.getAllFiles();
+        }],
+        exist: ['userService', function(userService){
+            return userService.exist();
         }]
     });
 })();
