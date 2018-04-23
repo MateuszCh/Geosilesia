@@ -10,4 +10,6 @@ module.exports = app => {
     app.get('/user/isAuthenticated', UserController.isAuthenticated);
 
     app.get('/user', UserController.getUser);
+
+    app.post('/user/changePassword', UserController.changePassword);
 };

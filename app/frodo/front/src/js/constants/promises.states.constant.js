@@ -42,6 +42,9 @@
         }],
         exist: ['userService', function(userService){
             return userService.exist();
+        }],
+        user: ['userService', function(userService){
+            return userService.user();
         }]
     });
 })();

@@ -136,6 +136,14 @@
                     exist: statePromises.exist
                 }
             },
+            account: {
+                name: 'account',
+                url: '/account',
+                component: 'account',
+                resolve: {
+                    user: statePromises.user
+                }
+            },
             error: {
                 name: 'error',
                 component: 'error'

@@ -70,6 +70,38 @@ module.exports = {
           res.send(undefined);
       }
   },
+  changePassword(req, res, next){
+    const {id, password, newPassword, newPasswordConfirmation} = req.body;
+    if(id && password && newPassword && newPasswordConfirmation && (newPasswordConfirmation === newPassword) && (password !== newPassword)){
+        User.findOne({id: id})
+            .then(user => {
+                if(user) {
+                    bcrypt.compare(password, user.password)
+                        .then(response => {
+                            if(!response){
+                                res.status(401).send({error: 'Wrong password'});
+                            } else {
+                                bcrypt.genSalt(12, (err, salt) => {
+                                    bcrypt.hash(newPassword, salt, (err, hash) => {
+                                        user.password = hash;
+
+                                        user.save()
+                                            .then(() => res.send('Password changed'))
+                                            .catch(next);
+                                    })
+                                })
+                            }
+                        })
+                        .catch(next);
+                } else {
+                    res.status(400).send({error: `There is no user with id: ${id}`})
+                }
+            })
+            .catch(next);
+    } else {
+        res.status(400).send({error: 'Incorrect data'});
+    }
+  },
   createUsers(){
       const users = config.users.filter(user => user.username && user.password);
       if(users.length){

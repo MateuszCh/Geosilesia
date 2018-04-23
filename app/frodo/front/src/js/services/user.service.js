@@ -42,6 +42,10 @@
             return requestService.send('/user', 'GET');
         }
 
+        function changePassword(data){
+            return requestService.send('/user/changePassword', 'POST', data);
+        }
+
         return {
             login: login,
             logout: logout,
@@ -50,7 +54,8 @@
             setUser: setUser,
             getUser: getUser,
             isLogged: isLogged,
-            user: user
+            user: user,
+            changePassword: changePassword
         }
     }])
 })();
