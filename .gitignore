@@ -1,12 +1,5 @@
 .idea/
-frodo/front/node_modules/
-frodo/front/package-lock.json
-frodo/front/public/
-frodo/node_modules/
-frodo/package-lock.json
-frodo/uploads/*
 front/node_modules/
-front/public/.htaccess
 front/public/css
 front/public/html
 front/public/js
