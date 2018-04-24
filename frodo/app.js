@@ -6,7 +6,7 @@ const express = require('express'),
       session = require('express-session'),
       passport = require('passport'),
       mongoose = require('mongoose'),
-      config = require('../config'),
+      config = require('./config'),
       UserController = require('./server/controllers/user.controller'),
       MongoStore = require('connect-mongo')(session),
       Counter = require('./server/models/counter'),
@@ -95,15 +95,12 @@ app.set('port', process.env.PORT || 3000);
 
 app.use((err, req, res, next) => {
     console.log(err);
-    console.log(1);
     console.log(err.message);
     if(typeof  err === 'string') {
-        console.log(2);
         res.status(422).send({error: err});
     } else if (typeof  err.message === 'string') {
         res.status(422).send({error: err.message});
     } else if (err.errors) {
-        console.log(3);
         const firstError = Object.keys(err.errors)[0];
         res.status(422).send({error: err.errors[firstError].message});
     } else {

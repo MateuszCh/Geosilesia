@@ -2,8 +2,10 @@
   "name": "frodo",
   "version": "1.0.0",
   "description": "",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon --watch ./server --watch app.js app.js"
+    "start": "node app.js",
+    "dev" : "nodemon --watch ./server --watch app.js app.js"
   },
   "keywords": [],
   "author": "",

@@ -96,10 +96,6 @@ gulp.task('inject', ['copy'], function(){
         .pipe(gulp.dest(paths.public));
 });
 
-// gulp.task('nodemon', ['inject'], function(){
-//     return nodemon({script: 'app.js'});
-// });
-
 // Browser-Sync Task
 gulp.task('browser-sync', ['inject'], function(){
     browserSync.init({
