@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use('/uploads', express.static(`${__dirname}/frodo/uploads`));
+app.use('/uploads', express.static(`${__dirname}/uploads`));
 app.use('/', express.static(`${__dirname}/front/public`));
 app.get(['*'], (req, res) => res.sendFile(path.resolve(`${__dirname}/front/public/index.html`)));
 
