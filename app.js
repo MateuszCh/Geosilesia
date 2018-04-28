@@ -12,7 +12,7 @@ const collections = {};
 
 MongoClient.connect(config.mongoUrl)
     .then(client => {
-        db = client.db('geosilesia');
+        db = client.db(config.dbName);
         collections.posts = db.collection('posts');
         collections.pages = db.collection('pages');
         app.listen(app.get('port'), () => console.log("Running on port 3001"));
