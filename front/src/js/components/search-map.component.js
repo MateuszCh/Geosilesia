@@ -32,26 +32,28 @@
                 loadGoogleMaps();
             }
 
-            var markers = angular.copy(vm.markers);
+            if(vm.markers.length){
+                var markers = angular.copy(vm.markers);
 
-            markers = markers.filter(function (marker) {
-                return marker.title && marker.data.lat && marker.data.long;
-            }).map(function (marker) {
-                return {
-                    title: marker.title,
-                    hyperlink: marker.data.link,
-                    place: marker.data.place,
-                    category: marker.data.category,
-                    position: {
-                        lat: marker.data.lat,
-                        lng: marker.data.long
+                markers = markers.filter(function (marker) {
+                    return marker.title && marker.data.lat && marker.data.long;
+                }).map(function (marker) {
+                    return {
+                        title: marker.title,
+                        hyperlink: marker.data.link,
+                        place: marker.data.place,
+                        category: marker.data.category,
+                        position: {
+                            lat: marker.data.lat,
+                            lng: marker.data.long
+                        }
                     }
-                }
-            }).sort(function (a, b) {
-                return b.position.lat - a.position.lat;
-            });
-            vm.markers = markers;
-            vm.places = angular.copy(vm.markers);
+                }).sort(function (a, b) {
+                    return b.position.lat - a.position.lat;
+                });
+                vm.markers = markers;
+                vm.places = angular.copy(vm.markers);
+            }
         }
 
         function loadGoogleMaps() {

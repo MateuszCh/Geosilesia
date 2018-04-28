@@ -31,7 +31,9 @@
                     }]
                 },
                 controller: ['$scope', 'events', function($scope, events){
-                    $scope.events = events.reverse();
+                    if(events.length){
+                        $scope.events = events.reverse();
+                    }
                 }]
             }).
             when('/galeria', {
