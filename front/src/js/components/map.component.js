@@ -119,6 +119,9 @@
         function setMarkers(){
             var infowindow = new google.maps.InfoWindow();
             vm.places.forEach(function (place) {
+                if(!(place.position.lat && place.position.lng && (place.title || place.type))){
+                    return;
+                }
                 var latitude = Number(place.position.lat);
                 var longitude = Number(place.position.lng);
                 var position = {lat: latitude, lng: longitude};
@@ -126,7 +129,7 @@
                     position: position,
                     map: map,
                     title: place.title || "",
-                    icon: place.type ? ""  : iconsForMarkers[place.category].icon
+                    icon: (place.type || !place.category) ? ""  : iconsForMarkers[place.category].icon
                 });
                 google.maps.event.addListener(marker, 'click', (function(marker){
                     return function() {

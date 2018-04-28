@@ -12,14 +12,11 @@
         vm.openHam = openHam;
         vm.hamOpen = false;
         vm.activeGeo = false;
-        var previousScroll = 0;
         var element;
-        var searchElement = document.getElementById('search');
 
         function onInit(){
             vm.nav = navigation.nav;
             $scope.$on("$routeChangeSuccess", setCurrentPath);
-            window.addEventListener('scroll', hideHeader);
             window.addEventListener('resize', resetHeader);
             element = $element[0].firstChild;
         }
@@ -61,11 +58,6 @@
                 vm.noTransition = false;
             }, 500);
         }
-        function hideHeader(){
-            var currentScroll = window.scrollY;
-            vm.hideHeader = (((previousScroll < currentScroll) && (currentScroll * 2 > window.innerHeight)) || (!!searchElement && (currentScroll > window.innerHeight - element.offsetHeight)));
-            vm.hideHeader ? element.classList.add('header--hidden') : element.classList.remove('header--hidden');
-            previousScroll = currentScroll;
-        }
+
     }
 })();
