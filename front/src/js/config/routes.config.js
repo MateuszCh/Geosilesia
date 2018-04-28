@@ -31,7 +31,7 @@
                     }]
                 },
                 controller: ['$scope', 'events', function($scope, events){
-                    if(events.length){
+                    if(events && events.length){
                         $scope.events = events.reverse();
                     }
                 }]

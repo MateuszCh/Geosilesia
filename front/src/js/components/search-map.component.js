@@ -32,7 +32,7 @@
                 loadGoogleMaps();
             }
 
-            if(vm.markers.length){
+            if(vm.markers && vm.markers.length){
                 var markers = angular.copy(vm.markers);
 
                 markers = markers.filter(function (marker) {
