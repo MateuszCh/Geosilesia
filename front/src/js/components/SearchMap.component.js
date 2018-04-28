@@ -2,12 +2,15 @@
     angular.module('geosilesia').component('searchMap', {
         templateUrl: 'html/components/search-map.html',
         controllerAs: 'vm',
-        controller: SearchMapController
+        controller: SearchMapController,
+        bindings: {
+            markers: '<'
+        }
     });
 
-    SearchMapController.$inject = ['$http', '$q', '$rootScope', '$document', '$element', '$timeout', 'gmapConfig', 'iconsForMarkers'];
+    SearchMapController.$inject = ['$q', '$rootScope', '$document', '$element', '$timeout', 'gmapConfig', 'iconsForMarkers'];
 
-    function SearchMapController($http, $q, $rootScope, $document, $element, $timeout, gmapConfig, iconsForMarkers){
+    function SearchMapController($q, $rootScope, $document, $element, $timeout, gmapConfig, iconsForMarkers){
         var vm = this;
         vm.$onInit = onInit;
         vm.search = search;
@@ -28,19 +31,22 @@
             if(!(angular.isDefined(window.google) && angular.isDefined(window.google.maps))){
                 loadGoogleMaps();
             }
-            // $http.get("/api/markers").then(function (response) {
-            //     vm.places = response.data.obiekty;
-            //     vm.markers = vm.places.slice();
-            //     vm.markers.sort(function (a, b) {
-            //         return b.position.lat - a.position.lat;
-            //     });
-            // });
-            $http.get("json/markers.json").then(function (response) {
-                vm.places = response.data.obiekty;
-                vm.markers = vm.places.slice();
-                vm.markers.sort(function (a, b) {
-                    return b.position.lat - a.position.lat;
-                });
+
+            vm.markers = vm.markers.map(function(marker){
+               return {
+                   title: marker.title,
+                   hyperlink: marker.data.link,
+                   place: marker.data.place,
+                   category: marker.data.category,
+                   position: {
+                       lat: marker.data.lat,
+                       lng: marker.data.long
+                   }
+               }
+            });
+            vm.places = angular.copy(vm.markers);
+            vm.markers.sort(function(a,b){
+                return b.position.lat - a.position.lat;
             });
         }
 

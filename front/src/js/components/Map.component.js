@@ -119,6 +119,9 @@
         function setMarkers(){
             var infowindow = new google.maps.InfoWindow();
             vm.places.forEach(function (place) {
+                if(!(place.position.lat && place.position.lng && ((place.title && place.category) || place.type))){
+                    return;
+                }
                 var latitude = Number(place.position.lat);
                 var longitude = Number(place.position.lng);
                 var position = {lat: latitude, lng: longitude};

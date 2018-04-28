@@ -6,6 +6,10 @@
   font-family: $text-font;
   color: #666;
 
+  &__info {
+    text-align: center;
+  }
+
   &--active  {
     background-color: $color3;
     color: white;

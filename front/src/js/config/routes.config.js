@@ -4,7 +4,15 @@
 
             $routeProvider.
             when('/',{
-                templateUrl: 'html/views/homepage.html'
+                templateUrl: 'html/views/homepage.html',
+                resolve : {
+                    markers:['postsService', function(postsService){
+                        return postsService.loadPosts('marker');
+                    }]
+                },
+                controller: ['$scope','markers', function($scope, markers){
+                    $scope.markers = markers;
+                }]
             }).
             when('/o-nas', {
                 templateUrl: 'html/views/about.html'
@@ -16,7 +24,15 @@
                 templateUrl: 'html/views/dictionary.html'
             }).
             when('/wydarzenia', {
-                template: '<news></news>'
+                template: '<news events="events"></news>',
+                resolve : {
+                    events: ['postsService', function(postsService){
+                        return postsService.loadPosts('wydarzenie');
+                    }]
+                },
+                controller: ['$scope', 'events', function($scope, events){
+                    $scope.events = events;
+                }]
             }).
             when('/galeria', {
                 template: '<main-gallery></main-gallery>'

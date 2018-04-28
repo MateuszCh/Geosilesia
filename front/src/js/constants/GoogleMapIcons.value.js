@@ -1,49 +1,49 @@
 (function(){
     angular.module('geosilesia').value('iconsForMarkers', {
-        geostanowiskaMiedzynarodowe:    {
+        "geostanowiska międzynarodowe":    {
             name: "Geostanowiska międzynarodowe",
             icon: "images/markers/world_geostanowiska.png",
-            category: 'geostanowiskaMiedzynarodowe'
+            category: 'geostanowiska międzynarodowe'
         },
-        geostanowiskaInne:    {
+        "geostanowiska inne":    {
             name: "Geostanowiska inne",
             icon: "images/markers/fossils.png",
-            category: 'geostanowiskaInne'
+            category: 'geostanowiska inne'
         },
-        geostanowiskaProjektowane:   {
+        "geostanowiska projektowane":   {
             name: "Geostanowiska projektowane",
             icon: "images/markers/peak.png",
-            category: 'geostanowiskaProjektowane'
+            category: 'geostanowiska projektowane'
         },
-        imprezyTematyczne:   {
+        "imprezy tematyczne":   {
             name: "Imprezy tematyczne",
             icon: "images/markers/world.png",
-            category: 'imprezyTematyczne'
+            category: 'imprezy tematyczne'
         },
-        muzeaGeologiczneIDinoparki:    {
+        "muzea, ośrodki edukacyjne i dinoparki":    {
             name: "Muzea, ośrodki edukacyjne i dinoparki",
             icon: "images/markers/museum_science.png",
-            category: 'muzeaGeologiczneIDinoparki'
+            category: 'muzea, ośrodki edukacyjne i dinoparki'
         },
-        obiektyPoprzemyslowe:   {
+        "obiekty poprzemysłowe":   {
             name: "Obiekty poprzemysłowe",
             icon: "images/markers/museum_industry.png",
-            category: 'obiektyPoprzemyslowe'
+            category: 'obiekty poprzemysłowe'
         },
-        sciezkiTematyczne: {
+        "ścieżki tematyczne": {
             name: "Ścieżki tematyczne",
             icon: "images/markers/walkingtour.png",
-            category: 'sciezkiTematyczne'
+            category: 'ścieżki tematyczne'
         },
-        trasyPodziemne:  {
+        "trasy podziemne":  {
             name: "Trasy podziemne",
             icon: "images/markers/cave-2.png",
-            category: 'trasyPodziemne'
+            category: 'trasy podziemne'
         },
-        uzdrowiskaIObiektyUzdrowiskowe: {
+        "uzdrowiska i obiekty lecznicze": {
             name: "Uzdrowiska i obiekty lecznicze",
             icon: "images/markers/spa.png",
-            category: 'uzdrowiskaIObiektyUzdrowiskowe'
+            category: 'uzdrowiska i obiekty lecznicze'
         }
     });
 })();
