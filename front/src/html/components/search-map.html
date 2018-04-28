@@ -13,7 +13,8 @@
                        type="submit"
                 value="">
             </div>
-            <div class="search__form__category">
+            <div class="search__form__category"
+                 ng-init="vm.category = 'all'">
                 <h3 class="search__form__category__heading">Kategorie</h3>
                 <div class="search__form__category__container" ng-repeat="category in ::vm.categories track by $index">
                     <input class="search__form__category__radio"
@@ -21,7 +22,7 @@
                            ng-attr-id="{{category.category}}"
                            ng-model="::vm.category"
                            value="{{::category.category}}"
-                           ng-change="vm.pickCategory(vm.category)">
+                           ng-change="vm.pickCategory()">
                     <label class="search__form__category__label" for="{{category.category}}">
                         <span class="search__form__category__label__icon"></span>
                         <span class="search__form__category__label__text"
@@ -35,7 +36,7 @@
                            ng-model="::vm.category"
                            value="all"
                            id="all"
-                           ng-change="vm.pickCategory(vm.category)">
+                           ng-change="vm.pickCategory()">
                     <label class="search__form__category__label" for="all">
                         <span class="search__form__category__label__icon"></span>
                         <span class="search__form__category__label__text">Wszystkie</span>
