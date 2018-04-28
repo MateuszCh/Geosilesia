@@ -13,7 +13,13 @@
     <body ng-app="geosilesia" ng-controller="MainController" ng-class="{'closedScroll' : $root.blur}">
         <header></header>
         <div ng-view="" class="fade" id="page"></div>
-        <button-up></button-up>
+        <button class="button-up"
+                id="scroll"
+                ng-class="{'scrolled' : scrolled}"
+                du-smooth-scroll="page">
+            <img class="button-up__image"
+                 src="images/arrow.svg">
+        </button>
         <!-- inject:js -->
         <!-- endinject -->
     </body>
