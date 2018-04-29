@@ -12,7 +12,7 @@
                         if(path === '/:page') {
                             page = $route.current.params.page;
                         } else {
-                            page = path;
+                            page = path.substring(1);
                         }
                         return pagesService.loadPage(page);
                     }]
