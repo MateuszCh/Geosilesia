@@ -1,0 +1,19 @@
+<main ng-class="::{'homepage' : vm.page.pageUrl === '/'}">
+    <section ng-repeat="row in ::vm.page.rows"
+             ng-if="::vm.page.rows.length"
+             ng-switch="::row.type"
+             ng-attr-id="{{'section-' + $index}}">
+        <homepage-banner ng-switch-when="homepage_banner"
+                         component="::row.data"></homepage-banner>
+        <search-map ng-switch-when="map"
+                    component="::row.data"></search-map>
+        <title-and-text ng-switch-when="title_and_text"
+                        component="::row.data"></title-and-text>
+        <marker-category-list ng-switch-when="marker_category_list"
+                              component="::row.data"></marker-category-list>
+        <literature ng-switch-when="literature"
+                    component="::row.data"></literature>
+        <news ng-switch-when="news"
+              component="::row.data"></news>
+    </section>
+</main>

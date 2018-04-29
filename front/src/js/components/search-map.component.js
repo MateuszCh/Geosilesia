@@ -4,13 +4,13 @@
         controllerAs: 'vm',
         controller: SearchMapController,
         bindings: {
-            markers: '<'
+            component: '<'
         }
     });
 
-    SearchMapController.$inject = ['$q', '$rootScope', '$document', '$element', '$timeout', 'gmapConfig', 'iconsForMarkers'];
+    SearchMapController.$inject = ['$q', '$rootScope', '$document', '$element', '$timeout', 'gmapConfig', 'iconsForMarkers', 'postsService'];
 
-    function SearchMapController($q, $rootScope, $document, $element, $timeout, gmapConfig, iconsForMarkers) {
+    function SearchMapController($q, $rootScope, $document, $element, $timeout, gmapConfig, iconsForMarkers, postsService) {
         var vm = this;
         vm.$onInit = onInit;
         vm.search = search;
@@ -31,6 +31,8 @@
             if (!(angular.isDefined(window.google) && angular.isDefined(window.google.maps))) {
                 loadGoogleMaps();
             }
+
+            vm.markers = postsService.loadPosts('marker');
 
             if(vm.markers && vm.markers.length){
                 var markers = angular.copy(vm.markers);

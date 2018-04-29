@@ -1,0 +1,31 @@
+<div class="homepage-banner">
+    <div>
+        <h2 class="homepage-banner__heading"
+            du-smooth-scroll="section-1">
+            <span ng-bind="::vm.component.title"></span>
+            <span class="homepage-banner__heading__left"></span>
+            <span class="homepage-banner__heading__right"></span>
+        </h2>
+        <span class="homepage-banner__bar"></span>
+    </div>
+    <div class="info info--top">
+        <div class="info__figure">
+            <img class="info__figure__image"
+                 src="{{::vm.component.top_info_icon.src}}">
+        </div>
+        <div class="info__text">
+            <p class="info__text__paragraph" ng-bind="::vm.component.top_info_text"></p>
+            <p class="info__text__paragraph" ng-bind="::vm.component.top_info_text_english"></p>
+        </div>
+    </div>
+    <div class="info info--bottom">
+        <div class="info__figure">
+            <img class="info__figure__image"
+                 src="{{::vm.component.bottom_info_icon.src}}">
+        </div>
+        <div class="info__text">
+            <p class="info__text__paragraph" ng-bind="::vm.component.bottom_info_text"></p>
+            <p class="info__text__paragraph" ng-bind="::vm.component.bottom_info_text_english"></p>
+        </div>
+    </div>
+</div>

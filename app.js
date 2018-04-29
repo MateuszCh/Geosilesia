@@ -31,6 +31,12 @@ app.get('/api/posts/:type', (req, res, next) => {
         .catch(next);
 });
 
+app.get('/api/page/', (req, res, next) => {
+    collections.pages.find({pageUrl: '/'}).toArray()
+        .then(page => res.send(page))
+        .catch(next);
+});
+
 app.get('/api/page/:pageUrl', (req, res, next) => {
    collections.pages.find({pageUrl: req.params.pageUrl}).toArray()
        .then(page => res.send(page))

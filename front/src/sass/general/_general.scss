@@ -60,6 +60,11 @@ main {
   @include full {
     width: 60%;
   }
+  &.homepage {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 }
 
 a   {

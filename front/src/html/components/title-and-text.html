@@ -1,0 +1,4 @@
+<h2 ng-if="::vm.component.title" ng-bind="::vm.component.title"></h2>
+<p ng-if="::vm.component.text.length"
+   ng-repeat="text in ::vm.component.text"
+   ng-bind-html="::text.paragraph"></p>

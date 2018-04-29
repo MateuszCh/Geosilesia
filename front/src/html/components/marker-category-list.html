@@ -1,0 +1,9 @@
+<p ng-bind="::vm.component.text" ng-if="::vm.component.text"></p>
+<ul class="markers"
+    ng-if="::vm.component.categories.length">
+    <li class="markers__item"
+        ng-repeat="category in ::vm.component.categories">
+        <img src="{{::category.icon.src}}">
+        <p class="markers__item__text" ng-bind="::category.text"></p>
+    </li>
+</ul>
