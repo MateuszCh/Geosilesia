@@ -1,4 +1,9 @@
 <h2 ng-if="::vm.component.title" ng-bind="::vm.component.title"></h2>
-<p ng-if="::vm.component.text.length"
-   ng-repeat="text in ::vm.component.text"
-   ng-bind-html="::text.paragraph"></p>
+<div ng-if="::vm.component.text.length"
+     ng-repeat="row in ::vm.component.text track by $index">
+    <p ng-if="::row.paragraph"
+       ng-bind="::row.paragraph"></p>
+    <ul class="default-list" ng-if="::row.list.length">
+        <li ng-repeat="item in ::row.list track by $index" ng-bind="::item.item"></li>
+    </ul>
+</div>

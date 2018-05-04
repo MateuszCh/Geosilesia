@@ -2,10 +2,7 @@
     angular.module('geosilesia').component('news', {
             templateUrl: 'html/components/news.html',
             controllerAs: 'vm',
-            controller: NewsController,
-            bindings: {
-                events: '<'
-            }
+            controller: NewsController
         });
 
     NewsController.$inject = ['postsService'];
@@ -13,7 +10,11 @@
         var vm = this;
         vm.$onInit = onInit;
         function onInit(){
-            vm.events = postsService.loadPosts('wydarzenie').reverse();
+            var events = postsService.loadPosts('wydarzenie').reverse();
+
+            vm.events = events.sort(function(a,b){
+                return new Date(b.data.date) - new Date(a.data.date);
+            })
         }
     }
 })();

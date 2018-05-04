@@ -5,7 +5,7 @@ const express = require('express'),
       config = require('./config');
 
 const app = express();
-app.set('port', process.env.PORT || 3005);
+app.set('port', process.env.PORT || 3100);
 
 let db;
 const collections = {};
