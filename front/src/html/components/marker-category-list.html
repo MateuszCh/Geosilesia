@@ -4,6 +4,6 @@
     <li class="markers__item"
         ng-repeat="category in ::vm.component.categories">
         <img src="{{::category.icon}}">
-        <p class="markers__item__text" ng-bind="::category.text"></p>
+        <p class="markers__item__text" ng-bind-html="::category.text"></p>
     </li>
 </ul>

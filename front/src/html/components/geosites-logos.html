@@ -1,6 +1,7 @@
 <ul class="geosites" ng-if="::vm.component.logos">
     <li ng-repeat="logo in ::vm.component.logos track by $index">
         <a class="geosites__link"
+           target="_blank"
            ng-href="{{::logo.link}}">
             <img class="geosites__image"
                  src="{{::logo.image}}"
