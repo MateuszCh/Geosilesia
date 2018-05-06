@@ -85,7 +85,7 @@ gulp.task('images', function(){
         .pipe(gulp.dest(paths.publicIMAGES));
 });
 
-gulp.task('copy', ['html', 'css', 'js', 'images']);
+gulp.task('copy', ['html', 'css', 'js']);
 
 gulp.task('inject', ['copy'], function(){
     const css = gulp.src('public/css/main.css');
@@ -113,7 +113,7 @@ gulp.task('watch', [ 'browser-sync'], function () {
     gulp.watch([paths.srcJS],['js']);
 });
 
-gulp.task('default', ['inject']);
+gulp.task('default', ['inject', 'images']);
 
 gulp.task('clean', function () {
     del([paths.publicIndex, paths.publicHTML, paths.publicCSS, paths.publicJS, paths.publicIMAGES]);
