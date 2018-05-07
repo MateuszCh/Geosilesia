@@ -44,7 +44,7 @@
                         title: marker.title,
                         hyperlink: marker.data.link,
                         place: marker.data.place,
-                        category: marker.data.category,
+                        categories: marker.data.categories,
                         position: {
                             lat: marker.data.lat,
                             lng: marker.data.long
@@ -160,7 +160,7 @@
             } else {
                 vm.markers = [];
                 vm.places.slice().forEach(function (place) {
-                    if (place.category === vm.category) {
+                    if (place.categories.indexOf(vm.category) > -1) {
                         vm.markers.push(place);
                     }
                 })

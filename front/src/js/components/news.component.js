@@ -16,18 +16,24 @@
             var events = postsService.loadPosts('wydarzenie');
 
             if(events.length){
-                sortEvents(events)
+                prepareEvents(events)
             } else {
                 events.then(function(response){
-                    sortEvents(response);
-
+                    prepareEvents(response);
                 })
             }
         }
 
-        function sortEvents(events){
-            vm.events = events.sort(function(a,b){
-                return new Date(b.data.date) - new Date(a.data.date);
+        function prepareEvents(events){
+            var now = (new Date()).getTime();
+            vm.events = events.filter(function(event){
+                if(!event.data.date_of_publication){
+                    return false;
+                }
+                var dateOfPublication = (new Date(event.data.date_of_publication)).getTime();
+                return dateOfPublication < now;
+            }).sort(function(a,b){
+                return b.created - a.created;
             })
         }
     }

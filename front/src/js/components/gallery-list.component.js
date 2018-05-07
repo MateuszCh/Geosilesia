@@ -17,7 +17,6 @@
         var timer;
 
         function onInit(){
-            console.log(vm.component.galleries);
             setCategories(vm.component.galleries);
         }
 
