@@ -8,7 +8,9 @@
             document.addEventListener('scroll', function(){
                 $scope.scrolled = window.scrollY > 0;
                 $scope.$apply();
-            })
+            });
+            $scope.scrolled = window.scrollY > 0;
+            $scope.$apply();
         }, 1000);
 
     }]);

@@ -3,6 +3,7 @@
         'ngRoute',
         'ngAnimate',
         'duScroll',
+        'ngSanitize',
         'ngTouch']);
 })();
 

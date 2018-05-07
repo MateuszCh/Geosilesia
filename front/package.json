@@ -26,6 +26,7 @@
     "angular": "^1.6.7",
     "angular-animate": "^1.6.7",
     "angular-route": "^1.6.7",
+    "angular-sanitize": "^1.6.10",
     "angular-scroll": "^1.0.2",
     "angular-touch": "^1.6.7",
     "js-marker-clusterer": "^1.0.0"

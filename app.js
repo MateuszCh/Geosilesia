@@ -5,7 +5,7 @@ const express = require('express'),
       config = require('./config');
 
 const app = express();
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3100);
 
 let db;
 const collections = {};
@@ -15,6 +15,7 @@ MongoClient.connect(config.mongoUrl)
         db = client.db(config.dbName);
         collections.posts = db.collection('posts');
         collections.pages = db.collection('pages');
+        collections.files = db.collection('files');
         app.listen(app.get('port'), () => console.log("Running on port 3001"));
 
     })
@@ -31,9 +32,47 @@ app.get('/api/posts/:type', (req, res, next) => {
         .catch(next);
 });
 
+app.get('/api/page/', (req, res, next) => {
+    collections.pages.find({pageUrl: '/'}).toArray()
+        .then(page => res.send(page))
+        .catch(next);
+});
+
 app.get('/api/page/:pageUrl', (req, res, next) => {
    collections.pages.find({pageUrl: req.params.pageUrl}).toArray()
-       .then(page => res.send(page))
+       .then(page => {
+           const pageOne = page[0];
+           const galleries = [];
+           if(pageOne && pageOne.rows){
+               pageOne.rows.forEach(row => {
+                   if(row.type === 'gallery'){
+                       galleries.push(row);
+                   }
+               })
+           }
+           if(galleries.length){
+               const promises = [];
+               galleries.forEach(gallery => {
+                   if(gallery.data.catalogue){
+                       promises.push(collections.files.find({catalogues: gallery.data.catalogue}).toArray());
+                   }
+               });
+               if(promises.length){
+                   Promise.all(promises)
+                       .then(responses => {
+                           responses.forEach((response, i) => {
+                              galleries[i].data.catalogue = response;
+                           });
+                           res.send(page);
+                       })
+               } else {
+                   res.send(page);
+               }
+           } else {
+               res.send(page);
+           }
+
+       })
        .catch(next);
 });
 
