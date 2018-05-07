@@ -13,7 +13,6 @@
                     return _pages[url];
                 })
                 .catch(function(err){
-                    console.log(err);
                     return _pages[url];
                 })
         }

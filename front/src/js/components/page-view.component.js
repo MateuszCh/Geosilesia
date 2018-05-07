@@ -15,7 +15,8 @@
         vm.$onInit = onInit;
 
         function onInit(){
-            if(!vm.page) $location.path('/');
+
+            if(!vm.page || !vm.page.pageUrl) $location.path('/');
         }
     }
 })();

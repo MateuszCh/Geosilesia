@@ -2,7 +2,10 @@
     angular.module('geosilesia').component('gallery', {
         templateUrl: 'html/components/gallery.html',
         controllerAs: 'vm',
-        controller: GalleryController
+        controller: GalleryController,
+        bindings: {
+            component: '<'
+        }
     });
 
     GalleryController.$inject = ['$http', '$routeParams', '$rootScope', '$timeout'];
@@ -22,11 +25,12 @@
             //     vm.gallery = gallery.data;
             //     vm.numberOfImages = vm.gallery.images.length;
             // });
-            $http.get("json/galleries/" + $routeParams.galleryId + ".json").then(function (gallery) {
-                vm.gallery = gallery.data;
-                vm.numberOfImages = gallery.data.images.length;
-            });
-
+            // $http.get("json/galleries/" + $routeParams.galleryId + ".json").then(function (gallery) {
+            //     vm.gallery = gallery.data;
+            //     vm.numberOfImages = gallery.data.images.length;
+            // });
+            vm.images = vm.component.catalogue;
+            vm.numberOfImages = vm.images.length;
             window.addEventListener('keydown', setKeyEvent);
 
         }
