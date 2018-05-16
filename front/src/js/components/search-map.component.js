@@ -8,9 +8,9 @@
         }
     });
 
-    SearchMapController.$inject = ['$q', '$rootScope', '$document', '$element', '$timeout', 'gmapConfig', 'iconsForMarkers', 'postsService'];
+    SearchMapController.$inject = ['$q', '$rootScope', '$document', '$element', '$timeout', 'gmapConfig', 'postsService'];
 
-    function SearchMapController($q, $rootScope, $document, $element, $timeout, gmapConfig, iconsForMarkers, postsService) {
+    function SearchMapController($q, $rootScope, $document, $element, $timeout, gmapConfig, postsService) {
         var vm = this;
         vm.$onInit = onInit;
         vm.search = search;
@@ -18,7 +18,6 @@
         vm.toggleSearchPanel = toggleSearchPanel;
         vm.increaseSearchQty = increaseSearchQty;
         vm.setCurrentResult = setCurrentResult;
-        vm.categories = iconsForMarkers;
         vm.showSearch = false;
         vm.showMore = false;
         vm.searchInput = "";
@@ -33,6 +32,28 @@
             }
 
             vm.markers = postsService.loadPosts('marker');
+
+            var allowedCategories = {};
+            vm.markers.forEach(function(marker){
+                if(marker.data.categories && marker.data.categories.length){
+                    marker.data.categories.forEach(function(category){
+                        if(!allowedCategories[category]){
+                            allowedCategories[category] = category;
+                        }
+                    })
+                }
+            });
+
+            var iconModels = postsService.loadPosts('icon');
+            var icons = {};
+            if(iconModels.length){
+                iconModels.forEach(function(icon){
+                    if(icon.data && icon.data.category && allowedCategories[icon.data.category]){
+                        icons[icon.data.category] = icon.data;
+                    }
+                })
+            }
+            vm.categories = icons;
 
             if(vm.markers && vm.markers.length){
                 var markers = angular.copy(vm.markers);
@@ -160,7 +181,7 @@
             } else {
                 vm.markers = [];
                 vm.places.slice().forEach(function (place) {
-                    if (place.categories.indexOf(vm.category) > -1) {
+                    if (place.categories && place.categories.length && place.categories.indexOf(vm.category) > -1) {
                         vm.markers.push(place);
                     }
                 })

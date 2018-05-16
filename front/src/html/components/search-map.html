@@ -25,7 +25,7 @@
                                ng-model="::vm.category"
                                value="{{::category.category}}"
                                ng-change="vm.pickCategory()">
-                        <label class="search__form__category__label" for="{{category.category}}">
+                        <label class="search__form__category__label" ng-attr-for="{{category.category}}">
                             <span class="search__form__category__label__icon"></span>
                             <span class="search__form__category__label__text"
                                   ng-bind="category.name"></span>
@@ -82,6 +82,8 @@
         <map class="search__container"
              ng-class="{'search__container--smaller' : vm.showSearch}"
              places="vm.markers"
+             categories="vm.categories"
+             active-category="vm.category"
              center-map="vm.showSearch"
              current-result="vm.currentResult"
              marker-cluster="true"></map>

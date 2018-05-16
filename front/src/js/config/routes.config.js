@@ -27,6 +27,9 @@
                     markers:['postsService', function(postsService){
                         return postsService.loadPosts('marker');
                     }],
+                    icons: ['postsService', function(postsService){
+                        return postsService.loadPosts('icon');
+                    }]
                 },
                 controller: ['page', '$scope', function(page, $scope){
                     $scope.page = page[0];
