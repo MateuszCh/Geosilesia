@@ -4,15 +4,17 @@
             places: '<',
             centerMap: '<',
             currentResult: '<',
-            markerCluster: '<'
+            markerCluster: '<',
+            categories: '<',
+            activeCategory: '<'
         },
         controllerAs: 'vm',
         controller: MapController,
         template: '<div class="search__container__map"></div>'
     });
 
-    MapController.$inject = ['$timeout', '$element', '$interval', 'mapStyle', 'iconsForMarkers'];
-    function MapController($timeout, $element, $interval, mapStyle, iconsForMarkers){
+    MapController.$inject = ['$timeout', '$element', '$interval', 'mapStyle'];
+    function MapController($timeout, $element, $interval, mapStyle){
 
         var vm = this;
         vm.$onInit = onInit;
@@ -125,11 +127,22 @@
                 var latitude = Number(place.position.lat);
                 var longitude = Number(place.position.lng);
                 var position = {lat: latitude, lng: longitude};
+
+                var icon;
+
+                if(place.type || !place.categories || !place.categories.length){
+                    icon = "";
+                } else if(!vm.activeCategory || vm.activeCategory === 'all'){
+                    icon = vm.categories[place.categories[0]].icon;
+                } else {
+                    icon = vm.categories[vm.activeCategory].icon;
+                }
+
                 var marker = new google.maps.Marker({
                     position: position,
                     map: map,
                     title: place.title || "",
-                    icon: (place.type || !place.categories || !place.categories.length) ? ""  : iconsForMarkers[place.categories[0]].icon
+                    icon: icon
                 });
                 google.maps.event.addListener(marker, 'click', (function(marker){
                     return function() {
