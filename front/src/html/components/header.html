@@ -14,7 +14,7 @@
        ng-click="vm.hamOpen = false">
         <h1 class="header__logo__heading">GeoSilesia</h1>
     </a>
-    <nav>
+    <nav ng-if="::vm.nav && vm.nav.length">
         <ul class="nav"
             ng-class="{'nav--active' : vm.hamOpen, 'nav--no-transition' : vm.noTransition}">
             <li class="nav__item"
@@ -29,12 +29,12 @@
                    ng-click="vm.openHam(item)"></a>
                 <span class="nav__item__link"
                       ng-bind="::item.title"
-                      ng-if="::item.submenu"></span>
-                <ul ng-if="::item.submenu"
+                      ng-if="::item.subnav.length"></span>
+                <ul ng-if="::item.subnav"
                     class="subnav"
                     ng-class="{'subnav--active' : vm.hoverNavItem == $index}">
                     <li class="subnav__item"
-                        ng-repeat="sub in ::item.submenu"
+                        ng-repeat="sub in ::item.subnav"
                         ng-class="{'subnav__item--active' : vm.currentPath == sub.link}">
                         <a class="subnav__item__link"
                            ng-href="{{::sub.link}}"

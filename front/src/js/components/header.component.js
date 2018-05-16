@@ -4,21 +4,22 @@
         controllerAs: 'vm',
         controller: HeaderController
     });
-    HeaderController.$inject = ['$location', '$scope', '$timeout', '$element', 'navigation'];
-    function HeaderController($location, $scope, $timeout, $element, navigation){
+    HeaderController.$inject = ['$location', '$scope', '$timeout', 'postsService'];
+    function HeaderController($location, $scope, $timeout, postsService){
 
         var vm = this;
         vm.$onInit = onInit;
         vm.openHam = openHam;
         vm.hamOpen = false;
         vm.activeGeo = false;
-        var element;
 
         function onInit(){
-            vm.nav = navigation.nav;
+            postsService.loadPosts('navigation')
+                .then(function(response){
+                    if(response[0] && response[0].data) vm.nav = response[0].data.nav;
+                });
             $scope.$on("$routeChangeSuccess", setCurrentPath);
             window.addEventListener('resize', resetHeader);
-            element = $element[0].firstChild;
         }
 
         function setCurrentPath() {
