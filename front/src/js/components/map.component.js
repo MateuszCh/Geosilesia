@@ -129,7 +129,7 @@
                     position: position,
                     map: map,
                     title: place.title || "",
-                    icon: (place.type || !place.categories.length) ? ""  : iconsForMarkers[place.categories[0]].icon
+                    icon: (place.type || !place.categories || !place.categories.length) ? ""  : iconsForMarkers[place.categories[0]].icon
                 });
                 google.maps.event.addListener(marker, 'click', (function(marker){
                     return function() {
