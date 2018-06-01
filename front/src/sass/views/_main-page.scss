@@ -1,16 +1,19 @@
 .homepage-banner  {
   overflow: hidden;
-  background-image: url("../images/geosilesia.jpg");
-  background-size: cover;
   height: 100vh;
-  background-position: 10%;
-  background-repeat: no-repeat;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   position: relative;
-  @include tablet  {
-    background-position: center;
+  &__image {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+    object-position: 10%;
+    @include  tablet {
+      object-position: center;
+    }
   }
   &__heading  {
     cursor: pointer;
