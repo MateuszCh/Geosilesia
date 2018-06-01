@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "start": "gulp",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "clean": "gulp clean"
   },
   "author": "",
   "license": "ISC",
