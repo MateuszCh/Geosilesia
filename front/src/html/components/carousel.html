@@ -9,7 +9,7 @@
              ng-style="{'left' : ($index * 100 + vm.left) + '%'}">
             <img src="{{::slide.image}}"
                  draggable="false"
-                 ng-style="::slide.image_position_left && {'object-position' : slide.image_position_left + '%'}"
+                 ng-style="::(slide.image_position_left || slide.image_position_top) && {'object-position' : (slide.image_position_left ? slide.image_position_left + '%' : 'center') + ' ' + (slide.image_position_top ? slide.image_position_top + '%' : 'center')}"
                  class="carousel__slide__image">
         </div>
     </div>
