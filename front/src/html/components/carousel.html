@@ -1,0 +1,60 @@
+<div class="fill carousel">
+    <!-- slides -->
+    <div class="fill">
+        <div class="carousel__slide"
+             ng-class="{'carousel__slide--no-transition' : vm.noTransition}"
+             ng-swipe-left="vm.swipeTo($index + 1)"
+             ng-swipe-right="vm.swipeTo($index - 1)"
+             ng-repeat="slide in ::vm.slides track by $index"
+             ng-style="{'left' : ($index * 100 + vm.left) + '%'}">
+            <img src="{{::slide.image}}"
+                 draggable="false"
+                 ng-style="::(slide.image_position_left || slide.image_position_top) && {'object-position' : (slide.image_position_left ? slide.image_position_left + '%' : 'center') + ' ' + (slide.image_position_top ? slide.image_position_top + '%' : 'center')}"
+                 class="carousel__slide__image">
+        </div>
+    </div>
+    <!-- pagination -->
+    <div class="carousel__pagination"
+         ng-if="::vm.slides.length > 1">
+        <div class="carousel__pagination__inner"
+             ng-mouseenter="vm.cancelInt()"
+             ng-mouseleave="vm.setInt()">
+            <div class="carousel__pagination__item"
+                 ng-repeat="i in ::vm.slides track by $index"
+                 ng-click="vm.goTo($index)"
+                 ng-class="{'carousel__pagination__item--active' : vm.left === $index * -100}"></div>
+        </div>
+    </div>
+    <!-- top info -->
+    <div class="info info--top ng-hide-animate"
+         ng-show="(vm.slides[vm.currentSlide()].top_text || vm.slides[vm.currentSlide()].top_text_english) && vm.custom.top_info_icon">
+        <div class="info__figure">
+            <img class="info__figure__image"
+                 src="{{::vm.custom.top_info_icon}}">
+        </div>
+        <div class="info__text">
+            <p class="info__text__paragraph"
+               ng-if="vm.slides[vm.currentSlide()].top_text"
+               ng-bind="vm.slides[vm.currentSlide()].top_text"></p>
+            <p class="info__text__paragraph"
+               ng-if="vm.slides[vm.currentSlide()].top_text_english"
+               ng-bind="vm.slides[vm.currentSlide()].top_text_english"></p>
+        </div>
+    </div>
+    <!-- bottom info -->
+    <div class="info info--bottom ng-hide-animate"
+         ng-show="(vm.slides[vm.currentSlide()].bottom_text || vm.slides[vm.currentSlide()].bottom_text_english) && vm.custom.bottom_info_icon">
+        <div class="info__figure">
+            <img class="info__figure__image"
+                 src="{{::vm.custom.bottom_info_icon}}">
+        </div>
+        <div class="info__text">
+            <p class="info__text__paragraph"
+               ng-if="vm.slides[vm.currentSlide()].bottom_text"
+               ng-bind="vm.slides[vm.currentSlide()].bottom_text"></p>
+            <p class="info__text__paragraph"
+               ng-if="vm.slides[vm.currentSlide()].bottom_text_english"
+               ng-bind="vm.slides[vm.currentSlide()].bottom_text_english"></p>
+        </div>
+    </div>
+</div>

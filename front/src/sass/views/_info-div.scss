@@ -4,6 +4,11 @@
   align-items: center;
   right: 0;
   height: 60px;
+  opacity: 1;
+  transition: opacity .5s ease;
+  &.ng-hide {
+    opacity: 0;
+  }
   @include laptop  {
     display: flex;
   }
