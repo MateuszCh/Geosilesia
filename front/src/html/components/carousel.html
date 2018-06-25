@@ -1,12 +1,34 @@
 <div class="fill carousel">
     <!-- slides -->
     <div class="fill">
+
         <div class="carousel__slide"
-             ng-class="{'carousel__slide--no-transition' : vm.noTransition}"
+             ng-swipe-left="vm.swipeTo(0)"
+             ng-swipe-right="vm.swipeTo(vm.slides.length - 2)"
+             ng-repeat="slide in ::[vm.slides[vm.slides.length - 1]] track by $index"
+             ng-style="{'left' : (vm.left - 100) + '%'}">
+            <img src="{{::slide.image}}"
+                 draggable="false"
+                 ng-style="::(slide.left_position || slide.top_position) && {'object-position' : (slide.left_position ? slide.left_position + '%' : 'center') + ' ' + (slide.top_position ? slide.top_position + '%' : 'center')}"
+                 class="carousel__slide__image">
+        </div>
+
+        <div class="carousel__slide"
              ng-swipe-left="vm.swipeTo($index + 1)"
              ng-swipe-right="vm.swipeTo($index - 1)"
              ng-repeat="slide in ::vm.slides track by $index"
              ng-style="{'left' : ($index * 100 + vm.left) + '%'}">
+            <img src="{{::slide.image}}"
+                 draggable="false"
+                 ng-style="::(slide.left_position || slide.top_position) && {'object-position' : (slide.left_position ? slide.left_position + '%' : 'center') + ' ' + (slide.top_position ? slide.top_position + '%' : 'center')}"
+                 class="carousel__slide__image">
+        </div>
+
+        <div class="carousel__slide"
+             ng-swipe-left="vm.swipeTo(1)"
+             ng-swipe-right="vm.swipeTo(vm.slides.length - 1)"
+             ng-repeat="slide in ::[vm.slides[0]] track by $index"
+             ng-style="{'left' : (vm.slides.length * 100 + vm.left) + '%'}">
             <img src="{{::slide.image}}"
                  draggable="false"
                  ng-style="::(slide.left_position || slide.top_position) && {'object-position' : (slide.left_position ? slide.left_position + '%' : 'center') + ' ' + (slide.top_position ? slide.top_position + '%' : 'center')}"
@@ -22,7 +44,7 @@
             <div class="carousel__pagination__item"
                  ng-repeat="i in ::vm.slides track by $index"
                  ng-click="vm.goTo($index)"
-                 ng-class="{'carousel__pagination__item--active' : vm.left === $index * -100}"></div>
+                 ng-class="{'carousel__pagination__item--active' : vm.left === $index * -100 || ($index === 0 && vm.left === -100 * vm.slides.length) ||($index === vm.slides.length - 1 && vm.left === 100)}"></div>
         </div>
     </div>
     <!-- top info -->
