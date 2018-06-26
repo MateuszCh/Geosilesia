@@ -55,7 +55,13 @@
             if(noTransition){
                 $scope.$apply();
             }
-            noTransition && setTransition(true);
+
+            if(noTransition){
+                setTimeout(function(){
+                    setTransition(true);
+                }, 10);
+            }
+
             if(index === -1){
                 setTimeout(function(){
                     goTo(numberOfSlides - 1, true);
