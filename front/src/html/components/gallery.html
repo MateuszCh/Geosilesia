@@ -26,7 +26,7 @@
         <div class="fullscreen-image__figure"
             ng-swipe-right="vm.prev()"
             ng-swipe-left="vm.next()"
-            ng-repeat="img in ::vm.images track by $index"
+            ng-repeat="img in ::vm.images | orderBy: 'position' track by img.id"
             ng-class="{'fullscreen-image__figure--active' : vm.currentImage == $index, 'fullscreen-image__figure--prev' : vm.prevImage == $index, 'fullscreen-image__figure--next' : vm.nextImage == $index, 'backward' : vm.back, 'no-move' : vm.noMove}">
             <div class="fullscreen-image__figure__container"
                 ng-class="::{'fullscreen-image__figure__container--full-width' : !(img.title || img.description || img.author)}">
