@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- src/index.html -->
-        <meta charset="UTF-8">
-        <base href="/">
-        <title>Geosilesia</title>
-        <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- inject:css -->
-        <!-- endinject -->
-    </head>
-    <body ng-app="geosilesia" ng-controller="MainController" ng-class="{'closedScroll' : $root.blur}">
-        <header></header>
-        <div ng-view="" class="fade" id="page"></div>
-        <button class="button-up"
-                id="scroll"
-                ng-class="{'scrolled' : scrolled}"
-                du-smooth-scroll="page">
-            <img class="button-up__image"
-                 src="images/arrow.svg">
-        </button>
-        <!-- inject:js -->
-        <!-- endinject -->
-    </body>
+
+<head>
+    <!-- src/index.html -->
+    <meta charset="UTF-8">
+    <base href="/">
+    <title>Geosilesia</title>
+    <link rel="shortcut icon"
+        href="/images/favicon.ico"
+        type="image/x-icon">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+    <!-- inject:css -->
+    <!-- endinject -->
+</head>
+
+<body ng-app="geosilesia"
+    ng-controller="MainController"
+    ng-class="{'closedScroll' : $root.blur}">
+    <header></header>
+    <div ng-view=""
+        class="fade"
+        id="page"></div>
+    <button class="button-up"
+        id="scroll"
+        ng-class="{'scrolled' : scrolled}"
+        du-smooth-scroll="page">
+        <img class="button-up__image"
+            src="images/arrow.svg">
+    </button>
+    <!-- inject:js -->
+    <!-- endinject -->
+</body>
+
 </html>

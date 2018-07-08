@@ -1,9 +1,9 @@
-(function(){
-    angular.module('geosilesia', [
-        'ngRoute',
-        'ngAnimate',
-        'duScroll',
-        'ngSanitize',
-        'ngTouch']);
+(function() {
+    angular.module("geosilesia", [
+        "ngRoute",
+        "ngAnimate",
+        "duScroll",
+        "ngSanitize",
+        "ngTouch"
+    ]);
 })();
-

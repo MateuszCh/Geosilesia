@@ -1,6 +1,6 @@
 // general
 @import "general/fonts";
-@import 'general/variables';
+@import "general/variables";
 @import "general/mixins";
 @import "general/animation";
 @import "general/general";
@@ -14,8 +14,8 @@
 @import "views/main-page";
 
 // components
-@import 'components/header';
-@import 'components/nav';
+@import "components/header";
+@import "components/nav";
 @import "components/button-up";
 @import "components/full-screen-mode";
 @import "components/search-map";
@@ -23,4 +23,3 @@
 @import "components/news";
 @import "components/main-gallery";
 @import "components/carousel";
-

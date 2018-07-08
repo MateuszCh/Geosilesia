@@ -1,22 +1,21 @@
-(function(){
-    angular.module('geosilesia').component('pageView', {
-        templateUrl: 'html/components/page-view.html',
-        controllerAs: 'vm',
+(function() {
+    angular.module("geosilesia").component("pageView", {
+        templateUrl: "html/components/page-view.html",
+        controllerAs: "vm",
         controller: PageViewController,
         bindings: {
-            page: '<'
+            page: "<"
         }
     });
 
-    PageViewController.$inject = ['$location'];
+    PageViewController.$inject = ["$location"];
 
-    function PageViewController($location){
+    function PageViewController($location) {
         var vm = this;
         vm.$onInit = onInit;
 
-        function onInit(){
-
-            if(!vm.page || !vm.page.pageUrl) $location.path('/');
+        function onInit() {
+            if (!vm.page || !vm.page.pageUrl) $location.path("/");
         }
     }
 })();

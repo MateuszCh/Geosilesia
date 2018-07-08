@@ -1,25 +1,27 @@
-(function(){
-    angular.module('geosilesia').service('pagesService', ['requestService', function(requestService){
+(function() {
+    angular.module("geosilesia").service("pagesService", [
+        "requestService",
+        function(requestService) {
+            var _pages = [];
 
-        var _pages = [];
-
-        function loadPage(url){
-            if(_pages[url]){
-                return _pages[url];
+            function loadPage(url) {
+                if (_pages[url]) {
+                    return _pages[url];
+                }
+                return requestService
+                    .send("/api/page/" + url, "GET")
+                    .then(function(response) {
+                        _pages[url] = response.data;
+                        return _pages[url];
+                    })
+                    .catch(function(err) {
+                        return _pages[url];
+                    });
             }
-            return requestService.send('/api/page/' + url, 'GET')
-                .then(function(response){
-                    _pages[url] = response.data;
-                    return _pages[url];
-                })
-                .catch(function(err){
-                    return _pages[url];
-                })
-        }
 
-        return {
-            loadPage: loadPage
+            return {
+                loadPage: loadPage
+            };
         }
-
-    }]);
+    ]);
 })();

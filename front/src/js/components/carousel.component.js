@@ -1,20 +1,21 @@
-(function () {
-    angular.module('geosilesia').component('carousel', {
-        templateUrl: 'html/components/carousel.html',
-        controllerAs: 'vm',
+(function() {
+    angular.module("geosilesia").component("carousel", {
+        templateUrl: "html/components/carousel.html",
+        controllerAs: "vm",
         controller: CarouselController,
         bindings: {
             slides: "<",
-            custom: '<',
-            interval: "@",
-            transition: "@"
+            custom: "<",
+            interval: "@"
         }
     });
 
-    CarouselController.$inject = ["$interval", "$scope"];
-    function CarouselController($interval, $scope){
+    CarouselController.$inject = ["$interval"];
+    function CarouselController($interval) {
         var vm = this;
         vm.$onInit = onInit;
+        vm.next = next;
+        vm.prev = prev;
         vm.goTo = goTo;
         vm.swipeTo = swipeTo;
         vm.setInt = setInt;
@@ -27,80 +28,62 @@
 
         function onInit() {
             numberOfSlides = vm.slides.length;
-            vm.maxLeft = numberOfSlides * -100;
+            vm.maxLeft = (numberOfSlides - 1) * -100;
             setInt();
         }
 
-        function setTransition(to){
-            var slidesElements = document.getElementsByClassName("carousel__slide");
-            var slidesLength = slidesElements.length;
-            for(var i = 0; i < slidesLength; i++){
-                if(to){
-                    slidesElements[i].style.transition = "";
-                } else {
-                    slidesElements[i].style.transition = "none";
-                }
-            }
-        }
-
-        function currentSlide(){
+        function currentSlide() {
             return -vm.left / 100;
         }
 
-        function goTo(index, noTransition){
-            noTransition && setTransition();
-            if(vm.left !== index * -100){
+        function goTo(index) {
+            if (vm.left !== index * -100) {
                 vm.left = index * -100;
             }
-            if(noTransition){
-                $scope.$apply();
-            }
+        }
 
-            if(noTransition){
-                setTimeout(function(){
-                    setTransition(true);
-                }, 10);
+        function swipeTo(index) {
+            cancelInt();
+            var target = undefined;
+            if (index < 0) {
+                target = numberOfSlides - 1;
+            } else if (index >= numberOfSlides) {
+                target = 0;
+            } else {
+                target = index;
             }
+            goTo(target);
+            setInt();
+        }
 
-            if(index === -1){
-                setTimeout(function(){
-                    goTo(numberOfSlides - 1, true);
-                }, parseInt(vm.transition));
-            } else if(index === numberOfSlides){
-                setTimeout(function(){
-                    goTo(0, true);
-                }, parseInt(vm.transition));
+        function setInt() {
+            if (
+                vm.slides &&
+                numberOfSlides > 1 &&
+                vm.interval &&
+                parseInt(vm.interval)
+            ) {
+                interval = $interval(next, parseInt(vm.interval) * 1000);
             }
         }
 
-        function swipeTo(index){
-            if(numberOfSlides > 1){
-                cancelInt();
-                var target = undefined;
-                if(index < -1){
-                    target = numberOfSlides - 1;
-                } else if (index > numberOfSlides){
-                    target = 0;
-                } else {
-                    target = index;
-                }
-                goTo(target);
-                setInt();
+        function cancelInt() {
+            if (interval) $interval.cancel(interval);
+        }
+
+        function next() {
+            if (vm.left === vm.maxLeft) {
+                vm.left = 0;
+            } else {
+                vm.left -= 100;
             }
         }
-
-        function setInt(){
-            if(vm.slides && (numberOfSlides > 1) && vm.interval && parseInt(vm.interval)){
-                interval = $interval(function(){
-                    swipeTo(currentSlide() + 1);
-                }, parseInt(vm.interval) * 1000);
+        function prev() {
+            if (vm.left !== 0) {
+                vm.left += 100;
+            } else {
+                vm.left = vm.maxLeft;
             }
         }
-
-        function cancelInt(){
-            if(interval) $interval.cancel(interval);
-        }
-
     }
-
 })();

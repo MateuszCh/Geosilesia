@@ -1,17 +1,17 @@
 <div class="header"
-     id="header"
-     ng-class="{'header--hidden' : vm.hideHeader}">
+    id="header"
+    ng-class="{'header--hidden' : vm.hideHeader}">
     <div class="hamburger"
-         ng-click="vm.openHam()"
-         ng-class="{'hamburger--open' : vm.hamOpen}">
+        ng-click="vm.openHam()"
+        ng-class="{'hamburger--open' : vm.hamOpen}">
         <span class="hamburger__menu"></span>
         <span class="hamburger__menu"></span>
         <span class="hamburger__menu"></span>
         <span class="hamburger__menu"></span>
     </div>
     <a class="header__logo"
-       href="/"
-       ng-click="vm.hamOpen = false">
+        href="/"
+        ng-click="vm.hamOpen = false">
         <h1 class="header__logo__heading">GeoSilesia</h1>
     </a>
     <nav ng-if="::vm.nav && vm.nav.length">
@@ -21,15 +21,15 @@
                 ng-repeat="item in ::vm.nav"
                 ng-mouseenter="vm.hoverNavItem = $index"
                 ng-mouseleave="vm.hoverNavItem = false"
-                ng-class="{'nav__item--active' : ((vm.currentPath == item.link) && item.link) || (!item.link && vm.activeGeo)}" >
+                ng-class="{'nav__item--active' : ((vm.currentPath == item.link) && item.link) || (!item.link && vm.activeGeo)}">
                 <a class="nav__item__link"
-                   ng-if="::item.link"
-                   ng-href="{{::item.link}}"
-                   ng-bind="::item.title"
-                   ng-click="vm.openHam(item)"></a>
+                    ng-if="::item.link"
+                    ng-href="{{::item.link}}"
+                    ng-bind="::item.title"
+                    ng-click="vm.openHam(item)"></a>
                 <span class="nav__item__link"
-                      ng-bind="::item.title"
-                      ng-if="::item.subnav.length"></span>
+                    ng-bind="::item.title"
+                    ng-if="::item.subnav.length"></span>
                 <ul ng-if="::item.subnav"
                     class="subnav"
                     ng-class="{'subnav--active' : vm.hoverNavItem == $index}">
@@ -37,9 +37,9 @@
                         ng-repeat="sub in ::item.subnav"
                         ng-class="{'subnav__item--active' : vm.currentPath == sub.link}">
                         <a class="subnav__item__link"
-                           ng-href="{{::sub.link}}"
-                           ng-bind="::sub.subtitle"
-                           ng-click="vm.openHam(sub); vm.hoverNavItem = false"></a>
+                            ng-href="{{::sub.link}}"
+                            ng-bind="::sub.subtitle"
+                            ng-click="vm.openHam(sub); vm.hoverNavItem = false"></a>
                     </li>
                 </ul>
             </li>

@@ -1,128 +1,127 @@
 html {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
-ul  {
-  list-style: none;
+ul {
+    list-style: none;
 }
-body  {
-  @include tablet  {
-    background-color: #ebebeb;
-  }
+body {
+    @include tablet {
+        background-color: #ebebeb;
+    }
 }
 p,
-dd  {
-  font-family: $text-font;
-  color: $text-color;
-  line-height: 1.5rem;
-  font-size: .9rem;
-  margin: 0.625rem 0;
-  @include tablet  {
-    font-size: 1rem;
-    padding: 0 0.625rem;
-  }
+dd {
+    font-family: $text-font;
+    color: $text-color;
+    line-height: 1.5rem;
+    font-size: 0.9rem;
+    margin: 0.625rem 0;
+    @include tablet {
+        font-size: 1rem;
+        padding: 0 0.625rem;
+    }
 }
 
-h2  {
-  margin: 0 auto;
-  width: 100%;
-  font-family: $headers-font;
-  text-align: center;
-  font-size: 2rem;
-  color: darken($header-color, 10%);
-  padding-bottom: .625rem;
-  @include tablet  {
-    font-size: 3rem;
-  }
+h2 {
+    margin: 0 auto;
+    width: 100%;
+    font-family: $headers-font;
+    text-align: center;
+    font-size: 2rem;
+    color: darken($header-color, 10%);
+    padding-bottom: 0.625rem;
+    @include tablet {
+        font-size: 3rem;
+    }
 }
-dt  {
-  font-family: $text-font;
-  font-size: 1.3rem;
-  color: darken($text-color, 10%);
+dt {
+    font-family: $text-font;
+    font-size: 1.3rem;
+    color: darken($text-color, 10%);
 }
 
 main {
-  width: 95%;
-  margin: 0 auto;
-  padding-top: 5rem;
-  @include tablet  {
-    width: 90%;
-    padding-top: 8.125rem;
-  }
-  @include laptop  {
-    width: 80%;
-  }
-  @include full {
-    width: 60%;
-  }
-  &.homepage {
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-}
-
-a   {
-  color: inherit;
-}
-
-.default-list  {
-  list-style-type: disc;
-  list-style-position: outside;
-  padding-left: 1.25rem;
-  @include tablet  {
-    padding-left: 2.25rem;
-  }
-  @include laptop  {
-    padding-left: 3.125rem;
-  }
-  li  {
-    margin: .625rem 0;
-    color: $text-color;
-    font-family: $text-font;
-    line-height: 1.5rem;
-    font-size: .9rem;
-    @include laptop  {
-      font-size: 1rem;
+    width: 95%;
+    margin: 0 auto;
+    padding-top: 5rem;
+    @include tablet {
+        width: 90%;
+        padding-top: 8.125rem;
     }
-  }
+    @include laptop {
+        width: 80%;
+    }
+    @include full {
+        width: 60%;
+    }
+    &.homepage {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+}
+
+a {
+    color: inherit;
+}
+
+.default-list {
+    list-style-type: disc;
+    list-style-position: outside;
+    padding-left: 1.25rem;
+    @include tablet {
+        padding-left: 2.25rem;
+    }
+    @include laptop {
+        padding-left: 3.125rem;
+    }
+    li {
+        margin: 0.625rem 0;
+        color: $text-color;
+        font-family: $text-font;
+        line-height: 1.5rem;
+        font-size: 0.9rem;
+        @include laptop {
+            font-size: 1rem;
+        }
+    }
 }
 
 .blur {
-  filter: blur(5px);
-  transition: filter 0.2s ease-in-out;
+    filter: blur(5px);
+    transition: filter 0.2s ease-in-out;
 }
 
 .closedScroll {
-  overflow: hidden;
-  max-height: 100vh;
+    overflow: hidden;
+    max-height: 100vh;
 }
-
 
 ::-webkit-scrollbar {
-  width: .25rem;
-  background-color: #ebebeb;
+    width: 0.25rem;
+    background-color: #ebebeb;
 }
 ::-webkit-scrollbar-track {
-  background-color: #ebebeb;
+    background-color: #ebebeb;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: lighten($header-color, 0%);
+    background-color: lighten($header-color, 0%);
 }
 
 .fw-bold {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .fill {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
