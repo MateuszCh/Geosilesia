@@ -5,7 +5,7 @@
         ng-bind="::paragraph.paragraph"></p>
     <figure class="gallery__figure"
         ng-click="vm.openFullMode($index)"
-        ng-repeat="image in ::vm.images"
+        ng-repeat="image in ::vm.images | orderBy: 'position' track by image.id"
         image-loaded
         ng-if="::image.src"
         load-class="figury-up">
