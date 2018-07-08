@@ -1,21 +1,20 @@
-(function () {
-    angular.module('geosilesia').component('tabs', {
-        templateUrl: 'html/components/tabs.html',
+(function() {
+    angular.module("geosilesia").component("tabs", {
+        templateUrl: "html/components/tabs.html",
         controller: TabsController,
-        controllerAs: 'vm',
+        controllerAs: "vm",
         bindings: {
-            component: '<'
+            component: "<"
         }
     });
 
-    function TabsController(){
+    function TabsController() {
         var vm = this;
         vm.activeTab = 0;
         vm.setTab = setTab;
 
-        function setTab(tab){
+        function setTab(tab) {
             vm.activeTab = tab;
         }
     }
-
 })();

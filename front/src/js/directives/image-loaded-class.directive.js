@@ -1,18 +1,18 @@
-(function(){
-    angular.module('geosilesia').directive('imageLoaded', function() {
+(function() {
+    angular.module("geosilesia").directive("imageLoaded", function() {
         return {
-            restrict: 'A',
+            restrict: "A",
             link: link,
             scope: {
                 loadClass: "@"
             }
         };
-        function link(scope, element){
-            if(scope.loadClass){
-                var img = element.find('img');
-                img.bind('load', function () {
+        function link(scope, element) {
+            if (scope.loadClass) {
+                var img = element.find("img");
+                img.bind("load", function() {
                     element.addClass(scope.loadClass);
-                })
+                });
             }
         }
     });

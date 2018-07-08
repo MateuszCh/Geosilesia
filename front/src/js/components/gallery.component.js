@@ -1,16 +1,21 @@
-(function(){
-    angular.module('geosilesia').component('gallery', {
-        templateUrl: 'html/components/gallery.html',
-        controllerAs: 'vm',
+(function() {
+    angular.module("geosilesia").component("gallery", {
+        templateUrl: "html/components/gallery.html",
+        controllerAs: "vm",
         controller: GalleryController,
         bindings: {
-            component: '<'
+            component: "<"
         }
     });
 
-    GalleryController.$inject = ['$http', '$routeParams', '$rootScope', '$timeout'];
+    GalleryController.$inject = [
+        "$http",
+        "$routeParams",
+        "$rootScope",
+        "$timeout"
+    ];
 
-    function GalleryController($http, $routeParams, $rootScope, $timeout){
+    function GalleryController($http, $routeParams, $rootScope, $timeout) {
         var vm = this;
         vm.$onInit = onInit;
         vm.$onDestroy = onDestroy;
@@ -31,19 +36,18 @@
             // });
             vm.images = vm.component.catalogue;
             vm.numberOfImages = vm.images.length;
-            window.addEventListener('keydown', setKeyEvent);
-
+            window.addEventListener("keydown", setKeyEvent);
         }
 
-        function onDestroy(){
-            window.removeEventListener('keydown', setKeyEvent);
+        function onDestroy() {
+            window.removeEventListener("keydown", setKeyEvent);
         }
 
-        function setKeyEvent(e){
-            if(e.defaultPrevented){
+        function setKeyEvent(e) {
+            if (e.defaultPrevented) {
                 return;
             }
-            switch(e.key){
+            switch (e.key) {
                 case "ArrowLeft":
                     prev();
                     break;
@@ -67,28 +71,28 @@
             vm.show = true;
         }
 
-        function closeFullScreenMode(){
+        function closeFullScreenMode() {
             $rootScope.blur = false;
             vm.show = false;
 
-            $timeout(function(){
+            $timeout(function() {
                 vm.currentImage = undefined;
                 vm.nextImage = undefined;
                 vm.prevImage = undefined;
             }, 500);
         }
 
-        function next(){
+        function next() {
             vm.back = false;
-            $timeout(function(){
+            $timeout(function() {
                 vm.noMove = false;
-                if((vm.currentImage + 1) === vm.numberOfImages){
+                if (vm.currentImage + 1 === vm.numberOfImages) {
                     vm.currentImage = 0;
                     vm.nextImage = 1;
                     vm.prevImage = vm.numberOfImages - 1;
                 } else {
                     vm.currentImage++;
-                    if((vm.currentImage + 1) === vm.numberOfImages){
+                    if (vm.currentImage + 1 === vm.numberOfImages) {
                         vm.nextImage = 0;
                         vm.prevImage = vm.numberOfImages - 2;
                     } else {
@@ -97,28 +101,26 @@
                     }
                 }
             }, 100);
-
         }
 
-        function prev(){
+        function prev() {
             vm.back = true;
             vm.noMove = true;
-            $timeout(function(){
+            $timeout(function() {
                 vm.noMove = false;
-                if(vm.currentImage === 0){
-                    vm.currentImage = (vm.numberOfImages - 1);
+                if (vm.currentImage === 0) {
+                    vm.currentImage = vm.numberOfImages - 1;
                     vm.nextImage = 0;
                     vm.prevImage = vm.currentImage - 1;
                 } else {
                     vm.currentImage--;
-                    if(vm.currentImage === 0){
+                    if (vm.currentImage === 0) {
                         vm.nextImage = 1;
-                        vm.prevImage = (vm.numberOfImages - 1);
+                        vm.prevImage = vm.numberOfImages - 1;
                     } else {
                         vm.nextImage = vm.currentImage + 1;
                         vm.prevImage = vm.currentImage - 1;
                     }
-
                 }
             }, 100);
         }
