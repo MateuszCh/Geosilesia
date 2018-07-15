@@ -2,7 +2,7 @@
     <h2 ng-bind="::vm.component.title"></h2>
     <p ng-repeat="paragraph in ::vm.component.paragraphs track by $index"
         class="gallery__description"
-        ng-bind="::paragraph.paragraph"></p>
+        ng-bind-html="::paragraph.paragraph"></p>
     <figure class="gallery__figure"
         ng-click="vm.openFullMode($index)"
         ng-repeat="image in ::vm.images | orderBy: 'position' track by image.id"
