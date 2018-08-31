@@ -86,9 +86,6 @@ self.addEventListener("fetch", function(event) {
             })
         );
     } else {
-        console.log(event);
-        console.log(event.request.url);
-        console.log(event.request.mode);
         event.respondWith(
             event.request.mode === "navigate"
                 ? caches.match("index.html")
