@@ -1,5 +1,5 @@
 <main ng-class="::{'homepage' : vm.page.pageUrl === '/'}">
-      <section ng-repeat="row in ::vm.page.rows"
+      <section ng-repeat="row in vm.page.rows"
             ng-if="::vm.page.rows.length"
             ng-switch="::row.type"
             ng-attr-id="{{'section-' + $index}}">

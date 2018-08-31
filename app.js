@@ -5,7 +5,7 @@ const express = require("express"),
     config = require("./config");
 
 const app = express();
-app.set("port", process.env.PORT || 3100);
+app.set("port", process.env.PORT || 3000);
 
 let db;
 const collections = {};
@@ -16,7 +16,7 @@ MongoClient.connect(config.mongoUrl)
         collections.posts = db.collection("posts");
         collections.pages = db.collection("pages");
         collections.files = db.collection("files");
-        app.listen(app.get("port"), () => console.log("Running on port 3001"));
+        app.listen(app.get("port"), () => console.log("Running on port 3000"));
     })
     .catch(err => {
         throw err;

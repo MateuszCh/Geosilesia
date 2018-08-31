@@ -9,6 +9,7 @@ const gulp = require("gulp"),
     concat = require("gulp-concat"),
     htmlmin = require("gulp-htmlmin"),
     cleancss = require("gulp-clean-css"),
+    series = require("stream-series"),
     // nodemon = require('gulp-nodemon'),
     del = require("del");
 
@@ -19,6 +20,7 @@ const paths = {
     srcSCSSs: "src/sass/**/*.scss",
     srcJS: "src/js/**/*.js",
     srcIMAGES: "src/images/**/*",
+    idb: "./node_modules/idb/lib/idb.js",
 
     public: "public",
     publicIndex: "public/index.html",
@@ -30,11 +32,11 @@ const paths = {
 
 const vendor = require("./vendor");
 
-const opts = {
-    algorithm: "sha1",
-    hashLength: 40,
-    template: "<%= name %><%= ext %>?hash=<%= hash %>"
-};
+// const opts = {
+//     algorithm: "sha1",
+//     hashLength: 40,
+//     template: "<%= name %><%= ext %>?hash=<%= hash %>"
+// };
 
 function errorLog(error) {
     console.error.bind(error);
@@ -73,12 +75,28 @@ gulp.task("css", function() {
 
 gulp.task("js", function() {
     return gulp
-        .src(vendor.concat([paths.srcJS]))
+        .src(paths.srcJS)
         .on("error", errorLog)
         .pipe(concat("app.min.js"))
         .pipe(uglify())
         .pipe(gulp.dest(paths.publicJS))
         .pipe(browserSync.stream());
+});
+
+gulp.task("jsLib", function() {
+    return gulp
+        .src(vendor)
+        .on("error", errorLog)
+        .pipe(concat("libs.min.js"))
+        .pipe(gulp.dest(paths.publicJS));
+});
+
+gulp.task("idbLib", function() {
+    return gulp
+        .src(paths.idb)
+        .on("error", errorLog)
+        .pipe(uglify())
+        .pipe(gulp.dest(paths.publicJS));
 });
 
 gulp.task("images", function() {
@@ -92,32 +110,40 @@ gulp.task("copy", ["html", "css", "js"]);
 
 gulp.task("inject", ["copy"], function() {
     const css = gulp.src("public/css/main.css");
-    const js = gulp.src("public/js/app.min.js");
+    const js = gulp.src(["public/js/app.min.js"], { read: false });
+    const vendor = gulp.src(["public/js/libs.min.js"], { read: false });
+    const idb = gulp.src(["public/js/idb.js"], { read: false });
     return gulp
         .src(paths.publicIndex)
-        .pipe(inject(css.pipe(hash(opts)), { relative: true }))
-        .pipe(inject(js.pipe(hash(opts)), { relative: true }))
+        .pipe(inject(css, { relative: true }))
+        .pipe(inject(series(vendor, idb, js), { relative: true }))
         .pipe(gulp.dest(paths.public));
 });
 
 // Browser-Sync Task
 gulp.task("browser-sync", ["inject"], function() {
     browserSync.init({
-        port: 3101,
+        port: 3001,
         proxy: {
-            target: "localhost:3100",
+            target: "localhost:3000",
             ws: false
         }
     });
 });
 
-gulp.task("watch", ["browser-sync"], function() {
+gulp.task("watch", ["inject"], function() {
     gulp.watch([paths.srcTemplates], ["htmlWatch"]);
     gulp.watch([paths.srcSCSSs], ["css"]);
     gulp.watch([paths.srcJS], ["js"]);
 });
 
-gulp.task("default", ["inject", "images"]);
+gulp.task("watch-sync", ["browser-sync"], function() {
+    gulp.watch([paths.srcTemplates], ["htmlWatch"]);
+    gulp.watch([paths.srcSCSSs], ["css"]);
+    gulp.watch([paths.srcJS], ["js"]);
+});
+
+gulp.task("default", ["images", "jsLib", "idbLib", "inject"]);
 
 gulp.task("clean", function() {
     del([

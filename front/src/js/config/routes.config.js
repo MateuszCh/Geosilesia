@@ -17,9 +17,7 @@
                             } else {
                                 page = path.substring(1);
                             }
-                            return pagesService.loadPage(
-                                page.replace(/\//g, "%2F")
-                            );
+                            return pagesService.loadPage(page);
                         }
                     ]
                 });
@@ -47,7 +45,7 @@
                         "page",
                         "$scope",
                         function(page, $scope) {
-                            $scope.page = page[0];
+                            $scope.page = page;
                         }
                     ]
                 })
@@ -65,7 +63,7 @@
                         "page",
                         "$scope",
                         function(page, $scope) {
-                            $scope.page = page[0];
+                            $scope.page = page;
                         }
                     ]
                 })
@@ -75,7 +73,7 @@
                         "page",
                         "$scope",
                         function(page, $scope) {
-                            $scope.page = page[0];
+                            $scope.page = page;
                         }
                     ]
                 })

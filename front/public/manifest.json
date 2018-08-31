@@ -1,0 +1,13 @@
+{
+    "name": "Geosilesia",
+    "short_name": "Geosilesia",
+    "start_url": "/index.html",
+    "scope": ".",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#fff",
+    "theme_color": "#28293e",
+    "description": "Geosilesia",
+    "dir": "ltr",
+    "lang": "en-US"
+}
