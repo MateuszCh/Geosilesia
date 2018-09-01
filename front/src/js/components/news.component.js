@@ -8,28 +8,36 @@
         }
     });
 
-    NewsController.$inject = ["postsService", "pwaService"];
-    function NewsController(postsService, pwaService) {
+    NewsController.$inject = ["pwaService", "resourceService"];
+    function NewsController(pwaService, resourceService) {
         var vm = this;
         vm.$onInit = onInit;
         function onInit() {
-            if (postsService.checkIfLoaded("wydarzenie")) {
-                prepareEvents(postsService.getLoadedPosts("wydarzenie"));
+            var loadedNews = resourceService.getLoadedModels(
+                "posts",
+                "wydarzenie"
+            );
+
+            if (loadedNews) {
+                prepareEvents(loadedNews);
             } else {
                 if (pwaService.isAvailable()) {
-                    postsService
-                        .loadPostsFromIDB("wydarzenie")
+                    resourceService
+                        .loadModelsFromIDB("posts", "wydarzenie")
                         .then(function(events) {
                             if (
-                                !postsService.checkIfLoaded("wydarzenie") &&
+                                !resourceService.getLoadedModels(
+                                    "posts",
+                                    "wydarzenie"
+                                ) &&
                                 events.length
                             ) {
                                 prepareEvents(events);
                             }
                         });
                 }
-                postsService
-                    .loadPostsFromNetwork("wydarzenie")
+                resourceService
+                    .loadModelsFromNetwork("posts", "wydarzenie")
                     .then(function(events) {
                         if (events.length) {
                             prepareEvents(events);

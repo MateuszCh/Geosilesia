@@ -8,15 +8,15 @@
         "$location",
         "$scope",
         "$timeout",
-        "postsService",
-        "pwaService"
+        "pwaService",
+        "resourceService"
     ];
     function HeaderController(
         $location,
         $scope,
         $timeout,
-        postsService,
-        pwaService
+        pwaService,
+        resourceService
     ) {
         var vm = this;
         vm.$onInit = onInit;
@@ -29,11 +29,14 @@
             window.addEventListener("resize", resetHeader);
 
             if (pwaService.isAvailable()) {
-                postsService
-                    .loadPostsFromIDB("navigation")
+                resourceService
+                    .loadModelsFromIDB("posts", "navigation")
                     .then(function(response) {
                         if (
-                            !postsService.checkIfLoaded("navigation") &&
+                            !resourceService.getLoadedModels(
+                                "posts",
+                                "navigation"
+                            ) &&
                             response &&
                             response[0] &&
                             response[0].data
@@ -42,8 +45,8 @@
                         }
                     });
             }
-            postsService
-                .loadPostsFromNetwork("navigation")
+            resourceService
+                .loadModelsFromNetwork("posts", "navigation")
                 .then(function(response) {
                     if (response && response[0] && response[0].data) {
                         vm.nav = response[0].data.nav;

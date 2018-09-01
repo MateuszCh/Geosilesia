@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl-PL">
 
 <head>
     <!-- src/index.html -->
@@ -9,8 +9,14 @@
     <link rel="shortcut icon"
         href="/images/favicon.ico"
         type="image/x-icon">
+    <meta name="description"
+        content="GeoSilesia to „Edukacyjno-informacyjny serwis internetowy o dziedzictwie geologicznym, geomorfologicznym i poprzemysłowym województwa śląskiego”.">
     <meta name="viewport"
         content="width=device-width, initial-scale=1">
+    <meta name="theme-color"
+        content="#28293e" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poiret+One&subset=latin-ext"
+        rel="stylesheet">
     <!-- inject:css -->
     <!-- endinject -->
     <link rel="manifest"
@@ -21,7 +27,7 @@
     ng-controller="MainController"
     ng-class="{'closedScroll' : $root.blur}">
     <header></header>
-    <div ng-view=""
+    <div ng-view
         class="fade"
         id="page"></div>
     <button class="button-up"
@@ -31,6 +37,10 @@
         <img class="button-up__image"
             src="images/arrow.svg">
     </button>
+    <noscript class="noscript">
+        <h1 class="header__logo__heading">GeoSilesia</h1>
+        <p>Strona wymaga JavaScriptu do prawidłowego działania</p>
+    </noscript>
     <!-- inject:js -->
     <!-- endinject -->
 </body>

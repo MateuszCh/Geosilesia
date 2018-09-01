@@ -8,16 +8,51 @@
                 route.resolve || (route.resolve = {});
                 angular.extend(route.resolve, {
                     page: [
-                        "pagesService",
                         "$route",
-                        function(pagesService, $route) {
-                            var page;
-                            if (path === "/:page*") {
-                                page = $route.current.params.page;
-                            } else {
-                                page = path.substring(1);
-                            }
-                            return pagesService.loadPage(page);
+                        "$q",
+                        "pwaService",
+                        "resourceService",
+                        function($route, $q, pwaService, resourceService) {
+                            var url = $route.current.params.page;
+                            return $q(function(resolve, reject) {
+                                var loadedModels = resourceService.getLoadedModels(
+                                    "page",
+                                    url || "/"
+                                );
+                                if (loadedModels) {
+                                    resolve(loadedModels);
+                                } else {
+                                    if (pwaService.isAvailable()) {
+                                        resourceService
+                                            .loadModelsFromIDB(
+                                                "page",
+                                                url || "/"
+                                            )
+                                            .then(function(response) {
+                                                if (response) {
+                                                    resolve(response);
+                                                } else {
+                                                    resourceService
+                                                        .loadModelsFromNetwork(
+                                                            "page",
+                                                            url
+                                                        )
+                                                        .then(function(
+                                                            response
+                                                        ) {
+                                                            resolve(response);
+                                                        });
+                                                }
+                                            });
+                                    } else {
+                                        resourceService
+                                            .loadModelsFromNetwork("page", url)
+                                            .then(function(response) {
+                                                resolve(response);
+                                            });
+                                    }
+                                }
+                            });
                         }
                     ]
                 });
@@ -44,8 +79,7 @@
                             $scope.page = page;
                         }
                     ]
-                })
-                .otherwise("/");
+                });
         }
     ]);
 })();

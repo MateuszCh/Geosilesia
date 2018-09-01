@@ -8,24 +8,22 @@
         }
     });
 
-    PageViewController.$inject = ["$location", "pagesService", "pwaService"];
+    PageViewController.$inject = ["$location", "pwaService", "resourceService"];
 
-    function PageViewController($location, pagesService, pwaService) {
+    function PageViewController($location, pwaService, resourceService) {
         var vm = this;
         vm.$onInit = onInit;
+        vm.pwaIsAvailable = pwaService.isAvailable();
 
         function onInit() {
             if (pwaService.isAvailable()) {
-                var path = $location.path().substring(1) || "/";
-                var page = pagesService.loadPageFromNetwork(path);
-                if (typeof page.then === "function") {
-                    page.then(function(response) {
-                        onLoad(response);
-                    }).catch(function(err) {
-                        onLoad();
-                    });
-                } else {
-                    onLoad(page);
+                var path = $location.path().substring(1);
+                if (!resourceService.getLoadedModels("page", path || "/")) {
+                    resourceService
+                        .loadModelsFromNetwork("page", path)
+                        .then(function(response) {
+                            onLoad(response);
+                        });
                 }
             } else {
                 onLoad();
@@ -36,9 +34,7 @@
             if (page && page.pageUrl) {
                 vm.page = page;
             }
-            if (!vm.page || !vm.page.pageUrl) {
-                $location.path("/");
-            }
+            vm.loaded = true;
         }
     }
 })();

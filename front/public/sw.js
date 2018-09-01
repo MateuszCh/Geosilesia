@@ -81,15 +81,14 @@ self.addEventListener("activate", function(event) {
 });
 
 self.addEventListener("fetch", function(event) {
-    // console.log(event);
     if (
         event.request.url.indexOf("https://maps.") == 0 ||
         event.request.url.indexOf("googleapis.com") > -1
     ) {
         // console.log("GMAP: ", event.request.url);
         event.respondWith(fetch(event.request));
-    } else if (event.request.url.indexOf("/api") > -1) {
-        // console.log("API: ", event.request.url);
+    } else if (event.request.url.indexOf(self.location.origin + "/api") > -1) {
+        // console.log("API: ", event, self, event.request.url);
         event.respondWith(
             fetch(event.request).then(function(res) {
                 var clonedRes = res.clone();

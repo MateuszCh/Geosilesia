@@ -13,8 +13,8 @@
         "$document",
         "$element",
         "gmapConfig",
-        "postsService",
-        "pwaService"
+        "pwaService",
+        "resourceService"
     ];
 
     function SearchMapController(
@@ -22,8 +22,8 @@
         $document,
         $element,
         gmapConfig,
-        postsService,
-        pwaService
+        pwaService,
+        resourceService
     ) {
         var vm = this;
         vm.$onInit = onInit;
@@ -50,22 +50,32 @@
                 loadGoogleMaps();
             }
 
-            if (
-                postsService.checkIfLoaded("marker") &&
-                postsService.checkIfLoaded("icon")
-            ) {
-                vm.markers = postsService.getLoadedPosts("marker");
-                vm.iconModels = postsService.getLoadedPosts("icon");
+            var loadedMarkers = resourceService.getLoadedModels(
+                "posts",
+                "marker"
+            );
+            var loadedIcons = resourceService.getLoadedModels("posts", "icon");
+            if (loadedMarkers && loadedIcons) {
+                vm.markers = loadedMarkers;
+                vm.iconModels = loadedIcons;
                 initSearchMap();
             } else {
                 if (pwaService.isAvailable()) {
                     $q.all([
-                        postsService.loadPostsFromIDB("marker"),
-                        postsService.loadPostsFromIDB("icon")
+                        resourceService.loadModelsFromIDB("posts", "marker"),
+                        resourceService.loadModelsFromIDB("posts", "icon")
                     ]).then(function(posts) {
+                        var loadedMarkers = resourceService.getLoadedModels(
+                            "posts",
+                            "marker"
+                        );
+                        var loadedIcons = resourceService.getLoadedModels(
+                            "posts",
+                            "icon"
+                        );
                         if (
-                            !postsService.checkIfLoaded("marker") &&
-                            !postsService.checkIfLoaded("icon") &&
+                            !loadedMarkers &&
+                            !loadedIcons &&
                             posts[0] &&
                             posts[1]
                         ) {
@@ -76,8 +86,8 @@
                     });
                 }
                 $q.all([
-                    postsService.loadPostsFromNetwork("marker"),
-                    postsService.loadPostsFromNetwork("icon")
+                    resourceService.loadModelsFromNetwork("posts", "marker"),
+                    resourceService.loadModelsFromNetwork("posts", "icon")
                 ]).then(function(posts) {
                     if (posts[0] && posts[1]) {
                         vm.markers = posts[0];
