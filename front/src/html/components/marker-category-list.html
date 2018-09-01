@@ -4,7 +4,7 @@
     ng-if="::vm.component.categories.length">
     <li class="markers__item"
         ng-repeat="category in ::vm.component.categories">
-        <img src="{{::category.icon}}">
+        <img ng-src="{{::category.icon}}">
         <p class="markers__item__text"
             ng-bind-html="::category.text"></p>
     </li>
