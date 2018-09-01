@@ -65,9 +65,10 @@
                     ]).then(function(posts) {
                         if (
                             !postsService.checkIfLoaded("marker") &&
-                            !postsService.checkIfLoaded("icon")
+                            !postsService.checkIfLoaded("icon") &&
+                            posts[0] &&
+                            posts[1]
                         ) {
-                            console.log("pwa");
                             vm.markers = posts[0];
                             vm.iconModels = posts[1];
                             initSearchMap();
@@ -78,9 +79,11 @@
                     postsService.loadPostsFromNetwork("marker"),
                     postsService.loadPostsFromNetwork("icon")
                 ]).then(function(posts) {
-                    vm.markers = posts[0];
-                    vm.iconModels = posts[1];
-                    initSearchMap();
+                    if (posts[0] && posts[1]) {
+                        vm.markers = posts[0];
+                        vm.iconModels = posts[1];
+                        initSearchMap();
+                    }
                 });
             }
         }
