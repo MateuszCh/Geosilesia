@@ -1,7 +1,7 @@
 importScripts("/js/idb.js");
 
-var CACHE_STATIC_NAME = "static-v13";
-var CACHE_DYNAMIC_NAME = "dynamic-v13";
+var CACHE_STATIC_NAME = "static-v6";
+var CACHE_DYNAMIC_NAME = "dynamic-v6";
 var STATIC_FILES = [
     "/",
     "index.html",
@@ -16,16 +16,37 @@ var dbPromise = idb.open("geosilesia", 1, function(db) {
         db.createObjectStore("pages", { keyPath: "pageUrl" });
     }
     if (!db.objectStoreNames.contains("posts")) {
-        db.createObjectStore("posts", { keyPath: "id" });
+        var postsStore = db.createObjectStore("posts", {
+            keyPath: "id"
+        });
+        postsStore.createIndex("type", "type", {
+            unique: false
+        });
     }
 });
-
 function writeData(st, data) {
     return dbPromise.then(function(db) {
         var tx = db.transaction(st, "readwrite");
         var store = tx.objectStore(st);
         store.put(data);
         return tx.complete;
+    });
+}
+
+function clearPostsByType(type) {
+    return dbPromise.then(function(db) {
+        var tx = db.transaction("posts", "readwrite");
+        var store = tx.objectStore("posts");
+        var index = store.index("type");
+        return index
+            .openKeyCursor(IDBKeyRange.only(type))
+            .then(function showRange(cursor) {
+                if (!cursor) {
+                    return;
+                }
+                store.delete(cursor.primaryKey);
+                return cursor.continue().then(showRange);
+            });
     });
 }
 
@@ -61,7 +82,10 @@ self.addEventListener("activate", function(event) {
 
 self.addEventListener("fetch", function(event) {
     // console.log(event);
-    if (event.request.url.indexOf("https://maps.") == 0) {
+    if (
+        event.request.url.indexOf("https://maps.") == 0 ||
+        event.request.url.indexOf("googleapis.com") > -1
+    ) {
         // console.log("GMAP: ", event.request.url);
         event.respondWith(fetch(event.request));
     } else if (event.request.url.indexOf("/api") > -1) {
@@ -77,8 +101,19 @@ self.addEventListener("fetch", function(event) {
                             : "";
                 if (typeOfRequest) {
                     clonedRes.json().then(function(data) {
-                        for (var key in data) {
-                            writeData(typeOfRequest, data[key]);
+                        if (typeOfRequest === "posts") {
+                            var type = event.request.url.substring(
+                                event.request.url.lastIndexOf("/") + 1
+                            );
+                            clearPostsByType(type).then(function() {
+                                for (var key in data) {
+                                    writeData(typeOfRequest, data[key]);
+                                }
+                            });
+                        } else {
+                            for (var key in data) {
+                                writeData(typeOfRequest, data[key]);
+                            }
                         }
                     });
                 }

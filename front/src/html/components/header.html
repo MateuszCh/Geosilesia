@@ -14,11 +14,11 @@
         ng-click="vm.hamOpen = false">
         <h1 class="header__logo__heading">GeoSilesia</h1>
     </a>
-    <nav ng-if="::vm.nav && vm.nav.length">
+    <nav ng-if="vm.nav && vm.nav.length">
         <ul class="nav"
             ng-class="{'nav--active' : vm.hamOpen, 'nav--no-transition' : vm.noTransition}">
             <li class="nav__item"
-                ng-repeat="item in ::vm.nav"
+                ng-repeat="item in vm.nav"
                 ng-mouseenter="vm.hoverNavItem = $index"
                 ng-mouseleave="vm.hoverNavItem = false"
                 ng-class="{'nav__item--active' : ((vm.currentPath == item.link) && item.link) || (!item.link && vm.activeGeo)}">

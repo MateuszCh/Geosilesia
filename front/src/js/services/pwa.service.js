@@ -5,7 +5,12 @@
                 db.createObjectStore("pages", { keyPath: "pageUrl" });
             }
             if (!db.objectStoreNames.contains("posts")) {
-                db.createObjectStore("posts", { keyPath: "id" });
+                var postsStore = db.createObjectStore("posts", {
+                    keyPath: "id"
+                });
+                postsStore.createIndex("type", "type", {
+                    unique: false
+                });
             }
         });
 
@@ -19,15 +24,25 @@
         }
 
         function getPosts(type) {
-            return dbPromise.then(function(db) {
-                return db
-                    .transaction("posts", "readonly")
-                    .objectStore("posts")
-                    .getAll()
-                    .filter(function(post) {
-                        return post.type === type;
-                    });
-            });
+            var range = IDBKeyRange.only(type);
+            var posts = [];
+            return dbPromise
+                .then(function(db) {
+                    var tx = db.transaction("posts", "readonly");
+                    var store = tx.objectStore("posts");
+                    var index = store.index("type");
+                    return index.openCursor(range);
+                })
+                .then(function showRange(cursor) {
+                    if (!cursor) {
+                        return;
+                    }
+                    posts.push(cursor.value);
+                    return cursor.continue().then(showRange);
+                })
+                .then(function() {
+                    return posts;
+                });
         }
 
         function isAvailable() {

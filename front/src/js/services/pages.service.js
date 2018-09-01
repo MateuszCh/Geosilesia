@@ -38,7 +38,7 @@
                 return requestService
                     .send("/api/page/" + correctUrl, "GET")
                     .then(function(response) {
-                        if (response.data[0]) {
+                        if (response.data && response.data[0]) {
                             _loadedPages[url] = {
                                 loaded: true,
                                 page: response.data[0]

@@ -27,38 +27,6 @@
             $routeProvider
                 .when("/", {
                     template: '<page-view page="page"></page-view>',
-                    resolve: {
-                        markers: [
-                            "postsService",
-                            function(postsService) {
-                                return postsService.loadPosts("marker");
-                            }
-                        ],
-                        icons: [
-                            "postsService",
-                            function(postsService) {
-                                return postsService.loadPosts("icon");
-                            }
-                        ]
-                    },
-                    controller: [
-                        "page",
-                        "$scope",
-                        function(page, $scope) {
-                            $scope.page = page;
-                        }
-                    ]
-                })
-                .when("/wydarzenia", {
-                    template: '<page-view page="page"></page-view>',
-                    resolve: {
-                        events: [
-                            "postsService",
-                            function(postsService) {
-                                return postsService.loadPosts("wydarzenie");
-                            }
-                        ]
-                    },
                     controller: [
                         "page",
                         "$scope",

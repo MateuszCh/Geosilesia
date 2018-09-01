@@ -1,27 +1,45 @@
 (function() {
     angular.module("geosilesia").service("postsService", [
         "requestService",
-        function(requestService) {
-            var _posts = [];
+        "pwaService",
+        function(requestService, pwaService) {
+            var _loadedPosts = {};
 
-            function loadPosts(type) {
-                if (_posts[type]) {
-                    return _posts[type];
-                }
+            function getLoadedPosts(type) {
+                return _loadedPosts[type] && _loadedPosts[type].posts;
+            }
+
+            function loadPostsFromIDB(type) {
+                return pwaService.getPosts(type);
+            }
+
+            function loadPostsFromNetwork(type) {
                 return requestService
                     .send("/api/posts/" + type, "GET")
                     .then(function(response) {
-                        _posts[type] = response.data;
-                        return _posts[type];
+                        if (response.data && response.data[0]) {
+                            _loadedPosts[type] = {
+                                loaded: true,
+                                posts: response.data
+                            };
+                            return _loadedPosts[type].posts;
+                        }
+                        return;
                     })
-                    .catch(function(err) {
-                        console.log(err);
-                        return _posts[type];
+                    .catch(function() {
+                        return;
                     });
             }
 
+            function checkIfLoaded(type) {
+                return _loadedPosts[type] && _loadedPosts[type].loaded;
+            }
+
             return {
-                loadPosts: loadPosts
+                loadPostsFromIDB: loadPostsFromIDB,
+                loadPostsFromNetwork: loadPostsFromNetwork,
+                getLoadedPosts: getLoadedPosts,
+                checkIfLoaded: checkIfLoaded
             };
         }
     ]);

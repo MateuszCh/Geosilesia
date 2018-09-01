@@ -8,9 +8,16 @@
         "$location",
         "$scope",
         "$timeout",
-        "postsService"
+        "postsService",
+        "pwaService"
     ];
-    function HeaderController($location, $scope, $timeout, postsService) {
+    function HeaderController(
+        $location,
+        $scope,
+        $timeout,
+        postsService,
+        pwaService
+    ) {
         var vm = this;
         vm.$onInit = onInit;
         vm.openHam = openHam;
@@ -18,12 +25,30 @@
         vm.activeGeo = false;
 
         function onInit() {
-            postsService.loadPosts("navigation").then(function(response) {
-                if (response[0] && response[0].data)
-                    vm.nav = response[0].data.nav;
-            });
             $scope.$on("$routeChangeSuccess", setCurrentPath);
             window.addEventListener("resize", resetHeader);
+
+            if (pwaService.isAvailable()) {
+                postsService
+                    .loadPostsFromIDB("navigation")
+                    .then(function(response) {
+                        if (
+                            !postsService.checkIfLoaded("navigation") &&
+                            response &&
+                            response[0] &&
+                            response[0].data
+                        ) {
+                            vm.nav = response[0].data.nav;
+                        }
+                    });
+            }
+            postsService
+                .loadPostsFromNetwork("navigation")
+                .then(function(response) {
+                    if (response && response[0] && response[0].data) {
+                        vm.nav = response[0].data.nav;
+                    }
+                });
         }
 
         function setCurrentPath() {

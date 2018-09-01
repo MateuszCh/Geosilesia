@@ -20,7 +20,7 @@
                     ng-init="vm.category = 'all'">
                     <h3 class="search__form__category__heading">Kategorie</h3>
                     <div class="search__form__category__container"
-                        ng-repeat="category in ::vm.categories track by $index">
+                        ng-repeat="category in vm.categories track by $index">
                         <input class="search__form__category__radio"
                             type="radio"
                             ng-attr-id="{{category.category}}"

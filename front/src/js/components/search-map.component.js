@@ -10,22 +10,20 @@
 
     SearchMapController.$inject = [
         "$q",
-        "$rootScope",
         "$document",
         "$element",
-        "$timeout",
         "gmapConfig",
-        "postsService"
+        "postsService",
+        "pwaService"
     ];
 
     function SearchMapController(
         $q,
-        $rootScope,
         $document,
         $element,
-        $timeout,
         gmapConfig,
-        postsService
+        postsService,
+        pwaService
     ) {
         var vm = this;
         vm.$onInit = onInit;
@@ -52,8 +50,42 @@
                 loadGoogleMaps();
             }
 
-            vm.markers = postsService.loadPosts("marker");
+            if (
+                postsService.checkIfLoaded("marker") &&
+                postsService.checkIfLoaded("icon")
+            ) {
+                vm.markers = postsService.getLoadedPosts("marker");
+                vm.iconModels = postsService.getLoadedPosts("icon");
+                initSearchMap();
+            } else {
+                if (pwaService.isAvailable()) {
+                    $q.all([
+                        postsService.loadPostsFromIDB("marker"),
+                        postsService.loadPostsFromIDB("icon")
+                    ]).then(function(posts) {
+                        if (
+                            !postsService.checkIfLoaded("marker") &&
+                            !postsService.checkIfLoaded("icon")
+                        ) {
+                            console.log("pwa");
+                            vm.markers = posts[0];
+                            vm.iconModels = posts[1];
+                            initSearchMap();
+                        }
+                    });
+                }
+                $q.all([
+                    postsService.loadPostsFromNetwork("marker"),
+                    postsService.loadPostsFromNetwork("icon")
+                ]).then(function(posts) {
+                    vm.markers = posts[0];
+                    vm.iconModels = posts[1];
+                    initSearchMap();
+                });
+            }
+        }
 
+        function initSearchMap() {
             var allowedCategories = {};
             vm.markers.forEach(function(marker) {
                 if (marker.data.categories && marker.data.categories.length) {
@@ -65,10 +97,9 @@
                 }
             });
 
-            var iconModels = postsService.loadPosts("icon");
             var icons = {};
-            if (iconModels.length) {
-                iconModels.forEach(function(icon) {
+            if (vm.iconModels.length) {
+                vm.iconModels.forEach(function(icon) {
                     if (
                         icon.data &&
                         icon.data.category &&
