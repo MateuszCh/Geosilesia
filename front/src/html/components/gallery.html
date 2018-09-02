@@ -10,6 +10,7 @@
         ng-if="::image.src"
         load-class="figury-up">
         <img class="gallery__figure__image"
+            ng-attr-alt="{{::image.title}}"
             ng-src="{{::image.src}}">
         <figcaption class="gallery__figure__text"
             ng-if="::image.title"
@@ -31,6 +32,7 @@
             <div class="fullscreen-image__figure__container"
                 ng-class="::{'fullscreen-image__figure__container--full-width' : !(img.title || img.description || img.author)}">
                 <img class="fullscreen-image__figure__container__img"
+                    ng-attr-alt="{{::img.title}}"
                     ng-src="{{::img.src}}">
             </div>
             <div class="fullscreen-image__figure__figcaption"

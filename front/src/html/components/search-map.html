@@ -11,10 +11,11 @@
                     <input class="search__form__search__input"
                         ng-model="vm.searchInput"
                         type="text"
+                        aria-label="Lokalizacja"
                         placeholder="Wpisz szukaną lokalizację">
                     <input class="search__form__search__button"
                         type="submit"
-                        value="">
+                        aria-label="Szukaj atrakcji geoturystycznych">
                 </div>
                 <div class="search__form__category"
                     ng-init="vm.category = 'all'">
@@ -33,7 +34,7 @@
                             <span class="search__form__category__label__text"
                                 ng-bind="category.name"></span>
                             <img class="search__form__category__label__image"
-                                ng-attr-alt="{{category.name}}"
+                                ng-attr-alt="{{::category.name}}"
                                 style="height:27px; width: 24px;"
                                 ng-src="{{category.icon}}">
                         </label>
@@ -77,6 +78,7 @@
                                     ng-href="{{'https://www.google.com/maps/dir/Current+Location/' + result.position.lat + ',' + result.position.lng}}"
                             
                                     target="_blank"
+                                    rel="noreferrer"
                                     ng-click="$event.stopPropagation()">Dojazd</a>
                                 <p class="result__container__right__distance"
                                     ng-if="result.distance && vm.location">Odległość:
@@ -89,6 +91,7 @@
             <div class="search__form__activate"
                 ng-click="vm.toggleSearchPanel()">
                 <img class="search__form__activate__image"
+                    alt="otwórz panel wyszukiwania atrakcji geoturystycznych"
                     src="images/search-icon.png">
             </div>
         </div>
