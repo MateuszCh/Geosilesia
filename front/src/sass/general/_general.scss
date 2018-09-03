@@ -158,3 +158,27 @@ a {
         }
     }
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.busy {
+    color: transparent;
+    &:after,
+    &:before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: calc(50% - 10px);
+        left: calc(50% - 10px);
+        border-radius: 50%;
+        background-color: white;
+        opacity: 0.6;
+        animation: sk-bounce 2s infinite ease-in-out;
+    }
+    &:before {
+        animation-delay: -1s;
+    }
+}

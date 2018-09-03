@@ -1,14 +1,30 @@
 importScripts("/js/idb.js");
 
-var CACHE_STATIC_NAME = "static-v2";
-var CACHE_DYNAMIC_NAME = "dynamic-v2";
+var CACHE_STATIC_NAME = "static-v1";
+var CACHE_DYNAMIC_NAME = "dynamic-v1";
 var STATIC_FILES = [
     "/",
     "index.html",
     "/css/main.css",
     "/js/app.min.js",
     "/js/idb.js",
-    "manifest.json"
+    "manifest.json",
+    "/html/components/carousel.html",
+    "/html/components/dictionary.html",
+    "/html/components/footnotes.html",
+    "/html/components/gallery-list.html",
+    "/html/components/gallery.html",
+    "/html/components/geosites-logos.html",
+    "/html/components/header.html",
+    "/html/components/heading.html",
+    "/html/components/homepage-banner.html",
+    "/html/components/literature.html",
+    "/html/components/marker-category-list.html",
+    "/html/components/news.html",
+    "/html/components/page-view.html",
+    "/html/components/search-map.html",
+    "/html/components/tabs.html",
+    "/html/components/title-and-text.html"
 ];
 
 var dbPromise = idb.open("geosilesia", 1, function(db) {
@@ -51,17 +67,14 @@ function clearPostsByType(type) {
 }
 
 self.addEventListener("install", function(event) {
-    // console.log("[Service Worker] installing", event);
     event.waitUntil(
         caches.open(CACHE_STATIC_NAME).then(function(cache) {
-            // console.log("[Service Worker] Precaching App Shell");
             cache.addAll(STATIC_FILES);
         })
     );
 });
 
 self.addEventListener("activate", function(event) {
-    // console.log("[Service Worker] activating", event);
     event.waitUntil(
         caches.keys().then(function(keysList) {
             return Promise.all(
@@ -70,7 +83,6 @@ self.addEventListener("activate", function(event) {
                         key !== CACHE_STATIC_NAME &&
                         key !== CACHE_DYNAMIC_NAME
                     ) {
-                        // console.log("[Service Worker] removing", key);
                         return caches.delete(key);
                     }
                 })
@@ -85,10 +97,8 @@ self.addEventListener("fetch", function(event) {
         event.request.url.indexOf("https://maps.") == 0 ||
         event.request.url.indexOf("googleapis.com") > -1
     ) {
-        // console.log("GMAP: ", event.request.url);
         event.respondWith(fetch(event.request));
     } else if (event.request.url.indexOf(self.location.origin + "/api") > -1) {
-        // console.log("API: ", event, self, event.request.url);
         event.respondWith(
             fetch(event.request).then(function(res) {
                 var clonedRes = res.clone();
