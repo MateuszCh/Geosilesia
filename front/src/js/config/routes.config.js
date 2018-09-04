@@ -13,21 +13,18 @@
                         "pwaService",
                         "resourceService",
                         function($route, $q, pwaService, resourceService) {
-                            var url = $route.current.params.page;
+                            var url = $route.current.params.page || "/";
                             return $q(function(resolve, reject) {
                                 var loadedModels = resourceService.getLoadedModels(
                                     "page",
-                                    url || "/"
+                                    url
                                 );
                                 if (loadedModels) {
                                     resolve(loadedModels);
                                 } else {
                                     if (pwaService.isAvailable()) {
                                         resourceService
-                                            .loadModelsFromIDB(
-                                                "page",
-                                                url || "/"
-                                            )
+                                            .loadModelsFromIDB("page", url)
                                             .then(function(response) {
                                                 if (response) {
                                                     resolve(response);

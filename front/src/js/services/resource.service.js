@@ -30,11 +30,11 @@
                     .send("/api/" + resourceType + "/" + formattedKey, "GET")
                     .then(function(response) {
                         if (response.data && response.data[0]) {
-                            _loadedModels[resourceType][key || "/"] =
+                            _loadedModels[resourceType][key] =
                                 resourceType === "page"
                                     ? response.data[0]
                                     : response.data;
-                            return getLoadedModels(resourceType, key || "/");
+                            return getLoadedModels(resourceType, key);
                         }
                         return;
                     })

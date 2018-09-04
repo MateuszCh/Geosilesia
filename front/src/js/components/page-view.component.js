@@ -17,8 +17,8 @@
 
         function onInit() {
             if (pwaService.isAvailable()) {
-                var path = $location.path().substring(1);
-                if (!resourceService.getLoadedModels("page", path || "/")) {
+                var path = $location.path().substring(1) || "/";
+                if (!resourceService.getLoadedModels("page", path)) {
                     resourceService
                         .loadModelsFromNetwork("page", path)
                         .then(function(response) {
