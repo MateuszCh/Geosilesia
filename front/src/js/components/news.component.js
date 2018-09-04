@@ -30,6 +30,7 @@
                                     "posts",
                                     "wydarzenie"
                                 ) &&
+                                events &&
                                 events.length
                             ) {
                                 prepareEvents(events);
@@ -39,7 +40,7 @@
                 resourceService
                     .loadModelsFromNetwork("posts", "wydarzenie")
                     .then(function(events) {
-                        if (events.length) {
+                        if (events && events.length) {
                             prepareEvents(events);
                         }
                     });

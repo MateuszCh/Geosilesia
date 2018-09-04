@@ -1,12 +1,13 @@
 importScripts("/js/idb.js");
 
-var CACHE_STATIC_NAME = "static-v2";
-var CACHE_DYNAMIC_NAME = "dynamic-v2";
+var CACHE_STATIC_NAME = "static-v1";
+var CACHE_DYNAMIC_NAME = "dynamic-v1";
 var STATIC_FILES = [
     "/",
     "index.html",
     "/css/main.css",
     "/js/app.min.js",
+    "/js/libs.min.js",
     "/js/idb.js",
     "manifest.json",
     "/html/components/carousel.html",
