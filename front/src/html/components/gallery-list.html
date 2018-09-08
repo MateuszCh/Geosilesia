@@ -16,7 +16,7 @@
                 <figure class="photos__list__item__figure">
                     <img class="photos__list__item__figure__image"
                         ng-src="{{::gallery.image}}"
-                        ng-attr-alt="{{::gallery.title}}">
+                        ng-attr-alt="{{::'przejdź do galerii ' + gallery.title}}">
                     <figcaption class="photos__list__item__figure__text"
                         ng-bind="::gallery.title"></figcaption>
                 </figure>

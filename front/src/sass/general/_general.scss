@@ -12,7 +12,7 @@ ul {
 }
 body {
     @include tablet {
-        background-color: #ebebeb;
+        background-color: #f8f8f8;
     }
 }
 p,
@@ -124,4 +124,61 @@ a {
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+.center-content {
+    @extend .fill;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.noscript {
+    @extend .center-content;
+    flex-direction: column;
+    background-color: white;
+    text-align: center;
+}
+
+.nopage {
+    @extend .center-content;
+    text-align: center;
+    flex-direction: column;
+    padding: 0 1em;
+    &__button {
+        text-decoration: none;
+        margin-top: 2em;
+        background-color: $color3;
+        padding: 1em;
+        color: white;
+        font-family: $text-font;
+        transition: background-color 0.5s ease;
+        &:hover {
+            background-color: lighten($color3, 10%);
+        }
+    }
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.busy {
+    color: transparent;
+    &:after,
+    &:before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: calc(50% - 10px);
+        left: calc(50% - 10px);
+        border-radius: 50%;
+        background-color: white;
+        opacity: 0.6;
+        animation: sk-bounce 2s infinite ease-in-out;
+    }
+    &:before {
+        animation-delay: -1s;
+    }
 }

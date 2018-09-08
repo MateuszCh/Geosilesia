@@ -1,28 +1,23 @@
 (function() {
     angular.module("geosilesia").component("map", {
         bindings: {
-            places: "<",
-            centerMap: "<",
+            markersModels: "<",
             currentResult: "<",
             markerCluster: "<",
             categories: "<",
-            activeCategory: "<"
+            activeCategory: "@"
         },
         controllerAs: "vm",
         controller: MapController,
         template: '<div class="search__container__map"></div>'
     });
 
-    MapController.$inject = ["$timeout", "$element", "$interval", "mapStyle"];
-    function MapController($timeout, $element, $interval, mapStyle) {
+    MapController.$inject = ["$timeout", "$element", "mapStyle", "mapService"];
+    function MapController($timeout, $element, mapStyle, mapService) {
         var vm = this;
         vm.$onInit = onInit;
-        vm.$onDestroy = onDestroy;
         vm.$onChanges = onChanges;
         var map,
-            currentCenter,
-            centering,
-            stopping,
             markerCluster,
             markers = [];
 
@@ -30,53 +25,45 @@
             initMap();
         }
 
+        var mapContainer = $element[0].firstChild;
+
         function onChanges(changes) {
             if (map) {
-                if (changes.places && changes.places.currentValue) {
-                    updateMarkers();
-                }
-                if (changes.centerMap) {
-                    if (centering && centering.$$state.value !== "canceled") {
-                        $interval.cancel(centering);
-                        $timeout.cancel(stopping);
-                    }
-                    centering = $interval(function() {
-                        centerMap();
-                    }, 1);
-                    stopping = $timeout(function() {
-                        $interval.cancel(centering);
-                    }, 1001);
+                if (
+                    changes.markersModels &&
+                    changes.markersModels.currentValue
+                ) {
+                    updateMap();
                 }
                 if (
                     changes.currentResult &&
                     changes.currentResult.currentValue !== undefined
                 ) {
-                    updateMarkers();
-                    var resultMarker =
-                        markers[changes.currentResult.currentValue];
-                    map.setZoom(18);
-                    map.panTo(resultMarker.position);
-                    currentCenter = map.getCenter();
-                    google.maps.event.trigger(resultMarker, "click");
+                    if (markers && markers.length) {
+                        var resultMarkerArray = markers.filter(function(
+                            marker
+                        ) {
+                            return (
+                                marker.id == changes.currentResult.currentValue
+                            );
+                        });
+
+                        if (resultMarkerArray && resultMarkerArray.length) {
+                            map.setZoom(18);
+                            map.panTo(resultMarkerArray[0].position);
+                            google.maps.event.trigger(
+                                resultMarkerArray[0],
+                                "click"
+                            );
+                        }
+                    }
                 }
             }
         }
 
-        function onDestroy() {
-            window.removeEventListener("resize", centerMap);
-        }
-
-        function gmapApiReady() {
-            return (
-                angular.isDefined(window.google) &&
-                angular.isDefined(window.google.maps)
-            );
-        }
-
         function initMap() {
-            if (gmapApiReady()) {
-                var mapContainer = $element[0].firstChild;
-                map = new google.maps.Map(mapContainer, {
+            if (mapService.isGoogleMapsLoaded()) {
+                var mapOptions = {
                     center: {
                         lat: 50.277978,
                         lng: 19.020544
@@ -107,155 +94,48 @@
                         style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
                     },
                     scaleControl: true
-                });
-                map.mapTypes.set(
-                    "styled_map",
-                    new google.maps.StyledMapType(mapStyle.style, mapStyle.name)
+                };
+
+                var mapStyleOptions = {
+                    style: mapStyle.style,
+                    name: mapStyle.name
+                };
+
+                map = mapService.createMap(
+                    mapContainer,
+                    mapOptions,
+                    mapStyleOptions
                 );
-                currentCenter = map.getCenter();
-                vm.places && updateMarkers();
-                window.addEventListener("resize", centerMap);
-                google.maps.event.addListener(map, "dragend", function() {
-                    currentCenter = map.getCenter();
-                });
+
+                updateMap();
                 return;
             }
-            $timeout(initMap, 10);
+            $timeout(initMap, 500);
         }
 
-        function updateMarkers() {
-            if (markers.length) {
-                deleteMarkers();
-            }
-            setMarkers();
-            setBounds();
-        }
-
-        function deleteMarkers() {
-            markers.forEach(function(marker) {
-                marker.setMap(null);
-            });
-            markers = [];
-        }
-
-        function setMarkers() {
-            var infowindow = new google.maps.InfoWindow();
-            vm.places.forEach(function(place) {
-                if (
-                    !(
-                        place.position.lat &&
-                        place.position.lng &&
-                        (place.title || place.type)
-                    )
-                ) {
-                    return;
-                }
-                var latitude = Number(place.position.lat);
-                var longitude = Number(place.position.lng);
-                var position = { lat: latitude, lng: longitude };
-
-                var icon;
-
-                if (
-                    place.type ||
-                    !place.categories ||
-                    !place.categories.length
-                ) {
-                    icon = "";
-                } else if (!vm.activeCategory || vm.activeCategory === "all") {
-                    icon = vm.categories[place.categories[0]].icon;
-                } else {
-                    icon = vm.categories[vm.activeCategory].icon;
+        function updateMap() {
+            if (vm.markersModels) {
+                if (markers.length) {
+                    mapService.deleteMarkers(markers);
                 }
 
-                var marker = new google.maps.Marker({
-                    position: position,
-                    map: map,
-                    title: place.title || "",
-                    icon: icon
-                });
-                google.maps.event.addListener(
-                    marker,
-                    "click",
-                    (function(marker) {
-                        return function() {
-                            if (place.type === "home") {
-                                infowindow.setContent(
-                                    "<div class='marker-description'>" +
-                                        "<p class='marker-description__text'>" +
-                                        place.address +
-                                        "</p>" +
-                                        "<p class='marker-description__text'>" +
-                                        place.position.lat +
-                                        ", " +
-                                        place.position.lng +
-                                        "</p>" +
-                                        "</div>"
-                                );
-                            } else {
-                                infowindow.setContent(
-                                    "<div class='marker-description'>" +
-                                        "<p class='marker-description__text'>" +
-                                        place.title +
-                                        "</p>" +
-                                        "<p class='marker-description__text'>" +
-                                        place.position.lat +
-                                        ", " +
-                                        place.position.lng +
-                                        "</p>" +
-                                        "<a href=" +
-                                        place.hyperlink +
-                                        " target='_blank'>Więcej</a>" +
-                                        "</div>"
-                                );
-                            }
-                            infowindow.open(map, marker);
-                        };
-                    })(marker)
+                markers = mapService.createMarkers(
+                    vm.markersModels,
+                    vm.categories,
+                    map,
+                    vm.activeCategory
                 );
-                markers.push(marker);
-            });
-            if (markerCluster) {
-                markerCluster.clearMarkers();
-            }
 
-            if (vm.markerCluster) {
-                markerCluster = new MarkerClusterer(map, markers, {
-                    imagePath: "images/markers/"
-                });
-                google.maps.event.addListener(
-                    markerCluster,
-                    "clusterclick",
-                    function() {
-                        $timeout(function() {
-                            currentCenter = map.getCenter();
-                        }, 100);
-                    }
-                );
+                if (markerCluster) {
+                    markerCluster.clearMarkers();
+                }
+                if (vm.markerCluster) {
+                    markerCluster = new MarkerClusterer(map, markers, {
+                        imagePath: "images/markers/"
+                    });
+                }
+                mapService.setBounds(markers, map);
             }
-        }
-
-        function setBounds() {
-            var bounds = new google.maps.LatLngBounds();
-            markers.forEach(function(marker) {
-                bounds.extend(marker.getPosition());
-            });
-            if (bounds.b.f < bounds.b.b) {
-                var longitude1 = bounds.b.f;
-                bounds.b.f = bounds.b.b;
-                bounds.b.b = longitude1;
-            }
-            map.fitBounds(bounds);
-            if (markers.length === 1) {
-                map.setZoom(16);
-            }
-            currentCenter = map.getCenter();
-        }
-
-        function centerMap() {
-            google.maps.event.trigger(map, "resize");
-            map.setCenter(currentCenter);
-            currentCenter = map.getCenter();
         }
     }
 })();

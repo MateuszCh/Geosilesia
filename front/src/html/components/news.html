@@ -1,7 +1,7 @@
 <h2 ng-bind="::vm.component.title"></h2>
 <article class="news"
     ng-if="::vm.events.length"
-    ng-repeat="event in ::vm.events"
+    ng-repeat="event in vm.events"
     ng-init="vm.active = 0"
     ng-class="{'news--active' : vm.active === $index}">
     <div class="news__head"
@@ -23,9 +23,10 @@
             <a class="news__body__links__item"
                 href="{{::link.link}}"
                 target="_blank"
+                rel="noreferrer"
                 ng-bind="::link.text"></a>
         </p>
     </div>
 </article>
 <p class="news__info"
-    ng-if="::!vm.events.length">Obecnie nie ma żadnych wydarzeń</p>
+    ng-if="!vm.events.length">Obecnie nie ma żadnych wydarzeń</p>
