@@ -14,6 +14,7 @@
                         "resourceService",
                         function($route, $q, pwaService, resourceService) {
                             var url = $route.current.params.page || "/";
+                            if (url === "index.html") url = "/";
                             return $q(function(resolve, reject) {
                                 var loadedModels = resourceService.getLoadedModels(
                                     "page",

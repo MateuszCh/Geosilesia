@@ -18,6 +18,7 @@
         function onInit() {
             if (pwaService.isAvailable()) {
                 var path = $location.path().substring(1) || "/";
+                if (path === "index.html") path = "/";
                 if (!resourceService.getLoadedModels("page", path)) {
                     resourceService
                         .loadModelsFromNetwork("page", path)
