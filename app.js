@@ -41,6 +41,17 @@ app.get("/api/page/", (req, res, next) => {
         .catch(next);
 });
 
+app.get("/api/appData/", (req, res, next) => {
+    Promise.all([
+        collections.pages.find({}).toArray(),
+        collections.posts.find({}).toArray()
+    ])
+        .then(response => {
+            res.send({ pages: response[0], posts: response[1] });
+        })
+        .catch(next);
+});
+
 app.get("/api/page/:pageUrl", (req, res, next) => {
     collections.pages
         .find({ pageUrl: req.params.pageUrl })

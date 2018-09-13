@@ -44,6 +44,8 @@
         vm.searchInput = "";
         vm.currentResult = undefined;
 
+        vm.dataLoaded = false;
+
         vm.search = search;
         vm.pickCategory = pickCategory;
         vm.toggleSearchPanel = toggleSearchPanel;
@@ -51,48 +53,26 @@
         vm.setCurrentResult = setCurrentResult;
 
         function onInit() {
-            var loadedMarkers = resourceService.getLoadedModels(
-                "posts",
-                "marker"
-            );
-            var loadedIcons = resourceService.getLoadedModels("posts", "icon");
-            if (loadedMarkers && loadedIcons) {
-                mapService.loadGoogleMaps();
-                onLoad(loadedMarkers, loadedIcons);
-            } else {
-                if (pwaService.isAvailable()) {
-                    $q.all([
-                        resourceService.loadModelsFromIDB("posts", "marker"),
-                        resourceService.loadModelsFromIDB("posts", "icon")
-                    ]).then(function(posts) {
-                        var loadedMarkers = resourceService.getLoadedModels(
-                            "posts",
-                            "marker"
-                        );
-                        var loadedIcons = resourceService.getLoadedModels(
-                            "posts",
-                            "icon"
-                        );
-                        if (
-                            !loadedMarkers &&
-                            !loadedIcons &&
-                            posts[0] &&
-                            posts[1]
-                        ) {
-                            onLoad(posts[0], posts[1]);
-                        }
-                    });
-                }
+            if (pwaService.isAvailable()) {
                 $q.all([
-                    resourceService.loadModelsFromNetwork("posts", "marker"),
-                    resourceService.loadModelsFromNetwork("posts", "icon")
+                    resourceService.loadModelsFromIDB("posts", "marker"),
+                    resourceService.loadModelsFromIDB("posts", "icon")
                 ]).then(function(posts) {
-                    if (posts[0] && posts[1]) {
-                        mapService.loadGoogleMaps();
+                    if (!vm.dataLoaded && posts[0] && posts[1]) {
                         onLoad(posts[0], posts[1]);
                     }
                 });
             }
+            $q.all([
+                resourceService.loadModelsFromNetwork("posts", "marker"),
+                resourceService.loadModelsFromNetwork("posts", "icon")
+            ]).then(function(posts) {
+                if (posts[0].data && posts[1].data) {
+                    vm.dataLoaded = true;
+                    mapService.loadGoogleMaps();
+                    onLoad(posts[0].data, posts[1].data);
+                }
+            });
         }
 
         function onLoad(markerModels, iconModels) {

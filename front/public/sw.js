@@ -1,7 +1,7 @@
 importScripts("/js/idb.js");
 
-var CACHE_STATIC_NAME = "static-v1";
-var CACHE_DYNAMIC_NAME = "dynamic-v1";
+var CACHE_STATIC_NAME = "static-v6";
+var CACHE_DYNAMIC_NAME = "dynamic-v6";
 var STATIC_FILES = [
     "/",
     "index.html",
@@ -46,6 +46,14 @@ function writeData(st, data) {
         var tx = db.transaction(st, "readwrite");
         var store = tx.objectStore(st);
         store.put(data);
+        return tx.complete;
+    });
+}
+
+function clearData(st) {
+    return dbPromise.then(function(db) {
+        var tx = db.transaction(st, "readwrite");
+        tx.objectStore(st).clear();
         return tx.complete;
     });
 }
@@ -99,6 +107,33 @@ self.addEventListener("fetch", function(event) {
         event.request.url.indexOf("googleapis.com") > -1
     ) {
         event.respondWith(fetch(event.request));
+    } else if (
+        event.request.url.indexOf(self.location.origin + "/api/appData") > -1
+    ) {
+        event.respondWith(
+            fetch(event.request).then(function(response) {
+                response
+                    .clone()
+                    .json()
+                    .then(function(res) {
+                        if (res.pages && res.pages.length) {
+                            clearData("pages").then(function() {
+                                res.pages.forEach(function(page) {
+                                    writeData("pages", page);
+                                });
+                            });
+                        }
+                        if (res.posts && res.posts.length) {
+                            clearData("posts").then(function() {
+                                res.posts.forEach(function(post) {
+                                    writeData("posts", post);
+                                });
+                            });
+                        }
+                    });
+                return response;
+            })
+        );
     } else if (event.request.url.indexOf(self.location.origin + "/api") > -1) {
         event.respondWith(
             fetch(event.request).then(function(res) {

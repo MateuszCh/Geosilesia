@@ -19,13 +19,18 @@
             if (pwaService.isAvailable()) {
                 var path = $location.path().substring(1) || "/";
                 if (path === "index.html") path = "/";
-                if (!resourceService.getLoadedModels("page", path)) {
-                    resourceService
-                        .loadModelsFromNetwork("page", path)
-                        .then(function(response) {
-                            onLoad(response);
-                        });
-                }
+                resourceService
+                    .loadModelsFromNetwork("page", path)
+                    .then(function(response) {
+                        if (response.data) {
+                            onLoad(response.data[0]);
+                        } else {
+                            onLoad();
+                        }
+                    })
+                    .catch(function() {
+                        onLoad();
+                    });
             } else {
                 onLoad();
             }

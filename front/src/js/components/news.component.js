@@ -11,40 +11,26 @@
     NewsController.$inject = ["pwaService", "resourceService"];
     function NewsController(pwaService, resourceService) {
         var vm = this;
+        vm.newsLoaded = false;
         vm.$onInit = onInit;
         function onInit() {
-            var loadedNews = resourceService.getLoadedModels(
-                "posts",
-                "wydarzenie"
-            );
-
-            if (loadedNews) {
-                prepareEvents(loadedNews);
-            } else {
-                if (pwaService.isAvailable()) {
-                    resourceService
-                        .loadModelsFromIDB("posts", "wydarzenie")
-                        .then(function(events) {
-                            if (
-                                !resourceService.getLoadedModels(
-                                    "posts",
-                                    "wydarzenie"
-                                ) &&
-                                events &&
-                                events.length
-                            ) {
-                                prepareEvents(events);
-                            }
-                        });
-                }
+            if (pwaService.isAvailable()) {
                 resourceService
-                    .loadModelsFromNetwork("posts", "wydarzenie")
+                    .loadModelsFromIDB("posts", "wydarzenie")
                     .then(function(events) {
-                        if (events && events.length) {
+                        if (!vm.newsLoaded && events) {
                             prepareEvents(events);
                         }
                     });
             }
+            resourceService
+                .loadModelsFromNetwork("posts", "wydarzenie")
+                .then(function(response) {
+                    if (response.data && response.data.length) {
+                        vm.newsLoaded = true;
+                        prepareEvents(response.data);
+                    }
+                });
         }
 
         function prepareEvents(events) {

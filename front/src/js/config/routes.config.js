@@ -16,39 +16,45 @@
                             var url = $route.current.params.page || "/";
                             if (url === "index.html") url = "/";
                             return $q(function(resolve, reject) {
-                                var loadedModels = resourceService.getLoadedModels(
-                                    "page",
-                                    url
-                                );
-                                if (loadedModels) {
-                                    resolve(loadedModels);
-                                } else {
-                                    if (pwaService.isAvailable()) {
-                                        resourceService
-                                            .loadModelsFromIDB("page", url)
-                                            .then(function(response) {
-                                                if (response) {
-                                                    resolve(response);
-                                                } else {
-                                                    resourceService
-                                                        .loadModelsFromNetwork(
-                                                            "page",
-                                                            url
-                                                        )
-                                                        .then(function(
-                                                            response
-                                                        ) {
-                                                            resolve(response);
-                                                        });
-                                                }
-                                            });
-                                    } else {
-                                        resourceService
-                                            .loadModelsFromNetwork("page", url)
-                                            .then(function(response) {
+                                if (pwaService.isAvailable()) {
+                                    resourceService
+                                        .loadModelsFromIDB("page", url)
+                                        .then(function(response) {
+                                            if (response) {
                                                 resolve(response);
-                                            });
-                                    }
+                                            } else {
+                                                resourceService
+                                                    .loadModelsFromNetwork(
+                                                        "page",
+                                                        url
+                                                    )
+                                                    .then(function(response) {
+                                                        if (response.data) {
+                                                            resolve(
+                                                                response.data[0]
+                                                            );
+                                                        } else {
+                                                            resolve();
+                                                        }
+                                                    })
+                                                    .catch(function() {
+                                                        resolve();
+                                                    });
+                                            }
+                                        });
+                                } else {
+                                    resourceService
+                                        .loadModelsFromNetwork("page", url)
+                                        .then(function(response) {
+                                            if (response.data) {
+                                                resolve(response.data[0]);
+                                            } else {
+                                                resolve();
+                                            }
+                                        })
+                                        .catch(function() {
+                                            resolve();
+                                        });
                                 }
                             });
                         }

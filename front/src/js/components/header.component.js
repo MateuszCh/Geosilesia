@@ -24,6 +24,8 @@
         vm.hamOpen = false;
         vm.activeGeo = false;
 
+        vm.navigationLoaded = false;
+
         function onInit() {
             $scope.$on("$routeChangeSuccess", setCurrentPath);
             window.addEventListener("resize", resetHeader);
@@ -32,26 +34,25 @@
                 resourceService
                     .loadModelsFromIDB("posts", "navigation")
                     .then(function(response) {
-                        if (
-                            !resourceService.getLoadedModels(
-                                "posts",
-                                "navigation"
-                            ) &&
-                            response &&
-                            response[0] &&
-                            response[0].data
-                        ) {
-                            vm.nav = response[0].data.nav;
+                        if (!vm.navigationLoaded && response) {
+                            onLoad(response);
                         }
                     });
             }
             resourceService
                 .loadModelsFromNetwork("posts", "navigation")
                 .then(function(response) {
-                    if (response && response[0] && response[0].data) {
-                        vm.nav = response[0].data.nav;
+                    if (response.data) {
+                        vm.navigationLoaded = true;
+                        onLoad(response.data);
                     }
                 });
+        }
+
+        function onLoad(data) {
+            if (data && data[0] && data[0].data && data[0].data.nav) {
+                vm.nav = data[0].data.nav;
+            }
         }
 
         function setCurrentPath() {

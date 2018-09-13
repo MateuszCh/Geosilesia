@@ -15,6 +15,10 @@
                 );
             }
 
+            function setLoadedModels(resourceType, key, models) {
+                _loadedModels[resourceType][key] = models;
+            }
+
             function loadModelsFromIDB(resourceType, key) {
                 if (resourceType === "page") {
                     return pwaService.getPage(key);
@@ -26,25 +30,15 @@
             function loadModelsFromNetwork(resourceType, key) {
                 var formattedKey =
                     resourceType === "page" ? key.replace(/\//g, "%2F") : key;
-                return requestService
-                    .send("/api/" + resourceType + "/" + formattedKey, "GET")
-                    .then(function(response) {
-                        if (response.data && response.data[0]) {
-                            _loadedModels[resourceType][key] =
-                                resourceType === "page"
-                                    ? response.data[0]
-                                    : response.data;
-                            return getLoadedModels(resourceType, key);
-                        }
-                        return;
-                    })
-                    .catch(function() {
-                        return;
-                    });
+                return requestService.send(
+                    "/api/" + resourceType + "/" + formattedKey,
+                    "GET"
+                );
             }
 
             return {
                 getLoadedModels: getLoadedModels,
+                setLoadedModels: setLoadedModels,
                 loadModelsFromIDB: loadModelsFromIDB,
                 loadModelsFromNetwork: loadModelsFromNetwork
             };
