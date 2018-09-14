@@ -16,7 +16,7 @@
                             var url = $route.current.params.page || "/";
                             if (url === "index.html") url = "/";
 
-                            function loadFromNetwork() {
+                            function loadFromNetwork(resolve) {
                                 resourceService
                                     .loadModelsFromNetwork("page", url)
                                     .then(function(response) {
@@ -39,11 +39,11 @@
                                             if (response) {
                                                 resolve(response);
                                             } else {
-                                                loadFromNetwork();
+                                                loadFromNetwork(resolve);
                                             }
                                         });
                                 } else {
-                                    loadFromNetwork();
+                                    loadFromNetwork(resolve);
                                 }
                             });
                         }
