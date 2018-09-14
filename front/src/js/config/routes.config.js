@@ -15,6 +15,22 @@
                         function($route, $q, pwaService, resourceService) {
                             var url = $route.current.params.page || "/";
                             if (url === "index.html") url = "/";
+
+                            function loadFromNetwork() {
+                                resourceService
+                                    .loadModelsFromNetwork("page", url)
+                                    .then(function(response) {
+                                        if (response.data) {
+                                            resolve(response.data[0]);
+                                        } else {
+                                            resolve();
+                                        }
+                                    })
+                                    .catch(function() {
+                                        resolve();
+                                    });
+                            }
+
                             return $q(function(resolve, reject) {
                                 if (pwaService.isAvailable()) {
                                     resourceService
@@ -23,38 +39,11 @@
                                             if (response) {
                                                 resolve(response);
                                             } else {
-                                                resourceService
-                                                    .loadModelsFromNetwork(
-                                                        "page",
-                                                        url
-                                                    )
-                                                    .then(function(response) {
-                                                        if (response.data) {
-                                                            resolve(
-                                                                response.data[0]
-                                                            );
-                                                        } else {
-                                                            resolve();
-                                                        }
-                                                    })
-                                                    .catch(function() {
-                                                        resolve();
-                                                    });
+                                                loadFromNetwork();
                                             }
                                         });
                                 } else {
-                                    resourceService
-                                        .loadModelsFromNetwork("page", url)
-                                        .then(function(response) {
-                                            if (response.data) {
-                                                resolve(response.data[0]);
-                                            } else {
-                                                resolve();
-                                            }
-                                        })
-                                        .catch(function() {
-                                            resolve();
-                                        });
+                                    loadFromNetwork();
                                 }
                             });
                         }

@@ -13,11 +13,11 @@
                     .catch(function(err) {
                         // console.log(err);
                     });
-            }
 
-            setTimeout(function() {
-                requestService.send("/api/appData", "GET");
-            }, 2000);
+                setTimeout(function() {
+                    requestService.send("/api/appData", "GET");
+                }, 2000);
+            }
         }
     ]);
 })();
