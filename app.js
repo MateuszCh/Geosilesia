@@ -9,6 +9,7 @@ app.set("port", process.env.PORT || 3000);
 
 let db;
 const collections = {};
+let databaseError = false;
 
 MongoClient.connect(config.mongoUrl)
     .then(client => {
@@ -19,11 +20,20 @@ MongoClient.connect(config.mongoUrl)
         app.listen(app.get("port"), () => console.log("Running on port 3000"));
     })
     .catch(err => {
-        throw err;
+        databaseError = err;
+        app.listen(app.get("port"), () => console.log("Running on port 3000"));
     });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.get("/api*", (req, res, next) => {
+    if (databaseError) {
+        res.status(503).send({ error: "Resource unavailable" });
+    } else {
+        next();
+    }
+});
 
 app.get("/api/posts/:type", (req, res, next) => {
     collections.posts
