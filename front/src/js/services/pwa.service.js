@@ -46,8 +46,7 @@
         }
 
         function isAvailable() {
-            // return "serviceWorker" in navigator && "indexedDB" in window;
-            return false;
+            return "serviceWorker" in navigator && "indexedDB" in window;
         }
 
         return {
