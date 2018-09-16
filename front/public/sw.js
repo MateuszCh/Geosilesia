@@ -1,7 +1,7 @@
 importScripts("/js/idb.js");
 
-var CACHE_STATIC_NAME = "static-v6";
-var CACHE_DYNAMIC_NAME = "dynamic-v6";
+var CACHE_STATIC_NAME = "static-v1";
+var CACHE_DYNAMIC_NAME = "dynamic-v1";
 var STATIC_FILES = [
     "/",
     "index.html",
@@ -165,6 +165,11 @@ self.addEventListener("fetch", function(event) {
                 return res;
             })
         );
+    } else if (
+        event.request.cache === "only-if-cached" &&
+        event.request.mode !== "same-origin"
+    ) {
+        return;
     } else {
         event.respondWith(
             event.request.mode === "navigate"
