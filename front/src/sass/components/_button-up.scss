@@ -26,4 +26,8 @@
     &__image {
         height: 60%;
     }
+
+    body.aside-nav-open & {
+        display: none;
+    }
 }
