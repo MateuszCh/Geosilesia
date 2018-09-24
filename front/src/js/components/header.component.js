@@ -6,30 +6,29 @@
     });
     HeaderController.$inject = [
         "$location",
-        "$scope",
-        "$timeout",
         "pwaService",
-        "resourceService"
+        "resourceService",
+        "$scope",
+        "$timeout"
     ];
     function HeaderController(
         $location,
-        $scope,
-        $timeout,
         pwaService,
-        resourceService
+        resourceService,
+        $scope,
+        $timeout
     ) {
         var vm = this;
         vm.$onInit = onInit;
-        vm.openHam = openHam;
-        vm.hamOpen = false;
-        vm.activeGeo = false;
-
+        vm.isActive = isActive;
+        vm.toggleAsideNav = toggleAsideNav;
+        var body = angular.element(document.getElementsByTagName("body"));
         vm.navigationLoaded = false;
 
         function onInit() {
-            $scope.$on("$routeChangeSuccess", setCurrentPath);
-            window.addEventListener("resize", resetHeader);
-
+            $scope.$on("$routeChangeStart", function() {
+                toggleAsideNav(false);
+            });
             if (pwaService.isAvailable()) {
                 resourceService
                     .loadModelsFromIDB("posts", "navigation")
@@ -55,43 +54,33 @@
             }
         }
 
-        function setCurrentPath() {
-            vm.currentPath = $location.path();
-            if (vm.currentPath === "/") {
-                vm.activeGeo = false;
-                vm.hamOpen = false;
-            }
-            var counter = 0,
-                i,
-                position;
-            for (i = 0; i < vm.currentPath.length; i++) {
-                if (vm.currentPath[i] === "/") {
-                    counter++;
-                    if (counter === 2) {
-                        position = i;
-                    }
-                }
-            }
-            if (counter === 2) {
-                vm.currentPath = vm.currentPath.substr(0, position);
-            }
-        }
-
-        function openHam(link) {
+        function isActive(link, group) {
+            var path = $location.path();
             if (link) {
-                vm.activeGeo = link.subtitle;
+                return link === path || path.indexOf(link + "/") === 0;
             }
-            if (window.innerWidth < 568) {
-                return vm.hamOpen ? (vm.hamOpen = false) : (vm.hamOpen = true);
+            if (group && group.length) {
+                var active = false;
+                var i = 0;
+                do {
+                    if (group[i].link === path) {
+                        active = true;
+                    }
+                    i += 1;
+                } while (!active && i < group.length);
+                return active;
             }
         }
 
-        function resetHeader() {
-            vm.hamOpen = false;
-            vm.noTransition = true;
-            $timeout(function() {
-                vm.noTransition = false;
-            }, 500);
+        function toggleAsideNav(to) {
+            var state = to === undefined ? !vm.asideOpen : to;
+            body.toggleClass("aside-nav-open", state);
+            vm.asideOpen = state;
+            if (!to) {
+                $timeout(function() {
+                    vm.showSubNav = false;
+                }, 500);
+            }
         }
     }
 })();

@@ -1,43 +1,27 @@
 .nav {
-    overflow: hidden;
     transition: all 0.2s ease;
-    max-height: 0;
-    &--active {
-        max-height: 500px;
-        transition: all 0.5s ease;
-    }
-    &--no-transition {
-        transition: none;
-    }
-    @include tablet {
-        max-height: 500px;
-        overflow: visible;
-        display: flex;
-        justify-content: space-around;
-        padding-bottom: 0.7rem;
-        position: relative;
-    }
+    max-height: 500px;
+    overflow: visible;
+    justify-content: space-around;
+    position: relative;
+    padding-bottom: 0;
+    display: none;
     @include laptop {
-        padding-bottom: 0;
+        display: flex;
     }
     &__item {
         transition: all 0.4s ease-in-out;
-        @include tablet {
-            background-color: lighten($header-color, 10%);
-            flex-grow: 1;
-            text-align: center;
-            &:hover {
-                background-color: white;
-                color: darken($header-color, 10%);
-            }
+        background-color: lighten($header-color, 10%);
+        flex-grow: 1;
+        text-align: center;
+        &:hover {
+            background-color: white;
+            color: darken($header-color, 10%);
         }
         &--active {
             background-color: lighten($header-color, 20%);
             .subnav__item {
-                background-color: $header-color;
-                @include tablet {
-                    background-color: lighten($header-color, 10%);
-                }
+                background-color: lighten($header-color, 10%);
                 &--active {
                     background-color: lighten($header-color, 20%);
                     &:hover {
@@ -48,22 +32,13 @@
             }
         }
         &__link {
-            padding: 0.2rem 0;
-            padding-left: 0.5rem;
-            font-size: 1.2rem;
             cursor: pointer;
             display: block;
             text-decoration: none;
             font-family: $text-font;
             color: inherit;
-            @include tablet {
-                font-size: 1rem;
-                padding: 0.5rem;
-            }
-            @include laptop {
-                font-size: 1rem;
-                padding: 2.625rem 1rem;
-            }
+            font-size: 1rem;
+            padding: 2.625rem 1rem;
             @include full {
                 font-size: 1rem;
                 padding: 2.625rem 1.75rem;
@@ -75,41 +50,35 @@
         overflow: hidden;
         transition: all 0.5s ease;
         z-index: 1000;
-        @include tablet {
-            position: absolute;
-            color: white;
-            width: 100%;
-            left: 0;
-        }
+        position: absolute;
+        color: white;
+        width: 100%;
+        left: 0;
         &--active {
             max-height: 500px;
             transition: all 0.5s ease;
         }
         &__item {
             transition: all 0.2s ease-in-out;
-            padding: 0.1875rem 0;
-            @include tablet {
-                background-color: lighten($header-color, 10%);
-                padding: 0.3125rem 0;
-                width: 100%;
-                &:hover {
-                    background-color: white;
-                    color: darken($header-color, 10%);
-                }
+            background-color: lighten($header-color, 10%);
+            padding: 0.3125rem 0;
+            width: 100%;
+            &:hover {
+                background-color: white;
+                color: darken($header-color, 10%);
+            }
+            &--active {
+                background-color: lighten($header-color, 20%);
             }
             &__link {
-                padding-left: 1rem;
-                font-size: 0.9rem;
                 cursor: pointer;
                 display: block;
                 text-decoration: none;
                 font-family: $text-font;
                 color: inherit;
-                @include tablet {
-                    padding-left: 0;
-                    width: 100%;
-                    font-size: 1rem;
-                }
+                padding-left: 0;
+                width: 100%;
+                font-size: 1rem;
             }
         }
     }

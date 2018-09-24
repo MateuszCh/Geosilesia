@@ -72,7 +72,7 @@
             left: 0;
             transform: rotate(0deg);
             transition: 0.25s ease-in-out;
-            @include tablet {
+            @include laptop {
                 display: none;
             }
             &:nth-child(1) {
