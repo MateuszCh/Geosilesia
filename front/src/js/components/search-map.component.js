@@ -51,6 +51,7 @@
         vm.toggleSearchPanel = toggleSearchPanel;
         vm.increaseSearchQty = increaseSearchQty;
         vm.setCurrentResult = setCurrentResult;
+        vm.isGoogleMapsAdded = mapService.isGoogleMapsScriptAdded;
 
         function onInit() {
             if (pwaService.isAvailable()) {
@@ -83,7 +84,6 @@
             vm.selectedMarkers = angular.copy(markers).sort(function(a, b) {
                 return b.position.lat - a.position.lat;
             });
-            vm.isGoogleMapsAdded = mapService.isGoogleMapsScriptAdded();
         }
 
         function toggleSearchPanel() {

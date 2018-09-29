@@ -6,11 +6,14 @@
             var _googleMapsScriptAdded = false;
 
             function loadGoogleMaps() {
-                if (!isGoogleMapsLoaded()) {
+                if (!isGoogleMapsScriptAdded()) {
                     var script = document.createElement("script");
                     script.src =
                         "https://maps.googleapis.com/maps/api/js?key=" +
                         gmapConfig.key;
+                    script.onerror = function() {
+                        _googleMapsScriptAdded = false;
+                    };
                     document
                         .getElementsByTagName("head")[0]
                         .appendChild(script);

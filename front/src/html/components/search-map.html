@@ -3,12 +3,12 @@
         class="search">
         <div id="search-form"
             class="search__form"
-            ng-class="{'search__form--active' : vm.showSearch || !vm.isGoogleMapsAdded}">
+            ng-class="{'search__form--active' : vm.showSearch || !vm.isGoogleMapsAdded()}">
             <h3 class="search__form__heading"
                 ng-bind="::vm.component.title"></h3>
             <form ng-submit="vm.search()">
                 <div class="search__form__search"
-                    ng-if="::vm.isGoogleMapsAdded">
+                    ng-if="::vm.isGoogleMapsAdded()">
                     <input class="search__form__search__input"
                         ng-model="vm.searchInput"
                         type="text"
@@ -62,10 +62,10 @@
                 <h3 class="search__form__results__heading">Obiekty/Produkty</h3>
                 <div class="search__form__results__container">
                     <div class="result"
-                        ng-class="::{'cursor-pointer': vm.isGoogleMapsAdded}"
+                        ng-class="::{'cursor-pointer': vm.isGoogleMapsAdded()}"
                         ng-repeat="result in vm.selectedMarkers track by result.id"
                         ng-if="::!result.type"
-                        ng-click="vm.isGoogleMapsAdded ? vm.setCurrentResult(result.id) : null">
+                        ng-click="vm.isGoogleMapsAdded() ? vm.setCurrentResult(result.id) : null">
                         <h4 class="result__heading"
                             ng-bind="::result.title"></h4>
                         <div class="result__container">
@@ -100,7 +100,7 @@
 
             </div>
             <div class="search__form__activate"
-                ng-if="::vm.isGoogleMapsAdded"
+                ng-if="::vm.isGoogleMapsAdded()"
                 ng-click="vm.toggleSearchPanel()">
                 <img class="search__form__activate__image"
                     alt="otwórz panel wyszukiwania atrakcji geoturystycznych"
@@ -109,7 +109,7 @@
         </div>
         <map class="search__container"
             ng-class="{'search__container--smaller' : vm.showSearch}"
-            ng-if="::vm.isGoogleMapsAdded"
+            ng-if="::vm.isGoogleMapsAdded()"
             markers-models="vm.selectedMarkers"
             categories="vm.categories"
             active-category="{{vm.category}}"
