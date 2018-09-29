@@ -22,8 +22,13 @@
                 resourceService
                     .loadModelsFromNetwork("page", path)
                     .then(function(response) {
-                        if (response.data) {
-                            onLoad(response.data[0]);
+                        if (
+                            response.data &&
+                            response.data &&
+                            response.data.pages &&
+                            response.data.pages.length
+                        ) {
+                            onLoad(response.data.pages[0]);
                         } else {
                             onLoad();
                         }

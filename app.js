@@ -51,13 +51,58 @@ app.get("/api/page/", (req, res, next) => {
         .catch(next);
 });
 
+function processRequest(res, posts, pages) {
+    function sendResponse(pages, posts) {
+        const data = {};
+        if (pages) data.pages = pages;
+        if (posts) data.posts = posts;
+        res.send(data);
+    }
+
+    const galleries = [];
+    if (pages && pages.length) {
+        pages.forEach(page => {
+            if (page.rows) {
+                page.rows.forEach(row => {
+                    if (row.type === "gallery") {
+                        galleries.push(row);
+                    }
+                });
+            }
+        });
+    }
+    if (galleries.length) {
+        const promises = [];
+        galleries.forEach(gallery => {
+            if (gallery.data.catalogue) {
+                promises.push(
+                    collections.files
+                        .find({ catalogues: gallery.data.catalogue })
+                        .toArray()
+                );
+            }
+        });
+        if (promises.length) {
+            Promise.all(promises).then(responses => {
+                responses.forEach((response, i) => {
+                    galleries[i].data.catalogue = response;
+                });
+                sendResponse(pages, posts);
+            });
+        } else {
+            sendResponse(pages, posts);
+        }
+    } else {
+        sendResponse(pages, posts);
+    }
+}
 app.get("/api/appData/", (req, res, next) => {
     Promise.all([
         collections.pages.find({}).toArray(),
         collections.posts.find({}).toArray()
     ])
         .then(response => {
-            res.send({ pages: response[0], posts: response[1] });
+            processRequest(res, response[1], response[0]);
         })
         .catch(next);
 });
@@ -66,40 +111,8 @@ app.get("/api/page/:pageUrl", (req, res, next) => {
     collections.pages
         .find({ pageUrl: req.params.pageUrl })
         .toArray()
-        .then(page => {
-            const pageOne = page[0];
-            const galleries = [];
-            if (pageOne && pageOne.rows) {
-                pageOne.rows.forEach(row => {
-                    if (row.type === "gallery") {
-                        galleries.push(row);
-                    }
-                });
-            }
-            if (galleries.length) {
-                const promises = [];
-                galleries.forEach(gallery => {
-                    if (gallery.data.catalogue) {
-                        promises.push(
-                            collections.files
-                                .find({ catalogues: gallery.data.catalogue })
-                                .toArray()
-                        );
-                    }
-                });
-                if (promises.length) {
-                    Promise.all(promises).then(responses => {
-                        responses.forEach((response, i) => {
-                            galleries[i].data.catalogue = response;
-                        });
-                        res.send(page);
-                    });
-                } else {
-                    res.send(page);
-                }
-            } else {
-                res.send(page);
-            }
+        .then(pages => {
+            processRequest(res, undefined, pages);
         })
         .catch(next);
 });

@@ -1,7 +1,7 @@
 importScripts("/js/idb.js");
 
-var CACHE_STATIC_NAME = "static-v3";
-var CACHE_DYNAMIC_NAME = "dynamic-v3";
+var CACHE_STATIC_NAME = "static-v5";
+var CACHE_DYNAMIC_NAME = "dynamic-v5";
 var STATIC_FILES = [
     "/",
     "index.html",
@@ -155,9 +155,9 @@ self.addEventListener("fetch", function(event) {
                                     writeData(typeOfRequest, data[key]);
                                 }
                             });
-                        } else {
-                            for (var key in data) {
-                                writeData(typeOfRequest, data[key]);
+                        } else if (data.pages) {
+                            for (var key in data.pages) {
+                                writeData(typeOfRequest, data.pages[key]);
                             }
                         }
                     });

@@ -20,8 +20,12 @@
                                 resourceService
                                     .loadModelsFromNetwork("page", url)
                                     .then(function(response) {
-                                        if (response.data) {
-                                            resolve(response.data[0]);
+                                        if (
+                                            response.data &&
+                                            response.data.pages &&
+                                            response.data.pages[0]
+                                        ) {
+                                            resolve(response.data.pages[0]);
                                         } else {
                                             resolve();
                                         }
