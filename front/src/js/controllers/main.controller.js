@@ -4,9 +4,11 @@
         "$rootScope",
         "$scope",
         function($window, $rootScope, $scope) {
+            var body = angular.element(document.getElementsByTagName("body"));
+
             $rootScope.$on("$routeChangeSuccess", function() {
                 $window.scrollTo(0, 0);
-                $rootScope.blur = false;
+                body.removeClass("closedScroll");
             });
             window.setTimeout(function() {
                 document.addEventListener("scroll", function() {

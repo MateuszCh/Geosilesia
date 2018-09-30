@@ -8,35 +8,22 @@
         }
     });
 
-    GalleryController.$inject = [
-        "$http",
-        "$routeParams",
-        "$rootScope",
-        "$timeout"
-    ];
+    GalleryController.$inject = ["$timeout"];
 
-    function GalleryController($http, $routeParams, $rootScope, $timeout) {
+    function GalleryController($timeout) {
         var vm = this;
+        var body = angular.element(document.getElementsByTagName("body"));
         vm.$onInit = onInit;
         vm.$onDestroy = onDestroy;
-        vm.showFullMode = false;
         vm.openFullMode = openFullMode;
         vm.closeFullScreenMode = closeFullScreenMode;
         vm.next = next;
         vm.prev = prev;
+        vm.showFullMode = false;
 
         function onInit() {
-            // $http.get('/api/gallery?id=' + $routeParams.galleryId).then(function(gallery){
-            //     vm.gallery = gallery.data;
-            //     vm.numberOfImages = vm.gallery.images.length;
-            // });
-            // $http.get("json/galleries/" + $routeParams.galleryId + ".json").then(function (gallery) {
-            //     vm.gallery = gallery.data;
-            //     vm.numberOfImages = gallery.data.images.length;
-            // });
             vm.images = vm.component.catalogue;
             vm.numberOfImages = vm.images.length;
-            window.addEventListener("keydown", setKeyEvent);
         }
 
         function onDestroy() {
@@ -63,17 +50,21 @@
         }
 
         function openFullMode(img) {
+            window.addEventListener("keydown", setKeyEvent);
             vm.noMove = true;
             vm.currentImage = img;
-            $rootScope.blur = true;
             vm.nextImage = vm.currentImage + 1;
             vm.prevImage = vm.currentImage - 1;
             vm.show = true;
+            body.addClass("closedScroll");
         }
 
         function closeFullScreenMode() {
-            $rootScope.blur = false;
-            vm.show = false;
+            window.removeEventListener("keydown", setKeyEvent);
+            body.removeClass("closedScroll");
+            $timeout(function() {
+                vm.show = false;
+            }, 0);
 
             $timeout(function() {
                 vm.currentImage = undefined;

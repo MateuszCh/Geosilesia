@@ -11,6 +11,7 @@ ul {
     list-style: none;
 }
 body {
+    width: 100%;
     @include tablet {
         background-color: #f8f8f8;
     }
@@ -99,8 +100,14 @@ a {
 }
 
 .closedScroll {
-    overflow: hidden;
+    overflow: visible;
     max-height: 100vh;
+    position: fixed;
+
+    @include laptop {
+        max-height: none;
+        position: static;
+    }
 }
 
 ::-webkit-scrollbar {
