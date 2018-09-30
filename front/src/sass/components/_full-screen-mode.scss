@@ -172,7 +172,7 @@
                 flex-direction: column;
                 justify-content: center;
                 @include landscape {
-                    display: none;
+                    display: none !important;
                 }
                 @include tablet {
                     display: flex;
