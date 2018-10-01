@@ -54,7 +54,7 @@
             &.ng-hide {
                 transform: scale(0) !important;
             }
-            &.figury-up {
+            &.img-loaded {
                 transform: scale(1);
             }
             @include landscape {

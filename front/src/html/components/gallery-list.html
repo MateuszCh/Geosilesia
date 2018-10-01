@@ -9,8 +9,7 @@
     <ul class="photos__list">
         <li ng-repeat="gallery in ::vm.component.galleries track by $index"
             class="photos__list__item"
-            image-loaded
-            load-class="figury-up"
+            image-loaded="img-loaded"
             ng-show="vm.selectedCategory === 'wszystkie' || vm.selectedCategory == gallery.category">
             <a ng-href="{{::gallery.link}}">
                 <figure class="photos__list__item__figure">

@@ -4,14 +4,14 @@
             restrict: "A",
             link: link,
             scope: {
-                loadClass: "@"
+                imageLoaded: "@"
             }
         };
         function link(scope, element) {
-            if (scope.loadClass) {
+            if (scope.imageLoaded) {
                 var img = element.find("img");
                 img.bind("load", function() {
-                    element.addClass(scope.loadClass);
+                    element.addClass(scope.imageLoaded);
                 });
             }
         }
