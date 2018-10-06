@@ -8,18 +8,48 @@
                 route.resolve || (route.resolve = {});
                 angular.extend(route.resolve, {
                     page: [
-                        "pagesService",
                         "$route",
-                        function(pagesService, $route) {
-                            var page;
-                            if (path === "/:page*") {
-                                page = $route.current.params.page;
-                            } else {
-                                page = path.substring(1);
+                        "$q",
+                        "pwaService",
+                        "resourceService",
+                        function($route, $q, pwaService, resourceService) {
+                            var url = $route.current.params.page || "/";
+                            if (url === "index.html") url = "/";
+
+                            function loadFromNetwork(resolve) {
+                                resourceService
+                                    .loadModelsFromNetwork("page", url)
+                                    .then(function(response) {
+                                        if (
+                                            response.data &&
+                                            response.data.pages &&
+                                            response.data.pages[0]
+                                        ) {
+                                            resolve(response.data.pages[0]);
+                                        } else {
+                                            resolve();
+                                        }
+                                    })
+                                    .catch(function() {
+                                        resolve();
+                                    });
                             }
-                            return pagesService.loadPage(
-                                page.replace(/\//g, "%2F")
-                            );
+
+                            return $q(function(resolve, reject) {
+                                if (pwaService.isAvailable()) {
+                                    resourceService
+                                        .loadModelsFromIDB("page", url)
+                                        .then(function(response) {
+                                            if (response) {
+                                                resolve(response);
+                                            } else {
+                                                loadFromNetwork(resolve);
+                                            }
+                                        });
+                                } else {
+                                    loadFromNetwork(resolve);
+                                }
+                            });
                         }
                     ]
                 });
@@ -29,43 +59,11 @@
             $routeProvider
                 .when("/", {
                     template: '<page-view page="page"></page-view>',
-                    resolve: {
-                        markers: [
-                            "postsService",
-                            function(postsService) {
-                                return postsService.loadPosts("marker");
-                            }
-                        ],
-                        icons: [
-                            "postsService",
-                            function(postsService) {
-                                return postsService.loadPosts("icon");
-                            }
-                        ]
-                    },
                     controller: [
                         "page",
                         "$scope",
                         function(page, $scope) {
-                            $scope.page = page[0];
-                        }
-                    ]
-                })
-                .when("/wydarzenia", {
-                    template: '<page-view page="page"></page-view>',
-                    resolve: {
-                        events: [
-                            "postsService",
-                            function(postsService) {
-                                return postsService.loadPosts("wydarzenie");
-                            }
-                        ]
-                    },
-                    controller: [
-                        "page",
-                        "$scope",
-                        function(page, $scope) {
-                            $scope.page = page[0];
+                            $scope.page = page;
                         }
                     ]
                 })
@@ -75,11 +73,10 @@
                         "page",
                         "$scope",
                         function(page, $scope) {
-                            $scope.page = page[0];
+                            $scope.page = page;
                         }
                     ]
-                })
-                .otherwise("/");
+                });
         }
     ]);
 })();

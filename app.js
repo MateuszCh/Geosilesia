@@ -5,10 +5,11 @@ const express = require("express"),
     config = require("./config");
 
 const app = express();
-app.set("port", process.env.PORT || 3100);
+app.set("port", process.env.PORT || 3000);
 
 let db;
 const collections = {};
+let databaseError = false;
 
 MongoClient.connect(config.mongoUrl)
     .then(client => {
@@ -16,14 +17,23 @@ MongoClient.connect(config.mongoUrl)
         collections.posts = db.collection("posts");
         collections.pages = db.collection("pages");
         collections.files = db.collection("files");
-        app.listen(app.get("port"), () => console.log("Running on port 3001"));
+        app.listen(app.get("port"), () => console.log("Running on port 3000"));
     })
     .catch(err => {
-        throw err;
+        databaseError = err;
+        app.listen(app.get("port"), () => console.log("Running on port 3000"));
     });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.get("/api*", (req, res, next) => {
+    if (databaseError) {
+        res.status(503).send({ error: "Resource unavailable" });
+    } else {
+        next();
+    }
+});
 
 app.get("/api/posts/:type", (req, res, next) => {
     collections.posts
@@ -41,44 +51,68 @@ app.get("/api/page/", (req, res, next) => {
         .catch(next);
 });
 
-app.get("/api/page/:pageUrl", (req, res, next) => {
-    collections.pages
-        .find({ pageUrl: req.params.pageUrl })
-        .toArray()
-        .then(page => {
-            const pageOne = page[0];
-            const galleries = [];
-            if (pageOne && pageOne.rows) {
-                pageOne.rows.forEach(row => {
+function processRequest(res, posts, pages) {
+    function sendResponse(pages, posts) {
+        const data = {};
+        if (pages) data.pages = pages;
+        if (posts) data.posts = posts;
+        res.send(data);
+    }
+
+    const galleries = [];
+    if (pages && pages.length) {
+        pages.forEach(page => {
+            if (page.rows) {
+                page.rows.forEach(row => {
                     if (row.type === "gallery") {
                         galleries.push(row);
                     }
                 });
             }
-            if (galleries.length) {
-                const promises = [];
-                galleries.forEach(gallery => {
-                    if (gallery.data.catalogue) {
-                        promises.push(
-                            collections.files
-                                .find({ catalogues: gallery.data.catalogue })
-                                .toArray()
-                        );
-                    }
-                });
-                if (promises.length) {
-                    Promise.all(promises).then(responses => {
-                        responses.forEach((response, i) => {
-                            galleries[i].data.catalogue = response;
-                        });
-                        res.send(page);
-                    });
-                } else {
-                    res.send(page);
-                }
-            } else {
-                res.send(page);
+        });
+    }
+    if (galleries.length) {
+        const promises = [];
+        galleries.forEach(gallery => {
+            if (gallery.data.catalogue) {
+                promises.push(
+                    collections.files
+                        .find({ catalogues: gallery.data.catalogue })
+                        .toArray()
+                );
             }
+        });
+        if (promises.length) {
+            Promise.all(promises).then(responses => {
+                responses.forEach((response, i) => {
+                    galleries[i].data.catalogue = response;
+                });
+                sendResponse(pages, posts);
+            });
+        } else {
+            sendResponse(pages, posts);
+        }
+    } else {
+        sendResponse(pages, posts);
+    }
+}
+app.get("/api/appData/", (req, res, next) => {
+    Promise.all([
+        collections.pages.find({}).toArray(),
+        collections.posts.find({}).toArray()
+    ])
+        .then(response => {
+            processRequest(res, response[1], response[0]);
+        })
+        .catch(next);
+});
+
+app.get("/api/page/:pageUrl", (req, res, next) => {
+    collections.pages
+        .find({ pageUrl: req.params.pageUrl })
+        .toArray()
+        .then(pages => {
+            processRequest(res, undefined, pages);
         })
         .catch(next);
 });

@@ -37,6 +37,7 @@
         &__search {
             padding: 0.5rem 0;
             display: flex;
+            position: relative;
             &__input {
                 flex-grow: 1;
                 border: 2px solid $header-color;
@@ -55,6 +56,7 @@
                 cursor: pointer;
                 box-shadow: none;
                 border: none;
+                position: relative;
                 background: url("../images/search-icon.png");
                 background-repeat: no-repeat;
                 background-position: center;
@@ -64,13 +66,28 @@
                 height: 30px;
                 width: 30px;
                 background-color: $header-color;
+                &.busy {
+                    background: $header-color;
+                }
                 @include laptop {
                     height: 40px;
                     width: 40px;
                 }
             }
+            &__message {
+                position: absolute;
+                text-align: center;
+                left: 0;
+                right: 0;
+                color: red;
+                top: 100%;
+                font-size: 0.85em;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
         }
         &__category {
+            margin-top: 1em;
             &__heading {
                 font-family: $text-font;
                 text-align: center;
@@ -226,9 +243,25 @@
                 @include laptop {
                     overflow: auto;
                 }
+                &__show-more {
+                    text-align: center;
+                    &__button {
+                        text-decoration: none;
+                        margin: 1em 0;
+                        background-color: $color3;
+                        cursor: pointer;
+                        border: none;
+                        padding: 0.5em 1em;
+                        color: white;
+                        font-family: $text-font;
+                        transition: background-color 0.5s ease;
+                        &:hover {
+                            background-color: lighten($color3, 10%);
+                        }
+                    }
+                }
                 .result {
                     margin-bottom: 10px;
-                    cursor: pointer;
                     padding: 0.2rem;
                     background-color: white;
                     box-shadow: 0 8px 6px -6px $header-color;

@@ -2,7 +2,7 @@
     <h2 ng-bind="::vm.component.title"></h2>
     <p ng-repeat="paragraph in ::vm.component.paragraphs track by $index"
         class="gallery__description"
-        ng-bind="::paragraph.paragraph"></p>
+        ng-bind-html="::paragraph.paragraph"></p>
     <figure class="gallery__figure"
         ng-click="vm.openFullMode($index)"
         ng-repeat="image in ::vm.images | orderBy: 'position' track by image.id"
@@ -10,6 +10,7 @@
         ng-if="::image.src"
         load-class="figury-up">
         <img class="gallery__figure__image"
+            ng-attr-alt="{{::image.title}}"
             ng-src="{{::image.src}}">
         <figcaption class="gallery__figure__text"
             ng-if="::image.title"
@@ -31,6 +32,7 @@
             <div class="fullscreen-image__figure__container"
                 ng-class="::{'fullscreen-image__figure__container--full-width' : !(img.title || img.description || img.author)}">
                 <img class="fullscreen-image__figure__container__img"
+                    ng-attr-alt="{{::img.title}}"
                     ng-src="{{::img.src}}">
             </div>
             <div class="fullscreen-image__figure__figcaption"

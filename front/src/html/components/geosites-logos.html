@@ -3,10 +3,11 @@
     <li ng-repeat="logo in ::vm.component.logos track by $index">
         <a class="geosites__link"
             target="_blank"
+            rel="noreferrer"
             ng-href="{{::logo.link}}">
             <img class="geosites__image"
-                src="{{::logo.image}}"
-                alt="">
+                ng-src="{{::logo.image}}"
+                ng-attr-alt="{{::'przejdź na stronę ' + logo.link}}">
         </a>
     </li>
 </ul>
