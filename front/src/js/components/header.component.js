@@ -28,6 +28,7 @@
         function onInit() {
             $scope.$on("$routeChangeStart", function() {
                 toggleAsideNav(false);
+                vm.hoverNavItem = false;
             });
             if (pwaService.isAvailable()) {
                 resourceService

@@ -74,13 +74,13 @@
             </li>
             <li class="aside-menu__sub-list__item"
                 ng-repeat="subitem in vm.subnav track by $index">
-                <a ng-if="::subitem.link"
+                <a ng-if="subitem.link"
                     class="aside-menu__sub-list__item__text"
-                    ng-bind="::subitem.subtitle"
-                    ng-href="{{::subitem.link}}"></a>
+                    ng-bind="subitem.subtitle"
+                    ng-href="{{subitem.link}}"></a>
                 <span class="aside-menu__sub-list__item__text"
-                    ng-if="::!subitem.link"
-                    ng-bind="::subitem.subtitle"></span>
+                    ng-if="!subitem.link"
+                    ng-bind="subitem.subtitle"></span>
             </li>
         </ul>
     </nav>
