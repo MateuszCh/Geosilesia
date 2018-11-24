@@ -48,15 +48,16 @@
     .subnav {
         max-height: 0;
         overflow: hidden;
-        transition: all 0.5s ease;
-        z-index: 1000;
+        transition: max-height 0.5s ease;
+        z-index: -1;
         position: absolute;
         color: white;
         width: 100%;
         left: 0;
         &--active {
             max-height: 500px;
-            transition: all 0.5s ease;
+            transition: max-height 0.5s ease;
+            z-index: 1010;
         }
         &__item {
             transition: all 0.2s ease-in-out;

@@ -119,11 +119,11 @@
                 markers.forEach(function(marker) {
                     bounds.extend(marker.getPosition());
                 });
-                if (bounds.b.f < bounds.b.b) {
-                    var longitude1 = bounds.b.f;
-                    bounds.b.f = bounds.b.b;
-                    bounds.b.b = longitude1;
-                }
+                // if (bounds.b.f < bounds.b.b) {
+                //     var longitude1 = bounds.b.f;
+                //     bounds.b.f = bounds.b.b;
+                //     bounds.b.b = longitude1;
+                // }
                 map.fitBounds(bounds);
                 if (markers.length === 1) {
                     map.setZoom(16);
