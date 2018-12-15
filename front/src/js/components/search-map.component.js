@@ -80,7 +80,7 @@
             vm.categories = mapService.getCategories(markerModels, iconModels);
 
             markers = mapService.getFormattedMarkers(markerModels);
-
+            vm.markersCount = markers.length;
             vm.selectedMarkers = angular.copy(markers).sort(function(a, b) {
                 return b.position.lat - a.position.lat;
             });
