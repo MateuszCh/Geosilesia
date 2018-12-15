@@ -1,7 +1,7 @@
 importScripts("/js/idb.js");
 
-var CACHE_STATIC_NAME = "static-v11";
-var CACHE_DYNAMIC_NAME = "dynamic-v11";
+var CACHE_STATIC_NAME = "static-v12";
+var CACHE_DYNAMIC_NAME = "dynamic-v12";
 var STATIC_FILES = [
     "/",
     "index.html",
@@ -142,8 +142,8 @@ self.addEventListener("fetch", function(event) {
                     event.request.url.indexOf("/api/page") > -1
                         ? "pages"
                         : event.request.url.indexOf("/api/posts") > -1
-                            ? "posts"
-                            : "";
+                        ? "posts"
+                        : "";
                 if (typeOfRequest) {
                     clonedRes.json().then(function(data) {
                         if (typeOfRequest === "posts") {

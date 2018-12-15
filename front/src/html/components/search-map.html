@@ -36,7 +36,7 @@
                             ng-attr-for="{{::category.category}}">
                             <span class="search__form__category__label__icon"></span>
                             <span class="search__form__category__label__text"
-                                ng-bind="category.name"></span>
+                                ng-bind="category.name + ' (' + category.count + ')'"></span>
                             <img class="search__form__category__label__image"
                                 ng-attr-alt="{{::category.name}}"
                                 style="height:27px; width: 24px;"
@@ -81,7 +81,6 @@
                             <div class="result__container__right">
                                 <a class="result__container__right__directions"
                                     ng-href="{{::'https://www.google.com/maps/dir/Current+Location/' + result.position.lat + ',' + result.position.lng}}"
-                            
                                     target="_blank"
                                     rel="noreferrer"
                                     ng-click="$event.stopPropagation()">Dojazd</a>

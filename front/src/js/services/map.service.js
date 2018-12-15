@@ -235,29 +235,39 @@
                 ) {
                     return [];
                 }
-                var allowedCategories = [].concat.apply(
-                    [],
-                    markerModels.reduce(function(accumulator, marker) {
-                        if (
-                            marker.data &&
-                            marker.data.categories &&
-                            marker.data.categories.length
+
+                var allowedCategories = {};
+
+                markerModels.forEach(function(markerModel) {
+                    if (
+                        markerModel.data &&
+                        markerModel.data.categories &&
+                        markerModel.data.categories.length
+                    ) {
+                        markerModel.data.categories.forEach(function(
+                            categoryName
                         ) {
-                            accumulator.push(marker.data.categories);
-                        }
-                        return accumulator;
-                    }, [])
-                );
+                            if (allowedCategories[categoryName]) {
+                                allowedCategories[categoryName]++;
+                            } else {
+                                allowedCategories[categoryName] = 1;
+                            }
+                        });
+                    }
+                });
 
                 var categories = {};
                 iconModels.forEach(function(iconModel) {
                     if (
                         iconModel.data &&
                         iconModel.data.category &&
-                        allowedCategories.indexOf(iconModel.data.category) > -1
+                        allowedCategories[iconModel.data.category]
                     ) {
-                        categories[iconModel.data.category] = iconModel.data;
-                        categories[iconModel.data.category].id = iconModel.id;
+                        var newCategory = iconModel.data;
+                        newCategory.id = iconModel.id;
+                        newCategory.count =
+                            allowedCategories[iconModel.data.category];
+                        categories[newCategory.category] = newCategory;
                     }
                 });
                 return categories;
