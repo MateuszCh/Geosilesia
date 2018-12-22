@@ -41,7 +41,7 @@
                     if (pwaService.isAvailable()) {
                         resourceService
                             .loadModelsFromIDB("posts", "navigation")
-                            .then(load);
+                            .then(onLoad);
                     }
                 });
         }
