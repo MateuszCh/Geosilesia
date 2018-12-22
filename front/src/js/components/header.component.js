@@ -30,29 +30,24 @@
                 toggleAsideNav(false);
                 vm.hoverNavItem = false;
             });
-            if (pwaService.isAvailable()) {
-                resourceService
-                    .loadModelsFromIDB("posts", "navigation")
-                    .then(onLoad);
-            }
             resourceService
                 .loadModelsFromNetwork("posts", "navigation")
                 .then(function(response) {
                     if (response.data) {
                         onLoad(response.data);
                     }
+                })
+                .catch(function() {
+                    if (pwaService.isAvailable()) {
+                        resourceService
+                            .loadModelsFromIDB("posts", "navigation")
+                            .then(load);
+                    }
                 });
         }
 
         function onLoad(data) {
-            if (
-                !vm.navigationLoaded &&
-                data &&
-                data[0] &&
-                data[0].data &&
-                data[0].data.nav
-            ) {
-                vm.navigationLoaded = true;
+            if (data && data[0] && data[0].data && data[0].data.nav) {
                 vm.nav = data[0].data.nav;
             }
         }
