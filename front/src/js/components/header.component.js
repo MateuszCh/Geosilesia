@@ -33,24 +33,26 @@
             if (pwaService.isAvailable()) {
                 resourceService
                     .loadModelsFromIDB("posts", "navigation")
-                    .then(function(response) {
-                        if (!vm.navigationLoaded && response) {
-                            onLoad(response);
-                        }
-                    });
+                    .then(onLoad);
             }
             resourceService
                 .loadModelsFromNetwork("posts", "navigation")
                 .then(function(response) {
                     if (response.data) {
-                        vm.navigationLoaded = true;
                         onLoad(response.data);
                     }
                 });
         }
 
         function onLoad(data) {
-            if (data && data[0] && data[0].data && data[0].data.nav) {
+            if (
+                !vm.navigationLoaded &&
+                data &&
+                data[0] &&
+                data[0].data &&
+                data[0].data.nav
+            ) {
+                vm.navigationLoaded = true;
                 vm.nav = data[0].data.nav;
             }
         }
