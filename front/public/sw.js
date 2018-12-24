@@ -1,7 +1,7 @@
 importScripts("/js/idb.js");
 
-var CACHE_STATIC_NAME = "static-v15";
-var CACHE_DYNAMIC_NAME = "dynamic-v15";
+var CACHE_STATIC_NAME = "static-v16";
+var CACHE_DYNAMIC_NAME = "dynamic-v16";
 var STATIC_FILES = [
     "/",
     "index.html",
@@ -172,7 +172,10 @@ self.addEventListener("fetch", function(event) {
         return;
     } else {
         event.respondWith(
-            event.request.mode === "navigate"
+            event.request.mode === "navigate" &&
+                event.request.url.indexOf(
+                    self.location.origin + "/uploads/"
+                ) === -1
                 ? caches.match("index.html")
                 : caches.match(event.request).then(function(response) {
                       return (
