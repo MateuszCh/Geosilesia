@@ -57,7 +57,7 @@
                 box-shadow: none;
                 border: none;
                 position: relative;
-                background: url("../images/search-icon.png");
+                background: url('../images/search-icon.png');
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: 60% 60%;
@@ -162,7 +162,7 @@
                         position: absolute;
                         bottom: 0;
                         right: 0;
-                        content: "";
+                        content: '';
                         border-radius: 50%;
                     }
                     &:before {
@@ -275,16 +275,14 @@
                     }
                     &__container {
                         display: flex;
-                        flex-direction: column;
                         justify-content: space-between;
                         align-items: baseline;
-                        @include tablet {
-                            flex-direction: row;
-                        }
                         &__left {
                             display: flex;
                             flex-direction: column;
                             justify-content: space-between;
+                            flex-grow: 1;
+                            padding-right: 1em;
                             &__coordinates {
                                 padding: 0;
                                 font-size: 0.95rem;
@@ -318,16 +316,14 @@
                                     color: $color3;
                                 }
                             }
-                            &__distance {
-                                padding: 0;
-                                font-size: 0.95rem;
-                                color: #000;
-                                margin-top: 0;
-                                @include laptop {
-                                    text-align: right;
-                                }
-                            }
                         }
+                    }
+                    &__distance {
+                        padding: 0;
+                        font-size: 0.95rem;
+                        color: #000;
+                        margin-top: 0;
+                        text-align: right;
                     }
                 }
             }

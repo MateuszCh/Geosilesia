@@ -71,10 +71,10 @@
                             ng-bind="::result.title"></h4>
                         <div class="result__container">
                             <div class="result__container__left">
-                                <p class="result__container__left__coordinates">Współrzędne:
+                                <!-- <p class="result__container__left__coordinates">Współrzędne:
                                     <span ng-bind="::result.position.lat"></span>,
                                     <span ng-bind="::result.position.lng"></span>
-                                </p>
+                                </p> -->
                                 <p class="result__container__left__address"
                                     ng-bind="::result.place"
                                     ng-if="::result.place"></p>
@@ -85,11 +85,11 @@
                                     target="_blank"
                                     rel="noreferrer"
                                     ng-click="$event.stopPropagation()">Dojazd</a>
-                                <p class="result__container__right__distance"
-                                    ng-if="::result.distance">Odległość:
-                                    <span ng-bind="::result.distance | number : 2"></span> km</p>
                             </div>
                         </div>
+                        <p class="result__distance"
+                            ng-if="::result.distance">Odległość:
+                            <span ng-bind="::result.distance | number : 2"></span> km</p>
                     </div>
                     <div class="search__form__results__container__show-more">
                         <button class="search__form__results__container__show-more__button"

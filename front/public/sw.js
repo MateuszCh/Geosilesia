@@ -1,49 +1,49 @@
-importScripts("/js/idb.js");
+importScripts('/js/idb.js');
 
-var CACHE_STATIC_NAME = "static-v17";
-var CACHE_DYNAMIC_NAME = "dynamic-v16";
+var CACHE_STATIC_NAME = 'static-v18';
+var CACHE_DYNAMIC_NAME = 'dynamic-v18';
 var STATIC_FILES = [
-    "/",
-    "index.html",
-    "/css/main.css",
-    "/js/app.min.js",
-    "/js/libs.min.js",
-    "/js/idb.js",
-    "manifest.json",
-    "/html/components/carousel.html",
-    "/html/components/dictionary.html",
-    "/html/components/footnotes.html",
-    "/html/components/gallery-list.html",
-    "/html/components/gallery.html",
-    "/html/components/geosites-logos.html",
-    "/html/components/header.html",
-    "/html/components/heading.html",
-    "/html/components/homepage-banner.html",
-    "/html/components/literature.html",
-    "/html/components/marker-category-list.html",
-    "/html/components/news.html",
-    "/html/components/page-view.html",
-    "/html/components/search-map.html",
-    "/html/components/tabs.html",
-    "/html/components/title-and-text.html"
+    '/',
+    'index.html',
+    '/css/main.css',
+    '/js/app.min.js',
+    '/js/libs.min.js',
+    '/js/idb.js',
+    'manifest.json',
+    '/html/components/carousel.html',
+    '/html/components/dictionary.html',
+    '/html/components/footnotes.html',
+    '/html/components/gallery-list.html',
+    '/html/components/gallery.html',
+    '/html/components/geosites-logos.html',
+    '/html/components/header.html',
+    '/html/components/heading.html',
+    '/html/components/homepage-banner.html',
+    '/html/components/literature.html',
+    '/html/components/marker-category-list.html',
+    '/html/components/news.html',
+    '/html/components/page-view.html',
+    '/html/components/search-map.html',
+    '/html/components/tabs.html',
+    '/html/components/title-and-text.html'
 ];
 
-var dbPromise = idb.open("geosilesia", 1, function(db) {
-    if (!db.objectStoreNames.contains("pages")) {
-        db.createObjectStore("pages", { keyPath: "pageUrl" });
+var dbPromise = idb.open('geosilesia', 1, function(db) {
+    if (!db.objectStoreNames.contains('pages')) {
+        db.createObjectStore('pages', { keyPath: 'pageUrl' });
     }
-    if (!db.objectStoreNames.contains("posts")) {
-        var postsStore = db.createObjectStore("posts", {
-            keyPath: "id"
+    if (!db.objectStoreNames.contains('posts')) {
+        var postsStore = db.createObjectStore('posts', {
+            keyPath: 'id'
         });
-        postsStore.createIndex("type", "type", {
+        postsStore.createIndex('type', 'type', {
             unique: false
         });
     }
 });
 function writeData(st, data) {
     return dbPromise.then(function(db) {
-        var tx = db.transaction(st, "readwrite");
+        var tx = db.transaction(st, 'readwrite');
         var store = tx.objectStore(st);
         store.put(data);
         return tx.complete;
@@ -52,7 +52,7 @@ function writeData(st, data) {
 
 function clearData(st) {
     return dbPromise.then(function(db) {
-        var tx = db.transaction(st, "readwrite");
+        var tx = db.transaction(st, 'readwrite');
         tx.objectStore(st).clear();
         return tx.complete;
     });
@@ -60,9 +60,9 @@ function clearData(st) {
 
 function clearPostsByType(type) {
     return dbPromise.then(function(db) {
-        var tx = db.transaction("posts", "readwrite");
-        var store = tx.objectStore("posts");
-        var index = store.index("type");
+        var tx = db.transaction('posts', 'readwrite');
+        var store = tx.objectStore('posts');
+        var index = store.index('type');
         return index
             .openKeyCursor(IDBKeyRange.only(type))
             .then(function showRange(cursor) {
@@ -75,7 +75,7 @@ function clearPostsByType(type) {
     });
 }
 
-self.addEventListener("install", function(event) {
+self.addEventListener('install', function(event) {
     event.waitUntil(
         caches.open(CACHE_STATIC_NAME).then(function(cache) {
             cache.addAll(STATIC_FILES);
@@ -83,7 +83,7 @@ self.addEventListener("install", function(event) {
     );
 });
 
-self.addEventListener("activate", function(event) {
+self.addEventListener('activate', function(event) {
     event.waitUntil(
         caches.keys().then(function(keysList) {
             return Promise.all(
@@ -101,14 +101,14 @@ self.addEventListener("activate", function(event) {
     return self.clients.claim();
 });
 
-self.addEventListener("fetch", function(event) {
+self.addEventListener('fetch', function(event) {
     if (
-        event.request.url.indexOf("https://maps.") == 0 ||
-        event.request.url.indexOf("googleapis.com") > -1
+        event.request.url.indexOf('https://maps.') == 0 ||
+        event.request.url.indexOf('googleapis.com') > -1
     ) {
         event.respondWith(fetch(event.request));
     } else if (
-        event.request.url.indexOf(self.location.origin + "/api/appData") > -1
+        event.request.url.indexOf(self.location.origin + '/api/appData') > -1
     ) {
         event.respondWith(
             fetch(event.request).then(function(response) {
@@ -117,16 +117,16 @@ self.addEventListener("fetch", function(event) {
                     .json()
                     .then(function(res) {
                         if (res.pages && res.pages.length) {
-                            clearData("pages").then(function() {
+                            clearData('pages').then(function() {
                                 res.pages.forEach(function(page) {
-                                    writeData("pages", page);
+                                    writeData('pages', page);
                                 });
                             });
                         }
                         if (res.posts && res.posts.length) {
-                            clearData("posts").then(function() {
+                            clearData('posts').then(function() {
                                 res.posts.forEach(function(post) {
-                                    writeData("posts", post);
+                                    writeData('posts', post);
                                 });
                             });
                         }
@@ -134,21 +134,21 @@ self.addEventListener("fetch", function(event) {
                 return response;
             })
         );
-    } else if (event.request.url.indexOf(self.location.origin + "/api") > -1) {
+    } else if (event.request.url.indexOf(self.location.origin + '/api') > -1) {
         event.respondWith(
             fetch(event.request).then(function(res) {
                 var clonedRes = res.clone();
                 var typeOfRequest =
-                    event.request.url.indexOf("/api/page") > -1
-                        ? "pages"
-                        : event.request.url.indexOf("/api/posts") > -1
-                        ? "posts"
-                        : "";
+                    event.request.url.indexOf('/api/page') > -1
+                        ? 'pages'
+                        : event.request.url.indexOf('/api/posts') > -1
+                        ? 'posts'
+                        : '';
                 if (typeOfRequest) {
                     clonedRes.json().then(function(data) {
-                        if (typeOfRequest === "posts") {
+                        if (typeOfRequest === 'posts') {
                             var type = event.request.url.substring(
-                                event.request.url.lastIndexOf("/") + 1
+                                event.request.url.lastIndexOf('/') + 1
                             );
                             clearPostsByType(type).then(function() {
                                 for (var key in data) {
@@ -166,17 +166,17 @@ self.addEventListener("fetch", function(event) {
             })
         );
     } else if (
-        event.request.cache === "only-if-cached" &&
-        event.request.mode !== "same-origin"
+        event.request.cache === 'only-if-cached' &&
+        event.request.mode !== 'same-origin'
     ) {
         return;
     } else {
         event.respondWith(
-            event.request.mode === "navigate" &&
+            event.request.mode === 'navigate' &&
                 event.request.url.indexOf(
-                    self.location.origin + "/uploads/"
+                    self.location.origin + '/uploads/'
                 ) === -1
-                ? caches.match("index.html")
+                ? caches.match('index.html')
                 : caches.match(event.request).then(function(response) {
                       return (
                           response ||
@@ -191,7 +191,7 @@ self.addEventListener("fetch", function(event) {
                                   .open(cacheToOpen)
                                   .then(function(cache) {
                                       if (
-                                          event.request.url.indexOf("http") == 0
+                                          event.request.url.indexOf('http') == 0
                                       ) {
                                           cache.put(
                                               event.request.url,
