@@ -29,7 +29,7 @@
                     ng-if="::item.subnav.length"></span>
                 <ul ng-if="::item.subnav"
                     class="subnav"
-                    ng-class="{'subnav--active' : vm.hoverNavItem == $index}">
+                    ng-class="{'subnav--active' : vm.hoverNavItem === $index}">
                     <li class="subnav__item"
                         ng-repeat="sub in ::item.subnav"
                         ng-class="{'subnav__item--active' : sub.link && vm.isActive(sub.link)}">
